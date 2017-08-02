@@ -1,0 +1,28 @@
+<%orden ||= "Crear"%>
+<%= form_for(@institution) do |f| %>
+	<% if @institution.errors.any? %>
+		<% @institution.errors.full_messages.each do |message| %>
+			<%flash[:alert] = message %>
+		<% end %>
+	<% end %>
+
+<div class="panel panel-default panelRease" >
+	<div class="panel-heading">
+		Datos de la institución
+	</div>
+	<div class="panel-body">
+		<p class="note">*Todos los campos obligatorios</p>
+		<div class="field">
+			<%= f.text_field :name, :class => 'form-control', :placeholder => 'Nombre',:required=>true %>
+		</div>
+		<div class="field">
+			<%= f.text_field :web,  :class => 'form-control', :placeholder => 'Página web. Ejemplo: http://www.ejemplo.com',:required=>true %>
+		</div>
+		<div class="field">
+			<%= f.file_field :logo %>
+		</div>
+	</div>	
+</div>
+	<%= f.submit orden, :class=>"btn btn-lg btnCRUD" %>
+	<%= link_to 'Volver', institutions_path, :class =>"btn btn-lg btnCRUD" %>
+<% end %>

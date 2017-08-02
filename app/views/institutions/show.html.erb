@@ -1,0 +1,16 @@
+<h1>Institución</h1>
+<div class="panel panel-default panelRease" >
+	<div class="panel-heading">
+		<%= @institution.name %>
+	</div>
+	<div class="panel-body">
+		<h2>Página Web:</h2>
+		<%= @institution.web %>
+		<h2>Logo institucional</h2>
+		<%= image_tag @institution.logo.url(:mini) %>
+	</div>
+</div>
+<%if user_signed_in? %>
+<%= link_to 'Editar', edit_institution_path(@institution), :class =>"btn btn-lg" %>
+<%= link_to 'Volver', institutions_path, :class =>"btn btn-lg" %>
+<%end%>

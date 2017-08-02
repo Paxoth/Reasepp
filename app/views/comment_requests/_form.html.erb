@@ -1,0 +1,21 @@
+<%= form_for([@request,@comment_request]) do |f| %>
+	<% if @comment_request.errors.any? %>
+		<div id="error_explanation">
+		<h2><%= pluralize(@comment_request.errors.count, "error") %> prohibited this comment_request from being saved:</h2>
+
+			<ul>
+			<% @comment_request.errors.full_messages.each do |message| %>
+			<li><%= message %></li>
+		<% end %>
+		</ul>
+		</div>
+	<% end %>
+
+	<div class="field">
+		<%= f.text_area :body, :class => 'form-control',:placeholder=>'Escriba acá su comentario respecto a esta solicitud de servicio...',:required=>true %>
+	</div>
+	<div class="actions">
+		<%= f.submit "Enviar comentario", :class => 'btn btn-default' %>
+	</div>
+	<% end %>
+

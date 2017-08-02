@@ -1,0 +1,127 @@
+<h1>Nuevo miembro</h1>
+<p><%= devise_error_messages! %></p>
+<!--h1 class="text-center login-title">Ingrese sus datos para conectarse a REASE</h1-->
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name),  html: {class: 'form'}) do |f| %>
+
+	<div class="panel panel-default panelRease" >
+		<div class="panel-heading">Consentimiento para ser evaluado</div>
+		<div class="panel-body">
+			<div>
+				<p>Antes de registrarse es necesario que sepa los términos y condiciones que existen para pertenecer y mantenerse dentro de ésta red.
+				<a id ="linkEstatuto" data-toggle="modal" data-target = "#encuentro" >
+				>> Leer estatuto</a></p> 
+				<div class="modal fade" id="encuentro" tabindex="-1" role="dialog" aria-labelledby="mymodallabel" aria-hidden="true">
+					<div class="modal-dialog modal-lg modal-estatuto">
+						<div class="modal-content">
+							<div class="modalbody">
+								<button type="button" class="close btnClose" data-dismiss="modal" aria-hidden = "true">
+								&times;
+								</button>
+								<%= render "partials/estatutos" %>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<p>Nuestro enfoque es el servicio, por lo que es necesario mantener un estándar dentro de la Red para que sus participantes cumplan con el objetivo. </p>
+				<p>Es por esto que se le pide a cada nuevo miembro de la red, dé su concentimiento para que pueda ser evaluado en las actividades que realice a nombre de REASE. </p>
+				<p>Además, así como se le evalúa a usted, usted deberá evaluar a otros miembros.
+				De no aprobar éste requisito, usted no podrá registarse en la Red.</p>
+				<p class="note">*Todos los campos son obligatorios.</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="panel panel-default panelRease" >
+		<div class="panel-heading">Datos personales</div>
+		<div class="panel-body">
+
+			<div class="field">
+				<%= f.text_field :nickname, :placeholder => "Apodo o nick",:class => 'form-control'  %>
+			</div>		
+
+			<div class="field">
+				<%= f.text_field :name, :placeholder => "Nombres",:class => 'form-control'  %>
+			</div>
+
+			<div class="field">
+				<%= f.text_field :last_name, :placeholder => "Apellidos",:class => 'form-control'  %>
+			</div>
+
+			<div class="field">
+				<%= f.email_field :email, :placeholder => "Correo electrónico",:class => 'form-control' %>
+			</div>
+
+			<div class="field"> <!--aun no sé como agregar el valor de minimo al placeholder-->
+				<% if @validatable %> 
+					<% minimo = @minimum_password_length %> 
+				<% end %>
+				<%= f.password_field :password, :placeholder => "Crear contraseña (6 caracteres como mínimo)", :class => 'form-control', autocomplete: "off" %>
+			</div>
+
+
+			<div class="field">
+				<%= f.password_field :password_confirmation, :placeholder => "Confirme su contraseña",:class => 'form-control', autocomplete: "off" %>
+			</div>
+
+
+			<!--%= render "devise/shared/links" %-->
+		</div>
+	</div>
+
+	<div class="panel panel-default panelRease" >
+		<div class="panel-heading">Identificación dentro de la red </div>
+		<div class="panel-body">
+
+			<div class="field">
+				<p><%= f.label :category, "Rol de usuario" %>
+				<button type="button" class="btn btn-default btnWhite" id:"btnTipoUsuario"  data-trigger="focus" data-container="body" data-toggle="btnRolUsuario"> ? </button></p>
+
+				<%= f.select(:category, [['Profesor', 2],['Vinculador Social', 3],['Socio comunitario', 4]], {:include_blank => '-- Seleccione una Opción --' }, { :class => 'form-control', :required => true }) %>
+			</div>
+
+
+			<div class="field">
+				<p><%= f.label :autorization_level, "Tipo de usuario"%>
+
+				<button type="button" class="btn btn-default btnWhite" id:"btnTipoUsuario"  data-trigger="focus" data-container="body" data-toggle="btnTipoUsuario"> ? </button>
+
+				</p>
+
+				<%= f.select(:autorization_level,[['Activo', 1], ['Adherente', 2]], {:include_blank => '-- Seleccione una Opción --' }, { :class => 'form-control', :required => true }) %>
+
+
+			</div>
+		
+			<div class="actions">
+				<%= f.submit "Aceptar y Enviar Fomulario", :class => 'btn btn-lg btnCRUD'%>
+				<%= link_to "Cancelar", root_path, :class => 'btn btn-lg btnCRUD' %>
+			</div>
+
+		</div>
+	</div>					
+<% end %>
+
+<!--desactivar btnes del indice, para que no aparezcan-->
+<script type="text/javascript">
+$(function () {
+  $('[data-toggle="btnTipoUsuario"]').popover(
+  {
+  	html: 'true', 
+    content: '<p><strong>Activo:</strong> Recibirá bimensualmente las actas de reuniones, invitaciones a todos los eventos y actividades de la Red y tendrá que participar en las reuniones de ampliadas y comisiones de trabajo de REASE.</p><p><strong>Adherente:</strong> Recibirá semestralmente los avances de la Red e invitaciones a eventos masivos, así como invitaciones a eventos masivos de REASE.</p>'
+  }
+  	)
+})
+$(function () {
+  $('[data-toggle="btnRolUsuario"]').popover(
+  {
+  	html: 'true', 
+    content: '<p><strong>Profesor:</strong> Es quien imparte la asignatura y que está cargo del curso. Realiza la asignatura y sus evaluaciones correspondiente, mediante la actividad de A+S.</p><p><strong>Socio comunitario:</strong> Representante de la comunidad que se beneficia de esta actividad. También tiene labores en el proceso de A+S, como cumplir con los acuerdos con el docente.</p><p><strong>Vinculador social: </strong> Actúa como intermediario entre el docente y el socio comunitario para realizar la actividad de A+S.</p>'
+
+  }
+  	)
+})
+
+</script>
+
+

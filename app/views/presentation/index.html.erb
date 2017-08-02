@@ -1,0 +1,50 @@
+<h1>Bienvenido al sitio de la Red Nacional de Aprendizaje Servicio:</h1>
+<%if user_signed_in?%>
+	<div class="panel panel-default panel-half">
+		<div class="panel-heading">
+			Últimos usuarios registrados
+		</div>
+		<div class="panel-body">
+			<%if @users.present?%>
+				<p><% @users.each  do |user|%>
+					<%if user.photo.present?%>
+						<%=link_to image_tag(user.photo.url(:mini),:class=>'RoundPicture'),user%>
+					<%end%>
+				<%end%></p>
+			<%else%>
+				<%if User.last.photo.present?%>
+					<%=link_to image_tag(User.last.photo.url(:mini),:class=>'RoundPicture'),User.last%>
+				<%else%>
+					<p>Las últimas semanas no se han registrado usuarios</p>
+				<%end%>
+			<%end%>
+		</div>
+	</div>
+	
+	<div class="panel panel-default panel-half">
+		<div class="panel-heading">
+			Última acta de REASE
+		</div>
+		<div class="panel-body">
+			<%if @minute.present?%>
+				<p><%=l @minute.date%>: <%= @minute.name%> - <%=	link_to "Ver", @minute.archive.url %> </p>
+			<%else%>
+				<p>No hay actas disponibles</p>
+			<%end%>			
+		</div>
+	</div>
+<%end%>
+<% @sections.each do |seccion| %>
+	<% div_id = seccion.id -%>
+	<div  class="panel panel-default panelClick">
+		<div class="panel-heading" data-toggle="collapse" data-target="#Novedad<%= div_id -%>">
+			<i class="glyphicon glyphicon-circle-arrow-down"></i> <%= seccion.title %> 
+		</div>
+		<div class="collapsing" id="Novedad<%= div_id -%>">
+			<div class="panel-body">
+				<p><%=raw seccion.body %></p>
+				<p class="note">Publicado el <%=l seccion.created_at%></p>
+			</div>
+		</div>
+	</div>
+<%end%>

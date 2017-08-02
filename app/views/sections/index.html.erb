@@ -1,0 +1,28 @@
+<%orden ||= "crear"%>
+<h1>Administración de página principal</h1>
+
+<p>Estimado administrador, las siguientes opciones son para poder editar la página de inicio de REASE, es decir, la que podrá ver cualquier persona que ingrese al presente sitio.</p>
+<p>Todos los campos que serán requeridos al momento de crear o editar una sección son obligatorios.</p>
+<p>Para editar una seccion haga click en alguno de los siguientes botones: </p>
+
+<%= link_to "Administrar novedades", sections_novedades_path, class:"btn btn-lg btnAdmin"%>
+
+<%= link_to "Administrar ¿Qué es A+S?", sections_aprendizaje_path, class:"btn btn-lg btnAdmin"%>
+
+<%= link_to "Administrar ¿Qué hacemos?", sections_hacemos_path, class:"btn btn-lg btnAdmin"%>
+
+<%= link_to "Administrar ¿Quiénes somos?", sections_somos_path, class:"btn btn-lg btnAdmin"%>
+
+<%= link_to "Administrar estatutos", sections_estatutos_path, class:"btn btn-lg btnAdmin"%>
+
+<%= link_to "Administrar instituciones", institutions_path, class:"btn btn-lg btnAdmin"%>
+
+<%= link_to "Administrar links de interés", interest_links_path, class:"btn btn-lg btnAdmin"%>
+
+<%= link_to "Ver listado de usuarios",  users_listarUsuarios_path, class:"btn btn-lg btnAdmin"%>
+
+<%= link_to "Administrar actas",  minutes_path, class:"btn btn-lg btnAdmin"%>
+
+<%= link_to "Administrar áreas",  areas_path, class:"btn btn-lg btnAdmin"%>
+
+<%= link_to "Enviar correo a todos",  bulletins_path, class:"btn btn-lg btnAdmin"%>

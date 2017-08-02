@@ -1,0 +1,62 @@
+<%accion ||= "Crear"%>
+
+<%= form_for @request, :html => { :class => "form-horizontal request" } do |f| %>
+	<% if @request.errors.any? %>
+		<% @request.errors.full_messages.each do |msg| %>
+			<%flash[:alert] = msg %>
+		<% end %>
+	<% end %>
+
+	<div class="panel panel-default panelRease" >
+    	<div class="panel-heading">Datos de la solicitud</div>
+    	<div class="panel-body">
+    		<p class="note">*Todos los campos son obligatorios.</p>
+    		<div class="control-group">
+				<div class="field">
+				<%= f.text_field :title, :class => 'form-control', :placeholder => 'Titulo' ,:required=>true%>
+				</div>
+				<div class="field">
+				<%= f.text_area :resume, :class => 'form-control', :placeholder => 'Resumen de la solicitud (10 carácteres mínimo)' ,:required=>true%>
+				</div>
+				<%= error_span(@request[:title]) %>
+			</div>
+			<p class="note">Sí no se encuentra su área de trabajo comuníquese con un administrador</p>
+			<div class="field">
+				<%= f.select(:area_id, Area.all.collect {|area| [area.name, area.id]},{:include_blank => "Área de trabajo (Opcional)"},{ :class => 'form-control'}) -%>
+			</div>
+			<% if accion == "Actualizar" %>
+				<%= f.select(:status, [['Disponible', 1],['En proceso', 2],['Realizado',3], ['Cancelado',4], ['Caducado', 5]], {:include_blank => '-- Seleccione un estado --' }, { :class => 'form-control', :required => true }) %>
+			<% else %>
+				<p><strong>Estado: </strong> Disponible </p>
+			<% end %>
+
+			<div class="control-group">
+				<div class="field">
+				<%= f.text_area :description, :placeholder=> "Escribir aquí.", :id=>"eg-basic", :class => 'form-control',:required=>true %>
+				</div>
+				<%= error_span(@request[:description]) %>
+			</div>
+
+			<div class="field">
+				<p><%= f.label :start_time, "Fecha de inicio" %>
+				<%= f.date_select :start_time %></p>
+			</div>
+			<div class="field">
+				<p><%= f.label :end_time, "Fecha de término" %>
+				<%= f.date_select :end_time %></p>
+			</div>
+			
+		</div>
+	</div>
+
+	<%= f.submit accion, :class => 'btn btn-lg btnCRUD' %>
+	<%= link_to t('.cancel', :default => t("helpers.links.cancel")), requests_path, :class => 'btn btn-lg btnCRUD' %>
+
+<% end %>
+
+<script>
+	 $(function() {$('textarea#eg-basic').editable({
+      inlineMode: false,
+    })
+  });
+</script>

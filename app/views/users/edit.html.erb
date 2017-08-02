@@ -1,0 +1,50 @@
+<%= form_for @user do |f| %>
+
+	<div class="panel panel-default panelRease" >
+    	<div class="panel-heading">Cambiar tipo de usuario de <%=@user.nickname%></div>
+    	<div class="panel-body">
+
+			<div class="field">
+				<p><%= f.label :category, "Rol de usuario" %>
+				<button type="button" class="btn btn-default btnWhite" id:"btnTipoUsuario"  data-trigger="focus" data-container="body" data-toggle="btnRolUsuario"> ? </button></p>
+
+				<%= f.select(:category, [['Administrador', 1],['Profesor', 2],['Vinculador Social', 3],['Socio comunitario', 4]], {:include_blank => '-- Seleccione una Opción --' }, { :class => 'form-control', :required => true }) %>
+			</div>
+
+			<div class="field">
+				<p><%= f.label :autorization_level, "Tipo de usuario"%>
+
+				<button type="button" class="btn btn-default btnWhite" id:"btnTipoUsuario"  data-trigger="focus" data-container="body" data-toggle="btnTipoUsuario"> ? </button>
+
+				</p>
+
+				<%= f.select(:autorization_level,[['Activo', 1], ['Adherente', 2]], {:include_blank => '-- Seleccione una Opción --' }, { :class => 'form-control', :required => true }) %>
+			</div>
+		</div>
+	</div>
+
+	<%= f.submit "Aceptar Cambios", :class => 'btn btn-lg btnCRUD', data: { confirm: '¿Está seguro que desea realizar estos cambios? Estos cambios afectarán directamente en los niveles de autorización del usuario.' } %>
+	<%= link_to 'Cancelar cambios', @user, :class =>"btn btn-lg btnCRUD" %>
+
+<% end %>
+
+<script type="text/javascript">
+$(function () {
+  $('[data-toggle="btnTipoUsuario"]').popover(
+  {
+  	html: 'true', 
+    content: '<p><strong>Activo:</strong> Recibirá bimensualmente las actas de reuniones, invitaciones a todos los eventos y actividades de la Red y tendrá que participar en las reuniones de ampliadas y comisiones de trabajo de REASE.</p><p><strong>Adherente:</strong> Recibirá semestralmente los avances de la Red e invitaciones a eventos masivos, así como invitaciones a eventos masivos de REASE.</p>'
+  }
+  	)
+})
+$(function () {
+  $('[data-toggle="btnRolUsuario"]').popover(
+  {
+  	html: 'true', 
+    content: '<p><strong>Administrador: </strong>El usuario administrador tiene todos los privilegios de la red.</p><p><strong>Profesor:</strong> Es quien imparte la asignatura y que está cargo del curso. Realiza la asignatura y sus evaluaciones correspondiente, mediante la actividad de A+S.</p><p><strong>Socio comunitario:</strong> Representante de la comunidad que se beneficia de esta actividad. También tiene labores en el proceso de A+S, como cumplir con los acuerdos con el docente.</p><p><strong>Vinculador social: </strong> Actúa como intermediario entre el docente y el socio comunitario para realizar la actividad de A+S.</p>'
+
+  }
+  	)
+})
+
+</script>

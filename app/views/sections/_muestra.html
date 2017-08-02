@@ -1,0 +1,22 @@
+<% orden %>
+<% eliminar %>
+
+<div class="panel panel-default panelRease">
+	<div class="panel-heading">
+		Listado de <%=orden%>
+	</div>
+	<div class="panel-body">
+		<% @sections.each do |seccion| %>
+			<%if seccion.module == orden%>
+				<p>
+				<%=	seccion.title %>  - 
+				<%=	link_to "Ver", seccion %>  -				
+				<%= link_to "Editar", edit_section_path(seccion)%> - 
+				<% if eliminar == "Si" %>
+					<%= link_to 'Eliminar', seccion, method: :delete, data: { confirm: '¿Está seguro de eliminar esta sección?' } %>
+				<%end%>
+				</p>
+			<%end%>
+		<%end%>
+	</div>
+</div>

@@ -1,0 +1,39 @@
+SHOW
+		<p>Estas son las últimas actualizaciones de la red, desde <%=l @bulletin.start_date%></p>
+		<% @sections.each do |section| %>
+			<p><strong>Novedades: </strong><%=section.title%> - <%= link_to "Ver", section %> </p>
+		<%end%>		
+		<% @events.each do |event| %>
+			<p><strong>Evento: </strong><%=event.title%> - <%= link_to "Ver", event %></p>
+		<%end%>
+		<% @offerings.each do |offering| %>
+			<p><strong>Ofertas de Servicio: </strong><%=offering.title%> - <%= link_to "Ver", offering %></p>
+		<%end%>
+		<% @requests.each do |request| %>
+			<p><strong>Solicitudes de Servicio: </strong><%=request.title%> - <%= link_to "Ver", request %></p>
+		<%end%>
+
+FORM
+				<div class="field">
+				<p class='note'>*La fecha indica desde cuándo se enviarán los contenidos pertenecientes al boletín.</p>
+				<p>
+					<%= f.label :start_date, "Seleccione la fecha: "  %>
+					<%= f.date_select :start_date %>
+				</p>
+			</div>
+
+MAILER
+			<br>
+		<p>Estas son las últimas actualizaciones de la red, desde <%=l @bulletin.start_date%></p>
+		<% @sections.each do |section| %>>
+			<p><strong>Novedades: </strong><%=section.title%> - <%= link_to "Ver", section %> </p>
+		<%end%>		
+		<% @events.each do |event| %>
+			<p><strong>Evento: </strong><%=event.title%> - <%= link_to "Ver", event %></p>
+		<%end%>
+		<% @offerings.each do |offering| %>
+			<p><strong>Ofertas de Servicio: </strong><%=offering.title%> - <%= link_to "Ver", offering %></p>
+		<%end%>
+		<% @requests.each do |request| %>
+			<p><strong>Solicitudes de Servicio: </strong><%=request.title%> - <%= link_to "Ver", request %></p>
+		<%end%>

@@ -1,0 +1,17 @@
+<h1>Administrar actas </h1>
+<%= link_to 'Agregar nueva acta', new_minute_path, :class=>"btn btn-lg btnAdmin" %><br>
+
+<div class="panel panel-default panelRease">
+	<div class="panel-heading">
+		Listado de actas
+	</div>
+	<div class="panel-body">
+		<% @minutes.each do |minute| %>
+			<p><%=minute.name%>: <%=l minute.date%> - 
+			<%= link_to 'Ver acta', minute.archive.url %> -
+			<%= link_to 'Detalle', minute %> -
+			<%= link_to 'Borrar acta', minute, method: :delete, data: { confirm: '¿Seguro que desea eliminar esta acta?' } %>
+			</p>
+		<%end%>
+	</div>
+</div>

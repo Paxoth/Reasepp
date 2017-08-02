@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 
+  experience_id: 
+  community_id: 
+  area_id: 
+  title: MyString
+  description: MyText
+  status: MyString
+  start_time: 2015-06-27 19:34:28
+  end_time: 2015-06-27 19:34:28
+
+two:
+  user_id: 
+  experience_id: 
+  community_id: 
+  area_id: 
+  title: MyString
+  description: MyText
+  status: MyString
+  start_time: 2015-06-27 19:34:28
+  end_time: 2015-06-27 19:34:28

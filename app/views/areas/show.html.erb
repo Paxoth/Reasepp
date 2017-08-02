@@ -1,0 +1,14 @@
+<h1>Área de trabajo</h1>
+<div class="panel panel-default panelRease" >
+	<div class="panel-heading">
+		<%= @area.name %>
+	</div>
+	<div class="panel-body">
+		<h2>Descripción:</h2>
+		<p><%= @area.description %></p>
+	</div>
+</div>
+<%if user_signed_in? %>
+<%= link_to 'Editar', edit_area_path(@area), :class =>"btn btn-lg" %>
+<%= link_to 'Volver', areas_path, :class =>"btn btn-lg" %>
+<%end%>

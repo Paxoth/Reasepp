@@ -1,0 +1,88 @@
+<h1>¿Qué hacemos?</h1>
+<p>
+La Red Nacional de Aprendizaje Servicio Chile a definido su rol a desempeñar a base de cuatro directrices, las cuales son: 
+</p>
+<center>
+	<% @sections.each do |seccion| %>
+		<%if seccion.module == 'Hacemos'%>
+		<% div_id = seccion.id -%>
+		<button class = "btn btn-lg btnHacemos" onclick="funcion<%= div_id -%>()"><%= seccion.title%></button> 
+		<%end%>
+	<%end%>
+</center>
+<p>
+
+
+<% @sections.each do |seccion| %>
+	<%if seccion.module == 'Hacemos'%>
+	<% titulo_id = seccion.id -%>
+	<div id="titulo<%= titulo_id -%>" >
+		<div  class="panel panel-default panelRease">
+			<div class="panel-heading">
+				<%=	seccion.title %> 
+			</div>
+			<div class="panel-body">
+				<p><%=raw seccion.body %></p>
+			</div>
+		</div>
+	</div>
+	<%end%>
+<%end%>
+
+<br>
+<h1>Actas de reuniones de REASE:</h1>
+<div class="panel panel-default panelRease">
+	<div class="panel-heading">
+		Listado de actas
+	</div>
+	<div class="panel-body">
+		<% @minutes.each do |minute| %>
+			<p><%=minute.name%>: <%=minute.date%> - 
+			<%= link_to 'Ver acta', minute.archive.url %> 
+			</p>
+		<%end%>
+	</div>
+</div>
+
+<script type="text/javascript">
+<% contador = 1; %>
+	<% @sections.each do |seccion| %>
+		<%if seccion.module == 'Hacemos'%>
+			<% titulo_id = seccion.id -%>
+			<% if contador==1 %>
+				document.getElementById('titulo<%= titulo_id -%>').style.display='block';
+				<% contador += 1; %>
+			<% else %>
+				document.getElementById('titulo<%= titulo_id -%>').style.display='none';
+			<%end%>
+		<%end%>
+	<%end%>
+</script>
+
+<script type="text/javascript">
+
+<% contador1 = 1; %>
+<% @sections.each do |seccion| %>
+	<%if seccion.module == 'Hacemos'%>
+		<% div_id = seccion.id -%>
+		function funcion<%= div_id -%>(){
+		<% contador2 = 1; %>
+		<% @sections.each do |seccion_in| %>
+			<%if seccion_in.module == 'Hacemos'%>
+				<% titulo_id = seccion_in.id -%>
+				<% if contador1==contador2 %>
+					document.getElementById('titulo<%= titulo_id -%>').style.display='block';
+				<% else %>
+					document.getElementById('titulo<%= titulo_id -%>').style.display='none';
+				<%end%>
+				<% contador2 += 1; %>
+			<%end%>
+		<%end%>
+		<% contador1 += 1; %>
+		}			
+	<%end%>
+<%end%>
+</script>
+		
+
+

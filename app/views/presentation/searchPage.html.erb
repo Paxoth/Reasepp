@@ -1,0 +1,52 @@
+<h1>Búsqueda: </h1>
+<%if !user_signed_in? %>	
+	<% if @sections.present? || @interest_links.present? || @events.present? || @minutes.present? || @institutions.present?%>
+	<div class="panel panel-default panelRease">
+		<div class="panel-heading">
+			Resultados de la búsqueda: <%= params[:search] %>
+		</div>
+		<div class="panel-body">
+			<%= render @sections %>
+			<%= render @interest_links %>
+			<%= render @events %>
+			<%= render @minutes %>
+			<%= render @institutions %>
+		</div>
+	</div>
+	<%else%>
+	<div class="panel panel-default panelRease">
+		<div class="panel-heading">
+			Resultados de la búsqueda: <%= params[:search] %>
+		</div>
+		<div class="panel-body">
+			<p>No se encontraron resultados en la búsqueda de <strong><%= params[:search] %></strong></p>
+		</div>
+	</div>
+	<% end %>
+<%else%>
+	<% if @sections.present?  || @events.present? || @minutes.present? || @institutions.present? || @requests.present? || @offerings.present? || @users.present? %>
+	<div class="panel panel-default panelRease">
+		<div class="panel-heading">
+			Resultados de la búsqueda: <%= params[:search] %>
+		</div>
+		<div class="panel-body">
+			<%= render @users %>
+			<%= render @requests %>
+			<%= render @offerings %>
+			<%= render @events %>
+			<%= render @sections %>
+			<%= render @minutes %>
+			<%= render @institutions %>
+		</div>
+	</div>
+	<%else%>
+	<div class="panel panel-default panelRease">
+		<div class="panel-heading">
+			Resultados de la búsqueda: <%= params[:search] %>
+		</div>
+		<div class="panel-body">
+			<p>No se encontraron resultados en la búsqueda de <strong><%= params[:search] %></strong></p>
+		</div>
+	</div>
+	<% end %>
+<%end%>

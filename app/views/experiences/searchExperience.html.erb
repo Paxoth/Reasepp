@@ -1,0 +1,32 @@
+<h1>Búsqueda de experiencias</h1>
+<div class="buscador">
+	<%= form_tag(experiences_searchExperience_path, :method => "post",:class=>"form-inline") do %>
+	<div class="input-group">
+		<%= text_field_tag :search, params[:search], placeholder: "Buscar experiencias",:class => 'form-control',:required=>true %>
+		<span class="input-group-btn">
+			<%= submit_tag "Ir", :class => 'btn btn-default' %>
+		</span>
+	</div>
+	<%end%>
+</div>
+
+<% if @offering.present? || @requests.present?%>
+<div class="panel panel-default panelRease">
+	<div class="panel-heading">
+		Resultados de la búsqueda: <%= params[:search] %>
+	</div>
+	<div class="panel-body">
+		<%= render @requests %>
+		<%= render @offerings %>
+	</div>
+</div>
+<%else%>
+<div class="panel panel-default panelRease">
+	<div class="panel-heading">
+		Búsqueda de Experiencias: <%= params[:search] %>
+	</div>
+	<div class="panel-body">
+		<p>No se encontraron resultados en la búsqueda de <strong><%= params[:search] %></strong></p>
+	</div>
+</div>
+<% end %>

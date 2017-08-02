@@ -1,0 +1,26 @@
+<h1> Todos los usuarios registrados </h1>
+
+ <div class="panel panel-default panelRease">
+    <div class="panel-heading">
+      Usuarios registrados
+    </div>
+    <div class="panel-body">
+		<% @user.each do |user| %>
+			<p>		
+			<%= link_to user.nickname, user_path(user.id) %>
+			<%if !user.photo.blank?%>
+			<%= image_tag user.photo.url(:mini), :class =>"RoundPicture" %>
+			<%end %> 
+			<%if current_user.category==1%> -
+				<%if user.category == 1%> Administrador <%end%>
+				<%if user.category == 2%> Profesor <%end%>
+				<%if user.category == 3%> Vinculador Social <%end%>
+				<%if user.category == 4%> Socio comunitario <%end%>
+				<%if user.autorization_level == 1%> activo <%end%>
+				<%if user.autorization_level == 2%> adherente <%end%> - 
+				<%=link_to " Cambiar tipo de usuario", edit_user_path(user) %>
+			<%end%>
+			</p>	
+		<%end%>
+	</div>
+</div>

@@ -1,0 +1,18 @@
+<h1>Administrar áreas de trabajo </h1>
+<%= link_to 'Agregar área de trabajo', new_area_path, :class=>"btn btn-lg btnAdmin" %><br>
+
+<div class="panel panel-default panelRease">
+	<div class="panel-heading">
+		Listado de areas de trabajo
+	</div>
+	<div class="panel-body">
+		<% @areas.each do |area| %>
+			<p><%=area.name%> - 
+			<%= link_to 'Ver detalle', area %> -
+			<%= link_to 'Borrar área', area, method: :delete, data: { confirm: '¿Seguro que desea eliminar esta área?' } %>
+			</p>
+		<%end%>
+	</div>
+</div>
+
+

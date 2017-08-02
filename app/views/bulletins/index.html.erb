@@ -1,0 +1,15 @@
+<h1>Correo</h1>
+
+<%= link_to 'Escribir Correo', new_bulletin_path,:class=>'btn btn-lg btnCRUD' %>
+
+<div class="panel panel-default panelRease">
+	<div class="panel-heading">
+		Correos enviados anteriormente
+	</div>
+	<div class="panel-body">
+		<%@bulletins.each do |bulletin|%>
+			<p><strong><%=bulletin.title%></strong> - <%=l bulletin.start_date%> - <%= link_to "Ver", bulletin %> </p>
+		<%end%>
+	</div>
+</div>
+

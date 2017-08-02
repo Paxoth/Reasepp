@@ -1,0 +1,40 @@
+
+<div class="panel panel-default panelRease">
+	<div class="panel-heading">
+		Información de contacto
+	</div>
+	<div class="panel-body">
+		<p>
+		Si quiere unirse a nuestra organización, tiene sugerencias que hacer o simplemente tiene interés y quiere saber más sobre Aprendizaje Servicio, por favor no dude en contactarse.
+		<p class="note">*Todos los campos son obligatorios.</p>
+		<%= form_for(@contact) do |f| %>
+			<% if @contact.errors.any? %>
+			<div id="error_explanation">
+			<h2><%= pluralize(@contact.errors.count, "error") %> prohibited this contact from being saved:</h2>
+			<ul>
+			<% @contact.errors.full_messages.each do |message| %>
+			<li><%= message %></li>
+			<% end %>
+			</ul>
+			</div>
+			<% end %>
+			<div class="field">
+			<%= f.text_field :name, :class => 'form-control', :placeholder => 'Nombre', :required => true %>
+			</div>
+			<div class="field">
+			<%= f.email_field :email, :class => 'form-control', :placeholder => 'Correo Electrónico', :required => true %>
+			</div>
+			<div class="field">
+			<%= f.text_area :body, :class => 'form-control', :placeholder => 'Escriba acá su comentario...', :required => true %>
+			</div>
+			<div class="actions">
+			<%= f.submit "Enviar Comentario", :class => "btn btn-lg btnCRUD" %>
+			</div>
+		<% end %>
+
+		</p>
+
+	</div>
+</div>
+
+

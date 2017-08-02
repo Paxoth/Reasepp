@@ -1,0 +1,100 @@
+<nav class="navbar navbar-default BarraNavegadora navbar-fixed-top">
+	<div class="container-fluid">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<%= link_to(image_tag("logoblanco.png", id: "logoNav"),root_path) %>
+			<button type="button" class="navbar-toggle btn-nav" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+				<i class="glyphicon glyphicon-circle-arrow-down"></i>
+			</button>
+		</div>
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav" >
+				<li role="presentation" class="<%= 'active' if current_page?(root_path) %>">
+					<%= link_to 'Inicio <i class="glyphicon glyphicon-home"></i>'.html_safe, root_path %>
+				</li>
+
+				<% if !user_signed_in? %>
+				<li role="presentation" class="<%= 'active' if current_page?(presentation_aprendizaje_path) %>">
+					<%= link_to '¿Qué es A+S? <i class="glyphicon glyphicon-pencil"></i>'.html_safe, presentation_aprendizaje_path %>
+				</li>
+
+				<li role="presentation" class="<%= 'active' if current_page?(presentation_hacemos_path) %>">
+					<%= link_to '¿Qué hacemos? <i class="glyphicon glyphicon-paperclip"></i>'.html_safe, presentation_hacemos_path %>
+				</li>
+
+				<li role="presentation" class="<%= 'active' if current_page?(presentation_somos_path) %>">
+					<%= link_to '¿Quiénes somos? <i class="glyphicon glyphicon-pushpin"></i>'.html_safe, presentation_somos_path %>
+				</li>
+
+				<li role="presentation" class="<%= 'active' if current_page?(presentation_estatutos_path) %>">
+					<%= link_to 'Estatuto <i class="glyphicon glyphicon-book"></i>'.html_safe, presentation_estatutos_path %>
+				</li>
+
+				<li role="presentation" class="<%= 'active' if current_page?(presentation_contacto_path) %>">
+					<%= link_to 'Contacto <i class="glyphicon glyphicon-envelope"></i>'.html_safe, contacts_path %>
+				</li>
+				<li role="presentation" class="navCenter">
+					<%= form_tag(presentation_searchPage_path, :method => "post",:class=>"form-inline") do %>
+					<div class="input-group">
+						<%= text_field_tag :search, params[:search], placeholder: "Buscar en la página",:class => 'form-control',:required => true %>
+						<span class="input-group-btn">
+							<%= submit_tag "Ir", :class => 'btn btn-default' %>
+						</span>
+					</div>
+					<%end%>
+				</li>
+			</ul>
+
+			<p class="navbar-text navbar-right">Miembros activos: <%= User.count %> </p>
+				<%else%>
+
+				<li role="presentation" class="<%= 'active' if current_page?(presentation_estatutos_path) %>">
+					<%= link_to 'Estatuto <i class="glyphicon glyphicon-book"></i>'.html_safe, presentation_estatutos_path %>
+				</li>
+
+				<li role="presentation" class="<%= 'active' if current_page?(requests_path) %>">
+					<%= link_to 'Solicitudes <i class="glyphicon glyphicon-log-in"></i>'.html_safe, requests_path %>
+				</li>
+
+				<li role="presentation">
+					<%= link_to 'Ofertas <i class="glyphicon glyphicon-log-out"></i>'.html_safe, offerings_path %>
+				</li>
+
+				<li role="presentation">
+					<%= link_to 'Experiencias <i class="glyphicon glyphicon-education"></i>'.html_safe, experiences_path %>
+				</li>
+
+				<li role="presentation">
+					<%= link_to 'Eventos <i class="glyphicon glyphicon-calendar"></i>'.html_safe, events_path %>
+				</li>
+				<%if current_user.category == 1%>
+					<li role="presentation" class="<%= 'active' if current_page?(sections_path) %>">
+					 <%= link_to 'Administrar <i class="glyphicon glyphicon-cog"></i>'.html_safe, sections_path %>
+					</li>
+				<%end%>
+
+				<li role="presentation" class="navCenter">
+					<%= form_tag(presentation_searchPage_path, :method => "post",:class=>"form-inline") do %>
+					<div class="input-group">
+						<%= text_field_tag :search, params[:search], placeholder: "Buscar en la red",:class => 'form-control',:required => true %>
+						<span class="input-group-btn">
+							<%= submit_tag "Ir", :class => 'btn btn-default' %>
+						</span>
+					</div>
+					<%end%>
+				</li>
+
+
+			</ul>
+			<p class="navbar-text navbar-right">
+				¡Hola <%= current_user.nickname %>!
+
+			<%=link_to '<i class="glyphicon glyphicon-user"></i>'.html_safe, users_path, :id=>'rightBar'%> 
+	
+			<%= link_to '<i class="glyphicon glyphicon-off"></i>'.html_safe, destroy_user_session_path, :method => :delete, :id=>'rightBar'%></p>
+			<%end%>
+		</div><!-- /.navbar-collapse -->
+	</div><!-- /.container-fluid -->
+</nav>

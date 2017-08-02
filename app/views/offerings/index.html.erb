@@ -1,0 +1,175 @@
+<h1>Ofertas de servicio</h1>
+<% if current_user.category != 4 %>
+	<%= link_to "Nueva oferta de servicio", new_offering_path, :class => 'btn btn-lg' %>
+<%end%>
+<div class="buscador">
+	<%= form_tag(offerings_searchOffering_path, :method => "post",:class=>"form-inline") do %>
+	<div class="input-group">
+		<%= text_field_tag :search, params[:search], placeholder: "Buscar ofertas",:class => 'form-control',:required=>true %>
+		<span class="input-group-btn">
+			<%= submit_tag "Ir", :class => 'btn btn-default' %>
+		</span>
+	</div>
+	<%end%>
+</div>
+	<ul class="nav nav-tabs tabRease nav-justified">
+	<li id="off1" onclick="off1()"><a>Disponibles</a></li>
+	<li id="off2" onclick="off2()"><a>En proceso</a></li>
+	<li id="off3" onclick="off3()"><a>Canceladas</a></li>
+	<li id="off4" onclick="off4()"><a>Caducadas</a></li>
+</ul>
+
+<div id="Disponible">
+	<%if @disponible.present?%>
+	<% @disponible.each do |offering| %>
+		<div class="panel panel-default panelRease">
+			<div class="panel-heading">
+				<%= offering.title %>
+			</div>
+			<div class="panel-body">
+				<h2>Resumen: </h2>
+				<p><%=raw offering.resume %></p>
+				<%= link_to "Ver oferta", offering %>
+			</div>
+		</div>
+	<%end%>
+	<%else%>
+		<div class="panel panel-default panelRease">
+			<div class="panel-heading">
+				Ofertas de servicios disponibles
+			</div>
+			<div class="panel-body">
+				<p>No hay ofertas de servicio disponibles
+			</div>
+		</div>
+	<%end%>
+
+</div>
+<div id="En Proceso">
+	<%if @proceso.present?%>
+	<% @proceso.each do |offering| %>
+		<div class="panel panel-default panelRease">
+			<div class="panel-heading">
+				<%= offering.title %>
+			</div>
+			<div class="panel-body">
+				<h2>Resumen: </h2>
+				<p><%=raw offering.resume %></p>
+				<%= link_to "Ver oferta", offering %>
+			</div>
+		</div>
+	<%end%>
+	<%else%>
+		<div class="panel panel-default panelRease">
+			<div class="panel-heading">
+				Ofertas de servicios en proceso
+			</div>
+			<div class="panel-body">
+				<p>No hay ofertas de servicio en proceso
+			</div>
+		</div>
+	<%end%>
+
+</div>
+<div id="Cancelada">
+	<%if @cancelada.present?%>
+	<% @cancelada.each do |offering| %>
+		<div class="panel panel-default panelRease">
+			<div class="panel-heading">
+				<%= offering.title %>
+			</div>
+			<div class="panel-body">
+				<h2>Resumen: </h2>
+				<p><%=raw offering.resume %></p>
+				<%= link_to "Ver oferta", offering %>
+			</div>
+		</div>
+	<%end%>
+	<%else%>
+		<div class="panel panel-default panelRease">
+			<div class="panel-heading">
+				Ofertas de servicios canceladas
+			</div>
+			<div class="panel-body">
+				<p>No hay ofertas de servicio canceladas
+			</div>
+		</div>
+	<%end%>
+
+</div>
+<div id="Caducada">
+	<%if @caducada.present?%>
+	<% @caducada.each do |offering| %>
+		<div class="panel panel-default panelRease">
+			<div class="panel-heading">
+				<%= offering.title %>
+			</div>
+			<div class="panel-body">
+				<h2>Resumen: </h2>
+				<p><%=raw offering.resume %></p>
+				<%= link_to "Ver oferta", offering %>
+			</div>
+		</div>
+	<%end%>
+	<%else%>
+		<div class="panel panel-default panelRease">
+			<div class="panel-heading">
+				Ofertas de servicios caducadas
+			</div>
+			<div class="panel-body">
+				<p>No hay ofertas de servicio caducadas
+			</div>
+		</div>
+	<%end%>
+
+
+</div>
+
+<script type="text/javascript">
+	document.getElementById('Disponible').style.display='block';	
+	document.getElementById("off1").className = "active";	
+	document.getElementById('En Proceso').style.display='none';
+	document.getElementById('Cancelada').style.display='none';
+	document.getElementById('Caducada').style.display='none';
+	function off1(){
+		document.getElementById('Disponible').style.display='block';	
+		document.getElementById('En Proceso').style.display='none';
+		document.getElementById('Cancelada').style.display='none';
+		document.getElementById('Caducada').style.display='none';
+		document.getElementById("off1").className = "active";
+		document.getElementById("off2").className = "";
+		document.getElementById("off3").className = "";
+		document.getElementById("off4").className = "";
+	}
+	function off2(){
+		document.getElementById('Disponible').style.display='none';	
+		document.getElementById('En Proceso').style.display='block';
+		document.getElementById('Cancelada').style.display='none';
+		document.getElementById('Caducada').style.display='none';
+		document.getElementById("off1").className = "";
+		document.getElementById("off2").className = "active";
+		document.getElementById("off3").className = "";
+		document.getElementById("off4").className = "";
+	}
+	function off3(){
+		document.getElementById('Disponible').style.display='none';	
+		document.getElementById('En Proceso').style.display='none';
+		document.getElementById('Cancelada').style.display='block';
+		document.getElementById('Caducada').style.display='none';
+		document.getElementById("off1").className = "";
+		document.getElementById("off2").className = "";
+		document.getElementById("off3").className = "active";
+		document.getElementById("off4").className = "";
+		
+	}
+	function off4(){
+		document.getElementById('Disponible').style.display='none';		
+		document.getElementById('En Proceso').style.display='none';
+		document.getElementById('Cancelada').style.display='none';
+		document.getElementById('Caducada').style.display='block';
+		document.getElementById("off1").className = "";
+		document.getElementById("off2").className = "";
+		document.getElementById("off3").className = "";
+		document.getElementById("off4").className = "active";
+	}
+</script>

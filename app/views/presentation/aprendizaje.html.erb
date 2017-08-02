@@ -1,0 +1,11 @@
+<h1>¿Qué es A+S?</h1>
+<% @sections.each do |seccion| %>	
+	<div  class="panel panel-default panelRease">
+		<div class="panel-heading">
+			<%= seccion.title %>
+		</div>
+		<div class="panel-body">
+			<p><%=raw seccion.body %></p>
+		</div>
+	</div>
+<%end%>

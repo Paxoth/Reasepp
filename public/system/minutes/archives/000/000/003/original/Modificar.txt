@@ -1,0 +1,63 @@
+##################################################################################################################
+												CRITICAS DISEÑADORA
+##################################################################################################################
+* los titulos de los panels deben estár siempre a la izquierda y tener el tamaño de letra mas grande.
+* los botones, titulos y textos deben ser distintos y estandarizados.
+* la altura de el primer panel debe ser a la altura del ingreso a la intranet
+* agrandar footer
+* usar letra mas adecuada a la lecturas largas como times, tamano correcto (serif)
+* los logos de las instituones deben tener el mismo tamaño, en preferencia que se vayan moviendo en carrousel. 
+* todo en minúscula a menos que sea una sigla
+
+
+##################################################################################################################
+												MODIFICAR
+##################################################################################################################
+
+6)  Enviar un comentario, agregar a todos los campos si es opcional u obligatorio
+11) Módulo de Inicio, debe contener los bloques de eventos y uno que se llame "Destacado"(puede ser un video, link, ect).
+* Modal estatuto le falta el botón de cerrar
+
+
+##################################################################################################################
+												FALTA
+##################################################################################################################
+1)  Terminar el formulario de registro a la red:
+		Radioutton categoria funcional
+		tabla de tipo de usuario con radiobutton funcional
+		niveles de usuario
+		Rcordar:
+			Se deben enviar dos correos, uno al usuario y otro al correo de rease, con los datos que se llenaron en el formulario.
+			
+2)	Todo lo que respecta a un comentario por mail.
+3)	Página completamente editable (pensar en crear un tabla en la base de datos que contenga toda la información)
+4)	Modulo somos, con fotos e información de los encargados de cada secretaria.
+
+
+##################################################################################################################
+												HECHOS
+##################################################################################################################
+
+3)  Corregir el font del "Somos"
+4)  Link de interés, eliminar el CREAS y el MARISTAS
+7)  Contador; de todos los miembros registados
+12) Cambiar el largo de la validación de la contraseña de 8 caracteres a 6 caracteres.
+2)  Eliminar la tabla de Organizaciones y poner los logos institucionales y su link de inicio
+9)  Agregar Cambios al módulo "Somos", que las secretarías sean botones y que al hacerles click deriven a la descripcion de dicha secretaría. Debe incluir el nombre del encargado de cada secretaria, sus datos generales(nombre, mail e institución) y una foto.
+13) Cambiar Textos:
+	- "Crear cuenta" -> "Registrarse"
+	- "Inicio sesión" -> "Ingreso intranet"
+5)  TODO VA CON TEXTO FORMAL
+
+	
+1)  Linkear los títulos de los estatutos
+10) Estatutos, agregarlos a un panel con fondo blanco para que no se confunda con el fondo.
+8)  Ocultar el header si es que no lo selecciona
+14) Formulario de Registro (seguir instrucciones del papel)
+15) Formulario de Conectarse (seguir instrucciones del papel) --> Googlear "templating with rails"
+ Terminar el formulario de registro a la red:
+Radiobutton de campos: tipo y rol de usuario → funcional
+tabla de tipo de usuario con radiobutton funcional
+niveles de usuario
+
+

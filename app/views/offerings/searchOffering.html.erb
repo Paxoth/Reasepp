@@ -1,0 +1,36 @@
+<h1>Búsqueda de ofertas de servicio</h1>
+<% if current_user.category != 4 %>
+	<%= link_to "Nueva oferta de servicio", new_offering_path, :class => 'btn btn-lg' %>
+<%end%>
+<div class="buscador">
+	<%= form_tag(offerings_searchOffering_path, :method => "post",:class=>"form-inline") do %>
+	<div class="input-group">
+		<%= text_field_tag :search, params[:search], placeholder: "Buscar ofertas",:class => 'form-control',:required=>true %>
+		<span class="input-group-btn">
+			<%= submit_tag "Ir", :class => 'btn btn-default' %>
+		</span>
+	</div>
+	<%end%>
+</div>
+
+<% if @offerings.present? %>
+<div class="panel panel-default panelRease">
+	<div class="panel-heading">
+		Ofertas de Servicio: <%= params[:search] %>
+	</div>
+	<div class="panel-body">
+		<%= render @offerings %>
+	</div>
+</div>
+<%else%>
+<div class="panel panel-default panelRease">
+	<div class="panel-heading">
+		Ofertas de Servicio: <%= params[:search] %>
+	</div>
+	<div class="panel-body">
+		<p>No se encontraron resultados en la búsqueda de <strong><%= params[:search] %></strong></p>
+	</div>
+</div>
+<% end %>
+
+<%=link_to "Volver", offerings_path, :class=>'btn btn-lg btnCRUD'%>

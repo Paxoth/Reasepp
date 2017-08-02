@@ -1,0 +1,83 @@
+<h1>Experiencias</h1>
+<div class="buscador">
+	<%= form_tag(experiences_searchExperience_path, :method => "post",:class=>"form-inline") do %>
+	<div class="input-group">
+		<%= text_field_tag :search, params[:search], placeholder: "Buscar experiencias",:class => 'form-control',:required=>true %>
+		<span class="input-group-btn">
+			<%= submit_tag "Ir", :class => 'btn btn-default' %>
+		</span>
+	</div>
+	<%end%>
+</div>
+<ul class="nav nav-tabs tabRease nav-justified">
+<li id="exp1" onclick="exp1()"><a>Solicitudes de Servicio</a></li>
+<li id="exp2" onclick="exp2()"><a>Ofertas de Servicio</a></li>
+</ul>
+<div id="FRequest">
+	<%if @requests.present?%>
+		<% @requests.order('created_at DESC').each do |request| %>
+			<div class="panel panel-default panelRease">
+				<div class="panel-heading">
+					<%= request.title %>
+				</div>
+				<div class="panel-body">
+					<h2>Resumen:</h2>
+					<p><%=request.resume%></p>
+					<%= link_to "Ver solicitud", request%>
+				</div>
+			</div>
+		<%end%>
+	<%else%>
+			<div class="panel panel-default panelRease">
+				<div class="panel-heading">
+					Experiencias de solicitudes de servicio
+				</div>
+				<div class="panel-body">
+					<p>No hay experiencias disponibles</p>
+				</div>
+			</div>
+	<%end%>      
+</div>
+<div id="FOfferings">
+	<%if @offerings.present?%>
+		<% @offerings.order('created_at DESC').each do |offering| %>
+			<div class="panel panel-default panelRease">
+				<div class="panel-heading">
+					<%= offering.title %>
+				</div>
+				<div class="panel-body">
+					<h2>Resumen:</h2>
+					<p><%=offering.resume%></p>
+					<%= link_to "Ver Oferta", offering%>
+				</div>
+			</div>
+		<%end%>
+	<%else%>
+			<div class="panel panel-default panelRease">
+				<div class="panel-heading">
+					Experiencias de ofertas de servicio
+				</div>
+				<div class="panel-body">
+					<p>No hay experiencias disponibles</p>
+				</div>
+			</div>
+	<%end%>
+</div>
+
+<script type="text/javascript">
+	document.getElementById('FRequest').style.display='block';	
+	document.getElementById("exp1").className = "active";	
+	document.getElementById('FOfferings').style.display='none';
+	function exp1(){
+		document.getElementById('FRequest').style.display='block';
+		document.getElementById('FOfferings').style.display='none';
+		document.getElementById("exp1").className = "active";
+		document.getElementById("exp2").className = "";
+	}
+	function exp2(){
+		document.getElementById('FRequest').style.display='none';
+		document.getElementById('FOfferings').style.display='block';
+		document.getElementById("exp1").className = "";
+		document.getElementById("exp2").className = "active";
+	}
+</script>

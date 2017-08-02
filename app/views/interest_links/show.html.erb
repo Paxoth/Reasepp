@@ -1,0 +1,22 @@
+<h1>Link de interés</h1>
+
+<div class="panel panel-default panelRease">
+	<div class="panel-heading">
+		<%= @interest_link.name %>
+	</div>
+	<div class="body">
+		<p>
+		<strong>Página del link:</strong>
+		<%= link_to @interest_link.url %>
+		</p>
+
+		<p>
+		<strong>Descripción:</strong>
+		<%= @interest_link.description %>
+		</p>	
+	</div>
+</div>
+<%if user_signed_in? %>
+<%= link_to 'Editar', edit_interest_link_path(@interest_link), :class => 'btn btn-lg btnCRUD' %> 
+<%= link_to 'Volver', interest_links_path , :class => 'btn btn-lg btnCRUD' %>
+<%end%>

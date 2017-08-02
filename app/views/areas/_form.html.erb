@@ -1,0 +1,25 @@
+<%orden ||= "Crear"%>
+<%= form_for(@area) do |f| %>
+	<% if @area.errors.any? %>
+		<% @area.errors.full_messages.each do |message| %>
+			<%flash[:alert] = message %>
+		<% end %>
+	<% end %>
+
+<div class="panel panel-default panelRease" >
+	<div class="panel-heading">
+		Datos del área de trabajo
+	</div>
+	<div class="panel-body">
+		<p class="note">*Todos los campos obligatorios</p>
+		<div class="field">
+			<%= f.text_field :name, :class => 'form-control', :placeholder => 'Nombre',:required=>true %>
+		</div>
+		<div class="field">
+			<%= f.text_area :description,  :class => 'form-control', :placeholder => 'Descripción o características del área de trabajo',:required=>true %>
+		</div>
+	</div>	
+</div>
+	<%= f.submit orden, :class=>"btn btn-lg btnCRUD" %>
+	<%= link_to 'Volver', areas_path, :class =>"btn btn-lg btnCRUD" %>
+<% end %>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+	</head>
+
+	<body>
+		<div class="panel panel-default panelRease">
+			<div class="panel-heading">
+				Contacto para REASE
+			</div>
+			<div class="panel-body">
+				<p>Hola, <strong><%= @contact.name %></strong>, usted se ha comunicado con REASE con los siguientes datos: </p>
+				<p><strong>Mail:</strong> <%= @contact.email %></p>
+				<p><strong>Comentario:</strong></p>
+				<p> <%= @contact.body %></p>
+			</div>
+			<div class="panel-footer">
+				<br><br>
+				<p>Muchas gracias por contactarse con nostros, intentaremos contestarle a la brevedad</p><br>
+				<p><strong>Red Nacional de aprendizaje servicio.</strong></p>
+				<p>coordinacion.rease@gmail.com</p>
+			</div>
+		</div>   
+
+	</body>
+</html>

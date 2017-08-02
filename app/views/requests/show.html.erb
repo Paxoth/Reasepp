@@ -1,0 +1,66 @@
+<div class="panel panel-default panelRease" >
+	<div class="panel-heading">
+		<%= @request.title %>
+	</div>
+
+	<div class="panel-body">
+		<h2>Descripción:</h2>
+		<p><%=raw @request.description %></p>
+
+		<h2> Información </h2>
+		<p><strong>Estado: </strong>
+		<% if @request.status == 1%>
+			Disponible
+		<%end%>
+		<% if @request.status == 2%>
+			En proceso
+		<%end%>
+		<% if @request.status == 3%>
+			Realizado
+		<%end%>
+		<% if @request.status == 4%>
+			Cancelado
+		<%end%>
+		<% if @request.status == 5%>
+			Caducado
+		<%end%>
+		</p>
+
+		<p><strong>Fecha de inicio: </strong><%=l @request.start_time %></p>
+		<p><strong>Fecha de término: </strong><%=l @request.end_time %></p>
+		<%if @request.area_id.present?%>
+			<p><strong>Área de trabajo: </strong> <%= @request.area.name%></p>
+		<%end%>
+		<p><strong>Creado por:</strong>
+		<%= link_to @request.user.nickname, user_path(@request.user.id) %>
+		<%if !@request.user.photo.blank?%>
+			<%= image_tag @request.user.photo.url(:mini), :class =>"RoundPicture" %>
+		<%end %>
+	</div>
+	<div class="panel-footer">
+		<h2>Comentarios</h2>
+		<%=render 'comment_requests/form'%>
+
+		<% @request.comment_requests.order('created_at DESC').each do |comment|%>
+		<p>	
+			<%if !@request.user.photo.blank?%>
+				<%= image_tag comment.user.photo.url(:mini), :class =>"RoundPicture" %>   	
+			<%end %>
+			<%= link_to comment.user.nickname, comment.user%>: 	<%=comment.body%>
+			<%if current_user == comment.user or current_user.category == 1 %> - 
+					<%= link_to 'Eliminar', request_comment_request_path(@request,comment), method: :delete, data: { confirm: '¿Está seguro de eliminar el comentario?' }%>
+			<%end%>
+		</p>
+		<%end%>
+	</div>
+</div>
+
+<% if user_signed_in? && current_user.category != 2 %>
+	<% if @request.user.id == current_user.id || current_user.category == 1 %>
+		<%= link_to 'Editar ', edit_request_path(@request), :class => "btn btn-lg btnCRUD" %>
+		<%= link_to t('Eliminar'), request_path(@request),:method => 'delete',
+		:data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => '¿Está seguro de eliminar la solicitud?')) }, :class => "btn btn-lg btnCRUD"%>
+	<% end %>
+<% end %>
+	
+	<%= link_to 'Volver', requests_path, :class => "btn btn-lg btnCRUD" %>
