@@ -10,7 +10,7 @@ class AreasController < ApplicationController
   # GET /areas.json
   def index
     add_breadcrumb "Areas de Trabajo", areas_path 
-    @areas = Area.order("name ASC").all
+    @areas = Area.paginate(page: params[:page],per_page: 15).order("discipline ASC").order("name ASC").all
   end
 
   # GET /areas/1
@@ -84,6 +84,6 @@ class AreasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def area_params
-      params.require(:area).permit(:name, :description)
+      params.require(:area).permit(:name, :description, :discipline)
     end
 end

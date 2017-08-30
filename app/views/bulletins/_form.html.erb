@@ -6,15 +6,28 @@
 	<% end %>
 	<div class="panel panel-default panelRease">
 		<div class="panel-heading">
-			Correo a todos los usuarios
+			Boletín para los usuarios
 		</div>
 		<div class="panel-body">
 			<p class="note">*Todos los campos obligatorios</p>
-			<div class="field">
+			<div class="field"><p>
+				<%=f.label :title, "Título:"%>
 				<%= f.text_field :title,:class=>'form-control',:placeholder=>'Título' ,:required=>true %>
+			</p></div>
+			<div class="field"><p>
+				<%=f.label :description, "Descripción:"%>
+				<%= f.text_area :description, :placeholder=> "Escribir aquí.", :id=>"eg-basic"%>
+			</p></div>
+
+			<div class="field"><p>
+			<%= f.label :receiver, "Destinatarios: "%>
+			<%= f.select(:receiver, [['Usuarios activos', 1],['Usuarios adherentes',2], ['Todos los usuarios',3]], {:include_blank => '-- Seleccione la adhesión en la red del destinatario --' }, { :class => 'form-control', :required => true }) %></p>
 			</div>
+
 			<div class="field">
-				<%= f.text_area :description, :placeholder=> "Escribir aquí.", :id=>"eg-basic",:required=>true %>
+				<p class="note">Fecha desde la que se enviará la información del sitio.</p>
+				<p><%= f.label :start_date, "A partir de: " %>
+				<%= f.date_select :start_date %></p>
 			</div>
 		</div>
 	</div>
@@ -29,7 +42,9 @@
 <script>
   $(function() {
     $('textarea#eg-basic').editable({
-      inlineMode: false,
+      theme: 'rease',
+	inlineMode: false,
+      language: 'es'
     })
   });
 </script>

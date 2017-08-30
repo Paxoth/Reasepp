@@ -10,39 +10,57 @@
 	<div class="panel panel-default panelRease" >
     	<div class="panel-heading">Datos de la solicitud</div>
     	<div class="panel-body">
-    		<p class="note">*Todos los campos son obligatorios.</p>
-    		<div class="control-group">
-				<div class="field">
+			<div class="field"><p>
+				<%= f.label :title, "Título: "%>
 				<%= f.text_field :title, :class => 'form-control', :placeholder => 'Titulo' ,:required=>true%>
-				</div>
-				<div class="field">
+			</p></div>
+
+			<div class="field"><p>
+				<%= f.label :resume, "Resumen de la solicitud: "%>
 				<%= f.text_area :resume, :class => 'form-control', :placeholder => 'Resumen de la solicitud (10 carácteres mínimo)' ,:required=>true%>
-				</div>
-				<%= error_span(@request[:title]) %>
-			</div>
+			</p></div>
 			<p class="note">Sí no se encuentra su área de trabajo comuníquese con un administrador</p>
-			<div class="field">
-				<%= f.select(:area_id, Area.all.collect {|area| [area.name, area.id]},{:include_blank => "Área de trabajo (Opcional)"},{ :class => 'form-control'}) -%>
-			</div>
-			<% if accion == "Actualizar" %>
-				<%= f.select(:status, [['Disponible', 1],['En proceso', 2],['Realizado',3], ['Cancelado',4], ['Caducado', 5]], {:include_blank => '-- Seleccione un estado --' }, { :class => 'form-control', :required => true }) %>
-			<% else %>
-				<p><strong>Estado: </strong> Disponible </p>
-			<% end %>
 
-			<div class="control-group">
-				<div class="field">
-				<%= f.text_area :description, :placeholder=> "Escribir aquí.", :id=>"eg-basic", :class => 'form-control',:required=>true %>
-				</div>
-				<%= error_span(@request[:description]) %>
+			<div class="field"><p>
+				<%= f.label :area_id, "Área de trabajo: "%>
+				<%= f.select(:area_id, Area.order("discipline ASC").order("name ASC").all.collect {|area| [area.discipline+": "+area.name, area.id]},{:include_blank => "Área de trabajo (Opcional)"},{ :class => 'form-control'}) -%>
+			</p></div>
+
+			<div class="field"><p>
+				<%= f.label :institution_id, "Institución adherida: "%>
+				<%= f.select(:institution_id, Institution.order("name ASC").all.collect {|inst| [inst.name, inst.id]},{:include_blank => "Institución (Opcional)"},{ :class => 'form-control'}) -%>
+			</p></div>
+
+			<div class="field"><p>
+				<%= f.label :location, "Dirección o úbicación: "%>
+				<%= f.text_area :location, :class => 'form-control', :placeholder => 'Indique dónde se realizaría este servicio. Ubicación o dirección (opcional)'%>
+			</p></div>
+
+			<div class="field"><p>
+				<% if accion == "Actualizar" %>
+					<%= f.label :status, "Estado: "%>
+					<%= f.select(:status, [['Disponible', 1],['Cancelado', 2],['Caducado',3]], {:include_blank => '-- Seleccione un estado --' }, { :class => 'form-control', :required => true }) %>
+				<% else %>
+					<p><strong>Estado: </strong> Disponible </p>
+				<% end %>
+			</p></div>
+
+			<div class="field"><p>
+				<%= f.label :description, "Descripción: "%>
+				<%= f.text_area :description, :placeholder=> "Escribir aquí.", :id=>"eg-basic"%>
 			</div>
 
 			<div class="field">
-				<p><%= f.label :start_time, "Fecha de inicio" %>
-				<%= f.date_select :start_time %></p>
+				<% if accion == "Crear" %>
+					<p><%= f.label :start_time, "Fecha de licitación de  inicio: " %>
+					<%= Time.now.strftime("%d/%m/%Y")%></p>
+				<%else%>
+					<p><%= f.label :start_time, "Fecha de licitación de inicio: " %>
+					<%= f.date_select :start_time %></p>
+				<%end%>
 			</div>
 			<div class="field">
-				<p><%= f.label :end_time, "Fecha de término" %>
+				<p><%= f.label :end_time, "Fecha de licitación de término" %>
 				<%= f.date_select :end_time %></p>
 			</div>
 			
@@ -50,13 +68,15 @@
 	</div>
 
 	<%= f.submit accion, :class => 'btn btn-lg btnCRUD' %>
-	<%= link_to t('.cancel', :default => t("helpers.links.cancel")), requests_path, :class => 'btn btn-lg btnCRUD' %>
+	<%= link_to "Volver", requests_path, :class => 'btn btn-lg btnCRUD' %>
 
 <% end %>
 
 <script>
 	 $(function() {$('textarea#eg-basic').editable({
-      inlineMode: false,
+      theme: 'rease',
+		inlineMode: false,
+      language: 'es'
     })
   });
 </script>

@@ -1,4 +1,14 @@
-<h1>Detalles de <%= @event.title %></h1>	
+<h1>Detalles del evento</h1>
+
+<% if user_signed_in? && current_user.category == 1  %>
+	<% if @event.user.id == current_user.id %>
+		<%= link_to 'Editar evento', edit_event_path(@event), :class => "btn btn-lg btnCRUD" %>
+		<%= link_to 'Eliminar evento', @event, method: :delete, data: { confirm: '¿Está seguro de eliminar el evento?' }, :class => "btn btn-lg btnCRUD" %>
+	<% end %>
+<% end %>
+	
+<%= link_to 'Volver', events_path, :class => "btn btn-lg btnCRUD" %>
+
 <div class="panel panel-default panelRease" >
 	<div class="panel-heading">
 		<%= @event.title %>
@@ -16,15 +26,12 @@
 			Disponible
 		<%end%>
 		<% if @event.status == 2%>
-			En proceso
-		<%end%>
-		<% if @event.status == 3%>
 			Realizado
 		<%end%>
-		<% if @event.status == 4%>
+		<% if @event.status == 3%>
 			Cancelado
 		<%end%>
-		<% if @event.status == 5%>
+		<% if @event.status == 4%>
 			Caducado
 		<%end%>
 		</p>
@@ -39,32 +46,35 @@
 	  	<%end %></p>
 	</div>
 	<div class="panel-footer">
-		<h2>Comentarios</h2>
-		<div class="comment">
-			<%if user_signed_in? %>
-				<%=render 'comments/form'%>
+		<%if user_signed_in? %>
+			<h2>Comentarios</h2>
+			<%if @event.comments.count == 0%>
+				<p>¡<%= current_user.nickname%>, sé el primero en comentar este evento!</p>
+			<%elsif @event.comments.count == 1%>
+				<p>Hay <strong>1</strong> comentario en este evento.</p>
+			<%else%>
+				<p>Hay un total de <strong><%= @event.comments.count%></strong> comentarios en este evento.</p>
 			<%end%>
-			<% @event.comments.order('created_at DESC').each do |comment|%>
-			<p>	
-				<%if !@event.user.photo.blank?%>
-					<%= image_tag comment.user.photo.url(:mini), :class =>"RoundPicture" %>   	
-				<%end %>
-				<%= link_to comment.user.nickname, comment.user%>: 	<%=comment.body%>
-				<%if user_signed_in? %>
-					<%if current_user == comment.user or current_user.category == 1 %> - 
-						<%= link_to 'Eliminar', event_comment_path(@event,comment), method: :delete, data: { confirm: '¿Está seguro de eliminar el comentario?' }%>
+			<div class="comment">
+				<%=render 'comments/formEvent'%>
+				
+				<% @event.comments.order('created_at DESC').each do |comment|%>
+				<hr>
+				<p>	
+					<%if comment.user.photo.present?%>
+						<%= image_tag comment.user.photo.url(:mini), :class =>"RoundPicture" %> 
+					<%else%>
+						<%= image_tag ("mini/missingPhoto.png") %> 
+					<%end %>
+					<%= link_to comment.user.nickname, comment.user%> [ <%=comment.created_at.strftime("%d/%m/%Y - %H:%M")%> ]: 	<%=raw comment.body%>
+					<%if user_signed_in? %>
+						<%if current_user == comment.user or current_user.category == 1 %> - 
+							<%= link_to 'Eliminar', event_comment_path(@event,comment), method: :delete, data: { confirm: '¿Está seguro de eliminar el comentario?' }%>
+						<%end%>
 					<%end%>
+				</p>
 				<%end%>
-			</p>
-			<%end%>
-		</div>
+			</div>
+		<%end%>
 	</div>
 </div> 
-<% if user_signed_in? && current_user.category == 1  %>
-	<% if @event.user.id == current_user.id %>
-		<%= link_to 'Editar evento', edit_event_path(@event), :class => "btn btn-lg btnCRUD" %>
-		<%= link_to 'Eliminar evento', @event, method: :delete, data: { confirm: '¿Está seguro de eliminar el evento?' }, :class => "btn btn-lg btnCRUD" %>
-	<% end %>
-<% end %>
-	
-	<%= link_to 'Volver', events_path, :class => "btn btn-lg btnCRUD" %>

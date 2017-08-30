@@ -1,66 +1,114 @@
+<h1>Detalles de la solicitud de servicio</h1>
+
+<% if user_signed_in? && current_user.category != 2 %>
+	<% if @request.user.id == current_user.id %>
+		<%if @request.status != 4%>
+			<%= link_to 'Editar ', edit_request_path(@request), :class => "btn btn-lg btnCRUD" %>
+			<%= link_to 'Eliminar', @request, method: :delete, data: { confirm: '¿Está seguro de eliminar la solicitud?' }, :class => "btn btn-lg btnCRUD" %>
+		<%end%>
+	<% end %>
+<% end %>
+
+<%= link_to 'Volver', requests_path, :class => "btn btn-lg btnCRUD" %>
 <div class="panel panel-default panelRease" >
 	<div class="panel-heading">
 		<%= @request.title %>
 	</div>
 
 	<div class="panel-body">
-		<h2>Descripción:</h2>
+
+		<h1>Descripción:</h1>
 		<p><%=raw @request.description %></p>
 
-		<h2> Información </h2>
+		<h1> Información </h1>
 		<p><strong>Estado: </strong>
-		<% if @request.status == 1%>
-			Disponible
-		<%end%>
-		<% if @request.status == 2%>
-			En proceso
-		<%end%>
-		<% if @request.status == 3%>
-			Realizado
-		<%end%>
-		<% if @request.status == 4%>
-			Cancelado
-		<%end%>
-		<% if @request.status == 5%>
-			Caducado
-		<%end%>
+			<% if @request.status == 1%>
+				Disponible
+			<% elsif @request.status == 2%>
+				Cancelado
+			<% elsif @request.status == 3%>
+				Caducado
+			<% elsif @request.status == 4%>
+				Aceptado para servicio
+			<%end%>
 		</p>
 
-		<p><strong>Fecha de inicio: </strong><%=l @request.start_time %></p>
-		<p><strong>Fecha de término: </strong><%=l @request.end_time %></p>
+
+		<p><strong>Fecha de licitación de inicio: </strong><%=l @request.start_time %></p>
+
+		<p><strong>Fecha de licitación de término: </strong><%=l @request.end_time %></p>
 		<%if @request.area_id.present?%>
 			<p><strong>Área de trabajo: </strong> <%= @request.area.name%></p>
 		<%end%>
+
+		<%if @request.institution_id.present?%>
+			<p><strong>Institución: </strong> <%= @request.institution.name%></p>
+		<%end%>
+		<%if @request.location.present?%>
+			<p><strong>Ubicación de desarrollo: </strong> <%= @request.location%></p>
+		<%end%>
+		
 		<p><strong>Creado por:</strong>
 		<%= link_to @request.user.nickname, user_path(@request.user.id) %>
 		<%if !@request.user.photo.blank?%>
 			<%= image_tag @request.user.photo.url(:mini), :class =>"RoundPicture" %>
 		<%end %>
+		<p>
+
+		<h2>Manifestaciones</h2>
+		<% if @aceptados.blank?%>
+			<%if @request.services.count == 0%>
+				<p>Aún no se han manifestado para participar en este servicio</p>
+			<%elsif @request.services.count == 1%>
+				<p>Se ha manifestado <strong>1</strong> persona para este proyecto</p>
+				<%= link_to "Ver peticiones", request_services_path(@request), :class=>'btn btnCRUD'%>
+			<%else%>
+				<p>Se han manifestado <strong><%=@request.services.count%></strong> personas para este proyecto</p>
+				<%= link_to "Ver peticiones", request_services_path(@request), :class=>'btn btnCRUD'%>
+			<%end%>
+
+			<% if @request.user != current_user and current_user.category == 2%>
+				<%if @petition.blank?%>
+					<%= link_to "Manifestar interés de trabajo", new_request_service_path(@request), :class=>'btn btnCRUD'%>
+				<%end%>
+			<%end%>
+			
+		<%else%>
+			<% @aceptados.each do |aceptado|%>
+				<p><%= link_to aceptado.acceptor.nickname, aceptado.acceptor%> ha aceptado a trabajar con <%= link_to aceptado.creator.nickname, aceptado.creator%></p>
+			<%end%>
+		<%end%>
 	</div>
 	<div class="panel-footer">
 		<h2>Comentarios</h2>
-		<%=render 'comment_requests/form'%>
-
-		<% @request.comment_requests.order('created_at DESC').each do |comment|%>
-		<p>	
-			<%if !@request.user.photo.blank?%>
-				<%= image_tag comment.user.photo.url(:mini), :class =>"RoundPicture" %>   	
-			<%end %>
-			<%= link_to comment.user.nickname, comment.user%>: 	<%=comment.body%>
-			<%if current_user == comment.user or current_user.category == 1 %> - 
-					<%= link_to 'Eliminar', request_comment_request_path(@request,comment), method: :delete, data: { confirm: '¿Está seguro de eliminar el comentario?' }%>
-			<%end%>
-		</p>
+		<%if @request.comments.count == 0%>
+			<p>¡<%= current_user.nickname%>, sé el primero en comentar esta solicitud!</p>
+		<%elsif @request.comments.count == 1%>
+			<p>Hay <strong>1</strong> comentario en esta solicitud.</p>
+		<%else%>
+			<p>Hay un total de <strong><%= @request.comments.count%></strong> comentarios en esta solicitud.</p>
 		<%end%>
+		<div class="comment">
+			<%if user_signed_in? %>
+				<%=render 'comments/formRequest'%>
+			<%end%>
+			<% @request.comments.order('created_at DESC').each do |comment|%>
+			<hr>
+			<p>	
+				<%if comment.user.photo.present?%>
+					<%= image_tag comment.user.photo.url(:mini), :class =>"RoundPicture" %> 
+				<%else%>
+					<%= image_tag ("mini/missingPhoto.png") %> 
+				<%end %>
+				<%= link_to comment.user.nickname, comment.user%> [ <%=comment.created_at.strftime("%d/%m/%Y - %H:%M")%> ]: 	<%=raw comment.body%>
+				<%if user_signed_in? %>
+					<%if current_user == comment.user or current_user.category == 1 %> - 
+						<%= link_to 'Eliminar', request_comment_path(@request,comment), method: :delete, data: { confirm: '¿Está seguro de eliminar el comentario?' }%>
+					<%end%>
+				<%end%>
+			</p>
+			<%end%>
+		</div>
 	</div>
 </div>
 
-<% if user_signed_in? && current_user.category != 2 %>
-	<% if @request.user.id == current_user.id || current_user.category == 1 %>
-		<%= link_to 'Editar ', edit_request_path(@request), :class => "btn btn-lg btnCRUD" %>
-		<%= link_to t('Eliminar'), request_path(@request),:method => 'delete',
-		:data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => '¿Está seguro de eliminar la solicitud?')) }, :class => "btn btn-lg btnCRUD"%>
-	<% end %>
-<% end %>
-	
-	<%= link_to 'Volver', requests_path, :class => "btn btn-lg btnCRUD" %>

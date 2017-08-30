@@ -6,9 +6,7 @@
 		<h2>Tipo: <%= @section.module %></h2>
 		<p>	<%=raw @section.body %></p>
 	</div>
-	<div class="panel-footer">
-		<p>Fecha de Creacion: <%= @section.created_at%></p>			
-	</div>
+	<p>Fecha de Creación:  <%=l @section.created_at%></p>			
 </div>
 <%if user_signed_in? %>
 <%= link_to "Editar", edit_section_path( @section), :class => "btn btn-lg btnCRUD"%>

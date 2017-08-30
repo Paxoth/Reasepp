@@ -1,37 +1,184 @@
 <h1> Todos los eventos </h1>
-
+<% if user_signed_in? && current_user.category == 1  %>
+	<%= link_to 'Nuevo evento', new_event_path, :class => "btn btn-lg " %>
+<% end %>
 <%= link_to "Volver al calendario", events_path , :class => "btn btn-lg btnCRUD" %>
+<div class="buscador">
+	<%= form_tag(events_searchEvent_path, :method => "post",:class=>"form-inline") do %>
+	<div class="input-group">
+		<%= text_field_tag :search, params[:search], placeholder: "Buscar eventos",:class => 'form-control',:required=>true %>
+		<span class="input-group-btn">
+			<%= button_tag(type: "submit", class: "btn btn-default ") do %>
+				<i class="glyphicon glyphicon-search"></i>
+			<% end %>
+		</span>
+	</div>
+	<%end%>
+</div>
 
-<% if @events.present? %>
-  <% @events.each do |event| %>
-    <div class="panel panel-default panelRease">
-      <div class="panel-heading">
-        <%= event.title %>
-      </div>
-      <div class="panel-body">
-        <%=raw event.description %>
-      </div>
+<ul class="nav nav-tabs tabRease nav-justified">
+<li id="event1" onclick="event1()"><a>Disponible</a></li>
+<li id="event2" onclick="event2()"><a>Realizado</a></li>
+<li id="event3" onclick="event3()"><a>Cancelado</a></li>
+<li id="event4" onclick="event4()"><a>Caducado</a></li>
+</ul>
+<div class="borderTab">
+	<div id ="Disponible">
+		<%if @disponibles.present?%>
+			<% @disponibles.each do |event| %>
+				<div class="panel  panel-default panelRease">
+					<div class="panel-heading">
+						<%=event.title%>
+					</div>
+					<div class="panel-body">
+						<h2>Información relevante</h2>
+						<p><strong>Creado por:</strong> <%= link_to event.user.nickname, event.user%></p>
+						<p><strong>Fecha y hora de inicio:</strong> <%=l event.start_time%></p>
+						<p><strong>Fecha y hora de término:</strong> <%=l event.end_time%></p>
+						<%= link_to "Ver evento", event%>
+					</div>
+				</div>
+			<%end%>
+			<%= will_paginate @disponibles, :param_name => 'disponibles' %>
+		<%else%>
+			<div class="panel  panel-default panelRease">
+				<div class="panel-heading">
+					Eventos disponibles
+				</div>
+				<div class="panel-body">
+					<p>No hay eventos disponibles agendados.</p>
+				</div>
+			</div>
+		<%end%>
+	</div>
+	<div id ="Realizado">
+		<%if @realizados.present?%>
+			<% @realizados.each do |event| %>
+				<div class="panel  panel-default panelRease">
+					<div class="panel-heading">
+						<%=event.title%>
+					</div>
+					<div class="panel-body">
+						<h2>Información relevante</h2>
+						<p><strong>Creado por:</strong> <%= link_to event.user.nickname, event.user%></p>
+						<p><strong>Fecha y hora de inicio:</strong> <%=l event.start_time%></p>
+						<p><strong>Fecha y hora de término:</strong> <%=l event.end_time%></p>
+						<%= link_to "Ver evento", event%>
+					</div>
+				</div>
+			<%end%>
+		<%else%>
+			<div class="panel  panel-default panelRease">
+				<div class="panel-heading">
+					Eventos realizados
+				</div>
+				<div class="panel-body">
+					<p>No hay eventos realizados agendados.</p>
+				</div>
+			</div>
+		<%end%>
+	</div>
+	<div id ="Cancelado">
+		<%if @cancelados.present?%>
+			<% @cancelados.each do |event| %>
+				<div class="panel  panel-default panelRease">
+					<div class="panel-heading">
+						<%=event.title%>
+					</div>
+					<div class="panel-body">
+						<h2>Información relevante</h2>
+						<p><strong>Creado por:</strong> <%= link_to event.user.nickname, event.user%></p>
+						<p><strong>Fecha y hora de inicio:</strong> <%=l event.start_time%></p>
+						<p><strong>Fecha y hora de término:</strong> <%=l event.end_time%></p>
+						<%= link_to "Ver evento", event%>
+					</div>
+				</div>
+			<%end%>
+		<%else%>
+			<div class="panel  panel-default panelRease">
+				<div class="panel-heading">
+					Eventos cancelados
+				</div>
+				<div class="panel-body">
+					<p>No hay eventos cancelados agendados.</p>
+				</div>
+			</div>
+		<%end%>
+	</div>
+	<div id ="Caducado">
+		<%if @caducados.present?%>
+			<% @caducados.each do |event| %>
+				<div class="panel  panel-default panelRease">
+					<div class="panel-heading">
+						<%=event.title%>
+					</div>
+					<div class="panel-body">
+						<h2>Información relevante</h2>
+						<p><strong>Creado por:</strong> <%= link_to event.user.nickname, event.user%></p>
+						<p><strong>Fecha y hora de inicio:</strong> <%=l event.start_time%></p>
+						<p><strong>Fecha y hora de término:</strong> <%=l event.end_time%></p>
+						<%= link_to "Ver evento", event%>
+					</div>
+				</div>
+			<%end%>
+		<%else%>
+			<div class="panel panel-default panelRease">
+				<div class="panel-heading">
+					Eventos caducados
+				</div>
+				<div class="panel-body">
+					<p>No hay eventos caducados agendados.</p>
+				</div>
+			</div>
+		<%end%>
+	</div>
+</div>
+<script type="text/javascript">
+	document.getElementById('Disponible').style.display='block';  
+	document.getElementById("event1").className = "active"; 
+	document.getElementById('Realizado').style.display='none';  
+	document.getElementById('Cancelado').style.display='none';  
+	document.getElementById('Caducado').style.display='none'; 
+	function event1(){
+		document.getElementById('Disponible').style.display='block';  
+		document.getElementById('Realizado').style.display='none';  
+		document.getElementById('Cancelado').style.display='none';  
+		document.getElementById('Caducado').style.display='none';
+		document.getElementById("event1").className = "active"; 
+		document.getElementById("event2").className = ""; 
+		document.getElementById("event3").className = ""; 
+		document.getElementById("event4").className = ""; 
+	}
+	function event2(){
+		document.getElementById('Disponible').style.display='none'; 
+		document.getElementById('Realizado').style.display='block'; 
+		document.getElementById('Cancelado').style.display='none';  
+		document.getElementById('Caducado').style.display='none';
+		document.getElementById("event1").className = ""; 
+		document.getElementById("event2").className = "active"; 
+		document.getElementById("event3").className = ""; 
+		document.getElementById("event4").className = ""; 
+	}
+	function event3(){
+		document.getElementById('Disponible').style.display='none'; 
+		document.getElementById('Realizado').style.display='none';  
+		document.getElementById('Cancelado').style.display='block'; 
+		document.getElementById('Caducado').style.display='none';
+		document.getElementById("event1").className = ""; 
+		document.getElementById("event2").className = ""; 
+		document.getElementById("event3").className = "active"; 
+		document.getElementById("event4").className = ""; 
+	}
+	function event4(){
+		document.getElementById('Disponible').style.display='none'; 
+		document.getElementById('Realizado').style.display='none';  
+		document.getElementById('Cancelado').style.display='none';  
+		document.getElementById('Caducado').style.display='block';
+		document.getElementById("event1").className = ""; 
+		document.getElementById("event2").className = ""; 
+		document.getElementById("event3").className = ""; 
+		document.getElementById("event4").className = "active"; 
+	}
+</script>
 
-      <div class="panel-footer">
-        <p><strong>Creado por:</strong>
-        <%= link_to event.user.nickname, user_path(event.user.id) %>
-        <%if !event.user.photo.blank?%>
-          <%= image_tag event.user.photo.url(:mini), :class =>"RoundPicture" %>
-        <%end %>
-        <p>
-        <p><strong>Fecha y hora de inicio: </strong><%=l event.start_time %></p>
-        <p><strong>Fecha y hora de término: </strong><%=l event.end_time %></p>
-        <%= link_to "Ver evento", event %>
-      </div>
-    </div>
-  <%end%>
-<%else%>
-  <div class="panel panel-default panelRease">
-    <div class="panel-heading">
-      Búsqueda de <%= params[:search] %>
-    </div>
-    <div class="panel-body">
-      <p>No hay resultados en la búsqueda de <strong><%= params[:search] %></strong></p>
-    </div>
-  </div>
-<%end%>
+

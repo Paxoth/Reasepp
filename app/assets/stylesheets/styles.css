@@ -1,9 +1,35 @@
 /* 
 	styles.css
-	Estilos para la página de REASE
+	Estilos para la página de ANEIB
 	Creados por PazBustos
 */
 
+/*Formato principal*/
+#wrapper {
+	padding: 0;
+	margin: 0;
+	min-height:100%;
+	position:relative;
+}
+#header {
+	margin: 0;
+	padding: 0;
+}
+#content {
+	margin: 0;
+	padding: 0;
+	padding-bottom: 135px;
+
+}
+#footer {
+	padding: 0;
+	margin: 0;
+	background:#30bbbb;
+	width:100%;
+	position:absolute;
+	bottom:0;
+	left:0;
+}
 /*link básicos estilos rease*/
 
 a, a:focus, a:active, a:visited 
@@ -20,48 +46,43 @@ a:hover
 /*Estilos para diseño responsive*/
 section#contenedor
 {
-	margin: 0.25em auto;
 	padding: 0;
 	text-align: center;
-
 }
 section#principal, aside
 {
 	display: inline-block;
-	margin: 0.25 auto;
 	min-width: 300px;
-	padding: 0.25em;
 	vertical-align: top;
 	width: 65%;
     min-height: 100%;
-    margin-bottom: 50px;
 }
 article
 {
 	min-height: 140px;
-	padding: 0.25em;
 }
 aside
 {
 	width: 25%;
-	min-width: 300px;
+	min-width: 250px;
 }
 /*Gradiente de color al cuerpo y font y tamaño letra*/
 body
 {
 	background: #ffffff;
-	background: -moz-linear-gradient(-45deg, #ffffff 0%, #ffffff 51%, #30aaaa 89%, #30aaaa 100%);
-	background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#ffffff), color-stop(51%,#ffffff), color-stop(89%,#30aaaa), color-stop(100%,#30aaaa));
-	background: -webkit-linear-gradient(-45deg, #ffffff 0%,#ffffff 51%,#30aaaa 89%,#30aaaa 100%);
-	background: -o-linear-gradient(-45deg, #ffffff 0%,#ffffff 51%,#30aaaa 89%,#30aaaa 100%);
-	background: -ms-linear-gradient(-45deg, #ffffff 0%,#ffffff 51%,#30aaaa 89%,#30aaaa 100%);
-	background: linear-gradient(135deg, #ffffff 0%,#ffffff 51%,#30aaaa 89%,#30aaaa 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#30aaaa',GradientType=1 );
+	background: -moz-linear-gradient(-45deg,  #ffffff 65%, #30aaaa 100%, #bf6e4e 100%);
+	background: -webkit-gradient(linear, left top, right bottom, color-stop(65%,#ffffff), color-stop(100%,#30aaaa), color-stop(100%,#bf6e4e));
+	background: -webkit-linear-gradient(-45deg,  #ffffff 65%,#30aaaa 100%,#bf6e4e 100%);
+	background: -o-linear-gradient(-45deg,  #ffffff 65%,#30aaaa 100%,#bf6e4e 100%);
+	background: -ms-linear-gradient(-45deg,  #ffffff 65%,#30aaaa 100%,#bf6e4e 100%);
+	background: linear-gradient(135deg,  #ffffff 65%,#30aaaa 100%,#bf6e4e 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#bf6e4e',GradientType=1 );
 	color: black;
-	font-family: 'Segoe UI', sans-serif;
-	font-size: 15px;
-	padding-top: 60px;
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+	font-size: 14px;
+	padding-top: 75px;
 	height: 100%;
+	min-height: 100hv;
 }
 
 /*pies de la página para contacto*/
@@ -69,7 +90,11 @@ footer
 {
 	clear:both;
 	padding-top: 15px;
-	bottom: 0;
+	width:100%;
+	height:100px;
+	position:absolute;
+	bottom:0;
+	left:0;
 }
 h1 /*Títulos de las páginas*/
 {
@@ -89,16 +114,16 @@ h2 /*Campos*/
 	font-weight: bold;
 	text-align: left;
 	text-decoration:none;
-	font-size: 18px;
+	font-size: 16px;
 	margin: 2%;
 }
 h3 /*Fuente para las listas de textos que pertenezcan al párrafo*/
 {
-	color: black;
+	color: #30aaaa;
 	font-weight: bold;
 	font-style: inherit;
 	text-align: justify;
-	font-size: 16px;
+	font-size: 14px;
 	margin: 2%;
 }
 
@@ -114,6 +139,7 @@ p
 
 
 /*CLASES*/
+
 .breadcrumb
 {
 	text-align: left;
@@ -123,8 +149,8 @@ p
 {
 	display: inline-block;
 }
-/*estilo de los indices de lso estatutos*/
-.estatutos
+/*estilo de los indices de lso estatuto*/
+.estatuto
 {
 	color: #30aaaa;
 	font-style: inherit;
@@ -134,13 +160,17 @@ p
 	display: block;
 }
 
-.estatutos:hover
+.estatuto:hover
 {
 	color: #30aaaa;
 	font-weight: bold;
 	text-decoration: none;
 }
-
+.experiencia
+{
+	padding-left: 30px;
+	padding-bottom: 20px;
+}
 .inicioSesion
 {
 	padding-bottom: 20px;
@@ -155,7 +185,7 @@ p
 	margin-left: 8px;
 	padding: 0;
 	margin-bottom: -8px;
-	max-width: 180px;
+	max-width: 130px;
 }
 
 .note
@@ -166,51 +196,49 @@ p
 	padding: 0;
 	margin: 0;
 }
-
-/*colores para barras y paneles*/
-.panelRease .panel-heading, #pies, #panelInstitution .panel-heading, .panel-half .panel-heading
+.no-margin
 {
-	background: #30aaaa;
-	background-image: -webkit-linear-gradient(top, #30aaaa, #30bbbb);
-	background-image: -moz-linear-gradient(top, #30aaaa, #30bbbb);
-	background-image: -ms-linear-gradient(top, #30aaaa, #30bbbb);
-	background-image: -o-linear-gradient(top, #30aaaa, #30bbbb);
-	background-image: linear-gradient(to bottom, #30aaaa, #30bbbb);
+	margin-top: 0;
+	margin-bottom: 0;
 }
-
-.panel-half
-{	
-	margin-right: 2%;
-	margin-left: 2%;
-	width: 45%;
+.omniauthLogo
+{
+	max-height: 30px;
+	max-width: 30px;
 	display: inline-block;
-
 }
-
-/*Todos los estilos de los paneles que se muestran en toda la página*/
-.panelRease, .panelClick
+.popoverImage
 {
-	margin: 2%;
-	text-align: center;
+	width: 650px;
 }
-
-.panelRease .panel-heading, #panelInstitution .panel-heading, .panelClick .panel-heading, .panel-half .panel-heading /*Cabecera del panel*/
+.popover-rease
 {
-	color: white;
-	font-weight: bold;
-	font-size: 18px;
+	max-width: 700px;
+	margin-left: 200px;
 	text-align: left;
 }
-.panelRease .panel-footer, #panelInstitution .panel-footer, .panelClick .panel-footer /*Cabecera del footer*/
-{
-	background: white;
-}
-
 .RoundPicture
 {
 	border-radius: 50%;
 }
-
+.SquarePicture
+{
+	border-radius: 1px;
+	height: 20px;
+	border: solid 1px;
+	border-color: white;
+	text-align: right;
+}
+.tabla-rease
+{
+	width: 95%;
+	text-align: left;
+}
+.tabla-rease tr:hover, .tabla-rease tr:hover a
+{
+	background: #30bbbb;
+	color: white;
+}
 .sesion .btn-block
 {
 	margin-left: auto;
@@ -232,7 +260,6 @@ p
 {
 	margin-left: 25%;
 	margin-right: 25%;
-	margin-bottom: 19px;
 	width: 50%;
 	padding: 0;
 	display: block;
@@ -246,7 +273,6 @@ p
 #logoNav /*estilos para el logo de la navbar*/
 {
 	margin-top:8px;
-	margin-right: 10px;
 	margin-right: 5px;
 	max-height: 40px;
 }
@@ -255,28 +281,17 @@ p
 {
 	-webkit-box-shadow: -3px -2px 5px #666666;
 	-moz-box-shadow: -3px -2px 5px #666666;
-	margin-top: 20px;
 	text-align: center;
 	font-weight: bold;
 	color: white;
 }
 
 /*textos de cantidad de usuario y nombre de usuario en la barra*/
-#rightBar, #rightBar:active
-{
-	color: white;
-	margin-left: 10px;
-}
-#rightBar:hover
-{
-	font-weight: bold;
-	font-size: 17px;
-}
+
 
 #styleSession
 {
 	text-align: center;
-	padding: 0;
 	margin:0;
 	display: block;
 }
@@ -286,7 +301,7 @@ p
 }
 
 /*tamaño de la navbar al disminuir el tamaño de la pantalla*/
-@media (max-width: 1199px){
+@media (max-width: 900px){
 	.navbar-header {
 	float: none;
 	}

@@ -1,5 +1,17 @@
-<p>
-<%if offering.status==3%><strong>Experiencia: </strong>
-<%else%><strong>Oferta de Servicio: </strong>
-<%end%>
- <%=offering.title%> - <%=	link_to "Ver", offering %> </p>
+<tr>
+	<td>Oferta de Servicio</td>
+	<td>
+	<%=offering.title%> (
+					<%if offering.status == 1%>
+						Disponible
+					<%elsif offering.status == 2%>
+						Cancelado
+					<%elsif offering.status == 3%>
+						Caducado
+					<%else%>
+						Servicio
+					<%end%>
+					)
+	</td>
+	<td><%= link_to "Ver", offering %> </td>
+</tr>

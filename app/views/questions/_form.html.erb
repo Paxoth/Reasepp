@@ -1,0 +1,46 @@
+<%= form_for(@question) do |f| %>
+	<% if @question.errors.any? %>
+		<div id="error_explanation">
+			<h2><%= pluralize(@question.errors.count, "error") %> prohibited this question from being saved:</h2>
+
+			<ul>
+				<% @question.errors.full_messages.each do |message| %>
+					<li><%= message %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+	<div class="panel panel-default panelRease" >
+    	<div class="panel-heading">Información de la pregunta</div>
+    	<div class="panel-body">	
+		<div class="field"><p>
+			<%= f.label :title, "Pregunta: "%>    
+			<%= f.text_area :title, :class => 'form-control', :placeholder => 'Ingrese la pregunta frecuente', :required=>true%>
+		</p></div>
+
+		<div class="control-group">
+			<div class="field"><p>
+				<%= f.label :answer, "Respuesta: "%>
+				<%= f.text_area :answer, :placeholder=> "Escriba acá la respuesta de la pregunta frecuente", :id=>"eg-basic"%>
+			</p></div>
+		</div>
+
+		<div class="field"><p>	
+		<%= f.label :reader, "Tipo de usuario: "%>	
+		<%= f.select(:reader, [['El usuario debe estar registrado para ver esta pregunta', 1],['El usuario NO debe estar registrado para ver esta pregunta', 2]], {:include_blank => '-- Seleccione una opción --' }, { :class => 'form-control', :required => true }) %>
+		</p></div>
+		</div>
+	</div>
+	<%= f.submit "Guardar Pregunta", :class => 'btn btn-lg btnCRUD' %>
+	<%= link_to "Volver", questions_path, :class => 'btn btn-lg btnCRUD' %>
+<% end %>
+
+
+<script>
+	 $(function() {$('textarea#eg-basic').editable({
+      theme: 'rease',
+		inlineMode: false,
+      language: 'es'
+    })
+  });
+</script>

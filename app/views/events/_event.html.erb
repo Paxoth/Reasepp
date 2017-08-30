@@ -1,1 +1,17 @@
-<p><strong>Evento: </strong>  <%=event.title%> - <%= link_to "Ver", event %> </p>
+<tr>
+	<td>Evento</td>
+	<td>
+	<%=event.title%> (
+					<%if event.status == 1%>
+						Disponible
+					<%elsif event.status == 2%>
+						Realizado
+					<%elsif event.status == 3%>
+						Cancelado
+					<%else%>
+						Caducado
+					<%end%>
+					)
+	</td>
+	<td><%= link_to "Ver", event %> </td>
+</tr>

@@ -1,3 +1,5 @@
-<p><strong>Link de Interés: </strong> <%=interest_link.name%> - <%= link_to "Ver", interest_link %> </p>
-
-
+<tr>
+	<td>Link de Interés</td>
+	<td><%= link_to interest_link.name, interest_link%></td>
+	<td><%= link_to "Ver página", interest_link.url,:target=>'_blank' %></td>
+</tr>

@@ -1,0 +1,12 @@
+<%if @service.status==1 or @service.status == 3%>
+	<h1>Aceptar Servicio</h1>
+	<%= render 'form', {accion: "Aceptar"} %>
+<%elsif @service.status ==2 or @service.status == 4%>
+	<h1>Editar Servicio</h1>
+	<%= render 'form', {accion: "Actualizar"} %>
+<%else%>
+	<h1>Solicitar Servicio</h1>
+	<%= render 'form', {accion: "Solicitar"} %>
+<%end%>
+
+

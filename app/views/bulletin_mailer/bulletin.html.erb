@@ -9,6 +9,50 @@
 
 		<br><br>
 		<p><strong>Red Nacional de aprendizaje servicio.</strong></p>
-		<p>coordinacion.rease@gmail.com</p>
+		<p>redrease@gmail.com</p>
+
+		<p>Las actualizaciones de la página desde <strong><%=l @bulletin.start_date%></strong> han sido los siguientes:</p>
+
+		<%if @sections.present?%>
+			<h2>Novedades: </h2>
+			<% @sections.each do |article| %>
+				<p><strong><%=article.title%></strong> - <%= link_to "Ver", article %> </p>
+			<%end%>
+		<%end%>
+
+		<%if @events.present?%>
+			<h2>Eventos: </h2>
+			<% @events.each do |article| %>
+				<p><strong><%=article.title%></strong> - <%= link_to "Ver", article %> </p>
+			<%end%>
+		<%end%>
+
+		<%if @offerings.present?%>
+			<h2>Ofertas de Servicios: </h2>
+			<% @offerings.each do |article| %>
+				<p><strong><%=article.title%></strong> - <%= link_to "Ver", article %> </p>
+			<%end%>
+		<%end%>
+
+		<%if @requests.present?%>
+			<h2>Solicitudes de Servicios: </h2>
+			<% @requests.each do |article| %>
+				<p><strong><%=article.title%></strong> - <%= link_to "Ver", article %> </p>
+			<%end%>
+		<%end%>
+
+		<%if @services.present?%>
+			<h2>Servicios activos: </h2>
+			<% @services.each do |article| %>
+				<p><strong><%=article.title%></strong> - <%= link_to "Ver", article %> </p>
+			<%end%>
+		<%end%>
+
+		<%if @experiences.present?%>
+			<h2>Experiencias: </h2>
+			<% @experiences.each do |article| %>
+				<p><strong><%=article.title%></strong> - <%= link_to "Ver", article %> </p>
+			<%end%>
+		<%end%>
 	</body>
 </html>

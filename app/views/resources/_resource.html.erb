@@ -1,0 +1,71 @@
+<tr>
+	<td>
+		<% if resource.category == 1%>
+			Acta de reunión
+		<% elsif resource.category == 2%>
+			Plantilla de recurso
+		<% elsif resource.category == 3%>
+			Formación AS
+		<%else%>
+			Recurso
+		<%end%>
+	</td>
+	<td><%= link_to resource.name, resource%></td>
+	<td>
+		<%if resource.archive.present?%>
+			<%if resource.archive.content_type == 'application/pdf'%>
+				<%=	link_to resource.archive.url,:target=>'_blank' do %>
+					Descargar <%=image_tag("Extensiones/pdf.gif")%>
+				<%end%>
+
+			<%elsif resource.archive.content_type =='image/jpg' ||
+				resource.archive.content_type =='image/jpeg' ||
+				resource.archive.content_type =='image/pjpeg' ||
+				resource.archive.content_type =='image/png' ||
+				resource.archive.content_type =='image/x-png' ||
+				resource.archive.content_type =='image/gif'  %>
+
+				<%=	link_to resource.archive.url,:target=>'_blank' do %>
+					Descargar <%=image_tag("Extensiones/img.gif")%>
+				<%end%>
+
+			<%elsif resource.archive.content_type =='application/msword' ||
+			resource.archive.content_type =='application/vnd.openxmlformats-officedocument.wordprocessingml.document' %>
+
+				<%=	link_to resource.archive.url,:target=>'_blank' do %>
+					Descargar <%=image_tag("Extensiones/word.gif")%>
+				<%end%>
+
+			<%elsif resource.archive.content_type =='application/msexcel'||
+			resource.archive.content_type =='application/vnd.ms-excel' ||
+			resource.archive.content_type =='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' %>
+				<%=	link_to resource.archive.url,:target=>'_blank' do %>
+					Descargar <%=image_tag("Extensiones/excel.gif")%>
+				<%end%>
+
+			<%elsif resource.archive.content_type =='application/mspowerpoint' ||
+			resource.archive.content_type =='application/vnd.ms-powerpoint'||
+			resource.archive.content_type =='application/vnd.openxmlformats-officedocument.presentationml.presentation'%>
+
+				<%=	link_to resource.archive.url,:target=>'_blank' do %>
+					Descargar <%=image_tag("Extensiones/ppt.gif")%>
+				<%end%>
+
+			<%else%>
+				<%=	link_to "Descargar", resource.archive.url,:target=>'_blank' %>
+			<%end%>
+		<%else%>
+			--
+		<%end%>
+
+	</td>
+</tr>
+
+
+
+
+
+
+
+
+

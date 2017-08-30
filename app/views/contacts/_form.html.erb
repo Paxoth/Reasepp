@@ -18,14 +18,17 @@
 			</ul>
 			</div>
 			<% end %>
-			<div class="field">
-			<%= f.text_field :name, :class => 'form-control', :placeholder => 'Nombre', :required => true %>
+			<div class="field"><p>
+				<%= f.label :name, "Nombre:" %>
+				<%= f.text_field :name, :class => 'form-control', :placeholder => 'Nombre', :required => true %>
+			</p></div>
+			<div class="field"><p>
+				<%= f.label :email, "Correo electrónico:" %>
+				<%= f.email_field :email, :class => 'form-control', :placeholder => 'Ingrese su correo electrónico', :required => true %>
 			</div>
-			<div class="field">
-			<%= f.email_field :email, :class => 'form-control', :placeholder => 'Correo Electrónico', :required => true %>
-			</div>
-			<div class="field">
-			<%= f.text_area :body, :class => 'form-control', :placeholder => 'Escriba acá su comentario...', :required => true %>
+			<div class="field"><p>
+				<%= f.label :body, "Comentario:" %>
+				<%= f.text_area :body, :class => 'form-control', :placeholder => 'Escriba acá su comentario...', :required => true %>
 			</div>
 			<div class="actions">
 			<%= f.submit "Enviar Comentario", :class => "btn btn-lg btnCRUD" %>

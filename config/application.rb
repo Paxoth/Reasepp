@@ -25,6 +25,7 @@ module App
     config.assets.enabled = true 
     config.assets.paths << "#{Rails.root}/app/assets/fonts" 
     config.assets.precompile += %w( .svg .eot .woff .ttf )
-
-  end
+    require Rails.root.join("lib/custom_public_exceptions")
+        config.exceptions_app = CustomPublicExceptions.new(Rails.public_path)
+    end
 end

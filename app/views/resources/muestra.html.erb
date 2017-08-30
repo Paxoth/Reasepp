@@ -1,0 +1,247 @@
+<h1>Recursos</h1>
+<%if current_user.category == 1%>
+	<%= link_to 'Agregar nuevo recurso', new_resource_path, :class=>"btn btn-lg btnAdmin" %>
+<%end%>
+<div class="buscador">
+	<%= form_tag(resources_searchResource_path, :method => "post",:class=>"form-inline") do %>
+	<div class="input-group">
+		<%= text_field_tag :search, params[:search], placeholder: "Buscar recursos",:class => 'form-control',:required=>true %>
+		<span class="input-group-btn">
+			<%= button_tag(type: "submit", class: "btn btn-default ") do %>
+				<i class="glyphicon glyphicon-search"></i>
+			<% end %>
+		</span>
+	</div>
+	<%end%>
+</div>
+
+<ul class="nav nav-tabs tabRease nav-justified">
+	<li id="res1" onclick="res1()"><a>Actas reuniones</a></li>
+	<li id="res2" onclick="res2()"><a>Plantillas</a></li>
+	<li id="res3" onclick="res3()"><a>Formación AS</a></li>
+	<li id="res4" onclick="res4()"><a>Enlaces útiles</a></li>
+	<li id="res5" onclick="res5()"><a>Otros</a></li>
+</ul>
+
+<div id="Actas">
+	<div class="panel panel-default panelRease">
+		<div class="panel-heading">
+			Actas disponibles
+		</div>
+		<div class="panel-body">
+			<%if @actas.present?%>
+				<table class="tabla-rease">
+					<tr>
+						<th><strong>Nombre</strong></th>
+						<th><strong>Fecha</strong></th>
+
+						<th><strong>Descargar</strong></th>
+
+					</tr>
+					<% @actas.each do |resource| %>
+					<tr>
+
+						<td><%=link_to truncate(resource.name, length: 20), resource%></td>
+						<td><%=l resource.date%></td>
+						<td>
+							<%= render 'extensiones', :resource => resource %>
+						</td>
+					</tr>
+					<%end%>
+				</table>
+			<%else%>
+				<p>No hay actas de reuniones disponibles</p>
+			<%end%>
+		</div>
+	</div>
+</div>
+<div id="Plantillas">
+	<div class="panel panel-default panelRease">
+		<div class="panel-heading">
+			Plantillas disponibles
+		</div>
+		<div class="panel-body">
+			<%if @plantillas.present?%>
+				<table class="tabla-rease">
+					<tr>
+						<th><strong>Nombre</strong></th>
+						<th><strong>Fecha</strong></th>
+
+						<th><strong>Descargar</strong></th>
+
+					</tr>
+					<% @plantillas.each do |resource| %>
+					<tr>
+						<td><%=link_to truncate(resource.name, length: 25), resource%></td>
+						<td><%=l resource.date%></td>
+
+						<td>
+							<%= render 'extensiones', :resource => resource %>
+						</td>
+					</tr>
+					<%end%>
+				</table>
+			<%else%>
+				No hay plantillas de recursos disponibles
+			<%end%>
+		</div>
+	</div>
+</div>
+<div id="Formacion">
+	<div class="panel panel-default panelRease">
+		<div class="panel-heading">
+			Formación AS disponibles
+		</div>
+		<div class="panel-body">
+			<%if @formacion.present?%>
+				<table class="tabla-rease">
+					<tr>
+						<th><strong>Nombre</strong></th>
+						<th><strong>Fecha</strong></th>
+
+						<th><strong>Descargar</strong></th>
+
+					</tr>
+					<% @formacion.each do |resource| %>
+					<tr>
+						<td><%=link_to truncate(resource.name, length: 25), resource%></td>
+						<td><%=l resource.date%></td>
+
+						<td><%= render 'extensiones', :resource => resource %></td>
+					</tr>
+					<%end%>
+				</table>
+			<%else%>
+				No hay recursos de formacion AS disponibles
+			<%end%>
+		</div>
+	</div>
+</div>
+<div id="Enlaces">
+	<div class="panel panel-default panelRease">
+		<div class="panel-heading">
+			Enlaces útiles disponibles
+		</div>
+		<div class="panel-body">
+			<%if @enlaces.present?%>
+				<table class="tabla-rease">
+					<tr>
+						<th><strong>Nombre</strong></th>
+						<th><strong>Fecha</strong></th>
+
+						<th><strong>Descargar</strong></th>
+
+					</tr>
+					<% @enlaces.each do |resource| %>
+					<tr>
+						<td><%=link_to truncate(resource.name, length: 25), resource%></td>
+						<td><%=l resource.date%></td>
+
+						<td><%= render 'extensiones', :resource => resource %></td>
+					</tr>
+					<%end%>
+				</table>
+			<%else%>
+				No hay enlaces útiles disponibles
+			<%end%>
+		</div>
+	</div>
+</div>
+<div id="Otros">
+	<div class="panel panel-default panelRease">
+		<div class="panel-heading">
+			Otro recursos disponibles
+		</div>
+		<div class="panel-body">
+			<%if @otros.present?%>
+				<table class="tabla-rease">
+					<tr>
+						<th><strong>Nombre</strong></th>
+						<th><strong>Fecha</strong></th>
+
+						<th><strong>Descargar</strong></th>
+
+					</tr>
+					<% @otros.each do |resource| %>
+					<tr>
+						<td><%=link_to truncate(resource.name, length: 25), resource%></td>
+						<td><%=l resource.date%></td>
+
+						<td><%= render 'extensiones', :resource => resource %></td>
+					</tr>
+					<%end%>
+				</table>
+			<%else%>
+				No hay otros recursos disponibles
+			<%end%>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	document.getElementById('Actas').style.display='block';	
+	document.getElementById("res1").className = "active";	
+	document.getElementById('Plantillas').style.display='none';
+	document.getElementById('Formacion').style.display='none';
+	document.getElementById('Enlaces').style.display='none';
+	document.getElementById('Otros').style.display='none';
+	function res1(){
+		document.getElementById('Actas').style.display='block';	
+		document.getElementById('Plantillas').style.display='none';
+		document.getElementById('Formacion').style.display='none';
+		document.getElementById('Enlaces').style.display='none';
+		document.getElementById('Otros').style.display='none';
+		document.getElementById("res1").className = "active";
+		document.getElementById("res2").className = "";
+		document.getElementById("res3").className = "";
+		document.getElementById("res4").className = "";
+		document.getElementById("res5").className = "";
+	}
+	function res2(){
+		document.getElementById('Actas').style.display='none';	
+		document.getElementById('Plantillas').style.display='block';
+		document.getElementById('Formacion').style.display='none';
+		document.getElementById('Enlaces').style.display='none';
+		document.getElementById('Otros').style.display='none';
+		document.getElementById("res1").className = "";
+		document.getElementById("res2").className = "active";
+		document.getElementById("res3").className = "";
+		document.getElementById("res4").className = "";		
+		document.getElementById("res5").className = "";
+	}
+	function res3(){
+		document.getElementById('Actas').style.display='none';		
+		document.getElementById('Plantillas').style.display='none';
+		document.getElementById('Formacion').style.display='block';
+		document.getElementById('Enlaces').style.display='none';
+		document.getElementById('Otros').style.display='none';
+		document.getElementById("res1").className = "";
+		document.getElementById("res2").className = "";
+		document.getElementById("res3").className = "active";
+		document.getElementById("res4").className = "";
+		document.getElementById("res5").className = "";
+	}
+	function res4(){
+		document.getElementById('Actas').style.display='none';		
+		document.getElementById('Plantillas').style.display='none';
+		document.getElementById('Formacion').style.display='none';
+		document.getElementById('Enlaces').style.display='block';
+		document.getElementById('Otros').style.display='none';
+		document.getElementById("res1").className = "";
+		document.getElementById("res2").className = "";
+		document.getElementById("res3").className = "";
+		document.getElementById("res4").className = "active";
+		document.getElementById("res5").className = "";
+	}
+	function res5(){
+		document.getElementById('Actas').style.display='none';		
+		document.getElementById('Plantillas').style.display='none';
+		document.getElementById('Formacion').style.display='none';
+		document.getElementById('Enlaces').style.display='none';
+		document.getElementById('Otros').style.display='block';
+		document.getElementById("res1").className = "";
+		document.getElementById("res2").className = "";
+		document.getElementById("res3").className = "";
+		document.getElementById("res4").className = "";
+		document.getElementById("res5").className = "active";
+	}
+</script>

@@ -1,0 +1,32 @@
+<h1>Detalles del recurso <%=@resource.name%></h1>
+
+<div class="panel panel-default panelRease" >
+	<div class="panel-heading">
+		<strong>
+		<% if resource.category == 1%>
+			Acta:
+		<% elsif resource.category == 2%>
+			Contrato:
+		<% elsif resource.category == 3%>
+			Formulario:
+		<%else%>
+			Recurso:
+		<%end%> </strong>  <%= @resource.name %>
+	</div>
+	<div class="panel-body">
+		<p> <strong>Descripción:</strong> <%=raw @resource.description%></p>	
+		<p> <strong>Fecha de emision:</strong> <%=l @resource.date%></p>	
+		<p> <strong>Fecha de subida:</strong> <%=l @resource.created_at%></p>		
+	</div>
+</div>
+
+<%if user_signed_in? %>
+<%= link_to 'Ver recurso <i class="glyphicon glyphicon-circle-arrow-down"></i>'.html_safe, @resource.archive.url, :class =>"btn btn-lg btnCRUD",:target => "_blank" %>
+	<%if current_user.category == 1%>
+		<%= link_to 'Editar', edit_resource_path(@resource), :class =>"btn btn-lg btnCRUD" %>
+		<%= link_to 'Volver', resources_path, :class =>"btn btn-lg btnCRUD" %>
+	<%else%>
+		<%= link_to 'Volver', resources_muestra_path, :class =>"btn btn-lg btnCRUD" %>
+	<%end%>
+<%end%>
+

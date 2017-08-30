@@ -1,12 +1,29 @@
-<% if !user_signed_in? %>
-	<div  class="panel panel-default panelClick">
-		<div class="panel-heading" data-toggle="collapse" data-target="#cuerpo">
-			Ingreso Intranet <i class="glyphicon glyphicon-circle-arrow-down"></i>
-		</div>
-		<div class="collapsing" id="cuerpo">
-			<div class="panel-body" id="styleSession" >
-		    	<%= render "devise/sessions/inicio_sesion" %>
-			</div>	
-		</div>
+<div  class="panel panel-default panelClick">
+	<div class="panel-heading" data-toggle="collapse" data-target="#cuerpo">
+		Ingreso Intranet <i class="glyphicon glyphicon-circle-arrow-down"></i>
 	</div>
-<%end%>
+	<div class="collapsing" id="cuerpo">
+		<div class="panel-body" id="styleSession" >
+	    	<%= render "devise/sessions/inicio_sesion" %>
+		</div>	
+	</div>
+</div>
+
+<div  class="panel panel-default panelClick">
+	<div class="panel-heading" data-toggle="collapse" data-target="#cuerpoNew">
+		¿Eres nuevo en la red? <i class="glyphicon glyphicon-circle-arrow-down"></i>
+	</div>
+	<div class="collapsing" id="cuerpoNew">
+		<div class="panel-body" id="styleSession" >
+			<div class="form-signin">
+				<p style="text-align: center;">Si eres nuevo en la red</p>
+				<%= link_to "Registrate aquí", new_registration_path(resource_name),:class=>"btn btn-lg btn-block", :id=>"styleSession" %>
+	    	</div>
+		</div>
+		<div class="panel-footer">
+			<p style="text-align:center;"><b>Miembros activos:</b>  <%= User.count%></p>
+		</div>		
+	</div>
+</div>
+
+

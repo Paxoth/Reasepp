@@ -3,7 +3,7 @@
 es:
   devise:
     confirmations:
-      confirmed: "Su cuenta ha sido confirmada."
+      confirmed: "Su cuenta ha sido confirmada. Intente conectarse por primera vez."
       send_instructions: "Recibirá un correo electrónico en unos minutos con instrucciones sobre cómo restablecer su contraseña."
       send_paranoid_instructions: "Si su correo electrónico existe en nuestra base de datos recibirá un correo electrónico en unos minutos con instrucciones sobre cómo restablecer su contraseña."
     failure:
@@ -37,7 +37,7 @@ es:
       signed_up: "¡Bienvenido! Usted ha sido identificado."
       signed_up_but_inactive: "Se ha registrado correctamente, pero no ha podido iniciar sesión porque su cuenta no ha sido activada."
       signed_up_but_locked: "Se ha registrado correctamente, pero no ha podido iniciar sesión porque su cuenta está bloqueada."
-      signed_up_but_unconfirmed: "Se le ha enviado un mensaje con un enlace de confirmación. Por favor visite el enlace para activar su cuenta."
+      signed_up_but_unconfirmed: "Se le ha enviado un correo electrónico con el enlace de confirmación. Por favor visite el enlace para activar su cuenta."
       update_needs_confirmation: "Ha actualizado su cuenta correctamente, sin embargo necesitamos verificar su nueva cuenta de correo. Por favor revise su correo electrónico y visite el enlace para finalizar la confirmación de su nueva dirección de correo electrónico."
       updated: "Ha actualizado su cuenta correctamente."
     sessions:

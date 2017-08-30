@@ -10,90 +10,100 @@
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav" >
-				<li role="presentation" class="<%= 'active' if current_page?(root_path) %>">
-					<%= link_to 'Inicio <i class="glyphicon glyphicon-home"></i>'.html_safe, root_path %>
-				</li>
-
-				<% if !user_signed_in? %>
-				<li role="presentation" class="<%= 'active' if current_page?(presentation_aprendizaje_path) %>">
-					<%= link_to '¿Qué es A+S? <i class="glyphicon glyphicon-pencil"></i>'.html_safe, presentation_aprendizaje_path %>
-				</li>
-
-				<li role="presentation" class="<%= 'active' if current_page?(presentation_hacemos_path) %>">
-					<%= link_to '¿Qué hacemos? <i class="glyphicon glyphicon-paperclip"></i>'.html_safe, presentation_hacemos_path %>
-				</li>
-
-				<li role="presentation" class="<%= 'active' if current_page?(presentation_somos_path) %>">
-					<%= link_to '¿Quiénes somos? <i class="glyphicon glyphicon-pushpin"></i>'.html_safe, presentation_somos_path %>
-				</li>
-
-				<li role="presentation" class="<%= 'active' if current_page?(presentation_estatutos_path) %>">
-					<%= link_to 'Estatuto <i class="glyphicon glyphicon-book"></i>'.html_safe, presentation_estatutos_path %>
-				</li>
-
-				<li role="presentation" class="<%= 'active' if current_page?(presentation_contacto_path) %>">
-					<%= link_to 'Contacto <i class="glyphicon glyphicon-envelope"></i>'.html_safe, contacts_path %>
-				</li>
-				<li role="presentation" class="navCenter">
-					<%= form_tag(presentation_searchPage_path, :method => "post",:class=>"form-inline") do %>
-					<div class="input-group">
-						<%= text_field_tag :search, params[:search], placeholder: "Buscar en la página",:class => 'form-control',:required => true %>
-						<span class="input-group-btn">
-							<%= submit_tag "Ir", :class => 'btn btn-default' %>
-						</span>
-					</div>
-					<%end%>
-				</li>
-			</ul>
-
-			<p class="navbar-text navbar-right">Miembros activos: <%= User.count %> </p>
-				<%else%>
-
-				<li role="presentation" class="<%= 'active' if current_page?(presentation_estatutos_path) %>">
-					<%= link_to 'Estatuto <i class="glyphicon glyphicon-book"></i>'.html_safe, presentation_estatutos_path %>
-				</li>
-
-				<li role="presentation" class="<%= 'active' if current_page?(requests_path) %>">
-					<%= link_to 'Solicitudes <i class="glyphicon glyphicon-log-in"></i>'.html_safe, requests_path %>
-				</li>
-
-				<li role="presentation">
-					<%= link_to 'Ofertas <i class="glyphicon glyphicon-log-out"></i>'.html_safe, offerings_path %>
-				</li>
-
-				<li role="presentation">
-					<%= link_to 'Experiencias <i class="glyphicon glyphicon-education"></i>'.html_safe, experiences_path %>
-				</li>
-
-				<li role="presentation">
-					<%= link_to 'Eventos <i class="glyphicon glyphicon-calendar"></i>'.html_safe, events_path %>
-				</li>
-				<%if current_user.category == 1%>
-					<li role="presentation" class="<%= 'active' if current_page?(sections_path) %>">
-					 <%= link_to 'Administrar <i class="glyphicon glyphicon-cog"></i>'.html_safe, sections_path %>
+			<% if !user_signed_in? %>
+				<ul class="nav navbar-nav" >
+				
+					<li role="presentation" class="<%= 'active' if current_page?(presentation_aprendizaje_path) %>">
+						<%= link_to '¿Qué es AS?', presentation_aprendizaje_path %>
 					</li>
-				<%end%>
 
-				<li role="presentation" class="navCenter">
-					<%= form_tag(presentation_searchPage_path, :method => "post",:class=>"form-inline") do %>
-					<div class="input-group">
-						<%= text_field_tag :search, params[:search], placeholder: "Buscar en la red",:class => 'form-control',:required => true %>
-						<span class="input-group-btn">
-							<%= submit_tag "Ir", :class => 'btn btn-default' %>
-						</span>
-					</div>
-					<%end%>
-				</li>
+					<li role="presentation" class="<%= 'active' if current_page?(presentation_somos_path) %>">
+						<%= link_to '¿Quiénes somos?', presentation_somos_path %>
+					</li>
+					
+					<li role="presentation" class="<%= 'active' if current_page?(presentation_hacemos_path) %>">
+						<%= link_to '¿Qué hacemos?', presentation_hacemos_path %>
+					</li>
 
+					<li role="presentation" class="<%= 'active' if current_page?(presentation_estatuto_path) %>">
+						<%= link_to 'Estatuto', presentation_estatuto_path %>
+					</li>
 
-			</ul>
-			<p class="navbar-text navbar-right">
-				¡Hola <%= current_user.nickname %>!
+					<li role="presentation" class="<%= 'active' if current_page?(contacts_path) %>">
+						<%= link_to 'Contacto', contacts_path %>
+					</li>
 
-			<%=link_to '<i class="glyphicon glyphicon-user"></i>'.html_safe, users_path, :id=>'rightBar'%> 
-	
-			<%= link_to '<i class="glyphicon glyphicon-off"></i>'.html_safe, destroy_user_session_path, :method => :delete, :id=>'rightBar'%></p>
+					<li role="presentation" class="navCenter">
+						<%= form_tag(presentation_searchPage_path, :method => "post",:class=>"form-inline") do %>	
+							<div class="input-group">
+								<%= text_field_tag :search, params[:search], placeholder: "Buscar",:class => 'form-control btnSearch',:required => true %>
+								<span class="input-group-btn">
+									<%= button_tag(type: "submit", class: "btn btn-default btnSearch") do %>
+										<i class="glyphicon glyphicon-search"></i>
+									<% end %>
+								</span>
+							</div>
+						<%end%>
+					</li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li>
+					<%= link_to '<i class="glyphicon glyphicon-question-sign"></i>'.html_safe, presentation_about_path,:class=>"rightNav"%>
+					</li>				
+				</ul>
+			<%else%>
+				<ul class="nav navbar-nav" >
+					
+					<li role="presentation" class="<%= 'active' if current_page?(presentation_estatuto_path) %>">
+						<%= link_to 'Estatuto', presentation_estatuto_path %>
+					</li>
+
+					<li role="presentation" class="<%= 'active' if current_page?(requests_path) %>">
+						<%= link_to 'Solicitudes', requests_path %>
+					</li>
+
+					<li role="presentation" class="<%= 'active' if current_page?(offerings_path) %>">
+						<%= link_to 'Ofertas', offerings_path %>
+					</li>
+
+					<li role="presentation" class="<%= 'active' if current_page?(services_index_activos_path) %>">
+						<%= link_to 'Servicios', services_index_activos_path %>
+					</li>
+
+					<li role="presentation" class="<%= 'active' if current_page?(experiences_path) %>">
+						<%= link_to 'Experiencias', experiences_path %>
+					</li>
+
+					<li role="presentation" class="<%= 'active' if current_page?(events_path) %>">
+						<%= link_to 'Eventos', events_path %>
+					</li>
+
+					<li role="presentation" class="navCenter">
+						<%= form_tag(presentation_searchPage_path, :method => "post",:class=>"form-inline") do %>
+							<div class="input-group">
+								<%= text_field_tag :search, params[:search], placeholder: "Buscar",:class => 'form-control btnSearch',:required => true %>
+								<span class="input-group-btn">
+									<%= button_tag(type: "submit", class: "btn btn-default btnSearch") do %>
+										<i class="glyphicon glyphicon-search"></i>
+									<% end %>
+								</span>
+							</div>
+						<%end%>
+					</li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<%if current_user.category == 1%>
+						<li>
+							<%= link_to '<i class="glyphicon glyphicon-cog"></i>'.html_safe, sections_path,:class=>"rightNav"%>
+						</li>
+					<%end%>	
+					<li>
+						<%= link_to '<i class="glyphicon glyphicon-question-sign"></i>'.html_safe, presentation_about_path,:class=>"rightNav"%>
+					</li>
+					<li>
+						<%= link_to '<i class="glyphicon glyphicon-off"></i>'.html_safe, destroy_user_session_path, :method => :delete, :class=>"rightNav"%>
+					</li>				
+				</ul>
 			<%end%>
 		</div><!-- /.navbar-collapse -->
 	</div><!-- /.container-fluid -->

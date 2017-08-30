@@ -1,1 +1,6 @@
-<p><strong>Institución: </strong>  <%=institution.name%> - <%= link_to "Ver", institution %> </p>
+</tr>
+	<td>Institución</td>
+	<td>
+	<%=link_to institution.name, institution%></td>
+	<td><%= link_to "Ver página", institution, :target=>'_blank' %> </td>
+</tr>

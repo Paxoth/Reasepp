@@ -11,22 +11,26 @@
     <div class="panel-body">
     <p class="note">*Todos los campos son obligatorios.</p>
 
-		<div class="field">
+		<div class="field"><p>
+			<%= f.label :title, "Título: "%>
 			<%= f.text_field :title, :placeholder => "Nombre del evento" , :class => 'form-control',autofocus: true, :required => true %>
 		</div>	
-		<div class="field">
-			<%= f.text_area :address, :placeholder => "Lugar y/o dirección", :class => 'form-control',autofocus: true, :required => true  %>
+		<div class="field"><p>
+			<%= f.label :address, "Dirección o ubicación: "%>
+			<%= f.text_area :address, :placeholder => "Lugar y/o dirección donde se realizará el evento", :class => 'form-control',autofocus: true, :required => true  %>
 		</div>
 
-		<div class="field">
+		<div class="field"><p>
 			<% if orden == "Actualizar" %>
-				<%= f.select(:status, [['Disponible', 1],['En proceso', 2],['Realizado',3], ['Cancelado',4], ['Caducado', 5]], {:include_blank => '-- Seleccione un estado --' }, { :class => 'form-control', :required => true }) %>
+				<%= f.label :status, "Estado: "%>
+				<%= f.select(:status, [['Disponible', 1],['Realizado',2], ['Cancelado',3], ['Caducado', 4]], {:include_blank => '-- Seleccione un estado --' }, { :class => 'form-control', :required => true }) %></p>
 			<% else %>
-				<p><strong>Estado: </strong> Vigente </p>
+				<strong>Estado: </strong> Vigente </p>
 			<% end %>
 		</div>
 
-		<div class="field">
+		<div class="field"><p>
+			<%= f.label :description, "Descripción: "%>
 			<%= f.text_area :description, :placeholder=> "Escribir aquí.", :id=>"eg-basic" %>
 		</div>
 
@@ -49,8 +53,10 @@
 
 
 <script>
-	 $(function() {$('textarea#eg-basic').editable({
-      inlineMode: false,
-    })
-  });
+$(function() {$('textarea#eg-basic').editable({
+	theme: 'rease',
+	inlineMode: false,
+	language: 'es'
+	})
+});
 </script>

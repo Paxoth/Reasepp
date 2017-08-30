@@ -1,0 +1,179 @@
+<h1>Administrar recursos </h1>
+<%= link_to 'Agregar nuevo recurso', new_resource_path, :class=>"btn btn-lg btnAdmin" %><br>
+
+<ul class="nav nav-tabs tabRease nav-justified">
+	<li id="res1" onclick="res1()"><a>Actas reuniones</a></li>
+	<li id="res2" onclick="res2()"><a>Plantillas</a></li>
+	<li id="res3" onclick="res3()"><a>Formación AS</a></li>
+	<li id="res4" onclick="res4()"><a>Enlaces útiles</a></li>
+	<li id="res5" onclick="res5()"><a>Otros</a></li>
+</ul>
+<div id="Actas">
+	<div class="panel panel-default panelRease">
+		<div class="panel-heading">
+			Actas disponibles
+		</div>
+		<div class="panel-body">
+			<%if @actas.present?%>
+				<% @actas.each do |resource| %>
+					<p>	<%=resource.name%>: <%=l resource.date%> - 
+					<%= link_to 'Ver recurso', resource.archive.url, :target => "_blank" %> -
+					<%= link_to 'Detalle', resource %> -
+					<%= link_to 'eliminar recurso', resource, method: :delete, data: { confirm: '¿Seguro que desea eliminar esta acta?' } %>
+					</p>
+				<%end%>
+			<%else%>
+				<p>No hay actas de reuniones disponibles</p>
+			<%end%>
+		</div>
+	</div>
+</div>
+<div id="Plantillas">
+	<div class="panel panel-default panelRease">
+		<div class="panel-heading">
+			Plantillas disponibles
+		</div>
+		<div class="panel-body">
+			<%if @plantillas.present?%>
+				<% @plantillas.each do |resource| %>
+					<p>	<%=resource.name%>: <%=l resource.date%> - 
+					<%= link_to 'Ver recurso', resource.archive.url,:target => "_blank" %> -
+					<%= link_to 'Detalle', resource %> -
+					<%= link_to 'eliminar recurso', resource, method: :delete, data: { confirm: '¿Seguro que desea eliminar esta acta?' } %>
+					</p>
+				<%end%>
+			<%else%>
+				No hay plantillas de recursos disponibles
+			<%end%>
+		</div>
+	</div>
+</div>
+<div id="Formacion">
+	<div class="panel panel-default panelRease">
+		<div class="panel-heading">
+			Formación AS disponibles
+		</div>
+		<div class="panel-body">
+			<%if @formacion.present?%>
+				<% @formacion.each do |resource| %>
+					<p>	<%=resource.name%>: <%=l resource.date%> - 
+					<%= link_to 'Ver recurso', resource.archive.url,:target => "_blank" %> -
+					<%= link_to 'Detalle', resource %> -
+					<%= link_to 'eliminar recurso', resource, method: :delete, data: { confirm: '¿Seguro que desea eliminar esta acta?' } %>
+					</p>
+				<%end%>
+			<%else%>
+				No hay recursos formación AS disponibles
+			<%end%>
+		</div>
+	</div>
+</div>
+<div id="Enlaces">
+	<div class="panel panel-default panelRease">
+		<div class="panel-heading">
+			Enlaces útiles disponibles
+		</div>
+		<div class="panel-body">
+			<%if @enlaces.present?%>
+				<% @enlaces.each do |resource| %>
+					<p>	<%=resource.name%>: <%=l resource.date%> - 
+					<%= link_to 'Ver recurso', resource.archive.url,:target => "_blank" %> -
+					<%= link_to 'Detalle', resource %> -
+					<%= link_to 'eliminar recurso', resource, method: :delete, data: { confirm: '¿Seguro que desea eliminar esta acta?' } %>
+					</p>
+				<%end%>
+			<%else%>
+				No hay enlaces útiles disponibles
+			<%end%>
+		</div>
+	</div>
+</div>
+<div id="Otros">
+	<div class="panel panel-default panelRease">
+		<div class="panel-heading">
+			Otro recursos disponibles
+		</div>
+		<div class="panel-body">
+			<%if @otros.present?%>
+				<% @otros.each do |resource| %>
+					<p>	<%=resource.name%>: <%=l resource.date%> - 
+					<%= link_to 'Ver recurso', resource.archive.url,:target => "_blank" %> -
+					<%= link_to 'Detalle', resource %> -
+					<%= link_to 'eliminar recurso', resource, method: :delete, data: { confirm: '¿Seguro que desea eliminar esta acta?' } %>
+					</p>
+				<%end%>
+			<%else%>
+				No hay otros recursos disponibles
+			<%end%>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	document.getElementById('Actas').style.display='block';	
+	document.getElementById("res1").className = "active";	
+	document.getElementById('Plantillas').style.display='none';
+	document.getElementById('Formacion').style.display='none';
+	document.getElementById('Enlaces').style.display='none';
+	document.getElementById('Otros').style.display='none';
+	function res1(){
+		document.getElementById('Actas').style.display='block';	
+		document.getElementById('Plantillas').style.display='none';
+		document.getElementById('Formacion').style.display='none';
+		document.getElementById('Enlaces').style.display='none';
+		document.getElementById('Otros').style.display='none';
+		document.getElementById("res1").className = "active";
+		document.getElementById("res2").className = "";
+		document.getElementById("res3").className = "";
+		document.getElementById("res4").className = "";
+		document.getElementById("res5").className = "";
+	}
+	function res2(){
+		document.getElementById('Actas').style.display='none';	
+		document.getElementById('Plantillas').style.display='block';
+		document.getElementById('Formacion').style.display='none';
+		document.getElementById('Enlaces').style.display='none';
+		document.getElementById('Otros').style.display='none';
+		document.getElementById("res1").className = "";
+		document.getElementById("res2").className = "active";
+		document.getElementById("res3").className = "";
+		document.getElementById("res4").className = "";		
+		document.getElementById("res5").className = "";
+	}
+	function res3(){
+		document.getElementById('Actas').style.display='none';		
+		document.getElementById('Plantillas').style.display='none';
+		document.getElementById('Formacion').style.display='block';
+		document.getElementById('Enlaces').style.display='none';
+		document.getElementById('Otros').style.display='none';
+		document.getElementById("res1").className = "";
+		document.getElementById("res2").className = "";
+		document.getElementById("res3").className = "active";
+		document.getElementById("res4").className = "";
+		document.getElementById("res5").className = "";
+	}
+	function res4(){
+		document.getElementById('Actas').style.display='none';		
+		document.getElementById('Plantillas').style.display='none';
+		document.getElementById('Formacion').style.display='none';
+		document.getElementById('Enlaces').style.display='block';
+		document.getElementById('Otros').style.display='none';
+		document.getElementById("res1").className = "";
+		document.getElementById("res2").className = "";
+		document.getElementById("res3").className = "";
+		document.getElementById("res4").className = "active";
+		document.getElementById("res5").className = "";
+	}
+	function res5(){
+		document.getElementById('Actas').style.display='none';		
+		document.getElementById('Plantillas').style.display='none';
+		document.getElementById('Formacion').style.display='none';
+		document.getElementById('Enlaces').style.display='none';
+		document.getElementById('Otros').style.display='block';
+		document.getElementById("res1").className = "";
+		document.getElementById("res2").className = "";
+		document.getElementById("res3").className = "";
+		document.getElementById("res4").className = "";
+		document.getElementById("res5").className = "active";
+	}
+</script>

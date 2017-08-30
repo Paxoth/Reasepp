@@ -1,0 +1,47 @@
+<%orden ||= "Crear"%>
+<%= form_for(@resource) do |f| %>
+	<% if @resource.errors.any? %>
+			<% @resource.errors.full_messages.each do |message| %>
+				<%flash[:alert] = message %>
+			<% end %>
+	<% end %>
+
+<div class="panel panel-default panelRease" >
+	<div class="panel-heading">
+		Datos del recurso
+	</div>
+	<div class="panel-body">
+		<p class="note">*Todos los campos obligatorios</p>
+		<div class="field"><p>
+			<%= f.label :name, "Nombre: "%>
+			<%= f.text_field :name, :class => 'form-control', :placeholder => 'Nombre recurso',:required=>true %>
+		</p></div>
+		<div class="field"><p>
+			<%= f.label :description, "Descripción: "%>
+			<%= f.text_area :description, :placeholder=> "Breve descripción.", :id=>"eg-basic" %>
+		</p></div>
+		<div class="field"><p>
+			<%= f.label :category, "Tipo de recurso: "%>
+			<%= f.select(:category, [['Acta de reunión', 1],['Plantilla de recursos', 2],['Formación AS',3], ['Enlaces útiles',4], ['Otros',5]], {:include_blank => '-- Seleccione el tipo de recurso --' }, { :class => 'form-control', :required => true }) %>
+		</p></div>
+		<div class="field">
+			<p><%= f.label :date, "Fecha: " %>
+			<%= f.date_select :date %></p>
+		</div>
+		<p class="note">Extensiones permitidas: .jpg .gif .png .pdf .doc .xls .ppt .txt </p>
+		<div class="field">
+			<p><%= f.file_field :archive %></p>
+		</div>
+	</div>	
+</div>
+	<%= f.submit orden+" recurso", :class=>"btn btn-lg btnCRUD" %>
+	<%= link_to 'Volver', resources_path, :class =>"btn btn-lg btnCRUD" %>
+<% end %>
+
+<script>
+	 $(function() {$('textarea#eg-basic').editable({
+      	theme: 'rease',
+		inlineMode: false,
+    })
+  });
+</script>

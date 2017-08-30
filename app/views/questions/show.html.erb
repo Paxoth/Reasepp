@@ -1,0 +1,17 @@
+<div  class="panel panel-default panelRease">
+	<div class="panel-heading">
+		<%=	@question.title %>
+	</div>
+	<div class="panel-body">
+		<h2>Tipo: <%= @question.reader %></h2>
+		<p>	<%=raw @question.answer %></p>
+	</div>
+	<p>Fecha de Creación: <%=l @question.created_at%></p>			
+</div>
+<%if user_signed_in? and current_user.category == 1%>
+	<%= link_to "Editar", edit_question_path( @question), :class => "btn btn-lg btnCRUD"%>
+	<%= link_to 'Eliminar',  @question, method: :delete, data: { confirm: '¿Está seguro de eliminar esta pregunta?' }, :class => "btn btn-lg btnCRUD" %>
+	<%= link_to "Volver", questions_path, :class => "btn btn-lg btnCRUD"%>
+<%else%>
+	<%= link_to "Volver", presentation_about_path, :class => "btn btn-lg btnCRUD"%>
+<%end%>

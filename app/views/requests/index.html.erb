@@ -1,6 +1,6 @@
-<h1>Solicitudes de servicio</h1>
+<h1>Solicitudes de servicio <button type="button" class="btn btn-default btnWhite" id:"btnSolicitud" data-trigger="focus" data-container="body" data-toggle="btnSolicitud"> ? </button></h1>
 
-<% if current_user.category != 2 %>
+<% if current_user.category == 4 %>
 	<%= link_to "Nueva solicitud de servicio", new_request_path, :class => 'btn btn-lg' %>
 <%end%>
 <div class="buscador">
@@ -8,170 +8,153 @@
 	<div class="input-group">
 		<%= text_field_tag :search, params[:search], placeholder: "Buscar solicitudes",:class => 'form-control',:required=>true %>
 		<span class="input-group-btn">
-			<%= submit_tag "Ir", :class => 'btn btn-default' %>
+			<%= button_tag(type: "submit", class: "btn btn-default btnSearch") do %>
+				<i class="glyphicon glyphicon-search"></i>
+			<% end %>
 		</span>
 	</div>
 	<%end%>
 </div>
-</div>
-	<ul class="nav nav-tabs tabRease nav-justified">
+	
+
+
+<ul class="nav nav-tabs nav-justified tabRease">
 	<li id="req1" onclick="req1()"><a>Disponibles</a></li>
-	<li id="req2" onclick="req2()"><a>En proceso</a></li>
-	<li id="req3" onclick="req3()"><a>Canceladas</a></li>
-	<li id="req4" onclick="req4()"><a>Caducadas</a></li>
+	<li id="req2" onclick="req2()"><a>Canceladas</a></li>
+	<li id="req3" onclick="req3()"><a>Caducadas</a></li>
 </ul>
+<div class="borderTab">
+	<div id="Disponible">
+		<%if @disponible.present?%>
+			<% @disponible.each do |request| %>
+				<div class="panel panel-default panelRease">
+					<div class="panel-heading">
+						<%if request.user == current_user %>
+							<i class="glyphicon glyphicon-tags"></i>
+						<%end%>
+						<%= request.title %>
+					</div>
+					<div class="panel-body">
+						<h2>Resumen: </h2>
+						<p><%=raw request.resume %></p>
+						<%= link_to "Ver solicitud", request %>
+					</div>
+				</div>
+			<%end%>
+			<%= will_paginate @disponible %>
+		<%else%>
+			<div class="panel panel-default panelRease">
+				<div class="panel-heading">
+					Ofertas de servicios disponibles
+				</div>
+				<div class="panel-body">
+					<p>No hay solicitudes de servicio disponibles</p>
+				</div>
+			</div>
+		<%end%>
 
-<div id="Disponible">
-	<%if @disponible.present?%>
-	<% @disponible.each do |request| %>
-		<div class="panel panel-default panelRease">
-			<div class="panel-heading">
-				<%= request.title %>
+	</div>
+	<div id="Cancelada">
+		<%if @cancelada.present?%>
+		<% @cancelada.each do |request| %>
+			<div class="panel panel-default panelRease">
+				<div class="panel-heading">
+					<%if request.user == current_user %>
+						<i class="glyphicon glyphicon-tags"></i>
+					<%end%>
+					<%= request.title %>
+				</div>
+				<div class="panel-body">
+					<h2>Resumen: </h2>
+					<p><%=raw request.resume %></p>
+					<%= link_to "Ver solicitud", request %>
+				</div>
 			</div>
-			<div class="panel-body">
-				<h2>Resumen: </h2>
-				<p><%=raw request.resume %></p>
-				<%= link_to "Ver solicitud", request %>
+		<%end%>
+		<%else%>
+			<div class="panel panel-default panelRease">
+				<div class="panel-heading">
+					Ofertas de servicios canceladas
+				</div>
+				<div class="panel-body">
+					<p>No hay solicitudes de servicio canceladas</p>
+				</div>
 			</div>
-		</div>
-	<%end%>
-	<%else%>
-		<div class="panel panel-default panelRease">
-			<div class="panel-heading">
-				Ofertas de servicios disponibles
-			</div>
-			<div class="panel-body">
-				<p>No hay solicitudes de servicio disponibles
-			</div>
-		</div>
-	<%end%>
+		<%end%>
 
+	</div>
+	<div id="Caducada">
+		<%if @caducada.present?%>
+		<% @caducada.each do |request| %>
+			<div class="panel panel-default panelRease">
+				<div class="panel-heading">
+					<%if request.user == current_user %>
+						<i class="glyphicon glyphicon-tags"></i>
+					<%end%>
+					<%= request.title %>
+				</div>
+				<div class="panel-body">
+					<h2>Resumen: </h2>
+					<p><%=raw request.resume %></p>
+					<%= link_to "Ver solicitud", request %>
+				</div>
+			</div>
+		<%end%>
+		<%else%>
+			<div class="panel panel-default panelRease">
+				<div class="panel-heading">
+					Ofertas de servicios caducadas
+				</div>
+				<div class="panel-body">
+					<p>No hay solicitudes de servicio caducadas</p>
+				</div>
+			</div>
+		<%end%>
+
+
+	</div>
 </div>
-<div id="En Proceso">
-	<%if @proceso.present?%>
-	<% @proceso.each do |request| %>
-		<div class="panel panel-default panelRease">
-			<div class="panel-heading">
-				<%= request.title %>
-			</div>
-			<div class="panel-body">
-				<h2>Resumen: </h2>
-				<p><%=raw request.resume %></p>
-				<%= link_to "Ver solicitud", request %>
-			</div>
-		</div>
-	<%end%>
-	<%else%>
-		<div class="panel panel-default panelRease">
-			<div class="panel-heading">
-				Ofertas de servicios en proceso
-			</div>
-			<div class="panel-body">
-				<p>No hay solicitudes de servicio en proceso
-			</div>
-		</div>
-	<%end%>
-
-</div>
-<div id="Cancelada">
-	<%if @cancelada.present?%>
-	<% @cancelada.each do |request| %>
-		<div class="panel panel-default panelRease">
-			<div class="panel-heading">
-				<%= request.title %>
-			</div>
-			<div class="panel-body">
-				<h2>Resumen: </h2>
-				<p><%=raw request.resume %></p>
-				<%= link_to "Ver solicitud", request %>
-			</div>
-		</div>
-	<%end%>
-	<%else%>
-		<div class="panel panel-default panelRease">
-			<div class="panel-heading">
-				Ofertas de servicios canceladas
-			</div>
-			<div class="panel-body">
-				<p>No hay solicitudes de servicio canceladas
-			</div>
-		</div>
-	<%end%>
-
-</div>
-<div id="Caducada">
-	<%if @caducada.present?%>
-	<% @caducada.each do |request| %>
-		<div class="panel panel-default panelRease">
-			<div class="panel-heading">
-				<%= request.title %>
-			</div>
-			<div class="panel-body">
-				<h2>Resumen: </h2>
-				<p><%=raw request.resume %></p>
-				<%= link_to "Ver solicitud", request %>
-			</div>
-		</div>
-	<%end%>
-	<%else%>
-		<div class="panel panel-default panelRease">
-			<div class="panel-heading">
-				Ofertas de servicios caducadas
-			</div>
-			<div class="panel-body">
-				<p>No hay solicitudes de servicio caducadas
-			</div>
-		</div>
-	<%end%>
-
-
-</div>
-
 <script type="text/javascript">
 	document.getElementById('Disponible').style.display='block';	
 	document.getElementById("req1").className = "active";	
-	document.getElementById('En Proceso').style.display='none';
 	document.getElementById('Cancelada').style.display='none';
 	document.getElementById('Caducada').style.display='none';
 	function req1(){
 		document.getElementById('Disponible').style.display='block';	
-		document.getElementById('En Proceso').style.display='none';
 		document.getElementById('Cancelada').style.display='none';
 		document.getElementById('Caducada').style.display='none';
 		document.getElementById("req1").className = "active";
 		document.getElementById("req2").className = "";
 		document.getElementById("req3").className = "";
-		document.getElementById("req4").className = "";
 	}
 	function req2(){
 		document.getElementById('Disponible').style.display='none';	
-		document.getElementById('En Proceso').style.display='block';
-		document.getElementById('Cancelada').style.display='none';
+		document.getElementById('Cancelada').style.display='block';
 		document.getElementById('Caducada').style.display='none';
 		document.getElementById("req1").className = "";
 		document.getElementById("req2").className = "active";
 		document.getElementById("req3").className = "";
-		document.getElementById("req4").className = "";
-	}
-	function req3(){
-		document.getElementById('Disponible').style.display='none';	
-		document.getElementById('En Proceso').style.display='none';
-		document.getElementById('Cancelada').style.display='block';
-		document.getElementById('Caducada').style.display='none';
-		document.getElementById("req1").className = "";
-		document.getElementById("req2").className = "";
-		document.getElementById("req3").className = "active";
-		document.getElementById("req4").className = "";
 		
 	}
-	function req4(){
+	function req3(){
 		document.getElementById('Disponible').style.display='none';		
-		document.getElementById('En Proceso').style.display='none';
 		document.getElementById('Cancelada').style.display='none';
 		document.getElementById('Caducada').style.display='block';
 		document.getElementById("req1").className = "";
 		document.getElementById("req2").className = "";
-		document.getElementById("req3").className = "";
-		document.getElementById("req4").className = "active";
+		document.getElementById("req3").className = "active";
 	}
+	var content = '<p>Una <strong>solicitud de servicio</strong> es el proceso previo para concretar un proyecto AS, esta es publicada por un socio comunitario y pretenden encontrar un profesor con quien realizar dicho proyecto.</p><p>A continuación se presenta el proceso completo de un proyecto AS</p></p><div id = \"image"> <%= image_tag("Services.png",:class=>"popoverImage") %></div><p><i class="glyphicon glyphicon-tags"></i> : Solicitud de servicio que usted publicó.</p>';
+	$(function () {
+		$('[data-toggle="btnSolicitud"]').popover(
+			{
+				html: 'true', 
+				content: content,
+				title: 'Solicitud de servicio',
+				placement: "bottom", 
+				template: '<div class="popover popover-rease"><div class="arrow"></div><div class="popover-inner"><h3 class="popover-title"></h3><div class="popover-content"><p></p></div></div></div>'
+
+			}
+		)
+	})
 </script>

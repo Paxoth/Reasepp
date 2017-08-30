@@ -1,0 +1,54 @@
+<h1>Acerda de</h1>
+
+<h2>Preguntas frecuentes</h2>
+<div class="buscador">
+	<%= form_tag(questions_searchQuestion_path, :method => "post",:class=>"form-inline") do %>
+	<div class="input-group">
+		<%= text_field_tag :search, params[:search], placeholder: "Buscar pregunta",:class => 'form-control',:required=>true %>
+		<span class="input-group-btn">
+			<%= button_tag(type: "submit", class: "btn btn-default ") do %>
+				<i class="glyphicon glyphicon-search"></i>
+			<% end %>
+		</span>
+	</div>
+	<%end%>
+</div>
+<% @questions.each do |pregunta| %>
+	<% if user_signed_in? %>
+		<% div_id = pregunta.id -%>
+			<div  class="panel panel-default panelClick">
+				<div class="panel-heading" data-toggle="collapse" data-target="#Novedad<%= div_id -%>">
+					<i class="glyphicon glyphicon-circle-arrow-down"></i> <%= pregunta.title %> 
+				</div>
+				<div class="collapsing" id="Novedad<%= div_id -%>">
+					<div class="panel-body">
+						<p><%=raw pregunta.answer %></p>
+					</div>
+				</div>
+			</div>
+	<%elsif pregunta.reader == 2%>
+		<% div_id = pregunta.id -%>
+		<div  class="panel panel-default panelClick">
+			<div class="panel-heading" data-toggle="collapse" data-target="#Novedad<%= div_id -%>">
+				<i class="glyphicon glyphicon-circle-arrow-down"></i> <%= pregunta.title %> 
+			</div>
+			<div class="collapsing" id="Novedad<%= div_id -%>">
+				<div class="panel-body">
+					<p><%=raw pregunta.answer %></p>
+				</div>
+			</div>
+		</div>
+	<%end%>
+<%end%>
+
+<h2>Créditos</h2>
+<div class="panel panel-default panelRease">
+	<div class="panel-heading">
+		Sobre la aplicación
+	</div>
+	<div class="body">
+		<p>La presente aplicación fue desarrollada en el año 2015 en el contexto del Trabajo de Título de las estudiantes de ingeniería informática Carolina Orrego y Paz Bustos, bajo la supervisión del Profesor Edmundo Leiva en la Universidad de Santiago de Chile.</p>
+	</div>
+</div>
+
+<%= link_to "Volver al inicio", root_path, :class => "btn btn-lg btnCRUD"%>

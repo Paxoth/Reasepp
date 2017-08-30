@@ -38,59 +38,51 @@
 		<%= javascript_include_tag "application" %>
 		</head>
 	<body>
+	<div id="wrapper">
+		<div id="header">
+			<header>
+				<%= render "partials/navigation"%>
+			</header>
+		</div>
+		<div id="content">
+			<section id="contenedor">
+				<section id="principal">
+					<article>
+						<%= bootstrap_flash %>
+						<%= yield %>
+					</article>
+				</section>
+				<aside>
+					<%= link_to(image_tag("LogoRease.png", id: "logo"),root_path) %><br>
+					<% if !user_signed_in? %>
+						<%= render "partials/intranet"%>
+					<%else%>
+						<%= render "partials/user"%>
+						<%= render "partials/resources"%>
+					<%end%>
 
-	<header>
-		<%= render "partials/navigation"%>
-	</header>
-
-	<section id="contenedor">
-		<section id="principal">
-			<article>
-				<%= render_breadcrumbs %>
-				<%= bootstrap_flash %>
-				<%= yield %>
-			</article>
-		</section>
-		<aside>
-			<%= link_to(image_tag("LogoRease.png", id: "logo"),root_path) %>
-
-			<%= render "partials/intranet"%>
-
-			
-			<div  class="panel panel-default panelClick">
-				<div class="panel-heading">
-					<%= link_to 'Calendario de eventos <i class="glyphicon glyphicon-circle-arrow-right"></i>'.html_safe, events_path, :id => "calendarPanelTitle"%>
-				</div>
-				<div class="panel-body" id = "calendarAside">
-				</div>
-			</div>
-
-			<% if !user_signed_in? %> 
-				<div  class="panel panel-default panelClick" >
-					<div class="panel-heading" data-toggle="collapse" data-target="#cuerpoLI">
-						Links de interés <i class="glyphicon glyphicon-circle-arrow-down"></i>
-					</div>
-					<div class="collapse" id="cuerpoLI">
-						<div class="panel-body">
-							<% @interest_links.each do |interest_link| %>
-								<p><%=link_to interest_link.name, interest_link.url%></p>
-							<%end%>
+					<div  class="panel panel-default panelClick">
+						<div class="panel-heading">
+							<%= link_to 'Calendario de eventos <i class="glyphicon glyphicon-circle-arrow-left"></i>'.html_safe, events_path, :id => "calendarPanelTitle"%>
+						</div>
+						<div class="panel-body" id = "calendarAside">
 						</div>
 					</div>
-				</div>
-			<%end%>
-
-		</aside>
-	</section>
-
-	<footer>
-		<!--Pie de página-->
-		<div  id="pies" class = "navbar-default pies">
-			REASE - Red Nacional de Aprendizaje Servicio
-			<br>
-			Contacto: reasechile@gmail.com
+					<%= render "partials/interest_links"%>
+				</aside>
+			</section>
 		</div>
-	</footer>
+		<div id="footer">
+			<!--Pie de página-->
+			<div  id="pies" class = "navbar-default pies">
+				REASE - Red Nacional de Aprendizaje Servicio
+				<br>
+				Contacto: redrease@gmail.com
+			</div>
+		</div>
+	</div>
+
+
 
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -103,7 +95,7 @@
 				},
 				events: '/events.json',
 				monthNames: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
-				dayNamesShort: ['Lun','Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom']
+				dayNamesShort: ['Dom','Lun','Mar', 'Mie', 'Jue', 'Vie', 'Sab']
 			})
 		});
 	</script>

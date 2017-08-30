@@ -1,0 +1,65 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  description: MyText
+  faculty: MyText
+  department: MyText
+  course_name: MyText
+  course_type: MyText
+  course_type_other: MyText
+  professor_name: MyText
+  professor_phone: MyText
+  learning_objectives: MyText
+  service_objectives: MyText
+  frequency: MyText
+  weekly_hours: MyText
+  students_level: MyText
+  community_partner: MyText
+  organization_type: MyText
+  benefit: MyText
+  results: MyText
+  tools: MyText
+  reflection_moments: MyText
+  period: 1
+  professor_degree: 1
+  participants: 1
+  institutional_support: 1
+  area_id: 
+  user_id: 
+  institution_id: 
+  start_time: 2015-10-07
+  end_time: 2015-10-07
+  partner: MyText
+
+two:
+  title: MyString
+  description: MyText
+  faculty: MyText
+  department: MyText
+  course_name: MyText
+  course_type: MyText
+  course_type_other: MyText
+  professor_name: MyText
+  professor_phone: MyText
+  learning_objectives: MyText
+  service_objectives: MyText
+  frequency: MyText
+  weekly_hours: MyText
+  students_level: MyText
+  community_partner: MyText
+  organization_type: MyText
+  benefit: MyText
+  results: MyText
+  tools: MyText
+  reflection_moments: MyText
+  period: 1
+  professor_degree: 1
+  participants: 1
+  institutional_support: 1
+  area_id: 
+  user_id: 
+  institution_id: 
+  start_time: 2015-10-07
+  end_time: 2015-10-07
+  partner: MyText

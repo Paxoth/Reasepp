@@ -1,5 +1,5 @@
 class Users::ConfirmationsController < Devise::ConfirmationsController
-  before_action :estatutos
+  before_action :estatuto
   # GET /resource/confirmation/new
   # def new
   #   super
@@ -28,7 +28,7 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
   # end
   private
   
-  def estatutos
+  def estatuto
     @sections = Section.all
     @institutions = Institution.all
   end

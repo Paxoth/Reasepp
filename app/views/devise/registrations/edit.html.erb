@@ -1,62 +1,67 @@
 <h1>Editar Perfil</h1>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
+	<%= devise_error_messages! %>
 
-  <!--MAIL-->
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-  <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
+	<!--MAIL-->
+	<% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+		<div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+	<% end %>
 
-  <div class="panel panel-default panelRease">
-    <div class="panel-heading">
-      Datos de <%=@user.name%>
-    </div>
-    <div class="panel-body">
-      <h2>Modificar contraseña</h2>
-      <div class="field">
-        <%= f.password_field :password, autocomplete: "off", :class => 'form-control', :placeholder => 'Nueva Contraseña (Dejar en blanco si no desea cambiarla)' %>
-      </div>
+	<div class="panel panel-default panelRease">
+		<div class="panel-heading">
+			Datos de <%=@user.name%>
+		</div>
+		<div class="panel-body">
+			
+			<h2>Modificar datos personales</h2>
+			<div class="field"><p>
+				<%= f.label :nickname, "Apodo: "%>
+				<%= f.text_field :nickname, :class => 'form-control', :placeholder => 'Apodo o nickname' %>
+			</p></div>
 
-      <div class="field">
-        <%= f.password_field :password_confirmation, autocomplete: "off", :class => 'form-control', :placeholder => 'Confirmar contraseña' %>
-      </div>
+			<div class="field"><p>
+				<%= f.label :name, "Nombres: "%>
+				<%= f.text_field :name, :class => 'form-control', :placeholder => 'Nombres' %>
+			</p></div>
 
-      <hr>
-      <h2>Modificar datos personales</h2>
-      <div class="field">
-        <%= f.text_field :nickname, :class => 'form-control', :placeholder => 'Apodo o nickname' %>
-      </div>
-      
-      <div class="field">
-        <%= f.text_field :name, :class => 'form-control', :placeholder => 'Nombres' %>
-      </div>
-      
-      <div class="field">
-        <%= f.text_field :last_name, :class => 'form-control', :placeholder => 'Apellidos' %>
-      </div>
-      
-      <div class="field">
-        <%= f.text_area :description, :class => 'form-control', :placeholder => 'Anote aquí algo sobre usted' %>
-      </div>
-      <p class="note">Sí no se encuentra su institución comuníquese con un administrador</p>
-      <div class="field">
-        <%= f.select :institution_id, @institutions.collect {|ins| [ins.name, ins.id]},{:include_blank => "Institución a la que pertenece (Opcional)"},{ :class => 'form-control'} %>
-      </div>
-      <hr>
-      <h2>Foto de perfil</h2>
-      <id="test">
- 
-          <%= f.file_field :photo %>
- 
-      </id="test">
-      <hr>
-      <h2>Agregar contraseña actual para aceptar cambios</h2>
-      <div class="field">
-        <%= f.password_field :current_password, autocomplete: "off", :class => 'form-control', :placeholder => 'Contraseña antigua para confirmar cambio' %>
-      </div>
-        <%= f.submit "Actualizar Perfil", :class=>"btn btn-lg btnCRUD" %>
-        <%= link_to 'Cancelar cambios', :back, :class =>"btn btn-lg btnCRUD" %>
-      <% end %>
-    </div>
-  </div>
+			<div class="field"><p>
+				<%= f.label :description, "Sobre mí: "%>
+				<%= f.text_area :description, :class => 'form-control', :placeholder => 'Anote aquí algo sobre usted' %>
+			</p></div>
+				
+			<div class="field"><p>
+				<%= f.label :institution_id, "Institución adherida: (*)"%>
+				<%= f.select :institution_id, @institutions.collect {|ins| [ins.name, ins.id]},{:include_blank => "Institución a la que pertenece (Opcional)"},{ :class => 'form-control'} %>
+				<p class="note">* Si no se encuentra su institución comuníquese con un administrador</p>
+			</p></div>
+			<h2>Foto de perfil (**)</h2>	
+				<%= f.file_field :photo %>
+				<p class="note">** Usted debe aparecer vertical en la foto a subir.</p>
+			
+			<div data-toggle="collapse" data-target="#CambiarPass">
+					<h2>Modificar contraseña</h2>	
+					<p>Si desea modificar su contraseña <u style="color: #30aaaa;">seleccione aquí</u></p>
+				</div>
+				<div class="collapse" id="CambiarPass">
+				<p class="note">Esta sección es solo en caso que desee cambiar su contraseña</p>
+				<div class="field"><p>
+					<%= f.label :password, "Nueva contraseña: "%>
+					<%= f.password_field :password, autocomplete: "off", :class => 'form-control', :placeholder => 'Nueva Contraseña (Dejar en blanco si no desea cambiarla)' %>
+				</p></div>
+
+				<div class="field"><p>
+					<%= f.label :password, "Confirme su contraseña: "%>
+					<%= f.password_field :password_confirmation, autocomplete: "off", :class => 'form-control', :placeholder => 'Confirmar contraseña' %>
+				</p></div>
+			</div>
+			<div class="field"><p>
+				<%= f.label :current_password, "Constraseña actual: "%>
+				<%= f.password_field :current_password, autocomplete: "off", :class => 'form-control', :placeholder => 'Ingrese su contraseña actual para confirmar los cambios' %>
+			</div>
+			<%= f.submit "Actualizar Perfil", :class=>"btn btn-lg btnCRUD" %>
+			<%= link_to 'Cancelar cambios', :back, :class =>"btn btn-lg btnCRUD" %>
+
+		</div>
+	</div>
+<% end %>

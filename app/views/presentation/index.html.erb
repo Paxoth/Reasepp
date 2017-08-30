@@ -9,10 +9,12 @@
 				<p><% @users.each  do |user|%>
 					<%if user.photo.present?%>
 						<%=link_to image_tag(user.photo.url(:mini),:class=>'RoundPicture'),user%>
+					<%else%>
+						<%=link_to image_tag("mini/miniphoto.png",:class=>'RoundPicture'),user%>
 					<%end%>
 				<%end%></p>
 			<%else%>
-				<%if User.last.photo.present?%>
+				<%if User.last.photo.present? %>
 					<%=link_to image_tag(User.last.photo.url(:mini),:class=>'RoundPicture'),User.last%>
 				<%else%>
 					<p>Las últimas semanas no se han registrado usuarios</p>
@@ -26,13 +28,27 @@
 			Última acta de REASE
 		</div>
 		<div class="panel-body">
-			<%if @minute.present?%>
-				<p><%=l @minute.date%>: <%= @minute.name%> - <%=	link_to "Ver", @minute.archive.url %> </p>
+			<%if @acta.present?%>
+				<p><%=l @acta.date%>: <%= @acta.name.truncate(20)%> - <%=	link_to "Ver", @acta.archive.url,:target=>'_blank' %> </p>
 			<%else%>
 				<p>No hay actas disponibles</p>
 			<%end%>			
 		</div>
 	</div>
+	<%if @bulletin.present? && @bulletin.created_at >= Time.now - 1.days %>
+		<div  class="panel panel-default panelClick">
+			<div class="panel-heading" data-toggle="collapse" data-target="#boletin">
+				<i class="glyphicon glyphicon-circle-arrow-down"></i> Último boletín:  <%= @bulletin.title %> 
+			</div>
+			<div class="collapsing" id="boletin">
+				<div class="panel-body">
+					<p><%=raw @bulletin.description %></p>
+					<%=link_to "ver", @bulletin%>
+					<p class="note">Enviado el <%=l @bulletin.created_at%></p>
+				</div>
+			</div>
+		</div>
+	<%end%>
 <%end%>
 <% @sections.each do |seccion| %>
 	<% div_id = seccion.id -%>
@@ -48,3 +64,5 @@
 		</div>
 	</div>
 <%end%>
+
+<%= will_paginate @sections %>

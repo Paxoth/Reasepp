@@ -35,12 +35,7 @@
 }
 #calendarAside .fc-button-today
 {
-
-	background: none;
-	background-image: none;
-	color: transparent;
-	border: none;
-	box-shadow: none;
+	display: none;
 }
 
 #calendar th, #calendarAside th

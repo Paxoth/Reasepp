@@ -15,8 +15,17 @@
  *= require_self
  *= require froala_editor.min.css
  *= require froala_style.min.css
- *= require froala_content.min.css
- *= require froala_style.min.css
+ *= require font-awesome
+ *= require plugins/char_counter.min.css
+ *= require plugins/colors.min.css
+ *= require plugins/emoticons.min.css
+ *= require plugins/file.min.css
+ *= require plugins/fullscreen.min.css
+ *= require plugins/image_manager.min.css
+ *= require plugins/image.min.css
+ *= require plugins/line_breaker.min.css
+ *= require plugins/table.min.css
+ *= require plugins/video.min.css
  */
 
 .form-signin
@@ -36,7 +45,7 @@
 .form-signin .form-control
 {
     position: relative;
-    font-size: 16px;
+    font-size: 14px;
     height: auto;
     padding: 10px;
     -webkit-box-sizing: border-box;
@@ -71,7 +80,7 @@
 .login-title
 {
     color: #555;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 400;
     display: block;
 }

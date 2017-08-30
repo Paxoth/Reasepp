@@ -18,7 +18,7 @@
 				<%if user.category == 4%> Socio comunitario <%end%>
 				<%if user.autorization_level == 1%> activo <%end%>
 				<%if user.autorization_level == 2%> adherente <%end%> - 
-				<%=link_to " Cambiar tipo de usuario", edit_user_path(user) %>
+				<%=link_to " Gestionar Usuario", edit_user_path(user) %>
 			<%end%>
 			</p>	
 		<%end%>

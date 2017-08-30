@@ -1,5 +1,5 @@
-<h1>Administrar links de interés </h1>
-<%= link_to 'Agregar nuevo link de interés', new_interest_link_path, :class=>"btn btn-lg btnAdmin" %><br>
+<h1>Administrar enlaces de interés </h1>
+<%= link_to 'Agregar nuevo enlace de interés', new_interest_link_path, :class=>"btn btn-lg btnAdmin" %><br>
 
 <div class="panel panel-default panelRease">
   <div class="panel-heading">
@@ -8,9 +8,9 @@
   <div class="panel-body">
     <% @interest_links.each do |interest_link| %>
       <p><%=interest_link.name%> - 
-      <%= link_to 'Ir', interest_link.url %> -
+      <%= link_to 'Ir', interest_link.url,:target => "_blank" %> -
       <%= link_to 'Detalle', interest_link %> -
-      <%= link_to 'Eliminar link', interest_link, method: :delete, data: { confirm: '¿Seguro que desea eliminar este link?' } %>
+      <%= link_to 'Eliminar enlace', interest_link, method: :delete, data: { confirm: '¿Seguro que desea eliminar este enlace?' } %>
       </p>
     <%end%>
   </div>

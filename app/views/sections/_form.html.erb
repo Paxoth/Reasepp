@@ -9,39 +9,43 @@
 	</div>
 	<div class="panel-body">
 		<center>
-			<div style="width: 90%">
-				<%= form_for(@section) do |f| %>
-					<p class="note">*Todos los campos son obligatorios.</p>
-					<div class="field">
-						<%= f.text_field :title, :class => 'form-control', :placeholder => 'Titulo',:required=>true %>
-					</div>
-					
-					<div class="field">
-						<%= f.select(:module, [['Novedad','Novedad'],['Aprendizaje Servicio', 'Aprendizaje Servicio'],['Hacemos', 'Hacemos'],['Somos', 'Somos'],['Estatutos', 'Estatutos']],  {:include_blank => '— Seleccione una sección —',:selected => orden }, { :class => 'form-control', :required => true }) %>
-					</div>
-					
-					<div class="field">
-						<%= f.select(:priority, [['Alta', 1],['Media', 2],['Baja', 3]], {:include_blank => '— Prioridad —' }, { :class => 'form-control', :required => true }) %>
-					</div>
-					
-					<div class="field"> 
-						<%= f.text_area :body, :placeholder=> "Escriba acá.", :id=>"eg-basic",:required=>true %>
-					</div>
-					
+			<%= form_for(@section) do |f| %>
+				<p class="note">*Todos los campos son obligatorios.</p>
+				<div class="field"><p>
+					<%= f.label :title, "Título: "%>
+					<%= f.text_field :title, :class => 'form-control', :placeholder => 'Titulo',:required=>true %>
+				</p></div>
+				<p class="note">La sección corresponden al módulo de las páginas de inicio el cual usted desea agregar un nuevo artículo.</p>
+				<div class="field"><p>
+					<%= f.label :module, "Sección: "%>
+					<%= f.select(:module, [['Novedad','Novedad'],['Aprendizaje Servicio', 'Aprendizaje Servicio'],['Hacemos', 'Hacemos'],['Somos', 'Somos'],['Estatuto', 'Estatuto']],  {:include_blank => '— Seleccione una sección —',:selected => orden }, { :class => 'form-control', :required => true }) %>
+				</p></div>
+				
+				<div class="field"><p>
+					<%= f.label :prority, "Prioridad: "%>
+					<%= f.select(:priority, [['Alta', 1],['Media', 2],['Baja', 3]], {:include_blank => '— Prioridad —' }, { :class => 'form-control', :required => true }) %>
+				</p></div>
+				
+				<div class="field"><p>
+					<%= f.label :body, "Cuerpo: "%>
+					<%= f.text_area :body, :placeholder=> "Escriba acá el contenido de la sección", :id=>"eg-basic"%>
+				</p></div>
+				
 
-					<div class="field"> 
-						<%= f.submit accion, :class => 'btn btn-lg btnCRUD' %>
-						<%= link_to "Cancelar", sections_path, :class => 'btn btn-lg btnCRUD' %>
-					</div>
-				<%end%>
-			</div> 
+				<div class="field"> 
+					<%= f.submit accion, :class => 'btn btn-lg btnCRUD' %>
+					<%= link_to "Cancelar", sections_path, :class => 'btn btn-lg btnCRUD' %>
+				</div>
+			<%end%>
 		</center>
 	</div>
 </div>
 
 <script>
 	 $(function() {$('textarea#eg-basic').editable({
-      inlineMode: false,
+      theme: 'rease',
+		inlineMode: false,
+      language: 'es'
     })
   });
 </script>

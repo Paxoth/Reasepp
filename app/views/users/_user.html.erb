@@ -1,1 +1,16 @@
-<p><strong>Usuario:</strong>  <%=user.nickname%> - <%= link_to "Ver", user %> </p>
+<tr>
+	<td>
+		Usuario: 
+		<%if user.category == 1%>
+			Administrador
+		<%elsif user.category == 2%>
+			Profesor
+		<%elsif user.category == 3%>
+			Vinculador social
+		<%elsif user.category == 4%>
+			Socio comunitario
+		<%end%>
+	</td>
+	<td><%= user.name %> (<%=user.nickname%>)</td>
+	<td><%= link_to "Ver", user %></td>
+</tr>

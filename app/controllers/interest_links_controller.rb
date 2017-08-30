@@ -5,7 +5,7 @@ class InterestLinksController < ApplicationController
 
   add_breadcrumb "Inicio", :root_path
   add_breadcrumb "Administrar", :sections_path
-  add_breadcrumb "Link de interés", :interest_links_path 
+  add_breadcrumb "Enlaces de interés", :interest_links_path 
 
   # GET /interest_links
   # GET /interest_links.json
@@ -16,18 +16,18 @@ class InterestLinksController < ApplicationController
   # GET /interest_links/1
   # GET /interest_links/1.json
   def show
-    add_breadcrumb "Mostrar link"
+    add_breadcrumb "Mostrar enlace"
   end
 
   # GET /interest_links/new
   def new
-    add_breadcrumb "Nuevo link"
+    add_breadcrumb "Nuevo enlace"
     @interest_link = InterestLink.new
   end
 
   # GET /interest_links/1/edit
   def edit
-    add_breadcrumb "Editar link"
+    add_breadcrumb "Editar enlace"
   end
 
   # POST /interest_links
@@ -37,7 +37,7 @@ class InterestLinksController < ApplicationController
 
     respond_to do |format|
       if @interest_link.save
-        format.html { redirect_to @interest_link, notice: 'El link de interés se ha agregado exitosamente.' }
+        format.html { redirect_to @interest_link, notice: 'El enlace de interés se ha agregado exitosamente.' }
         format.json { render :show, status: :created, location: @interest_link }
       else
         format.html { render :new }
@@ -51,7 +51,7 @@ class InterestLinksController < ApplicationController
   def update
     respond_to do |format|
       if @interest_link.update(interest_link_params)
-        format.html { redirect_to @interest_link, notice: 'El link de interés se ha actualizado exitosamente.' }
+        format.html { redirect_to @interest_link, notice: 'El enlace de interés se ha actualizado exitosamente.' }
         format.json { render :show, status: :ok, location: @interest_link }
       else
         format.html { render :edit }
@@ -65,7 +65,7 @@ class InterestLinksController < ApplicationController
   def destroy
     @interest_link.destroy
     respond_to do |format|
-      format.html { redirect_to interest_links_url, notice: 'El link de interés se ha eliminado exitosamente.' }
+      format.html { redirect_to interest_links_url, notice: 'El enlace de interés se ha eliminado exitosamente.' }
       format.json { head :no_content }
     end
   end

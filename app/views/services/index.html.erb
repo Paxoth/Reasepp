@@ -1,0 +1,39 @@
+<h1>Solicitudes de participación</h1>
+
+<div class="panel panel-default panelRease">
+	<div class="panel-heading">
+		Solicitudes para participar en <%=@publication.title%>
+	</div>
+	<div class="panel-body">
+		<%if @pendientes.present?%>
+			<h2>Pendientes: </h2>
+			<% @pendientes.each do |servicio| %>
+				<p>
+				<%if servicio.creator.photo.present?%>
+					<%=link_to image_tag(servicio.creator.photo.url(:mini)), servicio.creator%>
+				<%else%>
+					<%=link_to image_tag("mini/missingPhoto.png"), servicio.creator%>
+				<%end%>
+				<%=link_to servicio.creator.nickname, servicio.creator%> realizó una petición: <i>"<%= servicio.message.truncate(50)%>"</i>  
+				<%if current_user == @publication.user or current_user == servicio.creator%>
+					- <%= link_to "Ver", servicio %>
+				<%end%>
+			<%end%>
+		<%end%>
+		<%if @rechazados.present?%>
+			<h2>Desistidos: </h2>
+			<% @rechazados.each do |servicio| %>
+				<p>
+				<%if servicio.creator.photo.present?%>
+					<%=link_to image_tag(servicio.creator.photo.url(:mini)), servicio.creator%>
+				<%else%>
+					<%=link_to image_tag("mini/missingPhoto.png"), servicio.creator%>
+				<%end%>
+				<%=link_to servicio.creator.nickname, servicio.creator%> realizó una petición: <i>"<%= servicio.message.truncate(50)%>"</i>	
+				<%if current_user == @publication.user or current_user == servicio.creator%>
+					- <%= link_to "responder", servicio %> </p>
+				<%end%>
+			<%end%>
+		<%end%>		
+	</div>
+</div>

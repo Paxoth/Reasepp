@@ -1,5 +1,5 @@
 class ContactMailer < ApplicationMailer
-	default from: 'coordinacion.rease@gmail.com'
+	default from: 'redrease@gmail.com'
 
 	def contact_sender(contact)
 		@contact = contact
@@ -7,6 +7,6 @@ class ContactMailer < ApplicationMailer
 	end
 	def contact_receiver(contact)
 		@contact = contact
-		mail(to: 'coordinacion.rease@gmail.com', subject: 'Nuevo comentario para REASE de '+@contact.name)
+		mail(to: 'redrease@gmail.com', subject: 'Nuevo comentario para REASE de '+@contact.name)
 	end
 end

@@ -1,0 +1,92 @@
+<h1>Experiencia Reportada Folio N° <%=@project.id%>  </h1>
+<div class="panel panel-default panelRease">
+  <div class="panel-heading">
+    Formato sistematización actividades Aprendizaje Servicio
+  </div>
+  <div class="panel-body">
+    <div>
+      <h2><strong><%=@project.title%></strong></h2>
+      <h2><strong>Folio N°:</strong> <%=@project.id%> </h2>
+      <h2><strong>Fecha de subida: </strong> <%=l @project.created_at%></h2>
+    </div>
+
+    <h3>I. Antecedentes generales</h3>
+    <div  class="experiencia">
+      <p><strong>Area: </strong><%=@project.area.name%></p>
+      <p><strong>Institución: </strong><%=link_to @project.institution.name, @project.institution.web%></p>
+      <p><strong>Facultad: </strong><%=@project.faculty%></p>
+      <p><strong>Departamento: </strong><%=@project.department%></p>
+      <p><strong>Nombre de Asignatura/curso: </strong><%=@project.course_name%></p>
+      <p><strong>Tipo de Asignatura/curso: </strong> 
+        <% if @project.course_type == "Otro" %>
+          <%= @project.course_type_other %>
+        <%else%>
+          <%= @project.course_type %>
+        <%end%>
+      </p>
+      <p><strong>Periodo: </strong> 
+      <% if @project.period == 1%>
+        Primer semestre
+      <% elsif @project.period == 2%>
+        Segundo semestre
+      <% elsif @project.period == 3%>
+        Cada semestre
+      <% else %>
+        Anual
+      <%end%>
+
+      </p>
+      <p><strong>Nombre profesor responsable: </strong> <%=link_to @project.professor_name, @project.user%></p>
+      <p><strong>Correo del profesor: </strong><%=@project.professor_email%></p>
+      <p><strong>Número del profesor: </strong><%=@project.professor_phone%></p>
+      <p><strong>Grado académico del profesor: </strong>
+        <%if @project.professor_degree == 1%> Licenciado <%end%>
+        <%if @project.professor_degree == 2%> Magister <%end%>
+        <%if @project.professor_degree == 3%> Doctorado <%end%>
+      </p>
+      <p><strong>Nombre del socio comunitario responsable: </strong> <%=@project.partner%></p>
+    </div>
+
+    <h3>II. Antecedentes de la actividad de Aprendizaje Servicio </h3>
+    <div class="experiencia">
+      <p><strong>Objetivos de aprendizaje y/o Competencias asociadas</strong></p>
+        <p><%=@project.learning_objectives%></p><br>
+
+      <p><strong>Objetivo de servicio: </strong></p>
+        <p><%=@project.service_objectives%></p><br>
+
+      <p><strong>Descripción del Proyecto de AS: </strong></p>
+        <p><%=@project.description%></p><br>
+
+      <p><strong>La presente experiencia: </strong>
+        <%if @project.institutional_support == 1%> 
+          Cuenta con respaldo institucional.
+        <%end%>
+        <%if @project.institutional_support == 2%> 
+          Corresponde a una iniciativa individual del profesor.
+        <%end%>
+      </p>
+
+      <p><strong>¿Con qué frecuencia se realiza? </strong><%=@project.frequency%></p>
+      <p><strong>Horas cronológicas semanales: </strong><%=@project.weekly_hours%></p>
+      <p><strong>Número estudiantes participantes: </strong><%=@project.participants%></p>
+      <p><strong>Nivel de la carrera de los Estudiantes: </strong><%=@project.students_level%></p>
+      
+      <p><strong>Tipo de organización comunitaria: </strong><%=@project.organization_type%></p>
+      <p><strong>Número de beneficiados directos con toda la actividad o proyecto: </strong><%=@project.benefit%></p>
+
+      <p><strong>Resultados de aprendizaje: </strong></p>
+        <p><%=@project.results%></p><br>
+      <p><strong>Herramientas de medición (cuali y/o cuantitativas) utilizadas y documentos que respalden el proyecto: </strong></p>
+        <p><%=@project.tools%></p>
+      <p><strong>Instancias de reflexión: </strong></p>
+        <p><%=@project.reflection_moments%></p>
+    </div>
+<%if @project.user == current_user%>
+  <%= link_to 'Editar', edit_project_path(@project), :class => "btn btn-lg btnCRUD" %>
+<%end%>
+<%= link_to "Descargar como PDF", project_path(@project, format: "pdf"), :class=> "btn btn-lg btnCRUD", :target=>'_blank'%>
+<%= link_to 'Volver', projects_path, :class => "btn btn-lg btnCRUD" %>
+  </div>
+</div>
+

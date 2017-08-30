@@ -1,4 +1,17 @@
-<p>
-<%if request.status==3%><strong>Experiencia: </strong>
-<%else%><strong>Solicitud de Servicio: </strong>
-<%end%><%=request.title%> - <%=	link_to "Ver", request %> </p>
+<tr>
+	<td>Solicitud de Servicio</td>
+	<td>
+	<%=request.title%> (
+					<%if request.status == 1%>
+						Disponible
+					<%elsif request.status == 2%>
+						Cancelado
+					<%elsif request.status == 3%>
+						Caducado
+					<%else%>
+						Servicio
+					<%end%>
+					)
+	</td>
+	<td><%= link_to "Ver", request %> </td>
+</tr>

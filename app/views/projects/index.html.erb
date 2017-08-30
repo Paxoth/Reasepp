@@ -1,0 +1,58 @@
+<h1>Experiencias Reportadas <button type="button" class="btn btn-default btnWhite" id:"btnExperiencia" data-trigger="focus" data-container="body" data-toggle="btnExperiencia"> ? </button></h1>
+<div class="buscador">
+  <%= form_tag(experiences_searchExperience_path, :method => "post",:class=>"form-inline") do %>
+  <div class="input-group">
+    <%= text_field_tag :search, params[:search], placeholder: "Buscar experiencias",:class => 'form-control',:required=>true %>
+    <span class="input-group-btn">
+      <%= button_tag(type: "submit", class: "btn btn-default ") do %>
+        <i class="glyphicon glyphicon-search"></i>
+      <% end %>
+    </span>
+  </div>
+  <%end%>
+</div>
+
+<%if current_user.category == 2%>
+  <%= link_to "Generar experiencia reportada", new_project_path, :class => 'btn btn-lg' %>
+<%end%>
+<%if @projects.present?%>
+  <% @projects.order('created_at DESC').each do |project| %>
+    <div class="panel panel-default panelRease">
+      <div class="panel-heading">
+        <%if project.user == current_user%>
+          <i class="glyphicon glyphicon-tags"> </i>
+        <%end%>
+         Folio N° <%= project.id %>: <%= project.title%>
+      </div>
+      <div class="panel-body">
+        <h2>Objetivos de servicio:</h2>
+        <p><%=project.service_objectives%></p>
+        <%= link_to "Ver experiencia", project, :class =>'btn btnCRUD'%>
+      </div>
+    </div>
+  <%end%>
+<%else%>
+  <div class="panel panel-default panelRease">
+    <div class="panel-heading">
+      Experiencias
+    </div>
+    <div class="panel-body">
+      <p>No hay experiencias reportadas disponibles</p>
+    </div>
+  </div>
+<%end%>      
+
+<%= will_paginate @projects%>
+
+<script type="text/javascript">
+  $(function () {
+    $('[data-toggle="btnExperiencia"]').popover(
+      {
+        title: 'Experiencias',
+        html: 'true', 
+        content: '<p>Las <strong>Experiencias</strong> son servicios activos finalizados correctamente. La cual el profesor responsable ha documentado.</p><p>Las <strong>Experiencias reportadas</strong> son experiencias realizadas antes de la creación del sitio actual, las cuales son agregadas manualmente para poder almacenar la información de estas.</p><p><i class="glyphicon glyphicon-tags"></i> : Experiencia en la cual usted participó.</p>',
+        template: '<div class="popover popover-rease"><div class="arrow"></div><div class="popover-inner"><h3 class="popover-title"></h3><div class="popover-content"><p></p></div></div></div>'
+      }
+    )
+  })
+</script>

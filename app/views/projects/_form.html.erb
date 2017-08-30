@@ -1,0 +1,161 @@
+<%accion ||= "Crear"%>
+<%= form_for(@project) do |f| %>
+  <% if @project.errors.any? %>
+      <% @project.errors.full_messages.each do |message| %>
+        <%flash[:alert] = message %>
+      <% end %>
+  <% end %>
+
+<div class="panel panel-default panelRease" >
+    <div class="panel-heading">I. Antecedentes generales</div>
+    <div class="panel-body">
+
+    <%titulo=@project.title%>
+
+    <div class="field"><p>
+      <%= f.label :title, "Título de la experiencia: "%>
+      <%= f.text_field :title, :class => 'form-control', :placeholder => 'Título de la experiencia  ', :value=>titulo, required: true%>
+    </p></div>
+    
+    <div class="field"><p>
+      <%= f.label :area_id, "Area de trabajo: "%>
+      <%= f.select(:area_id, Area.order("discipline ASC").order("name ASC").all.collect {|area| [area.discipline+": "+area.name, area.id]},{:include_blank => " -- Área de trabajo -- "},{ :class => 'form-control',:required=>true}) -%>
+    </p></div>
+
+    <div class="field"><p>
+      <%= f.label :institution_id, "Institución: "%>
+      <%= f.select(:institution_id, Institution.order("name ASC").all.collect {|inst| [inst.name, inst.id]},{:include_blank => " -- Institución asociada -- "},{ :class => 'form-control',:required=>true}) -%>
+    </p></div>
+
+    <div class="field"><p>
+      <%= f.label :faculty, "Facultad: "%>
+      <%= f.text_field :faculty, :class => 'form-control', :placeholder => 'Facultad ', required: true%>
+    </p></div>
+
+    <div class="field"><p>
+      <%= f.label :department, "Departamento/Carrera: "%>
+        <%= f.text_field :department, :class => 'form-control', :placeholder => 'Departamento/Carrera', required: true%>
+      </p></div>
+
+      <div class="field"><p>
+        <%= f.label :course_name, "Nombre de la asignatura/curso"%>
+        <%= f.text_field :course_name, :class => 'form-control', :placeholder => 'Nombre asignatura/curso', required: true%>
+      </p></div>
+
+      <div class="field"><p>
+      <%= f.label :course_type, "Tipo de curso: "%>
+      <%= f.select(:course_type, [['Obligatorio', 'Obligatorio'],['Optativo', 'Optativo'],['Electivo','Electivo'], ['Otro','Otro']], {:include_blank => '-- Seleccione tipo de curso --' }, { :class => 'form-control', :required => true, :id => "tipoCurso" }) %>
+      <%= f.text_field :course_type_other ,:class => 'form-control', :placeholder => "OTRO: Especificación en caso de marcar otro" %></p>
+    </p></div>
+
+    <div class="field"><p>
+      <%= f.label :period, "Periodo del curso: "%>
+      <%= f.select(:period, [['I semestre', 1],['II semestre', 2],['Cada semestre', 3],['Anual', 4]], {:include_blank => '-- Periodo del curso --' }, { :class => 'form-control', :required => true }) %>
+    </p></div>
+    <div class="field"><p>
+      <%= f.label :professor_name, "Nombre profesor responsable: "%>
+      <%=current_user.name%>      
+    </p></div>
+    <div class="field"><p>
+      <%= f.label :professor_mail, "Mail profesor responsable: "%>
+      <%=current_user.email%>      
+    </p></div>
+
+    <div class="field"><p>
+      <%= f.label :professor_phone, "Teléfono profesor responsable: "%>
+      <%= f.text_field :professor_phone, :class => 'form-control', :placeholder => 'Telefono profesor responsable ', :required => true%>
+    </p></div>
+
+    <div class="field"><p>
+      <%= f.label :professor_degree, "Grado académico del profesor responsable: "%>
+      <%= f.select(:professor_degree, [['Licenciado', 1],['Magister', 2],['Doctorado',3]], {:include_blank => '-- Grado académico del profesor responsable --' }, { :class => 'form-control', :required => true }) %>
+    </p></div>
+
+
+    <div class="field"><p>
+      <%= f.label :partner, "Socio comunitario: "%>
+      <%= f.text_field :partner, :class => 'form-control', :placeholder => 'Nombre socio comunitario colaborador', :required => true%>
+    </p></div>
+
+
+  </div>
+</div>
+<div class="panel panel-default panelRease" >
+  <div class="panel-heading">II. Antecedentes de la actividad de Aprendizaje Servicio </div>
+  <div class="panel-body">
+
+
+    <div class="field"><p>
+      <%= f.label :learning_objectives, "Objetivos de aprendizaje y/o Competencias asociadas:" %>
+      <%= f.text_area :learning_objectives, :class => 'form-control', :placeholder => 'Objetivos de aprendizaje y/o Competencias asociadas', :required => true%>
+    </p></div>
+
+    <div class="field"><p>
+      <%= f.label :service_objectives,  "Objetivos de servicio: "%>
+      <%= f.text_area :service_objectives, :class => 'form-control', :placeholder => 'Objetivos de servicio', :required => true%>
+    </p></div>
+
+    <div class="field"><p>
+      <%= f.label :description, 'Descripción del Proyecto de AS: '%>
+      <%= f.text_area :description, :class => 'form-control', :placeholder => 'Descripción del Proyecto de AS (máximo 100 palabras dando énfasis a actividades desarrolladas) ', :required => true%>
+    </p></div>
+
+    <div class="field"><p>
+      <%= f.label :institutional_support, "Respaldo institucional: "%>
+      <%= f.select(:institutional_support, [['Cuenta con respaldo institucional', 1],['Corresponde a una iniciativa individual del profesor', 2]],{:include_blank => '-- Respaldo institucional (Seleccione una opción) --' } ,{ :class => 'form-control', :required => true }) %>
+    </p></div>
+
+    <div class="field"><p>
+      <%= f.label :frequency, "Frecuencia: "%>
+      <%= f.text_field :frequency, :class => 'form-control', :placeholder => '¿Con que frecuencia se realiza?', :required => true%>
+    </p></div>
+
+    <div class="field"><p>
+      <%= f.label :weekly_hours, "Horas cronológicas semanales: " %>
+      <%= f.text_field :weekly_hours, :class => 'form-control', :placeholder => 'Horas cronológicas semanales',:required => true%>
+    </p></div>
+
+    <div class="field"><p>
+      <%= f.label :participants, "Número estudiantes participantes" %>
+      <%= f.number_field :participants, :class => 'form-control', :placeholder => 'Número estudiantes participantes', :required => true%>
+    </p></div>
+
+    <div class="field"><p>
+      <%= f.label :students_level, "Nivel de la carrera de los Estudiantes" %>
+      <%= f.text_field :students_level, :class => 'form-control', :placeholder => 'Nivel de la carrera de los Estudiantes',:required => true%>
+    </p></div>
+
+    <div class="field"><p>
+      <%= f.label :organization_type, "Tipo de organización comunitaria: "%>
+      <%= f.text_field :organization_type, :class => 'form-control', :placeholder => 'Tipo de organización comunitaria',:required => true%>   
+    </p></div>  
+
+    <div class="field"><p>
+      <%= f.label :benefit, "Número de beneficiados: " %>
+      <%= f.text_field :benefit, :class => 'form-control', :placeholder => 'Número de beneficiados directos con toda la actividad o proyecto'%>
+    </p></div>  
+    
+    <div class="field"><p>
+      <%= f.label :results, "Resultados de aprendizaje: " %>
+      <%= f.text_area :results, :class => 'form-control', :placeholder => 'Resultados de aprendizaje',:required => true%>
+    </p></div>  
+    
+    <div class="field"><p>
+      <%= f.label :tools, "Herramientas de medición: " %>
+      <%= f.text_area :tools, :class => 'form-control', :placeholder => 'Nombre herramientas de medición (cuali y/o cuantitativas) utilizadas y documentos que respalden el proyecto ', :required => true%>
+    </p></div>  
+    
+    <div class="field"><p>
+      <%= f.label :reflection_moments, "Mencione las instancias de reflexión: " %>
+      <%= f.text_area :reflection_moments, :class => 'form-control', :placeholder => 'Mencione las instancias de reflexión',:required => true%>
+    </p></div>  
+
+  </div>
+</div>
+
+    <%= f.submit "Guardar Experiencia", :class => 'btn btn-lg btnCRUD' %>
+    <%= link_to 'Volver', projects_path, :class => "btn btn-lg btnCRUD"%>
+
+<% end %>
+
+

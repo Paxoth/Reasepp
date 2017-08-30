@@ -1,0 +1,156 @@
+/*****BARRA NAVEGADORA ***/
+/*sombras y efectos de la barra navegadora*/
+.navbar-default .navbar-nav>li>a
+{
+	text-align: center;
+	color: white;
+	padding-left: 5px;
+	padding-right: 5px;
+	min-width: 115px;
+
+}
+.navbar-default .navbar-nav>li>.rightNav
+{
+	min-width: 30px;
+	font-size: 15px;
+}
+.navbar-default .navbar-nav>li>a:hover
+{
+	background: #ffffff;
+	background-image: -webkit-linear-gradient(top, #ffffff, #30bbbb);
+	background-image: -moz-linear-gradient(top, #ffffff, #30bbbb);
+	background-image: -ms-linear-gradient(top, #ffffff, #30bbbb);
+	background-image: -o-linear-gradient(top, #ffffff, #30bbbb);
+	background-image: linear-gradient(to bottom, #ffffff, #30bbbb);
+	color: #999;
+
+}
+.navbar-default .navbar-nav>.active>a
+{
+	background: white;
+	color: #999;
+}
+p.navbar-text.navbar-right
+{
+	color:white;
+	padding: 0;
+	margin: 0;
+	line-height: 50px;
+}
+
+
+/*colores para barras y paneles*/
+
+.BarraNavegadora, .panelClick .panel-heading, .btnAside
+{
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+	background: #30bbbb;
+	background-image: -webkit-linear-gradient(top, #30bbbb, #30cccc);
+	background-image: -moz-linear-gradient(top, #30bbbb, #30cccc);
+	background-image: -ms-linear-gradient(top, #30bbbb, #30cccc);
+	background-image: -o-linear-gradient(top, #30bbbb, #30cccc);
+	background-image: linear-gradient(to bottom, #30bbbb, #30cccc);
+}
+.BarraNavegadora 
+{
+	-webkit-box-shadow: 3px 2px 5px #666666;
+	-moz-box-shadow: 3px 2px 5px #666666;
+	font-weight: bold;
+	border-color: #30cccc;
+}
+.panelClick .panel-heading:hover, .btn-nav:hover, .btnAside:hover
+{
+	background: #30cccc;
+	background-image: -webkit-linear-gradient(top, #30cccc, #30dddd);
+	background-image: -moz-linear-gradient(top, #30cccc, #30dddd);
+	background-image: -ms-linear-gradient(top, #30cccc, #30dddd);
+	background-image: -o-linear-gradient(top, #30cccc, #30dddd);
+	background-image: linear-gradient(to bottom, #30cccc, #30dddd);
+	font-weight: bold;
+	
+}
+/*colores para barras y paneles*/
+.panelRease .panel-heading, #pies, .panel-half .panel-heading
+{
+	font-size:  12px;
+	background: #30aaaa;
+	background-image: -webkit-linear-gradient(top, #30aaaa, #30bbbb);
+	background-image: -moz-linear-gradient(top, #30aaaa, #30bbbb);
+	background-image: -ms-linear-gradient(top, #30aaaa, #30bbbb);
+	background-image: -o-linear-gradient(top, #30aaaa, #30bbbb);
+	background-image: linear-gradient(to bottom, #30aaaa, #30bbbb);
+}
+
+.panel-half
+{	
+	margin-right: 2%;
+	margin-left: 2%;
+	width: 45%;
+	display: inline-block;
+
+}
+
+/*Todos los estilos de los paneles que se muestran en toda la página*/
+.panelRease, .panelClick
+{
+	margin: 2%;
+	text-align: center;
+}
+
+.panelRease .panel-heading, #panelInstitution .panel-heading, .panelClick .panel-heading, .panel-half .panel-heading /*Cabecera del panel*/
+{
+	color: white;
+	font-weight: bold;
+	font-size: 14px;
+	text-align: left;
+}
+.panelRease .panel-footer, #panelInstitution .panel-footer, .panelClick .panel-footer /*Cabecera del footer*/
+{
+	background: white;
+}
+.rightNav
+{
+	max-width: 100px;
+	text-align: left;
+
+}
+.tabRease
+{
+	margin: 0;
+	width: 100%;
+	max-width: 96%;
+
+}
+
+.tabRease>li>a
+{
+	color: #30aaaa;
+	margin: 0;
+}
+.tabRease>li>a:hover
+{
+	font-weight: bold;
+	background: #30cccc;
+	color: white;
+	margin: 0;
+}
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus
+{
+	color: white;
+	background: #30bbbb;
+	font-weight: bold;
+	margin: 0;
+}
+.nav-tabs.nav-justified > .active > a,
+.nav-tabs.nav-justified > .active > a:hover,
+.nav-tabs.nav-justified > .active > a:focus {
+	border-bottom-color: #30aaaa;
+}
+.borderTab
+{	
+	margin: 0;
+	border: solid 1px;
+	border-color: #30aaaa;
+	background: white;
+	max-width: 96%;
+}

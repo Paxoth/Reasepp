@@ -12,12 +12,21 @@
 	</div>
 	<div class="panel-body">
 		<p class="note">*Todos los campos obligatorios</p>
-		<div class="field">
+		
+		<div class="field"><p>
+			<%= f.label :discipline, "Disciplina:" %>
+			<%= f.select(:discipline, [['Ciencias Naturales', 'Ciencias Naturales'],['Ingeniería y Tecnología', 'Ingeniería y Tecnología'],['Ciencias Médicas y de la Salud','Ciencias Médicas y de la Salud'], ['Ciencias Agrícolas','Ciencias Agrícolas'], ['Ciencias Sociales','Ciencias Sociales'], ['Humanidades','Humanidades']], {:include_blank => '-- Seleccione tipo de curso --' }, { :class => 'form-control', :required => true, :id => "tipoCurso" }) %>
+		</p></div>
+
+		<div class="field"><p>
+			<%= f.label :name, "Nombre:" %>
 			<%= f.text_field :name, :class => 'form-control', :placeholder => 'Nombre',:required=>true %>
-		</div>
-		<div class="field">
+		</p></div>
+
+		<div class="field"><p>
+			<%= f.label :description, "Descripción:" %>
 			<%= f.text_area :description,  :class => 'form-control', :placeholder => 'Descripción o características del área de trabajo',:required=>true %>
-		</div>
+		</p></div>
 	</div>	
 </div>
 	<%= f.submit orden, :class=>"btn btn-lg btnCRUD" %>

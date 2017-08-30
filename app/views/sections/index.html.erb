@@ -1,28 +1,65 @@
 <%orden ||= "crear"%>
-<h1>Administración de página principal</h1>
+<h1>Administración del sitio </h1>
 
-<p>Estimado administrador, las siguientes opciones son para poder editar la página de inicio de REASE, es decir, la que podrá ver cualquier persona que ingrese al presente sitio.</p>
-<p>Todos los campos que serán requeridos al momento de crear o editar una sección son obligatorios.</p>
-<p>Para editar una seccion haga click en alguno de los siguientes botones: </p>
+<h2>Portal web <button type="button" class="btn btn-default btnWhite" id:"btnAdmin"  data-trigger="focus" data-container="body" data-toggle="btnAdmin"> ? </button></h2>
 
 <%= link_to "Administrar novedades", sections_novedades_path, class:"btn btn-lg btnAdmin"%>
 
-<%= link_to "Administrar ¿Qué es A+S?", sections_aprendizaje_path, class:"btn btn-lg btnAdmin"%>
+<%= link_to "Administrar ¿Qué es AS?", sections_aprendizaje_path, class:"btn btn-lg btnAdmin"%>
 
 <%= link_to "Administrar ¿Qué hacemos?", sections_hacemos_path, class:"btn btn-lg btnAdmin"%>
 
 <%= link_to "Administrar ¿Quiénes somos?", sections_somos_path, class:"btn btn-lg btnAdmin"%>
 
-<%= link_to "Administrar estatutos", sections_estatutos_path, class:"btn btn-lg btnAdmin"%>
+<%= link_to "Administrar estatuto", sections_estatuto_path, class:"btn btn-lg btnAdmin"%>
+
+<%= link_to "Administrar preguntas frecuentes", questions_path, class:"btn btn-lg btnAdmin"%>
+
+<h2>Intranet <button type="button" class="btn btn-default btnWhite" id:"btnAdmin2"  data-trigger="focus" data-container="body" data-toggle="btnAdmin2"> ? </button></h2>
 
 <%= link_to "Administrar instituciones", institutions_path, class:"btn btn-lg btnAdmin"%>
 
-<%= link_to "Administrar links de interés", interest_links_path, class:"btn btn-lg btnAdmin"%>
+<%= link_to "Administrar enlaces de interés", interest_links_path, class:"btn btn-lg btnAdmin"%>
 
-<%= link_to "Ver listado de usuarios",  users_listarUsuarios_path, class:"btn btn-lg btnAdmin"%>
+<%= link_to "Administrar recursos", resources_path, class:"btn btn-lg btnAdmin"%>
 
-<%= link_to "Administrar actas",  minutes_path, class:"btn btn-lg btnAdmin"%>
+<%= link_to "Administrar áreas de trabajo", areas_path, class:"btn btn-lg btnAdmin"%>
 
-<%= link_to "Administrar áreas",  areas_path, class:"btn btn-lg btnAdmin"%>
+<h2>Usuarios <button type="button" class="btn btn-default btnWhite" id:"btnAdmin3"  data-trigger="focus" data-container="body" data-toggle="btnAdmin3"> ? </button></h2>
 
-<%= link_to "Enviar correo a todos",  bulletins_path, class:"btn btn-lg btnAdmin"%>
+<%= link_to "Ver listado de usuarios", users_listarUsuarios_path, class:"btn btn-lg btnAdmin"%>
+
+<%= link_to "Generar boletín", bulletins_path, class:"btn btn-lg btnAdmin"%>
+
+<script type="text/javascript">
+	$(function () {
+	$('[data-toggle="btnAdmin"]').popover(
+	{
+		title: 'Administración del portal web',
+		placement: 'bottom',
+		html: 'true', 
+		content: '<p> Las siguientes opciones son para poder manejar el contenido de la página del visitante.</p><p>Se ha denominado <strong>secciones</strong> a los cinco módulos de la página de inicio (Novedades, Aprendizaje Servicio, Hacemos, Somos y Estatuto).</p><p> Al momento de crear o editar contenido se le pedirá elegir en la sección que desea que aparezca dicho contenido.</p><p><strong>En caso de equivocarse o no estar satisfecho con la sección elegida, siempre podrá editarlo.</strong></p>'
+	}
+	)
+	})
+
+	$(function () {
+	$('[data-toggle="btnAdmin2"]').popover(
+	{
+		title: 'Administración de la intranet',
+		html: 'true', 
+		content: '<p> Las siguientes opciones son para poder manejar el contenido de la intranet.</p><p>Cada uno de los siguientes módulos, será información la cual puede acceder cualquier usuario registrado en la red. </p><p>Las <strong>instituciones</strong> y las áreas de trabajo influirán directamente en las opciones de los formularios que hay en toda la intranet (Ofertas, Solicitudes, Servicios, Experiencias, etc) </p><p>Los <strong>recursos</strong> y los <strong>enlaces de interés</strong> son material de apoyo multimedia dentro del sitio.</p>'
+	}
+	)
+	})
+
+	$(function () {
+	$('[data-toggle="btnAdmin3"]').popover(
+	{
+		title:'Administración de los usuarios',
+		html: 'true', 
+		content: '<p>Los siguientes dos módulos estan relacionados directamente con el comportamiento de los usuarios del sitio.</p><p>El <strong>Listado de usuarios</strong>, permite modificar el rol o tipo de adhesión a la red del usuario, lo cual influye en los privilegios de estos</p><p> Los <strong>boletines</strong> permiten enviar un mail masivo, de manera sencilla a los usuarios con las actividades AS y artículos publicados en la página a partir de una fecha estipulada.</p>'
+	}
+	)
+	})
+</script>

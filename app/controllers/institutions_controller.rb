@@ -10,7 +10,7 @@ class InstitutionsController < ApplicationController
   # GET /institutions.json
   def index
     add_breadcrumb "Instituciones", institutions_path 
-    @institutions = Institution.order("name ASC").all
+    @institutions = Institution.paginate(page: params[:page],per_page: 15).order("name ASC").all
   end
 
   # GET /institutions/1

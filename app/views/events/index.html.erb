@@ -1,15 +1,18 @@
-<h1>Eventos </h1>
+<h1>Eventos <button type="button" class="btn btn-default btnWhite" id:"btnEvent" data-trigger="focus" data-container="body" data-toggle="btnEvent"> ? </button></h1>
+
 <% if user_signed_in? && current_user.category == 1  %>
 	<%= link_to 'Nuevo evento', new_event_path, :class => "btn btn-lg " %>
 <% end %>
-	<%= link_to 'Mostrar eventos', events_listado_path ,:class => "btn btn-lg " %>
+	<%= link_to 'Todos los eventos', events_listado_path ,:class => "btn btn-lg " %>
 
 <div class="buscador">
-	<%= form_tag(events_listado_path, :method => "get",:class=>"form-inline") do %>
+	<%= form_tag(events_searchEvent_path, :method => "post",:class=>"form-inline") do %>
 	<div class="input-group">
 		<%= text_field_tag :search, params[:search], placeholder: "Buscar eventos",:class => 'form-control',:required=>true %>
 		<span class="input-group-btn">
-			<%= submit_tag "Ir", :class => 'btn btn-default' %>
+			<%= button_tag(type: "submit", class: "btn btn-default ") do %>
+				<i class="glyphicon glyphicon-search"></i>
+			<% end %>
 		</span>
 	</div>
 	<%end%>
@@ -33,12 +36,25 @@
 				week:'Semana',
 				month:'Mes'
 			},
-			events: '/events.json',
+			eventSources:[{
+				url: '/events.json',
+				color: '#30bbbb',
+			}],
+			timeFormat: 'H(:mm)',			
 			monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-			dayNamesShort: ['Lunes','Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo']
+			dayNamesShort: ['Domingo','Lunes','Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado']
 
 		})
 	});
+	$(function () {
+		$('[data-toggle="btnEvent"]').popover(
+			{
+				title: 'Eventos',
+				html: 'true', 
+				content: '<p>Los <strong>Eventos</strong> son  actividades, reuniones y talleres a los que la red invita.</p><p>Solo aparecerán en el calendario los eventos disponibles.</p>',
+				template: '<div class="popover popover-rease"><div class="arrow"></div><div class="popover-inner"><h3 class="popover-title"></h3><div class="popover-content"><p></p></div></div></div>'
+			}
+		)
+	})
 </script>
-
 

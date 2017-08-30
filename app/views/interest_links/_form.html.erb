@@ -12,15 +12,18 @@
 		</div>
 		<div class="panel-body">
 			<p class="note">*Todos los campos obligatorios</p>
-			<div class="field">
+			<div class="field"><p>
+				<%= f.label :name, "Nombre: "%>
 				<%= f.text_field :name, :class => 'form-control', :placeholder => 'Nombre',:required=>true %>
-			</div>
-			<div class="field">
+			</p></div>
+			<div class="field"><p>
+				<%= f.label :url, "Sitio web: "%>
 				<%= f.text_field :url,  :class => 'form-control', :placeholder => 'Página web. Ejemplo: http://www.ejemplo.com',:required=>true %>
-			</div>
-			<div class="field">
+			</p></div>
+			<div class="field"><p>
+				<%= f.label :description, "Descripción:"%>
 				<%= f.text_area :description,  :class => 'form-control', :placeholder => 'Breve descripción',:required=>true %>
-			</div>
+			</p></div>
 		</div>  
 	</div>
 	<%= f.submit orden, :class=>"btn btn-lg btnCRUD" %>

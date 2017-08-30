@@ -66,7 +66,10 @@ La Red Nacional de Aprendizaje Servicio Chile reúne  a profesores, estudiantes,
 <h1>Organizaciones adheridas</h1>
 <p> Las organizaciones que actualmente están activas dentro de REASE o alguno de los miembros activos pertenecen a ellas, son: </p>
 
-
-<% @instituciones.each do |institution| %>
-	<%= link_to(image_tag(institution.logo.url(:mini)), institution.web, :id=>"logoInstituciones") %>
+<%if @instituciones.present?%>
+	<% @instituciones.each do |institution| %>
+		<%= link_to(image_tag(institution.logo.url(:mini)), institution.web, :id=>"logoInstituciones", :target => "_blank") %>
+	<%end%>
+<%else%>
+	Aún no se han agregado insituciones.
 <%end%>

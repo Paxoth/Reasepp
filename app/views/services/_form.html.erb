@@ -1,0 +1,95 @@
+<%accion ||= "Aceptar"%>
+	<%= form_for([@publication, @service]) do |f| %>
+		<% if @service.errors.any? %>
+			<div id="error_explanation">
+				<h2><%= pluralize(@service.errors.count, "error") %> prohibited this service 	from being saved:</h2>
+				<ul>
+					<% @service.errors.full_messages.each do |message| %>
+						<li><%= message %></li>
+					<% end %>
+				</ul>
+			</div>
+		<% end %>
+	<div class="panel panel-default panelRease" >
+		<div class="panel-heading"><%=accion%> <%= @service.title%></div>
+		<div class="panel-body">
+			<%if accion == "Aceptar" || accion == "Actualizar" %>
+				<%if accion == "Aceptar"%>
+					<%= f.hidden_field :status, :value=>2%>
+				<%end%>
+
+				<div class="field"><p>
+					<%= f.label :title, "Título: "%>
+					<%= f.text_field :title, :class => 'form-control', :placeholder => 'Titulo' ,:required=>true%>
+				</p></div>
+
+				<div class="field"><p>
+					<%= f.label :resume, "Resumen: "%>
+					<%= f.text_area :resume, :class => 'form-control', :placeholder => 'Resumen de la servicio' ,:required=>true%>
+				</p></div>
+
+				<div class="field"><p>
+					<%= f.label :institution_id, "Institución adherida: "%>		
+					<%= f.select(:institution_id, Institution.order("name ASC").all.collect {|inst| [inst.name, inst.id]},{:include_blank => " -- Institución asociada -- ", :selected => @publication.institution_id },{ :class => 'form-control',:required=>true}) -%>
+				</p></div>
+
+				<p class="note">Sí no se encuentra su área de trabajo comuníquese con un administrador</p>
+				<div class="field"><p>
+					<%= f.label :area_id, "Área de trabajo: "%>	
+					<%= f.select(:area_id, Area.order("discipline ASC").order("name ASC").all.collect {|area| [area.discipline+": "+area.name, area.id]},{:include_blank => " -- Área de trabajo -- "},{ :class => 'form-control',:required=>true}) -%>
+				</p></div>
+
+				<div class="field"><p>
+					<%= f.label :description, "Descripción: "%>	
+					<%= f.text_area :description, :placeholder=> "Descripción del servicio", :id=>"eg-basic"%>
+				</div>
+
+				<div class="field">
+				<br>
+					<h2><strong>Propositos del proyecto:</strong></h2>
+					<p class="note">En el área de aprendizaje se ingresan los aspectos curriculares asociados al proyecto.</p>
+					<p><%= f.label :learning_objectives, "De aprendizaje: "%>	
+					<%= f.text_area :learning_objectives, :placeholder=> "Objetivos principales del servicio.", :class=>'form-control', :required=>true %></p>
+					<p class="note">En el área de servicio se ingresan los objetivos del servicio.</p>
+					<p>
+					<%= f.label :service_objectives, "De servicio"%>
+					<%= f.text_area :service_objectives, :placeholder=> "Objetivos principales del servicio.", :class=>'form-control', :required=>true %>		
+				</p></div>
+
+				<div class="field">
+					<p><%= f.label :start_time, "Fecha de inicio del proyecto" %>
+					<%= f.date_select :start_time %></p>
+				</p></div>
+
+				<div class="field">
+					<p><%= f.label :end_time, "Fecha de término del proyecto" %>
+					<%= f.date_select :end_time %></p>
+				</p></div>
+				
+				<% if @service.acceptor.blank? %>
+					<%= f.hidden_field :acceptor_id, :value => current_user.id%>
+				<%end%>
+				
+
+			<%elsif accion == "Manifestar"%>
+				<p class="note">El hecho que usted manifieste interés no significa que vaya ser seleccionado en este proyecto.</p>
+				<div class="field"><p>
+					<%= f.label :message, "Mensaje: "%>	
+					<%= f.text_field :message, :class => 'form-control', :placeholder => 'Deje algún mensaje', required: true%>
+				</p></div>
+			<%end%>
+			<div class="actions">
+				<%= f.submit accion, :class => 'btn btn-lg btnCRUD' %>
+			</div>
+		</div>
+	</div>
+	<% end %>
+
+<script>
+	$(function() {$('textarea#eg-basic').editable({
+		theme: 'rease',
+		inlineMode: false,
+		language: 'es'
+		})
+	});
+</script>

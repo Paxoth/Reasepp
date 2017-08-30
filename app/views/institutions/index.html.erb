@@ -9,7 +9,7 @@
 		<% @institutions.each do |institution| %>
 			<p><%=institution.name%> - 
 			<%= link_to 'Ver detalle', institution %> -
-			<%= link_to 'Web', institution.web %> -
+			<%= link_to 'Web', institution.web, :target => "_blank" %> -
 			<%= link_to 'Borrar institución', institution, method: :delete, data: { confirm: '¿Seguro que desea eliminar esta institución?' } %>
 			</p>
 		<%end%>
