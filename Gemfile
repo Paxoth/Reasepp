@@ -15,36 +15,35 @@ gem 'coffee-rails', '~> 4.1.0'
 # gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails'
+gem 'jquery-rails', '4.1.0'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
+gem 'turbolinks', '2.5.3'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
-gem 'mysql2', '~> 0.3.20'
-gem 'devise'
-gem "therubyracer"
+gem 'mysql2', '~> 0.3.18'
+gem 'devise', '3.5.5'
+gem "therubyracer", '0.12.2'
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
-gem "twitter-bootstrap-rails"
+gem "twitter-bootstrap-rails", '3.2.2'
 
-gem 'unicorn'
-gem 'mina'
+gem 'unicorn', '5.0.1'
+gem 'mina', '0.3.8'
 gem 'mina-unicorn', :require => false
 
 gem 'wysiwyg-rails', '2.0.1'
-gem "breadcrumbs_on_rails"
+gem "breadcrumbs_on_rails", '2.3.1'
 gem 'fullcalendar-rails', '~> 2.0.2.0'
-gem 'paperclip'
-gem 'mailgun_rails'
+gem 'paperclip', '4.3.2'
+gem 'mailgun_rails', '0.8.0'
 
 gem 'omniauth'
 gem 'omniauth-facebook'
 
-gem 'will_paginate'
-gem 'prawn'
-gem 'sprockets', '3.6.3' #Por tema de funciones deprecadas
+gem 'will_paginate', '3.1.0'
+gem 'prawn', '2.0.2'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

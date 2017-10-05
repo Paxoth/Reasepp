@@ -11,11 +11,10 @@ class User < ActiveRecord::Base
 	has_many :sections
 	has_many :events
 	has_many :comments
-	has_many :offerings
 	has_many :comment_offerings
-	has_many :requests
 	has_many :comment_requests
-	has_many :meetings
+	has_many :offerings
+	has_many :requests
 	has_many :experiences
 	has_many :projects
 
