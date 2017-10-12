@@ -12,8 +12,8 @@ class Experience < ActiveRecord::Base
 			#service_objectives, institutional_support, frequency, weekly_hours, participants, students_level, 
 			#community_partner, organization_type, benefit, results, tools, reflection_moments
 		#title: Título de la experiencia.
-		#start_time: Fecha de inicio del proyecto AS.
-		#end_time: Fecha de término del proyecto AS.
+		#start_time: Fecha de inicio del experiencia AS.
+		#end_time: Fecha de término del experiencia AS.
 
 	#RELACIONES
 	belongs_to :professor, :class_name=> "User"
@@ -22,8 +22,7 @@ class Experience < ActiveRecord::Base
 	belongs_to :area
 	belongs_to :service
 
-
-	#Función para usar el buscador de experiencias de acuerdo algun match entre las palabras y los valores de los atributos de esta.
+	#Función que permite que el buscador encuentre Experiencias a través de match de palabras en sus atributos.
 	def self.search(search)
 		where("faculty LIKE ? or department LIKE ? or course_name LIKE ? or course_type LIKE ? or period LIKE ? or learning_objectives LIKE ? or service_objectives LIKE ? or benefit LIKE ? or results LIKE ? or tools LIKE ? or description LIKE ? or reflection_moments LIKE ? or title LIKE ?", "%#{search}%","%#{search}%", "%#{search}%", "%#{search}%","%#{search}%", "%#{search}%", "%#{search}%","%#{search}%", "%#{search}%", "%#{search}%","%#{search}%", "%#{search}%" , "%#{search}%") 
 	end

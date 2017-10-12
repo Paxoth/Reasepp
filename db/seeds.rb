@@ -6,6 +6,17 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+Area.destroy_all
+Institution.destroy_all
+InterestLink.destroy_all
+Resource.destroy_all
+
+Offering.destroy_all
+Request.destroy_all
+Service.destroy_all
+Experience.destroy_all
+
+
 User.create([{
 	email: 'coordinacion.rease@gmail.com',
 	password: 'rease2015',
@@ -15,9 +26,10 @@ User.create([{
 	autorization_level: 1, 
 	confirmed_at: Time.now,
 }])
+print("\tSeed:\tUsuario Administrador creado\n")
 
 usuarios_prueba_list =[
-	["profesor@rease.cl",'rease2015', 'Profesor Prueba', 'Profesor', 2, 1],
+	["profesor@rease.cl",'rease2015', 'profesor Prueba', 'profesor', 2, 1],
 	["vinculador@rease.cl",'rease2015', 'Vinculador Prueba', 'Vinculador', 3, 1],
 	["socio@rease.cl",'rease2015', 'Socio Prueba', 'Socio',4,1]
 ]
@@ -25,8 +37,9 @@ usuarios_prueba_list =[
 usuarios_prueba_list.each do |email, password, name, nickname, category, autorization_level|
   User.create( email: email, password: password, name: name, nickname: nickname, category: category, autorization_level:autorization_level, confirmed_at: Time.now)
 end
+print("\tSeed:\tUsuarios profesor, Vinculador y Socio Comunitario creados\n")
 
-Area.destroy_all
+
 area_list = [
 	[1,"Ciencias Naturales","Matemáticas","Disciplina: Ciencias Naturales"],
 	[2,"Ciencias Naturales","Computación y Ciencias de la Información","Disciplina: Ciencias Naturales"],
@@ -77,7 +90,9 @@ area_list.each do |id, discipline, name, description|
   Area.create(id: id, discipline: discipline, name: name, description: description )
 end
 
-Institution.destroy_all
+print("\tSeed:\tAreas de trabajo creadas\n")
+
+
 institution_list = [
 	[1,"#{Rails.root}/public/institution/hdc.png", "Hogar de Cristo", "http://www.hogardecristo.cl/"],
 	[2,"#{Rails.root}/public/institution/maristas.png", "Maristas Chile", "http://www.maristas.cl/"],
@@ -98,6 +113,7 @@ institution_list = [
 institution_list.each do |id, logo,name, web|
   	Institution.create(id: id, logo: File.new(logo), name: name, web: web)
 end
+print("\tSeed:\tInstuciones creadas\n")
 
 interestLinks_list = [
 	["RIDAS","http://revistes.ub.edu/index.php/RIDAS","Revista Iberoamericana de Aprendizaje Servicio"],
@@ -113,8 +129,9 @@ interestLinks_list = [
 interestLinks_list.each do |name,url, description|
   	InterestLink.create(name: name, url: url, description: description)
 end
+print("\tSeed:\tEnlances de Interes creados\n")
 
-Resource.destroy_all
+
 actas_list = [
  [1,"#{Rails.root}/public/resources/actas/2014_04_10_ampliada.pdf", "Acta reunión ampliada 1", "2014-04-10", "Acta de reunión ampliada 2014-04-10"],
  [2,"#{Rails.root}/public/resources/actas/2014_07_11_ampliada.pdf", "Acta reunión ampliada 2", "2014-07-11", "Acta de reunión ampliada 2014-07-11"],
@@ -127,3 +144,185 @@ actas_list = [
 actas_list.each do |id, archive,name, date, description|
  Resource.create(id:id, archive: File.new(archive), name: name, date: date, description: description, category: 1)
 end
+
+print("\tSeed:\tRecursos creados y subidos\n")
+
+print("\nGENERACIÓN DE DATOS DUMMIES PARA LAS PRUEBAS DE INFORMACIÓN DE GESTION DE LA INSTITUCIÓN\n")
+
+print("\n\tSeed:\tCreando profesores: ")
+(1..100).step(1) do |n|
+	User.create(
+		email: "profesor"+n.to_s+"@rease.cl",
+		password: 'rease2017',
+		name: "profesor Prueba "+n.to_s,
+		nickname: "Profe"+n.to_s,
+		category: 2, 
+		autorization_level: 1, 
+		confirmed_at: Time.now,
+		institution_id: rand(1..14)
+	)
+	print(User.last.id.to_s+" ")
+end
+print("\n\tSeed:\tprofesores de pruebas creados [100=>5-105]\n")
+
+print("\n\tSeed:\tCreando socios: ")
+(1..100).step(1) do |n|
+	User.create(
+		email: "socio"+n.to_s+"@rease.cl",
+		password: 'rease2017',
+		name: "Socio Prueba "+n.to_s,
+		nickname: "Socio"+n.to_s,
+		category: 4, 
+		autorization_level: 1, 
+		confirmed_at: Time.now,
+		institution_id: (rand*14)
+	)
+	print(User.last.id.to_s+" ")
+end
+print("\n\tSeed:\tSocios de pruebas creados [100=>106-206] \n")
+
+
+print("\n\tSeed:\tCreando ofertas con usuarios: ")
+(1..100).step(1) do |n|
+	professor_aux_id = rand(5..104)
+	print(professor_aux_id.to_s+" ")
+	professor_aux = User.where(id:professor_aux_id).first #UN professor al azar
+	Offering.create(
+		id: n, 
+		user_id: professor_aux.id, 
+		title: "Oferta de prueba generada por seed #"+n.to_s, 
+		description: "Descripción de Oferta de Servicio de prueba generada por seed #"+n.to_s, 
+		start_time: Time.now, 
+		end_time: Time.now+(rand*(20+n)).days, 
+		resume: "Resumen de prueba generada por seed #"+n.to_s, 
+		status: 1, 
+		area_id: (rand*42), 
+		location: "Ubicación de prueba generada por seed #"+n.to_s, 
+		institution_id: professor_aux.institution_id
+	)
+end
+print("\n\tSeed:\tOfertas de pruebas creadas [100]\n")
+
+print("\n\tSeed:\tCreando solicitudes con usuarios: ")
+(1..100).step(1) do |n|
+	partner_aux_id = rand(105..204)
+	print(partner_aux_id.to_s+" ")
+	partner_aux = User.where(id:partner_aux_id).first 	#Un socio al aazar
+	Request.create(
+		id: n, 
+		user_id: partner_aux.id, 
+		title: "Solicitud de prueba generada por seed #"+n.to_s, 
+		description: "Descripción de Solicitud de Servicio de prueba generada por seed #"+n.to_s, 
+		start_time: Time.now, 
+		end_time: Time.now+(rand*(20+n)).days, 
+		resume: "Resumen de prueba generada por seed #"+n.to_s, 
+		status: 1, 
+		area_id: rand(1..42), 
+		location: "Ubicación de prueba generada por seed #"+n.to_s, 
+		institution_id: partner_aux.institution_id
+	)
+end
+print("\n\tSeed:\tSolicitud de pruebas creadas [100] \n")
+
+(1..100).step(1) do |n|
+	professor_aux_id = rand(5..104)
+	professor_aux = User.where(id: professor_aux_id).first 	#Un professor al azar
+	partner_aux_id = rand(105..204)
+	partner_aux = User.where(id: partner_aux_id).first		#Un socio al azar
+	if n%2!=0 #ESTA CONDICION SE PUEDE CAMBIAR
+		publication_aux = Request.where(id: n).first		
+		Service.create( #BASADOS EN REQUEST
+			id: n, 
+			publication_id: publication_aux.id, 
+			publication_type: "Request", 
+			creator_id: professor_aux.id, #Creador de servicio, no de la solicitud
+			acceptor_id: publication_aux.user_id, #Creador de la solicitud
+			area_id: publication_aux.area_id, 
+			institution_id: publication_aux.institution_id, 
+			title: "Servicio basado en solicitud de prueba generada por seed #"+publication_aux.id.to_s, 
+			status: 4,
+			message: "Mensaje de prueba de servicio #"+n.to_s, 
+			description: "Descripción de del Servicio basado en Solicitud de prueba por seed #"+publication_aux.id.to_s,
+			resume: "Resumen de prueba del Servicio generado basado en Solicitud por seed #"+publication_aux.id.to_s, 
+			start_time: publication_aux.start_time+5.days, 
+			end_time: publication_aux.end_time+5.days, 
+			learning_objectives: "Objetivos de Aprendizaje del Servicio basado en solicitud #"+n.to_s, 
+			service_objectives: "Objetivos de Servicio del Servicio basado en solicitud #"+n.to_s
+		)
+	else
+		publication_aux = Offering.where(id: n).first
+		Service.create( #BASADOS EN OFFERING
+			id: n, 
+			publication_id: publication_aux.id, 
+			publication_type: "Offering", 
+			creator_id: partner_aux.id, #Creador del servicio, no de la oferta
+			acceptor_id: publication_aux.user_id, #Creador de la oferta
+			area_id: publication_aux.area_id, 
+			institution_id: publication_aux.institution_id, 
+			title: "Servicio basado en la Oferta de prueba generada por seed #"+publication_aux.id.to_s, 
+			status: 4,
+			message: "Mensaje de prueba de servicio #"+n.to_s, 
+			description: "Descripción de del Servicio basado en Oferta de prueba por seed #"+publication_aux.id.to_s,
+			resume: "Resumen de prueba del Servicio generado basado en Oferta por seed #"+publication_aux.id.to_s, 
+			start_time: publication_aux.start_time+5.days, 
+			end_time: publication_aux.end_time+5.days, 
+			learning_objectives: "Objetivos de Aprendizaje del Servicio basado en oferta #"+n.to_s, 
+			service_objectives: "Objetivos de Servicio del Servicio basado en oferta #"+n.to_s
+		)
+	end
+	publication_aux.status = 4 #Con esto la oferta o la soliitud pasa al estado de servicio
+	publication_aux.save
+end
+print("\tSeed:\tServicios de pruebas creadas basadas las ofertas y solicitudes de prueba [100] \n")
+
+exp_id = 0
+(1..100).step(2) do |n| #ESTA CONDICION SE PUEDE CAMBIAR
+	service_aux = Service.where(id:n).first
+	if service_aux.publication_type = "Request"
+		professor_aux = User.where(id:service_aux.creator_id).first
+		partner_aux = User.where(id: service_aux.acceptor_id).first
+	else
+		partner_aux = User.where(id:service_aux.creator_id).first
+		professor_aux = User.where(id: service_aux.acceptor_id).first
+	end
+	exp_id += 1 
+	Experience.create(
+		id: exp_id,
+		description: "Descripción basada en servicio #"+service_aux.id.to_s,
+		title: "Experiencia basada en servicio #"+service_aux.id.to_s,
+		institution_id: service_aux.institution_id,
+		faculty: "Facultad de prueba Experiencia basada en servicio #"+service_aux.id.to_s,
+		department: "Departamento de prueba para Experiencia basada en servicio #"+service_aux.id.to_s,
+		course_name: "Curso de prueba para Experiencia basada en servicio #"+service_aux.id.to_s,
+		course_type: ["Obligatorio", "Optativo", "Electivo"].sample,
+		course_type_other: nil,	
+		period: rand(1..4),
+		professor_name:	professor_aux.name,		
+		professor_email: professor_aux.email,
+		professor_phone: "+56987654321",
+		professor_degree: rand(1..3),
+		learning_objectives: service_aux.learning_objectives,
+		service_objectives: service_aux.service_objectives,
+		institutional_support:	rand(1..2),
+		frequency: "Frecuencia e Experiencia basada en servicio #"+service_aux.id.to_s,
+		weekly_hours: "Horas semanales de Experiencia basada en servicio #"+service_aux.id.to_s,
+		participants: rand(5..40),
+		students_level: "Nivel de estudiantes Experiencia basada en servicio #"+service_aux.id.to_s,
+		community_partner: partner_aux.name,
+		organization_type:	"Organizacion para Experiencia basada en servicio #"+service_aux.id.to_s,
+		benefit: "Beneficiados para Experiencia basada en servicio #"+service_aux.id.to_s,
+		results: "Resultados de aprendizaje para Experiencia basada en servicio #"+service_aux.id.to_s,
+		tools: "Herramientas de medicion para Experiencia basada en servicio #"+service_aux.id.to_s,
+		reflection_moments: "Momentos de reflexión Experiencia basada en servicio #"+service_aux.id.to_s,
+		area_id: service_aux.area_id,
+		service_id:	service_aux.id,
+		start_time:	service_aux.start_time,
+		end_time: service_aux.end_time,
+		professor_id: professor_aux.id,
+		partner_id: partner_aux.id,
+	)
+	service_aux.status = 5 #Con esto el servicio pasa a estado de experiencia
+	service_aux.save
+end
+print("\tSeed:\tExperiencias de pruebas creadas [50]\n")
+

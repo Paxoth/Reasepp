@@ -24,7 +24,7 @@ class Event < ActiveRecord::Base
 	validates :address, presence: true #no puede haber carácteres en blanco
 	validates :status, presence: true
 
-	#Función para usar el buscador de eventos de acuerdo algun match entre las palabras y los valores de los atributos de esta.
+	#Función que permite que el buscador encuentre Eventos a través de match de palabras en sus atributos.
 	def self.search(search)
 		where("title LIKE ? or description LIKE ?", "%#{search}%","%#{search}%") 
 	end

@@ -29,7 +29,7 @@ class Institution < ActiveRecord::Base
 	validates :name, presence: true, uniqueness: true
 	validates :web, presence: true, uniqueness: true
 
-	#Función para usar el buscador de institucion de acuerdo algun match entre las palabras y los valores de los atributos de esta.
+	#Función que permite que el buscador encuentre Instituciones a través de match de palabras en sus atributos.
 	def self.search(search)
 		where("name LIKE ? or web LIKE ?", "%#{search}%","%#{search}%") 
 	end

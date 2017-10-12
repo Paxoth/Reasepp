@@ -11,7 +11,7 @@ class InterestLink < ActiveRecord::Base
 	validates :name, presence: true, uniqueness: true
 	validates :url, presence: true, uniqueness: true
 
-	#Función para usar el buscador de link de interés de acuerdo algun match entre las palabras y los valores de los atributos de esta.
+	#Función que permite que el buscador encuentre Enlaces de Interés a través de match de palabras en sus atributos.
 	def self.search(search)
 		where("name LIKE ? or description LIKE ?", "%#{search}%","%#{search}%") 
 	end
