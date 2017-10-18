@@ -14,3 +14,18 @@
 <%= link_to 'Editar', edit_institution_path(@institution), :class =>"btn btn-lg" %>
 <%= link_to 'Volver', institutions_path, :class =>"btn btn-lg" %>
 <%end%>
+
+<div class="panel panel-default panelRease">
+	<div class="panel-heading">
+		Profesores que pertenecen a <%= @institution.name %> 
+	</div>
+	<div class="panel-body">
+		 	<p><% @professors.each  do |user|%>
+				<%if user.photo.present?%>
+					<%=link_to image_tag(user.photo.url(:mini),:class=>'RoundPicture'),user%>
+				<%else%>
+					<%=link_to image_tag("mini/miniphoto.png",:class=>'RoundPicture'),user%>
+				<%end%>
+			<%end%></p>
+	</div>
+</div>
