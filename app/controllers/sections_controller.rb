@@ -94,8 +94,8 @@ class SectionsController < ApplicationController
 	private #acciones privadas del controlador
 
 	def validate_category
-		if current_user.category != 1
-		redirect_to root_path, alert: "Sólo un administrador puede trabajar la página de inicio."
+		if !current_user.is_admin?
+			redirect_to root_path, alert: "Sólo un administrador puede trabajar la página de inicio."
 		end   
 	end
 

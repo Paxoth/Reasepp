@@ -8,7 +8,7 @@
 	</div>
 	<p>Fecha de Creación: <%=l @question.created_at%></p>			
 </div>
-<%if user_signed_in? and current_user.category == 1%>
+<%if user_signed_in? and current_user.is_admin?%>
 	<%= link_to "Editar", edit_question_path( @question), :class => "btn btn-lg btnCRUD"%>
 	<%= link_to 'Eliminar',  @question, method: :delete, data: { confirm: '¿Está seguro de eliminar esta pregunta?' }, :class => "btn btn-lg btnCRUD" %>
 	<%= link_to "Volver", questions_path, :class => "btn btn-lg btnCRUD"%>

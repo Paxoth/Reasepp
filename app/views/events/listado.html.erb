@@ -1,5 +1,5 @@
 <h1> Todos los eventos </h1>
-<% if user_signed_in? && current_user.category == 1  %>
+<% if user_signed_in? && current_user.is_admin?  %>
 	<%= link_to 'Nuevo evento', new_event_path, :class => "btn btn-lg " %>
 <% end %>
 <%= link_to "Volver al calendario", events_path , :class => "btn btn-lg btnCRUD" %>

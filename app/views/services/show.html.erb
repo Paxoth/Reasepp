@@ -76,7 +76,7 @@
 					<%end %>
 					<%= link_to comment.user.nickname, comment.user%> [ <%=comment.created_at.strftime("%d/%m/%Y - %H:%M")%> ]: 	<%=raw comment.body%>
 					<%if user_signed_in? %>
-						<%if current_user == comment.user or current_user.category == 1 %> 
+						<%if current_user == comment.user or current_user.is_admin? %> 
 							<%= link_to 'Eliminar', service_comment_path(@service,comment), method: :delete, data: { confirm: '¿Está seguro de eliminar el comentario?' }%>
 						<%end%>
 					<%end%>
@@ -129,7 +129,9 @@
 				<p><strong>Profesor responsable: </strong> <%= link_to @service.creator.nickname, @service.creator%></p>
 				<p><strong>Socio comunitario: </strong>  <%= link_to @service.acceptor.nickname, @service.acceptor%></p>
 			<%end%>
-
+			<%if @service.broker_id.present?%>
+				<p><strong>Vinculador Social: </strong> <%= link_to @broker.nickname, @broker%></p>
+			<%end%>
 
 			<%if @service.area_id.present?%>
 				<p><strong>Área de trabajo: </strong> <%= @service.area.discipline%>: <%= @service.area.name%> </p>
@@ -182,7 +184,7 @@
 					<%end %>
 					<%= link_to comment.user.nickname, comment.user%> [ <%=comment.created_at.strftime("%d/%m/%Y - %H:%M")%> ]: 	<%=raw comment.body%>
 					<%if user_signed_in? %>
-						<%if current_user == comment.user or current_user.category == 1 %> 
+						<%if current_user == comment.user or current_user.is_admin %> 
 							<%= link_to 'Eliminar', service_comment_path(@service,comment), method: :delete, data: { confirm: '¿Está seguro de eliminar el comentario?' }%>
 						<%end%>
 					<%end%>

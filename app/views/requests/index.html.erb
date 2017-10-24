@@ -1,6 +1,6 @@
 <h1>Solicitudes de servicio <button type="button" class="btn btn-default btnWhite" id:"btnSolicitud" data-trigger="focus" data-container="body" data-toggle="btnSolicitud"> ? </button></h1>
 
-<% if current_user.category == 4 %>
+<% if current_user.category == 4 or current_user.category == 3 %>
 	<%= link_to "Nueva solicitud de servicio", new_request_path, :class => 'btn btn-lg' %>
 <%end%>
 <div class="buscador">

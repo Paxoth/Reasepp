@@ -48,6 +48,9 @@
 			<section id="contenedor">
 				<section id="principal">
 					<article>
+						<ol class="breadcrumb">
+							<%= render_breadcrumbs :tag => :li, :separator => "" %>
+						</ol>
 						<%= bootstrap_flash %>
 						<%= yield %>
 					</article>
@@ -57,8 +60,10 @@
 					<% if !user_signed_in? %>
 						<%= render "partials/intranet"%>
 					<%else%>
-						<%= render "partials/user"%>
-						<%= render "partials/resources"%>
+						<%= render "partials/user"%>						
+						<%= link_to "Recursos", resources_muestra_path, :class=>'btn btnAside' %>
+						<%= link_to "Instituciones Adheridas", institutions_path, :class=>'btn btnAside' %>
+
 					<%end%>
 
 					<div  class="panel panel-default panelClick">

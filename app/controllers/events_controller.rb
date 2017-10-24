@@ -111,7 +111,7 @@ class EventsController < ApplicationController
 
 	private
 		def validate_category
-			if current_user.category != 1
+			if !current_user.is_admin?
 				redirect_to root_path, alert: "Sólo un administrador puede trabajar los eventos."
 			end 
 		end

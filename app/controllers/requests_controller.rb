@@ -3,7 +3,8 @@ class RequestsController < ApplicationController
 	before_action :validate_category, except: [:index, :show, :searchRequest]
 	before_action :set_request, only: [:show, :edit, :update]
 	before_action :unique_petition, only: [:show]
-	
+	before_action :set_broker, only: [:show]
+
 	add_breadcrumb "Inicio", :root_path
 	add_breadcrumb "Solicitudes", :requests_path
 
@@ -42,6 +43,10 @@ class RequestsController < ApplicationController
 
 	def create
 		@request = current_user.requests.new(defined_params)
+		if current_user.category == 3 #El creador es vinculador social
+			@request.broker_id = current_user.id
+			flash[:alert] = "Para que esta solicitud de servicio se concrete, un socio comunitario debe aceptarla inicialmente."
+		end
 		@request.status = 1
 		@request.start_time = Time.now
 		if @request.save
@@ -95,14 +100,16 @@ class RequestsController < ApplicationController
 			if current_user.category == 2 
 				redirect_to root_path, alert: "Su categoría de profesor no permite ésta acción."
 			end  
-			if current_user.category == 1
-			  redirect_to root_path, alert: "El administrador no puede crear solicitudes de servicio"
-			end
 		end
 
 		# Use callbacks to share common setup or constraints between actions.
 		def set_request
 			@request = Request.find(params[:id])
+		end
+		def set_broker
+			if @request.broker_id.present?
+				@broker = User.where(id: @request.broker_id).first
+			end
 		end
 
 		def unique_petition
@@ -113,6 +120,7 @@ class RequestsController < ApplicationController
 				:title, 
 				:description, 
 				:user_id,
+				:broker_id,
 				:institution_id, 
 				:area_id, 
 				:status, 

@@ -17,7 +17,8 @@ class Institution < ActiveRecord::Base
 
 	
 	#RELACIONES
-	has_many :users
+	belongs_to :user #referencia al usuario que lo crea.
+	has_many :users #referencia a los usuarios que pertenece a la institución
 	has_many :offerings
 	has_many :requests
 	has_many :services

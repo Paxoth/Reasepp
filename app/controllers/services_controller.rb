@@ -21,6 +21,9 @@ class ServicesController < ApplicationController
 		@service = Service.find(params[:id])
 		@experience = @service.experiences.last
 		add_breadcrumb "Mostrar"
+		if @service.broker_id.present?
+			@broker = User.where(id:@service.broker_id).first
+		end
 	end
 
 	def new
@@ -71,6 +74,9 @@ class ServicesController < ApplicationController
 		@service.start_time = Time.now
 		@service.end_time = Time.now
 		@service.status = 1 #el servicio es solo una petición pendiente.
+		if @publication.broker_id.present?
+			@service.broker_id = @publication.broker_id
+		end
 
 		respond_to do |format|
 			if @service.save
@@ -188,6 +194,7 @@ class ServicesController < ApplicationController
 				:publication_type,
 				:creator_id,
 				:acceptor_id,
+				:broker_id,
 				:institution_id,
 				:area_id,
 				:description,

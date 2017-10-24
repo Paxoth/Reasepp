@@ -13,7 +13,7 @@
 		<h2>Datos de usuario:</h2>
 		<p><strong>Nombre completo: </strong> <%= @user.name %> </p>
 		<p><strong>Categoría:</strong> 
-		<%if @user.category == 1%> Administrador <%end%>
+		<%if @user.is_admin? %> Administrador <%end%>
 		<%if @user.category == 2%> Profesor <%end%>
 		<%if @user.category == 3%> Vinculador Social <%end%>
 		<%if @user.category == 4%> Socio Comunitario <%end%>
@@ -24,10 +24,34 @@
 		</p>
 		<p><strong>Correo: </strong> <%= @user.email%></p>
 		<%if !@user.institution_id.blank?%>
-			<p><strong>Institución: </strong> <%=link_to @user.institution.name, @user.institution.web,:target=>'_blank'%></p>
+			<p><strong>Institución: </strong> <%=link_to @user.institution.name, @user.institution%></p>
 		<%end%>
 		<%if !@user.description.blank? %>
 			<p><strong>Sobre mí:</strong> <%= @user.description%></p>
 		<%end%>
 	</div>
 </div>
+
+<div class="panel panel-default panelRease">
+	<div class="panel-heading">
+		Actividades actuales en modo de licitación
+	</div>
+	<div class="panel-body div-justify">
+		<%if @offerings.present? %>
+			<% @offerings.each do |offering| %>
+				<hr><strong>OFERTA: <%= link_to offering.title, offering%></strong>: <%=offering.resume%>
+				<p class="note">Fecha de término: <%= offering.end_time.strftime("%d/%m/%Y")%></p>
+			<%end%>
+		<%end%>
+		<%if @requests.present? %>
+			<% @requests.each do |request| %>
+				<hr><strong>SOLICITUD: <%= link_to request.title, request%></strong>: <%= request.resume%>
+				<p class="note">Fecha de término: <%= request.end_time.strftime("%d/%m/%Y")%></p>
+			<%end%>
+		<%end%>
+		<%if !@offerings.present? and !@requests.present?%>
+			Actualmente <%= @user.nickname%> no tiene una actividad de servicio activa y en modo de licitación.
+		<%end%>
+	</div>
+</div>
+

@@ -4,6 +4,7 @@ class ExperiencesController < ApplicationController
 	before_action :set_experience, only: [:update, :destroy]
 	before_action :set_institutionsAndAreas
 	before_action :validate_category, except: [:show, :index, :searchExperience]
+	before_action :set_broker, only: [:new, :edit, :create]
 
 
 	add_breadcrumb "Inicio", :root_path
@@ -29,6 +30,10 @@ class ExperiencesController < ApplicationController
 
 	def show
 		@experience = Experience.find(params[:id])
+		if @experience.broker_id.present?
+			@broker = User.where(id:@experience.broker_id).first
+		end
+
 		add_breadcrumb "Mostrando "+@experience.title
 		respond_to do |format|
 			format.html
@@ -48,12 +53,13 @@ class ExperiencesController < ApplicationController
 		@service = servicio
 		@experience = @service.experiences.new(experience_params)
 		@experience.professor = current_user
-		@experience.professor_name = current_user.name
-		@experience.professor_email = current_user.email
 		if @service.publication_type == "Offering"
 			@experience.partner = @service.creator
 		else
 			@experience.partner = @service.acceptor
+		end
+		if @broker.present?
+			@experience.broker_id = @broker.id
 		end
 		respond_to do |format|
 			if @experience.save
@@ -132,6 +138,12 @@ class ExperiencesController < ApplicationController
     	@institutions = Institution.all
     	@areas = Area.order("discipline ASC").order("name ASC").all	
     end
+
+	def set_broker
+		if servicio.broker_id.present?
+			@broker = User.where(id:servicio.broker_id).first
+		end
+	end
     # Never trust parameters from the scary internet, only allow the white list through.
     def experience_params
       params.require(:experience).permit(
@@ -140,6 +152,7 @@ class ExperiencesController < ApplicationController
 			:description,
 			:partner_id,
 			:professor_id,
+			:broker_id,
 			:folio,
 			:institution_id,
 			:faculty,
@@ -148,20 +161,17 @@ class ExperiencesController < ApplicationController
 			:course_type,
 			:course_type_other,
 			:period,
-			:professor_name,
-			:professor_email,
 			:professor_phone,
 			:professor_degree,
 			:learning_objectives,
 			:service_objectives,
-			:institutional_support,
 			:frequency,
 			:weekly_hours,
 			:participants,
 			:students_level,
 			:community_partner,
 			:organization_type,
-			:benefit,
+			:benefited,
 			:results,
 			:tools,
 			:reflection_moments,

@@ -1,9 +1,11 @@
 class OfferingsController < ApplicationController
 	before_action :authenticate_user!
 	before_action :validate_category, except: [:index, :show, :searchOffering]
-	before_action :set_offering, only: [:show, :edit, :update, :destroy]
+	before_action :set_offering, only: [:show, :edit, :update, :destroy, :professor]
 	before_action :set_area, only: [:edit, :update]
 	before_action :unique_petition, only: [:show]
+	before_action :set_broker, only: [:show]
+
 
 	add_breadcrumb "Inicio", :root_path
 	add_breadcrumb "Ofertas", :offerings_path
@@ -47,6 +49,11 @@ class OfferingsController < ApplicationController
 	# POST /offerings.json
 	def create
 		@offering = current_user.offerings.new(offering_params)
+		
+		if current_user.category == 3 #El creador es vinculador social
+			@offering.broker_id = current_user.id
+			flash[:alert] = "Para que esta oferta de servicio se concrete, un profesor debe aceptarla inicialmente."
+		end
 		@offering.status = 1
 		@offering.start_time = Time.now
 		respond_to do |format|
@@ -109,14 +116,19 @@ class OfferingsController < ApplicationController
 	
 	end
 
+	def professor #Vista que permitirá a un vinculador elegir a un profesor responsable de la oferta.
+		if current_user != @offering.user || @offering.user.category != 3
+			redirect_to root_path, alert: "Esta acción es solo valida cuando una oferta no tiene profesor responsable."
+		else
+			
+		end 
+	end
+
 	private
 		def validate_category
-			if current_user.category == 4
+			if current_user.category == 4 
 				redirect_to root_path, alert: "Su categoría de socio comunitario no permite ésta acción."
-			end 
-			if current_user.category == 1
-			  redirect_to root_path, alert: "El administrador no puede crear ofertas de servicio"
-			end
+			end  
 		end
 
 		# Use callbacks to share common setup or constraints between actions.
@@ -131,11 +143,19 @@ class OfferingsController < ApplicationController
 		def unique_petition
 			@petition = @offering.services.where(:creator_id => current_user.id)
 		end
+
+		def set_broker
+			if @offering.broker_id.present?
+				@broker = User.where(id: @offering.broker_id).first
+			end
+		end
+
 		# Never trust parameters from the scary internet, only allow the white list through.
 		def offering_params
 			params.require(:offering).permit(
 				:user_id, 
 				:area_id,
+				:broker_id,
 				:institution_id, 
 				:title, 
 				:description, 

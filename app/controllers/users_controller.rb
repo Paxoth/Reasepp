@@ -7,6 +7,17 @@ class UsersController < ApplicationController
 	def index
 		add_breadcrumb "Perfil", :users_path
 		@user = current_user
+
+		#Consultar por las actividades de servicio en estado de licitación que posee cada usuario.
+		@caca = Offering.where(user: @user,status: 1) and Request.where(user: @user,status: 1) 
+		if @user.category == 2
+			@offerings = Offering.where(user: @user,status: 1)
+		elsif @user.category == 4
+			@requests = Request.where(user: @user,status: 1)
+		elsif @user.category == 3
+			@offerings = Offering.where(broker_id: @user.id,status: 1)
+			@requests = Request.where(broker_id: @user.id,status: 1)
+		end
 	end
 
 	def listarUsuarios
@@ -17,6 +28,15 @@ class UsersController < ApplicationController
 	def show
 		add_breadcrumb "Perfil", :users_path
 		add_breadcrumb "Perfil de "+@user.nickname
+		#Consultar por las actividades de servicio en estado de licitación que posee cada usuario.
+		if @user.category == 2
+			@offerings = Offering.where(user: @user,status: 1)
+		elsif @user.category == 4
+			@requests = Request.where(user: @user,status: 1)
+		elsif @user.category == 3
+			@offerings = Offering.where(broker_id: @user.id,status: 1)
+			@requests = Request.where(broker_id: @user.id,status: 1)
+		end
 	end
 
 	def edit
@@ -64,7 +84,7 @@ class UsersController < ApplicationController
 	private
 
 	def validate_category
-		if current_user.category != 1
+		if !current_user.is_admin?
 			redirect_to root_path, alert: "Solo el administrador tiene este privilegio"
 		end   
 	end
@@ -75,7 +95,7 @@ class UsersController < ApplicationController
 	end
 	
 	def user_params
-		accessible = [ :name, :email,:category,:autorization_level,:nickname ] # extend with your own params
+		accessible = [ :name, :email,:category,:autorization_level,:nickname, :is_admin ] # extend with your own params
      	accessible << [ :password, :password_confirmation ] unless params[:user][:password].blank?
       	params.require(:user).permit(accessible)
 	end

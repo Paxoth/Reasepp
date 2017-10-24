@@ -163,7 +163,7 @@ print("\n\tSeed:\tCreando profesores: ")
 	)
 	print(User.last.id.to_s+" ")
 end
-print("\n\tSeed:\tprofesores de pruebas creados [100=>5-105]\n")
+print("\n\tSeed:\tprofesores de pruebas creados [100=>5-104]\n")
 
 print("\n\tSeed:\tCreando socios: ")
 (1..100).step(1) do |n|
@@ -175,11 +175,11 @@ print("\n\tSeed:\tCreando socios: ")
 		category: 4, 
 		autorization_level: 1, 
 		confirmed_at: Time.now,
-		institution_id: (rand*14)
+		institution_id: rand(1..14)
 	)
 	print(User.last.id.to_s+" ")
 end
-print("\n\tSeed:\tSocios de pruebas creados [100=>106-206] \n")
+print("\n\tSeed:\tSocios de pruebas creados [100=>105-204] \n")
 
 
 print("\n\tSeed:\tCreando ofertas con usuarios: ")
@@ -297,20 +297,17 @@ exp_id = 0
 		course_type: ["Obligatorio", "Optativo", "Electivo"].sample,
 		course_type_other: nil,	
 		period: rand(1..4),
-		professor_name:	professor_aux.name,		
-		professor_email: professor_aux.email,
 		professor_phone: "+56987654321",
 		professor_degree: rand(1..3),
 		learning_objectives: service_aux.learning_objectives,
 		service_objectives: service_aux.service_objectives,
-		institutional_support:	rand(1..2),
 		frequency: "Frecuencia e Experiencia basada en servicio #"+service_aux.id.to_s,
-		weekly_hours: "Horas semanales de Experiencia basada en servicio #"+service_aux.id.to_s,
+		weekly_hours: rand(8..48),
 		participants: rand(5..40),
 		students_level: "Nivel de estudiantes Experiencia basada en servicio #"+service_aux.id.to_s,
 		community_partner: partner_aux.name,
 		organization_type:	"Organizacion para Experiencia basada en servicio #"+service_aux.id.to_s,
-		benefit: "Beneficiados para Experiencia basada en servicio #"+service_aux.id.to_s,
+		benefited: rand(5..40),
 		results: "Resultados de aprendizaje para Experiencia basada en servicio #"+service_aux.id.to_s,
 		tools: "Herramientas de medicion para Experiencia basada en servicio #"+service_aux.id.to_s,
 		reflection_moments: "Momentos de reflexión Experiencia basada en servicio #"+service_aux.id.to_s,

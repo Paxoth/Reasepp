@@ -33,6 +33,7 @@ Rails.application.routes.draw do
 	post 'services/searchService'
 	post 'questions/searchQuestion'
 
+
 	resources :questions
 	resources :projects
 	resources :sections

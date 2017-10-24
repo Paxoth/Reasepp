@@ -15,7 +15,7 @@ class BulletinsController < ApplicationController
 	# GET /bulletins/1
 	# GET /bulletins/1.json
 	def show
-		if current_user.category == 1
+		if current_user.is_admin?
 			add_breadcrumb "Administración", :sections_path, except:[:show]
 			add_breadcrumb "Boletines", :bulletins_path, except:[:show]
 		end
@@ -94,7 +94,7 @@ class BulletinsController < ApplicationController
 
 	private
 		def validate_category
-			if current_user.category != 1
+			if !current_user.is_admin?
 				redirect_to root_path, alert: "Sólo un administrador puede trabajar la página de inicio."
 			end   
 		end

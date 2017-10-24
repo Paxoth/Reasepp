@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171005205606) do
+ActiveRecord::Schema.define(version: 20171023201026) do
 
   create_table "areas", force: :cascade do |t|
     t.string "description", limit: 255
@@ -60,40 +60,38 @@ ActiveRecord::Schema.define(version: 20171005205606) do
   end
 
   create_table "experiences", force: :cascade do |t|
-    t.text     "description",           limit: 65535
+    t.text     "description",         limit: 65535
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "title",                 limit: 255
-    t.integer  "institution_id",        limit: 4
-    t.text     "faculty",               limit: 65535
-    t.text     "department",            limit: 65535
-    t.text     "course_name",           limit: 65535
-    t.text     "course_type",           limit: 65535
-    t.text     "course_type_other",     limit: 65535
-    t.integer  "period",                limit: 4
-    t.text     "professor_name",        limit: 65535
-    t.text     "professor_email",       limit: 65535
-    t.text     "professor_phone",       limit: 65535
-    t.integer  "professor_degree",      limit: 4
-    t.text     "learning_objectives",   limit: 65535
-    t.text     "service_objectives",    limit: 65535
-    t.integer  "institutional_support", limit: 4
-    t.text     "frequency",             limit: 65535
-    t.text     "weekly_hours",          limit: 65535
-    t.integer  "participants",          limit: 4
-    t.text     "students_level",        limit: 65535
-    t.text     "community_partner",     limit: 65535
-    t.text     "organization_type",     limit: 65535
-    t.text     "benefit",               limit: 65535
-    t.text     "results",               limit: 65535
-    t.text     "tools",                 limit: 65535
-    t.text     "reflection_moments",    limit: 65535
-    t.integer  "area_id",               limit: 4
-    t.integer  "service_id",            limit: 4
+    t.string   "title",               limit: 255
+    t.integer  "institution_id",      limit: 4
+    t.text     "faculty",             limit: 65535
+    t.text     "department",          limit: 65535
+    t.text     "course_name",         limit: 65535
+    t.text     "course_type",         limit: 65535
+    t.text     "course_type_other",   limit: 65535
+    t.integer  "period",              limit: 4
+    t.text     "professor_phone",     limit: 65535
+    t.integer  "professor_degree",    limit: 4
+    t.text     "learning_objectives", limit: 65535
+    t.text     "service_objectives",  limit: 65535
+    t.text     "frequency",           limit: 65535
+    t.integer  "participants",        limit: 4
+    t.text     "students_level",      limit: 65535
+    t.text     "community_partner",   limit: 65535
+    t.text     "organization_type",   limit: 65535
+    t.text     "results",             limit: 65535
+    t.text     "tools",               limit: 65535
+    t.text     "reflection_moments",  limit: 65535
+    t.integer  "area_id",             limit: 4
+    t.integer  "service_id",          limit: 4
     t.date     "start_time"
     t.date     "end_time"
-    t.integer  "professor_id",          limit: 4
-    t.integer  "partner_id",            limit: 4
+    t.integer  "professor_id",        limit: 4
+    t.integer  "partner_id",          limit: 4
+    t.integer  "weekly_hours",        limit: 4,     default: 0
+    t.integer  "benefited",           limit: 4,     default: 0
+    t.integer  "broker_id",           limit: 4
   end
 
   create_table "identities", force: :cascade do |t|
@@ -116,6 +114,7 @@ ActiveRecord::Schema.define(version: 20171005205606) do
     t.string   "logo_content_type", limit: 255
     t.integer  "logo_file_size",    limit: 4
     t.datetime "logo_updated_at"
+    t.integer  "manager_id",        limit: 4
   end
 
   create_table "interest_links", force: :cascade do |t|
@@ -139,44 +138,42 @@ ActiveRecord::Schema.define(version: 20171005205606) do
     t.integer  "area_id",        limit: 4
     t.text     "location",       limit: 65535
     t.integer  "institution_id", limit: 4
+    t.integer  "broker_id",      limit: 4
   end
 
   add_index "offerings", ["user_id"], name: "index_offerings_on_user_id", using: :btree
 
   create_table "projects", force: :cascade do |t|
-    t.string   "title",                 limit: 255
-    t.text     "description",           limit: 65535
-    t.text     "faculty",               limit: 65535
-    t.text     "department",            limit: 65535
-    t.text     "course_name",           limit: 65535
-    t.text     "course_type",           limit: 65535
-    t.text     "course_type_other",     limit: 65535
-    t.text     "professor_name",        limit: 65535
-    t.text     "professor_phone",       limit: 65535
-    t.text     "professor_email",       limit: 65535
-    t.text     "learning_objectives",   limit: 65535
-    t.text     "service_objectives",    limit: 65535
-    t.text     "frequency",             limit: 65535
-    t.text     "weekly_hours",          limit: 65535
-    t.text     "students_level",        limit: 65535
-    t.text     "community_partner",     limit: 65535
-    t.text     "organization_type",     limit: 65535
-    t.text     "benefit",               limit: 65535
-    t.text     "results",               limit: 65535
-    t.text     "tools",                 limit: 65535
-    t.text     "reflection_moments",    limit: 65535
-    t.integer  "period",                limit: 4
-    t.integer  "professor_degree",      limit: 4
-    t.integer  "participants",          limit: 4
-    t.integer  "institutional_support", limit: 4
-    t.integer  "area_id",               limit: 4
-    t.integer  "user_id",               limit: 4
-    t.integer  "institution_id",        limit: 4
+    t.string   "title",               limit: 255
+    t.text     "description",         limit: 65535
+    t.text     "faculty",             limit: 65535
+    t.text     "department",          limit: 65535
+    t.text     "course_name",         limit: 65535
+    t.text     "course_type",         limit: 65535
+    t.text     "course_type_other",   limit: 65535
+    t.text     "professor_phone",     limit: 65535
+    t.text     "learning_objectives", limit: 65535
+    t.text     "service_objectives",  limit: 65535
+    t.text     "frequency",           limit: 65535
+    t.text     "students_level",      limit: 65535
+    t.text     "community_partner",   limit: 65535
+    t.text     "organization_type",   limit: 65535
+    t.text     "results",             limit: 65535
+    t.text     "tools",               limit: 65535
+    t.text     "reflection_moments",  limit: 65535
+    t.integer  "period",              limit: 4
+    t.integer  "professor_degree",    limit: 4
+    t.integer  "participants",        limit: 4
+    t.integer  "area_id",             limit: 4
+    t.integer  "user_id",             limit: 4
+    t.integer  "institution_id",      limit: 4
     t.date     "start_time"
     t.date     "end_time"
-    t.text     "partner",               limit: 65535
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.text     "partner",             limit: 65535
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
+    t.integer  "weekly_hours",        limit: 4,     default: 0
+    t.integer  "benefited",           limit: 4,     default: 0
   end
 
   add_index "projects", ["area_id"], name: "index_projects_on_area_id", using: :btree
@@ -204,6 +201,7 @@ ActiveRecord::Schema.define(version: 20171005205606) do
     t.integer  "status",         limit: 4,     default: 1
     t.text     "location",       limit: 65535
     t.integer  "institution_id", limit: 4
+    t.integer  "broker_id",      limit: 4
   end
 
   create_table "resources", force: :cascade do |t|
@@ -246,17 +244,18 @@ ActiveRecord::Schema.define(version: 20171005205606) do
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
     t.text     "service_objectives",  limit: 65535
+    t.integer  "broker_id",           limit: 4
   end
 
   add_index "services", ["publication_type", "publication_id"], name: "index_services_on_publication_type_and_publication_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  limit: 255,   default: "", null: false
-    t.string   "encrypted_password",     limit: 255,   default: "", null: false
+    t.string   "email",                  limit: 255,   default: "",    null: false
+    t.string   "encrypted_password",     limit: 255,   default: "",    null: false
     t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          limit: 4,     default: 0,  null: false
+    t.integer  "sign_in_count",          limit: 4,     default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip",     limit: 255
@@ -277,6 +276,7 @@ ActiveRecord::Schema.define(version: 20171005205606) do
     t.integer  "photo_file_size",        limit: 4
     t.datetime "photo_updated_at"
     t.text     "description",            limit: 65535
+    t.boolean  "is_admin",               limit: 1,     default: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

@@ -1,6 +1,6 @@
 <h1>Ofertas de servicio <button type="button" class="btn btn-default btnWhite" id:"btnOferta" data-placement="bottom" data-trigger="focus" data-container="body" data-toggle="btnOferta"> ? </button></h1>
 
-<% if current_user.category == 2 %>
+<% if current_user.category == 2 or current_user.category == 3 %>
 	<%= link_to "Nueva oferta de servicio", new_offering_path, :class => 'btn btn-lg' %>
 <%end%>
 <div class="buscador">
@@ -15,7 +15,7 @@
 	</div>
 	<%end%>
 </div>
-	<ul class="nav nav-tabs tabRease nav-justified">
+<ul class="nav nav-tabs tabRease nav-justified">
 	<li id="off1" onclick="off1()"><a>Disponibles</a></li>
 	<li id="off2" onclick="off2()"><a>Canceladas</a></li>
 	<li id="off3" onclick="off3()"><a>Caducadas</a></li>

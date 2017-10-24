@@ -103,3 +103,11 @@
     display: block;
     margin-top: 10px;
 }
+
+.form-inline {
+    display: inline;
+}
+.div-justify
+{
+    text-align: justify;
+}

@@ -6,6 +6,9 @@
 			<%flash[:alert] = msg %>
 		<% end %>
 	<% end %>
+	<% if current_user.category == 3%>
+		<%flash[:alert] = "Para que esta oferta de servicio se concrete, debe seleccionarse un profesor que desee ser el responsable de esta."%>
+	<% end %>
 
 	<div class="panel panel-default panelRease" >
     	<div class="panel-heading">Datos de la oferta</div>

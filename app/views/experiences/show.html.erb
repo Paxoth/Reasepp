@@ -14,7 +14,7 @@
 		<div  class="experiencia">
 			<p><strong>Título del servicio relacionado: </strong><%= link_to @experience.service.title,@experience.service %> </p>
 			<p><strong>Area: </strong><%=@experience.area.name%></p>
-			<p><strong>Institución: </strong><%=link_to @experience.institution.name, @experience.institution.web%></p>
+			<p><strong>Institución: </strong><%=link_to @experience.institution.name, @experience.institution%></p>
 			<p><strong>Facultad: </strong><%=@experience.faculty%></p>
 			<p><strong>Departamento: </strong><%=@experience.department%></p>
 			<p><strong>Nombre de Asignatura/curso: </strong><%=@experience.course_name%></p>
@@ -37,8 +37,13 @@
 			<%end%>
 
 			</p>
-			<p><strong>Nombre profesor responsable: </strong> <%=link_to @experience.professor_name, @experience.professor%></p>
-			<p><strong>Correo del profesor: </strong><%=@experience.professor_email%></p>
+		</div>
+
+
+		<h3>II. Datos de los responsables</h3>
+		<div  class="experiencia">
+			<p><strong>Nombre profesor responsable: </strong> <%=link_to @experience.professor.name, @experience.professor.name%></p>
+			<p><strong>Correo del profesor: </strong><%=@experience.professor.email%></p>
 			<p><strong>Número del profesor: </strong><%=@experience.professor_phone%></p>
 			<p><strong>Grado académico del profesor: </strong>
 				<%if @experience.professor_degree == 1%> Licenciado <%end%>
@@ -46,9 +51,14 @@
 				<%if @experience.professor_degree == 3%> Doctorado <%end%>
 			</p>
 			<p><strong>Nombre del socio comunitario responsable: </strong> <%=link_to @experience.partner.name, @experience.partner%></p>
+
+			<%if @broker.present?%>
+				<p><strong>Nombre del vinculador social: </strong> <%=link_to @broker.name, @broker%></p>
+			<%end%>
 		</div>
 
-		<h3>II. Antecedentes de la actividad de Aprendizaje Servicio </h3>
+
+		<h3>III. Antecedentes de la actividad de Aprendizaje Servicio </h3>
 		<div class="experiencia">
 			<p><strong>Objetivos de aprendizaje y/o Competencias asociadas</strong></p>
 				<p><%=@experience.learning_objectives%></p><br>
@@ -59,22 +69,13 @@
 			<p><strong>Descripción del Proyecto de AS: </strong></p>
 				<p><%=@experience.description%></p><br>
 
-			<p><strong>La presente experiencia: </strong>
-				<%if @experience.institutional_support == 1%> 
-					Cuenta con respaldo institucional.
-				<%end%>
-				<%if @experience.institutional_support == 2%> 
-					Corresponde a una iniciativa individual del profesor.
-				<%end%>
-			</p>
-
 			<p><strong>¿Con qué frecuencia se realiza? </strong><%=@experience.frequency%></p>
 			<p><strong>Horas cronológicas semanales: </strong><%=@experience.weekly_hours%></p>
 			<p><strong>Número estudiantes participantes: </strong><%=@experience.participants%></p>
 			<p><strong>Nivel de la carrera de los Estudiantes: </strong><%=@experience.students_level%></p>
 			
 			<p><strong>Tipo de organización comunitaria: </strong><%=@experience.organization_type%></p>
-			<p><strong>Número de beneficiados directos con toda la actividad o proyecto: </strong><%=@experience.benefit%></p>
+			<p><strong>Número de beneficiados directos con toda la actividad o proyecto: </strong><%=@experience.benefited%></p>
 
 			<p><strong>Resultados de aprendizaje: </strong></p>
 				<p><%=@experience.results%></p><br>
