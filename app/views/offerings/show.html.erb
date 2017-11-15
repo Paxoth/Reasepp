@@ -62,19 +62,17 @@
 		<%end%>
 
 		<!-- Creador es la persona que creó inicialmente la oferta -->
-		<p><strong>Creado por:</strong>
-			<% if @offering.broker_id.present?%>
+		
+		<% if @offering.broker_id.present?%>
+			<p>
+				<strong>Creado por:</strong>
 				<%= link_to @broker.nickname, user_path(@broker) %>
 				<%if !@broker.photo.blank?%>
 					<%= image_tag @broker.photo.url(:mini), :class =>"RoundPicture" %>
 				<%end %>
-			<%else%>
-				<%= link_to @offering.user.nickname, user_path(@offering.user.id) %>
-				<%if !@offering.user.photo.blank?%>
-					<%= image_tag @offering.user.photo.url(:mini), :class =>"RoundPicture" %>
-				<%end %>
-			<%end%>
-		</p>
+			</p>
+		<%end%>
+		
 		<!-- Profesor responsable no necesariamente es el creador -->
 		<p><strong>Profesor responsable:</strong>
 			<% if !@offering.broker_id.present?%>

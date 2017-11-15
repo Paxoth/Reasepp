@@ -17,16 +17,46 @@
 </div>
 	
 
+<div class="ReaseDiv">
+	<ul class="nav nav-tabs nav-justified tabRease">
+		<li id="req1" onclick="req1()"><a>Disponibles</a></li>
+		<li id="req2" onclick="req2()"><a>Canceladas</a></li>
+		<li id="req3" onclick="req3()"><a>Caducadas</a></li>
+	</ul>
+	<div class="borderTab">
+		<div id="Disponible">
+			<%if @disponible.present?%>
+				<% @disponible.each do |request| %>
+					<div class="panel panel-default panelRease">
+						<div class="panel-heading">
+							<%if request.user == current_user %>
+								<i class="glyphicon glyphicon-tags"></i>
+							<%end%>
+							<%= request.title %>
+						</div>
+						<div class="panel-body">
+							<h2>Resumen: </h2>
+							<p><%=raw request.resume %></p>
+							<%= link_to "Ver solicitud", request %>
+						</div>
+					</div>
+				<%end%>
+				<%= will_paginate @disponible %>
+			<%else%>
+				<div class="panel panel-default panelRease">
+					<div class="panel-heading">
+						Ofertas de servicios disponibles
+					</div>
+					<div class="panel-body">
+						<p>No hay solicitudes de servicio disponibles</p>
+					</div>
+				</div>
+			<%end%>
 
-<ul class="nav nav-tabs nav-justified tabRease">
-	<li id="req1" onclick="req1()"><a>Disponibles</a></li>
-	<li id="req2" onclick="req2()"><a>Canceladas</a></li>
-	<li id="req3" onclick="req3()"><a>Caducadas</a></li>
-</ul>
-<div class="borderTab">
-	<div id="Disponible">
-		<%if @disponible.present?%>
-			<% @disponible.each do |request| %>
+		</div>
+		<div id="Cancelada">
+			<%if @cancelada.present?%>
+			<% @cancelada.each do |request| %>
 				<div class="panel panel-default panelRease">
 					<div class="panel-heading">
 						<%if request.user == current_user %>
@@ -41,77 +71,46 @@
 					</div>
 				</div>
 			<%end%>
-			<%= will_paginate @disponible %>
-		<%else%>
-			<div class="panel panel-default panelRease">
-				<div class="panel-heading">
-					Ofertas de servicios disponibles
+			<%else%>
+				<div class="panel panel-default panelRease">
+					<div class="panel-heading">
+						Ofertas de servicios canceladas
+					</div>
+					<div class="panel-body">
+						<p>No hay solicitudes de servicio canceladas</p>
+					</div>
 				</div>
-				<div class="panel-body">
-					<p>No hay solicitudes de servicio disponibles</p>
-				</div>
-			</div>
-		<%end%>
+			<%end%>
 
-	</div>
-	<div id="Cancelada">
-		<%if @cancelada.present?%>
-		<% @cancelada.each do |request| %>
-			<div class="panel panel-default panelRease">
-				<div class="panel-heading">
-					<%if request.user == current_user %>
-						<i class="glyphicon glyphicon-tags"></i>
-					<%end%>
-					<%= request.title %>
+		</div>
+		<div id="Caducada">
+			<%if @caducada.present?%>
+			<% @caducada.each do |request| %>
+				<div class="panel panel-default panelRease">
+					<div class="panel-heading">
+						<%if request.user == current_user %>
+							<i class="glyphicon glyphicon-tags"></i>
+						<%end%>
+						<%= request.title %>
+					</div>
+					<div class="panel-body">
+						<h2>Resumen: </h2>
+						<p><%=raw request.resume %></p>
+						<%= link_to "Ver solicitud", request %>
+					</div>
 				</div>
-				<div class="panel-body">
-					<h2>Resumen: </h2>
-					<p><%=raw request.resume %></p>
-					<%= link_to "Ver solicitud", request %>
+			<%end%>
+			<%else%>
+				<div class="panel panel-default panelRease">
+					<div class="panel-heading">
+						Ofertas de servicios caducadas
+					</div>
+					<div class="panel-body">
+						<p>No hay solicitudes de servicio caducadas</p>
+					</div>
 				</div>
-			</div>
-		<%end%>
-		<%else%>
-			<div class="panel panel-default panelRease">
-				<div class="panel-heading">
-					Ofertas de servicios canceladas
-				</div>
-				<div class="panel-body">
-					<p>No hay solicitudes de servicio canceladas</p>
-				</div>
-			</div>
-		<%end%>
-
-	</div>
-	<div id="Caducada">
-		<%if @caducada.present?%>
-		<% @caducada.each do |request| %>
-			<div class="panel panel-default panelRease">
-				<div class="panel-heading">
-					<%if request.user == current_user %>
-						<i class="glyphicon glyphicon-tags"></i>
-					<%end%>
-					<%= request.title %>
-				</div>
-				<div class="panel-body">
-					<h2>Resumen: </h2>
-					<p><%=raw request.resume %></p>
-					<%= link_to "Ver solicitud", request %>
-				</div>
-			</div>
-		<%end%>
-		<%else%>
-			<div class="panel panel-default panelRease">
-				<div class="panel-heading">
-					Ofertas de servicios caducadas
-				</div>
-				<div class="panel-body">
-					<p>No hay solicitudes de servicio caducadas</p>
-				</div>
-			</div>
-		<%end%>
-
-
+			<%end%>
+		</div>
 	</div>
 </div>
 <script type="text/javascript">

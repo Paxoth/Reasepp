@@ -15,15 +15,46 @@
 	</div>
 	<%end%>
 </div>
-<ul class="nav nav-tabs tabRease nav-justified">
-	<li id="off1" onclick="off1()"><a>Disponibles</a></li>
-	<li id="off2" onclick="off2()"><a>Canceladas</a></li>
-	<li id="off3" onclick="off3()"><a>Caducadas</a></li>
-</ul>
-<div class="borderTab">
-	<div id="Disponible">
-		<%if @disponible.present?%>
-			<% @disponible.each do |offering| %>
+<div class="ReaseDiv">
+	<ul class="nav nav-tabs tabRease nav-justified">
+		<li id="off1" onclick="off1()"><a>Disponibles</a></li>
+		<li id="off2" onclick="off2()"><a>Canceladas</a></li>
+		<li id="off3" onclick="off3()"><a>Caducadas</a></li>
+	</ul>
+	<div class="borderTab">
+		<div id="Disponible">
+			<%if @disponible.present?%>
+				<% @disponible.each do |offering| %>
+					<div class="panel panel-default panelRease">
+						<div class="panel-heading">
+							<%if offering.user == current_user %>
+								<i class="glyphicon glyphicon-tags"></i>
+							<%end%>
+							<%= offering.title %>
+						</div>
+						<div class="panel-body">
+							<h2>Resumen: </h2>
+							<p><%=raw offering.resume %></p>
+							<%= link_to "Ver oferta", offering %>
+						</div>
+					</div>
+				<%end%>
+				<%= will_paginate @disponible %>
+			<%else%>
+				<div class="panel panel-default panelRease">
+					<div class="panel-heading">
+						Ofertas de servicios disponibles
+					</div>
+					<div class="panel-body">
+						<p>No hay ofertas de servicio disponibles</p>
+					</div>
+				</div>
+			<%end%>
+
+		</div>
+		<div id="Cancelada">
+			<%if @cancelada.present?%>
+			<% @cancelada.each do |offering| %>
 				<div class="panel panel-default panelRease">
 					<div class="panel-heading">
 						<%if offering.user == current_user %>
@@ -38,75 +69,46 @@
 					</div>
 				</div>
 			<%end%>
-			<%= will_paginate @disponible %>
-		<%else%>
-			<div class="panel panel-default panelRease">
-				<div class="panel-heading">
-					Ofertas de servicios disponibles
+			<%else%>
+				<div class="panel panel-default panelRease">
+					<div class="panel-heading">
+						Ofertas de servicios canceladas
+					</div>
+					<div class="panel-body">
+						<p>No hay ofertas de servicio canceladas</p>
+					</div>
 				</div>
-				<div class="panel-body">
-					<p>No hay ofertas de servicio disponibles</p>
-				</div>
-			</div>
-		<%end%>
+			<%end%>
 
-	</div>
-	<div id="Cancelada">
-		<%if @cancelada.present?%>
-		<% @cancelada.each do |offering| %>
-			<div class="panel panel-default panelRease">
-				<div class="panel-heading">
-					<%if offering.user == current_user %>
-						<i class="glyphicon glyphicon-tags"></i>
-					<%end%>
-					<%= offering.title %>
+		</div>
+		<div id="Caducada">
+			<%if @caducada.present?%>
+			<% @caducada.each do |offering| %>
+				<div class="panel panel-default panelRease">
+					<div class="panel-heading">
+						<%if offering.user == current_user %>
+							<i class="glyphicon glyphicon-tags"></i>
+						<%end%>
+						<%= offering.title %>
+					</div>
+					<div class="panel-body">
+						<h2>Resumen: </h2>
+						<p><%=raw offering.resume %></p>
+						<%= link_to "Ver oferta", offering %>
+					</div>
 				</div>
-				<div class="panel-body">
-					<h2>Resumen: </h2>
-					<p><%=raw offering.resume %></p>
-					<%= link_to "Ver oferta", offering %>
+			<%end%>
+			<%else%>
+				<div class="panel panel-default panelRease">
+					<div class="panel-heading">
+						Ofertas de servicios caducadas
+					</div>
+					<div class="panel-body">
+						<p>No hay ofertas de servicio caducadas</p>
+					</div>
 				</div>
-			</div>
-		<%end%>
-		<%else%>
-			<div class="panel panel-default panelRease">
-				<div class="panel-heading">
-					Ofertas de servicios canceladas
-				</div>
-				<div class="panel-body">
-					<p>No hay ofertas de servicio canceladas</p>
-				</div>
-			</div>
-		<%end%>
-
-	</div>
-	<div id="Caducada">
-		<%if @caducada.present?%>
-		<% @caducada.each do |offering| %>
-			<div class="panel panel-default panelRease">
-				<div class="panel-heading">
-					<%if offering.user == current_user %>
-						<i class="glyphicon glyphicon-tags"></i>
-					<%end%>
-					<%= offering.title %>
-				</div>
-				<div class="panel-body">
-					<h2>Resumen: </h2>
-					<p><%=raw offering.resume %></p>
-					<%= link_to "Ver oferta", offering %>
-				</div>
-			</div>
-		<%end%>
-		<%else%>
-			<div class="panel panel-default panelRease">
-				<div class="panel-heading">
-					Ofertas de servicios caducadas
-				</div>
-				<div class="panel-body">
-					<p>No hay ofertas de servicio caducadas</p>
-				</div>
-			</div>
-		<%end%>
+			<%end%>
+		</div>
 	</div>
 </div>
 <script type="text/javascript">

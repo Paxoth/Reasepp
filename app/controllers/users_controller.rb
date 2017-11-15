@@ -9,14 +9,16 @@ class UsersController < ApplicationController
 		@user = current_user
 
 		#Consultar por las actividades de servicio en estado de licitación que posee cada usuario.
-		@caca = Offering.where(user: @user,status: 1) and Request.where(user: @user,status: 1) 
 		if @user.category == 2
 			@offerings = Offering.where(user: @user,status: 1)
+			@experiences = Experience.where(professor_id: @user.id)
 		elsif @user.category == 4
 			@requests = Request.where(user: @user,status: 1)
+			@experiences = Experience.where(partner_id: @user.id)
 		elsif @user.category == 3
 			@offerings = Offering.where(broker_id: @user.id,status: 1)
 			@requests = Request.where(broker_id: @user.id,status: 1)
+			@experiences = Experience.where(broker_id: @user.id)
 		end
 	end
 
@@ -31,11 +33,14 @@ class UsersController < ApplicationController
 		#Consultar por las actividades de servicio en estado de licitación que posee cada usuario.
 		if @user.category == 2
 			@offerings = Offering.where(user: @user,status: 1)
+			@experiences = Experience.where(professor_id: @user.id)
 		elsif @user.category == 4
 			@requests = Request.where(user: @user,status: 1)
+			@experiences = Experience.where(partner_id: @user.id)
 		elsif @user.category == 3
 			@offerings = Offering.where(broker_id: @user.id,status: 1)
 			@requests = Request.where(broker_id: @user.id,status: 1)
+			@experiences = Experience.where(broker_id: @user.id)
 		end
 	end
 

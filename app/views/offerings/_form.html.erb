@@ -31,8 +31,12 @@
 			</p></div>
 
 			<div class="field"><p>
-				<%= f.label :institution_id, "Institución adherida: "%>		
-				<%= f.select(:institution_id, Institution.order("name ASC").all.collect {|inst| [inst.name, inst.id]},{:include_blank => "Institución (Opcional)"},{ :class => 'form-control'}) -%>
+				<%= f.label :institution_id, "Institución adherida: "%>
+				<%if current_user.institution_id.present?%>
+					<%= f.select(:institution_id, Institution.order("name ASC").all.collect {|inst| [inst.name, inst.id]},{:selected => current_user.institution_id, :selected => current_user.institution_id},{ :class => 'form-control'}) -%>
+				<%else%>
+					<%= f.select(:institution_id, Institution.order("name ASC").all.collect {|inst| [inst.name, inst.id]},{:include_blank => "Institución (Opcional)", :selected => current_user.institution_id},{ :class => 'form-control'}) -%>
+				<%end%>
 			</p></div>
 			
 			<div class="field"><p>

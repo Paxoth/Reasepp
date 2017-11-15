@@ -70,7 +70,22 @@ class AreasController < ApplicationController
   end
 
   private
-
+    # This is an example method commented the way I like. 
+    # It sums the three arguments and returns that value.
+    #
+    # Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
+    # do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+    # Ut enim ad minim veniam, quis nostrud exercitation ullamco 
+    # laboris nisi ut aliquip ex ea commodo consequat.
+    #
+    # * *Args*    :
+    #   - +apples+ -> the number of apples
+    #   - +oranges+ -> the number of oranges
+    #   - +pears+ -> the number of pears
+    # * *Returns* :
+    #   - the total number of fruit as an integer
+    # * *Raises* :
+    #   -
     def validate_category
       if !current_user.is_admin?
       redirect_to root_path, alert: "Sólo un administrador puede trabajar la página de inicio."

@@ -1,16 +1,7 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
-
 Area.destroy_all
 Institution.destroy_all
 InterestLink.destroy_all
 Resource.destroy_all
-
 Offering.destroy_all
 Request.destroy_all
 Service.destroy_all
@@ -22,9 +13,10 @@ User.create([{
 	password: 'rease2015',
 	name: 'Coordinación',
 	nickname: 'Admin', 
-	category: 1, 
+	category: 2, 
 	autorization_level: 1, 
 	confirmed_at: Time.now,
+	is_admin: true,
 }])
 print("\tSeed:\tUsuario Administrador creado\n")
 
@@ -179,11 +171,29 @@ print("\n\tSeed:\tCreando socios: ")
 	)
 	print(User.last.id.to_s+" ")
 end
+
 print("\n\tSeed:\tSocios de pruebas creados [100=>105-204] \n")
 
-
-print("\n\tSeed:\tCreando ofertas con usuarios: ")
+print("\n\tSeed:\tCreando Vinculadores: ")
 (1..100).step(1) do |n|
+	User.create(
+		email: "vinculador"+n.to_s+"@rease.cl",
+		password: 'rease2017',
+		name: "Vinculador Prueba "+n.to_s,
+		nickname: "Vinculador"+n.to_s,
+		category: 3, 
+		autorization_level: 1, 
+		confirmed_at: Time.now,
+		institution_id: rand(1..14)
+	)
+	print(User.last.id.to_s+" ")
+end
+
+print("\n\tSeed:\tVinculadores de pruebas creados [100=>205-304] \n")
+
+
+print("\n\tSeed:\tCreando ofertas con profesores: ")
+(1..200).step(1) do |n|
 	professor_aux_id = rand(5..104)
 	print(professor_aux_id.to_s+" ")
 	professor_aux = User.where(id:professor_aux_id).first #UN professor al azar
@@ -201,10 +211,40 @@ print("\n\tSeed:\tCreando ofertas con usuarios: ")
 		institution_id: professor_aux.institution_id
 	)
 end
-print("\n\tSeed:\tOfertas de pruebas creadas [100]\n")
+print("\n\tSeed:\tOfertas de pruebas por profesores creadas [200]\n")
 
-print("\n\tSeed:\tCreando solicitudes con usuarios: ")
+print("\n\tSeed:\tCreando ofertas con vinculadores: ")
+offering_count = Offering.count
 (1..100).step(1) do |n|
+	vinculador_aux_id = rand(205..304)
+	has_professor = rand(0..1)
+	if has_professor == 0
+		user_id = vinculador_aux_id
+	else
+		user_id = rand(5..104)
+	end
+	print(vinculador_aux_id.to_s+" ")
+	vinculador_aux = User.where(id:vinculador_aux_id).first 	
+	actual_id = offering_count+n
+	Offering.create(
+		id: actual_id,
+		user_id: user_id,
+		title: "Oferta de prueba por VINCULADOR generada por seed #"+actual_id.to_s, 
+		description: "Descripción de Oferta de Servicio por VINCULADOR de prueba generada por seed #"+actual_id.to_s, 
+		start_time: Time.now, 
+		end_time: Time.now+(rand*(20+n)).days, 
+		resume: "Resumen de Oferta prueba por VINCULADOR generada por seed #"+actual_id.to_s, 
+		status: 1, 
+		area_id: rand(1..42), 
+		location: "Ubicación de Oferta prueba por VINCULADOR generada por seed #"+actual_id.to_s, 
+		institution_id: vinculador_aux.institution_id,
+		broker_id: vinculador_aux.id
+	)
+end
+print("\n\tSeed:\tSolicitud de ofertas por vinculadores creadas [100] \n")
+
+print("\n\tSeed:\tCreando solicitudes con socios: ")
+(1..200).step(1) do |n|
 	partner_aux_id = rand(105..204)
 	print(partner_aux_id.to_s+" ")
 	partner_aux = User.where(id:partner_aux_id).first 	#Un socio al aazar
@@ -222,18 +262,64 @@ print("\n\tSeed:\tCreando solicitudes con usuarios: ")
 		institution_id: partner_aux.institution_id
 	)
 end
-print("\n\tSeed:\tSolicitud de pruebas creadas [100] \n")
+print("\n\tSeed:\tSolicitud de pruebas por socios creadas [100] \n")
 
+
+print("\n\tSeed:\tCreando solicitudes con vinculadores: ")
+request_count = Request.count
 (1..100).step(1) do |n|
+	vinculador_aux_id = rand(205..304)
+	has_partner = rand(0..1)
+	if has_partner == 0
+		user_id = vinculador_aux_id
+	else
+		user_id = rand(105..204)
+	end
+	print(vinculador_aux_id.to_s+" ")
+	vinculador_aux = User.where(id:vinculador_aux_id).first 	#Un socio al aazar
+	actual_id = request_count+n
+	Request.create(
+		id: actual_id,
+		user_id: user_id, 
+		title: "Solicitud de prueba por VINCULADOR generada por seed #"+actual_id.to_s, 
+		description: "Descripción de Solicitud de Servicio por VINCULADOR de prueba generada por seed #"+actual_id.to_s, 
+		start_time: Time.now, 
+		end_time: Time.now+(rand*(20+n)).days, 
+		resume: "Resumen de Solicitud prueba por VINCULADOR generada por seed #"+actual_id.to_s, 
+		status: 1, 
+		area_id: rand(1..42), 
+		location: "Ubicación de Solicitud prueba por VINCULADOR generada por seed #"+actual_id.to_s, 
+		institution_id: vinculador_aux.institution_id,
+		broker_id: vinculador_aux.id
+	)
+end
+print("\n\tSeed:\tSolicitud de servicio por vinculadores creadas [100] \n")
+
+print("\n\tSeed:\tCreando servicios con profesores: ")
+(1..150).step(1) do |n|
 	professor_aux_id = rand(5..104)
 	professor_aux = User.where(id: professor_aux_id).first 	#Un professor al azar
 	partner_aux_id = rand(105..204)
 	partner_aux = User.where(id: partner_aux_id).first		#Un socio al azar
-	if n%2!=0 #ESTA CONDICION SE PUEDE CAMBIAR
-		publication_aux = Request.where(id: n).first		
+	publication_type = rand(0..1)
+	publication_id = rand(1..300)
+	if publication_type == 0
+		publication_aux = Request.where(id: publication_id).first
+		while publication_aux.user.category == 3 or publication_aux.status != 1
+			publication_id = rand(1..300)
+			publication_aux = Request.where(id: publication_id).first
+		end
+	else
+		publication_aux = Offering.where(id: publication_id).first
+		while publication_aux.user.category == 3 or publication_aux.status != 1
+			publication_id = rand(1..300)
+			publication_aux = Offering.where(id: publication_id).first
+		end
+	end
+	if publication_type == 0
 		Service.create( #BASADOS EN REQUEST
 			id: n, 
-			publication_id: publication_aux.id, 
+			publication_id: publication_id, 
 			publication_type: "Request", 
 			creator_id: professor_aux.id, #Creador de servicio, no de la solicitud
 			acceptor_id: publication_aux.user_id, #Creador de la solicitud
@@ -247,10 +333,11 @@ print("\n\tSeed:\tSolicitud de pruebas creadas [100] \n")
 			start_time: publication_aux.start_time+5.days, 
 			end_time: publication_aux.end_time+5.days, 
 			learning_objectives: "Objetivos de Aprendizaje del Servicio basado en solicitud #"+n.to_s, 
-			service_objectives: "Objetivos de Servicio del Servicio basado en solicitud #"+n.to_s
+			service_objectives: "Objetivos de Servicio del Servicio basado en solicitud #"+n.to_s,
+			broker_id: publication_aux.broker_id
 		)
+		print "R"+publication_id.to_s+" "
 	else
-		publication_aux = Offering.where(id: n).first
 		Service.create( #BASADOS EN OFFERING
 			id: n, 
 			publication_id: publication_aux.id, 
@@ -267,17 +354,26 @@ print("\n\tSeed:\tSolicitud de pruebas creadas [100] \n")
 			start_time: publication_aux.start_time+5.days, 
 			end_time: publication_aux.end_time+5.days, 
 			learning_objectives: "Objetivos de Aprendizaje del Servicio basado en oferta #"+n.to_s, 
-			service_objectives: "Objetivos de Servicio del Servicio basado en oferta #"+n.to_s
+			service_objectives: "Objetivos de Servicio del Servicio basado en oferta #"+n.to_s,
+			broker_id: publication_aux.broker_id
 		)
+		print "O"+publication_id.to_s+" "
 	end
 	publication_aux.status = 4 #Con esto la oferta o la soliitud pasa al estado de servicio
 	publication_aux.save
 end
-print("\tSeed:\tServicios de pruebas creadas basadas las ofertas y solicitudes de prueba [100] \n")
+print("\tSeed:\tServicios de pruebas creadas basadas las ofertas y solicitudes de prueba [150] \n")
 
-exp_id = 0
-(1..100).step(2) do |n| #ESTA CONDICION SE PUEDE CAMBIAR
-	service_aux = Service.where(id:n).first
+
+print("\n\tSeed:\tCreando Experiencias basados en los servicios: ")
+(1..100).step(1) do |n| #ESTA CONDICION SE PUEDE CAMBIAR
+	service_aux_id = rand(1..150)
+	service_aux = Service.where(id:service_aux_id).first
+	while service_aux.status == 5
+		service_aux_id = rand(1..150)
+		service_aux = Service.where(id:service_aux_id).first
+	end
+	print service_aux_id.to_s+" "
 	if service_aux.publication_type = "Request"
 		professor_aux = User.where(id:service_aux.creator_id).first
 		partner_aux = User.where(id: service_aux.acceptor_id).first
@@ -285,9 +381,8 @@ exp_id = 0
 		partner_aux = User.where(id:service_aux.creator_id).first
 		professor_aux = User.where(id: service_aux.acceptor_id).first
 	end
-	exp_id += 1 
 	Experience.create(
-		id: exp_id,
+		id: n,
 		description: "Descripción basada en servicio #"+service_aux.id.to_s,
 		title: "Experiencia basada en servicio #"+service_aux.id.to_s,
 		institution_id: service_aux.institution_id,
@@ -317,9 +412,11 @@ exp_id = 0
 		end_time: service_aux.end_time,
 		professor_id: professor_aux.id,
 		partner_id: partner_aux.id,
+		broker_id: service_aux.broker_id,
+		created_at: Time.now+rand(-600..0).days, 
 	)
 	service_aux.status = 5 #Con esto el servicio pasa a estado de experiencia
 	service_aux.save
 end
-print("\tSeed:\tExperiencias de pruebas creadas [50]\n")
+print("\n\tSeed:\tExperiencias de pruebas creadas [50]\n")
 

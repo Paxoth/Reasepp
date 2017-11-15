@@ -111,3 +111,5 @@
 {
     text-align: justify;
 }
+.mainLayout{float:left;width:50%}
+.clearFlt{clear:both}
