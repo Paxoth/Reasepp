@@ -32,7 +32,7 @@ Rails.application.routes.draw do
 	post 'events/searchEvent'
 	post 'services/searchService'
 	post 'questions/searchQuestion'
-
+	
 
 	resources :questions
 	resources :projects
@@ -55,6 +55,7 @@ Rails.application.routes.draw do
 	end
 	resources :experiences
 	resources :institutions
+	get 'institutions/:id/managment' => 'institutions#managment', as: :managment
 	resources :contacts
 	resources :resources
 	resources :interest_links

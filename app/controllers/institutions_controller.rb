@@ -1,14 +1,13 @@
 class InstitutionsController < ApplicationController
 	before_action :authenticate_user!, except: [:show]
-	before_action :set_institution, only: [:show, :edit, :update, :destroy]
-	before_action :validate_category, except: [:show,:index]
+	before_action :set_institution, only: [:show, :edit, :update, :destroy, :managment]
+	before_action :validate_category, except: [:show,:index,:new,:create]
 	before_action :set_breadcrumbs
 
 
 	# GET /institutions
 	# GET /institutions.json
 	def index
-		
 		@institutions = Institution.paginate(page: params[:page],per_page: 15).order("name ASC").all
 	end
 
@@ -80,6 +79,19 @@ class InstitutionsController < ApplicationController
 		end
 	end
 
+	def managment
+		add_breadcrumb @institution.name, @institution
+		add_breadcrumb "Información", managment_path(@institution)
+		@fecha_inicio = params[:fecha_inicio]
+		@fecha_termino = params[:fecha_termino]
+		if(@fecha_inicio.present? and @fecha_termino.present?)
+			print("\nTENGO LAS FECHAS: "+@fecha_inicio+" Y "+@fecha_termino+"\n")
+			@experiences = @institution.experiences.created_between(@fecha_inicio.to_date,@fecha_termino.to_date);
+		end
+		print("\nEXPERIENCIAS------------------------------------------------\n")
+	end
+
+
 	private
 		def set_breadcrumbs
 			add_breadcrumb "Inicio", :root_path
@@ -94,7 +106,7 @@ class InstitutionsController < ApplicationController
 		def validate_category
 			if !@institution.manager_id.blank?
 				if current_user.id != @institution.manager_id
-					redirect_to root_path, alert: "Sólo un encargado AS puede trabajar sobre esta institución."
+					redirect_to root_path, alert: "Sólo el encargado AS puede trabajar sobre esta institución."
 				end
 			elsif !current_user.is_admin?
 				redirect_to root_path, alert: "Solo un admin puede trabajar sobre las insituciones, mientras no haya encargado AS."

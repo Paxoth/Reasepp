@@ -4,29 +4,39 @@ class AreasController < ApplicationController
   before_action :set_area, only: [:show, :edit, :update, :destroy]
 
   add_breadcrumb "Inicio", :root_path
-  add_breadcrumb "Administración", :sections_path
+  
 
   # GET /areas
   # GET /areas.json
+  
   def index
+    add_breadcrumb "Experiencias", experiences_path
     add_breadcrumb "Areas de Trabajo", areas_path 
-    @areas = Area.paginate(page: params[:page],per_page: 15).order("discipline ASC").order("name ASC").all
+    @areas = Area.order("discipline ASC").order("name ASC").all
   end
+
 
   # GET /areas/1
   # GET /areas/1.json
   def show
+    add_breadcrumb "Experiencias", experiences_path
+    add_breadcrumb "Areas de Trabajo", areas_path 
+    add_breadcrumb @area.name
   end
 
   # GET /areas/new
   def new
-    add_breadcrumb "Nueva Area de Trabajo", areas_path
+    add_breadcrumb "Experiencias", experiences_path
+    add_breadcrumb "Areas de Trabajo", areas_path 
+    add_breadcrumb "Nueva Area de Trabajo"
     @area = Area.new
   end
 
   # GET /areas/1/edit
   def edit
-    add_breadcrumb "Editar", areas_path
+    add_breadcrumb "Experiencias", experiences_path
+    add_breadcrumb "Areas de Trabajo", areas_path 
+    add_breadcrumb "Editar"
   end
 
   # POST /areas
@@ -70,22 +80,7 @@ class AreasController < ApplicationController
   end
 
   private
-    # This is an example method commented the way I like. 
-    # It sums the three arguments and returns that value.
-    #
-    # Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-    # do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-    # Ut enim ad minim veniam, quis nostrud exercitation ullamco 
-    # laboris nisi ut aliquip ex ea commodo consequat.
-    #
-    # * *Args*    :
-    #   - +apples+ -> the number of apples
-    #   - +oranges+ -> the number of oranges
-    #   - +pears+ -> the number of pears
-    # * *Returns* :
-    #   - the total number of fruit as an integer
-    # * *Raises* :
-    #   -
+
     def validate_category
       if !current_user.is_admin?
       redirect_to root_path, alert: "Sólo un administrador puede trabajar la página de inicio."

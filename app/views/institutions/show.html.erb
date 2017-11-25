@@ -1,7 +1,17 @@
 <h1><%= @institution.name %></h1>
+
+<%if user_signed_in?%>
+    <%if (current_user.is_admin? and !@manager.present?) or current_user==@manager%>
+        <%= link_to 'Editar', edit_institution_path(@institution), :class =>"btn btn-lg btnCRUD" %>
+        <%=link_to "Información de gestión", managment_path(@institution), :class=>'btn btn-lg btnCRUD'%>
+    <%end%>
+<%end%>
+<%= link_to 'Volver', :back, :class =>"btn btn-lg btnCRUD" %>
+
 <div class="ReaseDiv">
-	<%= render 'datas'%>
-	<%= render 'impacts'%>
-	<%= render 'members'%>
-</div>	
+    
+    <%= render 'datas'%>
+    <%= render 'impacts'%>
+    <%= render 'members'%>
+</div>  
 

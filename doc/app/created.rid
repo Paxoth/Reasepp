@@ -1,7 +1,7 @@
-Wed, 15 Nov 2017 11:04:22 -0300
+Wed, 15 Nov 2017 11:22:31 -0300
 README.rdoc	Wed, 04 Oct 2017 12:07:15 -0300
 app/controllers/application_controller.rb	Wed, 04 Oct 2017 12:20:36 -0300
-app/controllers/areas_controller.rb	Wed, 15 Nov 2017 10:52:29 -0300
+app/controllers/areas_controller.rb	Wed, 15 Nov 2017 11:12:37 -0300
 app/controllers/bulletins_controller.rb	Wed, 18 Oct 2017 12:28:54 -0300
 app/controllers/comments_controller.rb	Wed, 04 Oct 2017 12:20:36 -0300
 app/controllers/contacts_controller.rb	Wed, 04 Oct 2017 12:07:15 -0300
@@ -50,7 +50,7 @@ app/models/area.rb	Fri, 29 Sep 2017 15:37:51 -0300
 app/models/bulletin.rb	Fri, 29 Sep 2017 15:37:53 -0300
 app/models/comment.rb	Fri, 29 Sep 2017 15:37:54 -0300
 app/models/contact.rb	Fri, 29 Sep 2017 15:37:56 -0300
-app/models/event.rb	Wed, 11 Oct 2017 11:54:00 -0300
+app/models/event.rb	Wed, 15 Nov 2017 11:22:23 -0300
 app/models/experience.rb	Mon, 23 Oct 2017 16:01:00 -0300
 app/models/identity.rb	Wed, 11 Oct 2017 11:56:49 -0300
 app/models/institution.rb	Mon, 23 Oct 2017 18:48:55 -0300

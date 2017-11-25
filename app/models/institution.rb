@@ -28,8 +28,9 @@ class Institution < ActiveRecord::Base
 	has_attached_file :logo, styles: {mini:"160x80"}
 	validates_attachment_content_type :logo, content_type: /\Aimage\/.*\Z/ 
 	validates :name, presence: true, uniqueness: true
-	validates :web, presence: true, uniqueness: true
 
+	
+	
 	#Función que permite que el buscador encuentre Instituciones a través de match de palabras en sus atributos.
 	def self.search(search)
 		where("name LIKE ? or web LIKE ?", "%#{search}%","%#{search}%") 

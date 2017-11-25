@@ -45,7 +45,7 @@
 							<th><strong>Apodo</strong></th>
 							<th><strong>Correo electrónico</strong></th>
 							<th><strong>Ofertas disponibles</strong></th>
-							<th><strong>Última Oferta</strong></th>
+							<th><strong>Ingreso a REASE</strong></th>
 
 						</tr>
 						<%@professors.each do |profesor|%>
@@ -53,13 +53,7 @@
 								<td><%=link_to profesor.nickname, profesor%></td>
 								<td><%= profesor.email%></td>
 								<td><%=profesor.offerings.where(status:1).count%></td>
-								<td>
-									<%if profesor.offerings.where(status:1).count > 0 %>
-										<%=link_to "Ver", profesor.offerings.where(status:1).last%>
-									<%else%>
-										--
-									<%end%>								
-								</td>
+								<td><%=l profesor.confirmed_at%></td>
 							</tr>
 						<%end%>
 					</table>
@@ -77,7 +71,7 @@
 							<th><strong>Apodo</strong></th>
 							<th><strong>Correo electrónico</strong></th>
 							<th><strong>Ofertas disponibles</strong></th>
-							<th><strong>Última Oferta</strong></th>
+							<th><strong>Ingreso a REASE</strong></th>
 
 						</tr>
 						<%@partners.each do |socio|%>
@@ -85,13 +79,7 @@
 								<td><%=link_to socio.nickname, socio%></td>
 								<td><%= socio.email%></td>
 								<td><%=socio.requests.where(status:1).count%></td>
-								<td>
-									<%if socio.requests.where(status:1).count > 0 %>
-										<%=link_to "Ver", socio.requests.where(status:1).last%>
-									<%else%>
-										--
-									<%end%>								
-								</td>
+								<td><%=l socio.confirmed_at%></td>
 							</tr>
 						<%end%>
 					</table>
@@ -110,6 +98,7 @@
 							<th><strong>Correo electrónico</strong></th>
 							<th><strong>Ofertas disponibles</strong></th>
 							<th><strong>Solicitudes disponibles</strong></th>
+							<th><strong>Ingreso a REASE</strong></th>
 
 						</tr>
 						<%@brokers.each do |vinculador|%>
@@ -118,6 +107,7 @@
 								<td><%= vinculador.email%></td>
 								<td><%=vinculador.offerings.where(status:1).count%></td>
 								<td><%=vinculador.requests.where(status:1).count%></td>
+								<td><%=l vinculador.confirmed_at%></td>
 							</tr>
 						<%end%>
 					</table>
@@ -129,12 +119,6 @@
 		</div>
 	</div>
 	<br>
-	<%if (current_user.is_admin? and !@manager.present?) or current_user==@manager%>
-		<%= link_to 'Editar', edit_institution_path(@institution), :class =>"btn btn-lg" %>
-		<%= link_to 'Volver', :back, :class =>"btn btn-lg" %>
-	<%end%>
-<%else%>
-	<br><%= link_to 'Volver', :back, :class =>"btn btn-lg" %>
 <%end%>
 
 <script type="text/javascript">

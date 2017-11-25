@@ -45,6 +45,11 @@ gem 'omniauth-facebook'
 gem 'will_paginate', '3.1.0'
 gem 'prawn', '2.0.2'
 
+gem 'jquery-ui-rails'
+gem 'multi-dates-picker-rails'
+gem 'bootstrap-datepicker-rails'
+
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

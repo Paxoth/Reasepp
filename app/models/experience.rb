@@ -22,6 +22,9 @@ class Experience < ActiveRecord::Base
 	belongs_to :area
 	belongs_to :service
 
+	scope :created_between, lambda {|start_date, end_date| where("created_at >= ? AND created_at <= ?", start_date, end_date )}
+	scope :by_area, ->(area_id) { where("area_id = ?", area_id)}
+	
 	#Función que permite que el buscador encuentre Experiencias a través de match de palabras en sus atributos.
 	def self.search(search)
 		where("faculty LIKE ? or department LIKE ? or course_name LIKE ? or course_type LIKE ? or period LIKE ? or learning_objectives LIKE ? or service_objectives LIKE ? or benefited LIKE ? or results LIKE ? or tools LIKE ? or description LIKE ? or reflection_moments LIKE ? or title LIKE ?", "%#{search}%","%#{search}%", "%#{search}%", "%#{search}%","%#{search}%", "%#{search}%", "%#{search}%","%#{search}%", "%#{search}%", "%#{search}%","%#{search}%", "%#{search}%" , "%#{search}%") 

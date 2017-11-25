@@ -11,7 +11,12 @@ class ExperiencesController < ApplicationController
 	add_breadcrumb "Experiencias", :experiences_path
 
 	def index
-		@experiences =Experience.paginate(page: params[:page],per_page: 5).all.order("created_at DESC")
+		@experiences =Experience.paginate(page: params[:page],per_page: 30).all.order("created_at DESC")
+	end
+
+	def by_areas
+		@experiences =Experience.paginate(page: params[:page],per_page: 30).all.order("created_at DESC")
+		@areas = Area.all
 	end
 
 	def new
