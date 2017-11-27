@@ -1,3 +1,6 @@
+=begin rdoc
+  _**Experience:** controlador de las Experiencias (Ver Experience)_
+=end
 class ExperiencesController < ApplicationController
 	before_action :authenticate_user!
 	before_action :set_realizado
@@ -10,20 +13,26 @@ class ExperiencesController < ApplicationController
 	add_breadcrumb "Inicio", :root_path
 	add_breadcrumb "Experiencias", :experiences_path
 
+	#Vista principal
+	#
+	#Genera la consulta de las experiencias paginadas de a 30 elementos.
 	def index
 		@experiences =Experience.paginate(page: params[:page],per_page: 30).all.order("created_at DESC")
 	end
 
-	def by_areas
-		@experiences =Experience.paginate(page: params[:page],per_page: 30).all.order("created_at DESC")
-		@areas = Area.all
-	end
-
+	#Vista nueva experiencias
+	#
+	#Permite crear uan experiencia, basada un un servicio anteriormente generado. Las experiencias, siempre provienen de un servicio.
+	#En caso de que no provenga de un servicio se pueden generar experiencias documentadas (Ver Project)
 	def new
 		@service = servicio
 		@experience = @service.experiences.new
 	end
-	# GET /experiences/1/edit
+
+	#Vista de editar experiencias
+	#
+	#Permite editar expereincias de acuerdo a los parametros establecidos.
+	#Impide que un usuario que no sea el profesor creador del servicio padre pueda generar la experiencia.
 	def edit
 		add_breadcrumb "Editar"
 	    @service = servicio
@@ -33,6 +42,10 @@ class ExperiencesController < ApplicationController
 	    end
 	end
 
+	#Vista específica
+	#
+	#Permite mostrar los datos de una experiecias buscada por ID.
+	#También se pueden generar un pdf con la inforḿación de la experiencia (Ver ExperiencePdf)
 	def show
 		@experience = Experience.find(params[:id])
 		if @experience.broker_id.present?
@@ -52,8 +65,11 @@ class ExperiencesController < ApplicationController
 		end
 	end
 
-	# POST /experiences
-	# POST /experiences.json
+	#Crear Experiencia
+	#
+	# Método que permite crear una experiencia basada en un servicio (NestedResource)
+	# Se preocupa de ver si la experiencia viene de una oferta o una solicitud para decidir quién es el responsable. 
+	# El profesor siempre debe ser responsable de las experiencias.
 	def create
 		@service = servicio
 		@experience = @service.experiences.new(experience_params)
@@ -78,8 +94,9 @@ class ExperiencesController < ApplicationController
 		end
 	end
 
-	# PATCH/PUT /experiences/1
-	# PATCH/PUT /experiences/1.json
+	#Actualizar experiencia
+	#
+	#Permite actualizar los datos de la experiencia.
 	def update
 	    @service = servicio
 	    @experience = @service.experiences.find(params[:id])
@@ -94,8 +111,7 @@ class ExperiencesController < ApplicationController
 		end
 	end
 
-	# DELETE /experiences/1
-	# DELETE /experiences/1.json
+	#Permite eliminar una experiencia. Generada automáticamente por scaffold.
 	def destroy
 		@experience.destroy
 		respond_to do |format|
@@ -104,6 +120,8 @@ class ExperiencesController < ApplicationController
 		end
 	end
 
+	#Vista que permite buscar experiencias a través de un match de palabras, utilizando la función search.
+	#La busqueda complementa tanto las experiencias como las experiencias documentadas ( Project )
 	def searchExperience
 		add_breadcrumb "Búsqueda"
 		@experiences = Experience.order("created_at DESC").all
@@ -119,18 +137,21 @@ class ExperiencesController < ApplicationController
 	
 	private
 
-    def servicio
+	#Busca los servicios de acuerdo al ID obtenido del URL
+    def servicio # :doc
         id = params[:service_id]
         Service.find(params[:service_id])     
     end 
 
-	def validate_category
+    #Valida que solo un profesor puede trabajar sobre la experiencia.
+	def validate_category # :doc
 		if current_user.category != 2
 			redirect_to root_path, alert: "Sólo un profesor puede trabajar las experiencias."
 		end   
 	end
 
-	def set_realizado
+	#Realiza la consulta de las actividades AS que estén en un estado de realizado.
+	def set_realizado # :doc
 		@offerings = Offering.where("status = ?", 3)
 		@requests = Request.where("status = ?", 3)
 	end
@@ -139,17 +160,20 @@ class ExperiencesController < ApplicationController
 		@experience = Experience.find(params[:id])
     end
 
-    def set_institutionsAndAreas
+    #Realiza las consultas de todas las Institution y Area para la clasificación de las experiencias.
+    def set_institutionsAndAreas # :doc
     	@institutions = Institution.all
     	@areas = Area.order("discipline ASC").order("name ASC").all	
     end
 
-	def set_broker
+    # Busca si el servicio padre de la experiencia posee un vinculador social.
+    # De ser así realiza la consulta para tenerlo en parametros.
+	def set_broker # :doc
 		if servicio.broker_id.present?
 			@broker = User.where(id:servicio.broker_id).first
 		end
 	end
-    # Never trust parameters from the scary internet, only allow the white list through.
+    
     def experience_params
       params.require(:experience).permit(
       		:area_id,

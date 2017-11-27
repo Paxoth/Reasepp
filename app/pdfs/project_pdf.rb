@@ -1,7 +1,10 @@
-#https://www.youtube.com/watch?v=e-A3zBeWDdE
-
-#margin arriba 1.24 abajo 2.5 abajo 3 y 3
+=begin rdoc
+  _**Project PDF:** generador del documento .PDF de una experiencia documentada  (Ver Project)_
+=end
 class ProjectPdf < Prawn::Document
+	#Funcion que inicializa el documento, dandole el formato respectivo.
+	#
+	#Llama a los métodos con la información de las experiencias.
 	def initialize(project) 
 		super(:margin => [90,90,90,90], :page_size=>'LETTER')
 		@project = project
@@ -14,12 +17,14 @@ class ProjectPdf < Prawn::Document
 
 	end
 
+	#Título del pdf
 	def project_title
 		text "\n\nFORMATO SISTEMATIZACIÓN ACTIVIDADES APRENDIZAJE SERVICIO", size: 13, style: :bold, align: :center
 		text "TÍTULO: #{@project.title}",size: 13, style: :bold, align: :center
 		text "FOLIO N° #{@project.id}\nFecha: #{@project.created_at.strftime("%d/%m/%Y")}", size: 13, style: :bold, align: :center
 	end
 
+	#Información general de la experiencia
 	def projects_general
 		text "\n\n I Antecedentes generales:", size: 12, style: :bold
 		text "\n<b>Universidad:</b> #{@project.institution.name}", size: 11, indent_paragraphs: 30, align: :justify, :inline_format => true
@@ -47,6 +52,7 @@ class ProjectPdf < Prawn::Document
 		
 	end
 	
+	#Información sobre los responsables de la experiencia
 	def projects_information
 		text "\n\n II Datos de los responsables:", size: 12, style: :bold
 		text "\n<b>Nombre profesor responsable:</b> #{@project.user.name}", size: 11, indent_paragraphs: 30, align: :justify, :inline_format => true
@@ -62,6 +68,7 @@ class ProjectPdf < Prawn::Document
 		text "\n<b>Nombre del socio comunitario:</b> #{@project.partner}", size: 11, indent_paragraphs: 30, align: :justify, :inline_format => true
 	end
 
+	#Información sobre la actividad y sus objetivos
 	def project_activity
 		text "\n\n III Antecedentes de la actividad de Aprendizaje Servicio:", size: 12, style: :bold
 		text "\n<b>Objetivos de aprendizaje y/o competencias asociadas:", size: 11, indent_paragraphs: 30, align: :justify, :inline_format => true

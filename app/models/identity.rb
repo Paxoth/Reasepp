@@ -1,6 +1,12 @@
-class Identity < ActiveRecord::Base
+=begin rdoc
 
-	#Esta entidad fue creada para poder dar paso a la gema Omniauth y permitir la conexión a través de Facebook.
+_**Identity**__ esta entidad fue creada para poder dar paso a la gema Omniauth y permitir la conexión a través de Facebook.
+
+**RELACIONES**
+
+*	belongs_to User
+=end
+class Identity < ActiveRecord::Base
 	belongs_to :user
 	validates_presence_of :uid, :provider
 	validates_uniqueness_of :uid, :scope => :provider

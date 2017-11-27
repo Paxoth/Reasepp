@@ -70,6 +70,8 @@
 
   <ul class="link-list" role="directory">
     
+    <li ><a href="#method-i-area_params">#area_params</a>
+    
     <li ><a href="#method-i-create">#create</a>
     
     <li ><a href="#method-i-destroy">#destroy</a>
@@ -80,9 +82,13 @@
     
     <li ><a href="#method-i-new">#new</a>
     
+    <li ><a href="#method-i-set_area">#set_area</a>
+    
     <li ><a href="#method-i-show">#show</a>
     
     <li ><a href="#method-i-update">#update</a>
+    
+    <li ><a href="#method-i-validate_category">#validate_category</a>
     
   </ul>
 </div>
@@ -97,6 +103,9 @@
 
   <section class="description">
     
+<p><strong><em>Areas</strong> controlador de las áreas de trabajo (Ver <a
+href="Area.html">Area</a>)</em></p>
+
   </section>
 
   
@@ -131,13 +140,16 @@
 
         <div class="method-description">
           
-          <p>POST /areas POST /areas.json</p>
+          <p>Crear área</p>
+
+<p>Genera la nueva área con los parametros permitidos de la clase <a
+href="Area.html">Area</a> y redirecciona la vista de esta.</p>
           
           
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/areas_controller.rb, line 34</span>
+            <pre><span class="ruby-comment"># File app/controllers/areas_controller.rb, line 52</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
   <span class="ruby-ivar">@area</span> = <span class="ruby-constant">Area</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">area_params</span>)
 
@@ -174,13 +186,15 @@
 
         <div class="method-description">
           
-          <p>DELETE /areas/1 DELETE /areas/1.json</p>
+          <p>Eliminar área</p>
+
+<p>Permite eliminar de la base de datos el área de trabajo</p>
           
           
 
           
           <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/areas_controller.rb, line 64</span>
+            <pre><span class="ruby-comment"># File app/controllers/areas_controller.rb, line 84</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
   <span class="ruby-ivar">@area</span>.<span class="ruby-identifier">destroy</span>
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
@@ -211,15 +225,19 @@
 
         <div class="method-description">
           
-          <p>GET /areas/1/edit</p>
+          <p>Vista Editar área</p>
+
+<p>Pérmite la edición de un área de trabajo ya generado.</p>
           
           
 
           
           <div class="method-source-code" id="edit-source">
-            <pre><span class="ruby-comment"># File app/controllers/areas_controller.rb, line 28</span>
+            <pre><span class="ruby-comment"># File app/controllers/areas_controller.rb, line 43</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">edit</span>
-  <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Editar&quot;</span>, <span class="ruby-identifier">areas_path</span>
+  <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Experiencias&quot;</span>, <span class="ruby-identifier">experiences_path</span>
+  <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Areas de Trabajo&quot;</span>, <span class="ruby-identifier">areas_path</span> 
+  <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Editar&quot;</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -244,16 +262,19 @@
 
         <div class="method-description">
           
-          <p>GET /areas GET /areas.json</p>
+          <p>Vista Principal</p>
+
+<p>Genera la consulta de las áreas ordenadas por disciplina y nombre.</p>
           
           
 
           
           <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File app/controllers/areas_controller.rb, line 11</span>
+            <pre><span class="ruby-comment"># File app/controllers/areas_controller.rb, line 14</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
+  <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Experiencias&quot;</span>, <span class="ruby-identifier">experiences_path</span>
   <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Areas de Trabajo&quot;</span>, <span class="ruby-identifier">areas_path</span> 
-  <span class="ruby-ivar">@areas</span> = <span class="ruby-constant">Area</span>.<span class="ruby-identifier">paginate</span>(<span class="ruby-identifier">page</span><span class="ruby-operator">:</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:page</span>],<span class="ruby-identifier">per_page</span><span class="ruby-operator">:</span> <span class="ruby-value">15</span>).<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;discipline ASC&quot;</span>).<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;name ASC&quot;</span>).<span class="ruby-identifier">all</span>
+  <span class="ruby-ivar">@areas</span> = <span class="ruby-constant">Area</span>.<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;discipline ASC&quot;</span>).<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;name ASC&quot;</span>).<span class="ruby-identifier">all</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -278,15 +299,19 @@
 
         <div class="method-description">
           
-          <p>GET /areas/new</p>
+          <p>Vista Nueva área</p>
+
+<p>Pérmite la creación de una nueva área de trabajo</p>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/controllers/areas_controller.rb, line 22</span>
+            <pre><span class="ruby-comment"># File app/controllers/areas_controller.rb, line 33</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
-  <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Nueva Area de Trabajo&quot;</span>, <span class="ruby-identifier">areas_path</span>
+  <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Experiencias&quot;</span>, <span class="ruby-identifier">experiences_path</span>
+  <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Areas de Trabajo&quot;</span>, <span class="ruby-identifier">areas_path</span> 
+  <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Nueva Area de Trabajo&quot;</span>
   <span class="ruby-ivar">@area</span> = <span class="ruby-constant">Area</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -312,14 +337,19 @@
 
         <div class="method-description">
           
-          <p>GET /areas/1 GET /areas/1.json</p>
+          <p>Vista específica</p>
+
+<p>Muestra la vista de un área en específico clasificado por ID</p>
           
           
 
           
           <div class="method-source-code" id="show-source">
-            <pre><span class="ruby-comment"># File app/controllers/areas_controller.rb, line 18</span>
+            <pre><span class="ruby-comment"># File app/controllers/areas_controller.rb, line 24</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
+  <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Experiencias&quot;</span>, <span class="ruby-identifier">experiences_path</span>
+  <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Areas de Trabajo&quot;</span>, <span class="ruby-identifier">areas_path</span> 
+  <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-ivar">@area</span>.<span class="ruby-identifier">name</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -344,13 +374,17 @@
 
         <div class="method-description">
           
-          <p>PATCH/PUT /areas/1 PATCH/PUT /areas/1.json</p>
+          <p>Actualizar área</p>
+
+<p>Genera el cambio realizado a través de la vista de editar área con los
+parametros permitidos de la clase <a href="Area.html">Area</a> y
+redirecciona la vista de esta.</p>
           
           
 
           
           <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File app/controllers/areas_controller.rb, line 50</span>
+            <pre><span class="ruby-comment"># File app/controllers/areas_controller.rb, line 69</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">if</span> <span class="ruby-ivar">@area</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">area_params</span>)
@@ -361,6 +395,119 @@
       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@area</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:unprocessable_entity</span> }
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="private-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Private Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-area_params" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">area_params</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Parametros permitidos para creación y edición de un área de trabajo.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="area_params-source">
+            <pre><span class="ruby-comment"># File app/controllers/areas_controller.rb, line 110</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">area_params</span> <span class="ruby-comment"># :doc:</span>
+  <span class="ruby-identifier">params</span>.<span class="ruby-identifier">require</span>(<span class="ruby-value">:area</span>).<span class="ruby-identifier">permit</span>(<span class="ruby-value">:name</span>, <span class="ruby-value">:description</span>, <span class="ruby-value">:discipline</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-set_area" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">set_area</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Permite la consulta específica de un área de trabajo Utilizado para la
+vista específica y la edición de un área.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="set_area-source">
+            <pre><span class="ruby-comment"># File app/controllers/areas_controller.rb, line 105</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">set_area</span> <span class="ruby-comment"># :doc:</span>
+  <span class="ruby-ivar">@area</span> = <span class="ruby-constant">Area</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-validate_category" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">validate_category</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Confirma que el único capaz de entrar a vistas de <a
+href="Area.html">Area</a> sea un administrador.</p>
+
+<p>Excepto a la vista principal y la específica.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="validate_category-source">
+            <pre><span class="ruby-comment"># File app/controllers/areas_controller.rb, line 97</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">validate_category</span> <span class="ruby-comment"># :doc:</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">is_admin?</span>
+    <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">root_path</span>, <span class="ruby-identifier">alert</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;Sólo un administrador puede trabajar la página de inicio.&quot;</span>
+  <span class="ruby-keyword">end</span>   
 <span class="ruby-keyword">end</span></pre>
           </div>
           

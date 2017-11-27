@@ -1,13 +1,23 @@
+=begin rdoc
+_**Comments** Son los comentarios que puede realizar un usuario, en las ofertas de servicios, solicitudes de servicios, servicios activos y eventos._
+
+**ATRIBUTOS**
+
+*	__body__: Corresponde al texto del comentario.
+*	__post_i__d: Corresponde al id de la publicación cual se está comentado la cual, como ya se mencionó, corresponde a ofertas de servicios, solicitudes de servicios, servicios activos y eventos.
+*	__post_type__: Indica qué tipo publicación se está comentando.
+
+**RELACIONES**
+
+*	belongs_to User
+*	belongs_to Post (Polimorfismo)
+    + Offering
+    + Request
+    + Service
+
+
+=end
 class Comment < ActiveRecord::Base
-	#ENTIDAD COMMENT:
-	#Utilizado para generar comentario en diferentes post (Servicios y eventos)
-		
-	#ATRIBUTOS:
-		#body: representa el cuerpo del comentario en si
-		#post_id: hace referencia al post que se está cometnando (Servicios o eventos)
-		#post_type: hace referencia al tipo de post al cual e le hace comentario (request, offerings, experiences, events, etc)
-			#Los dos atributos anteriores son referencias basadas en el polimorfismo de los post.
-	
 	#RELACIONES
 	belongs_to :user
 	belongs_to :post, polymorphic: true

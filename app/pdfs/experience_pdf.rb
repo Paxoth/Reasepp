@@ -1,7 +1,10 @@
-#https://www.youtube.com/watch?v=e-A3zBeWDdE
-
-#margin arriba 1.24 abajo 2.5 abajo 3 y 3
+=begin rdoc
+  _**Experience PDF:** generador del documento .PDF de una experiencia de servicio (Ver Experience)_
+=end
 class ExperiencePdf < Prawn::Document
+	#Funcion que inicializa el documento, dandole el formato respectivo.
+	#
+	#Llama a los métodos con la información de las experiencias.
 	def initialize(experience) 
 		super(:margin => [90,90,90,90], :page_size=>'LETTER')
 		@experience = experience
@@ -17,12 +20,14 @@ class ExperiencePdf < Prawn::Document
 
 	end
 
+	#Título del pdf
 	def experience_title
 		text "\n\nFORMATO SISTEMATIZACIÓN ACTIVIDADES APRENDIZAJE SERVICIO", size: 13, style: :bold, align: :center
 		text "TÍTULO: #{@experience.title}",size: 13, style: :bold, align: :center
 		text "FOLIO N° #{@experience.id}\nFecha: #{@experience.created_at.strftime("%d/%m/%Y")}", size: 13, style: :bold, align: :center
 	end
 
+	#Información general de la experiencia
 	def experiences_general
 		text "\n\n I Antecedentes generales:", size: 12, style: :bold
 		text "\n<b>Universidad:</b> #{@experience.institution.name}", size: 11, indent_paragraphs: 30, align: :justify, :inline_format => true
@@ -50,6 +55,7 @@ class ExperiencePdf < Prawn::Document
 		
 	end
 	
+	#Información sobre los responsables de la experiencia
 	def experiences_information
 		text "\n\n II Datos de los responsables:", size: 12, style: :bold
 		text "\n<b>Nombre profesor responsable:</b> #{@experience.professor.name}", size: 11, indent_paragraphs: 30, align: :justify, :inline_format => true
@@ -69,6 +75,7 @@ class ExperiencePdf < Prawn::Document
 		end
 	end
 
+	#Información sobre la actividad y sus objetivos
 	def experience_activity
 		text "\n\n III Antecedentes de la actividad de Aprendizaje Servicio:", size: 12, style: :bold
 		text "\n<b>Objetivos de aprendizaje y/o competencias asociadas:", size: 11, indent_paragraphs: 30, align: :justify, :inline_format => true

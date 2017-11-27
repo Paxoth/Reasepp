@@ -70,17 +70,19 @@
 
   <ul class="link-list" role="directory">
     
-    <li ><a href="#method-i-create">#create</a>
+    <li ><a href="#method-i-bulletin_params">#bulletin_params</a>
     
-    <li ><a href="#method-i-destroy">#destroy</a>
+    <li ><a href="#method-i-create">#create</a>
     
     <li ><a href="#method-i-index">#index</a>
     
     <li ><a href="#method-i-new">#new</a>
     
+    <li ><a href="#method-i-set_bulletin">#set_bulletin</a>
+    
     <li ><a href="#method-i-show">#show</a>
     
-    <li ><a href="#method-i-update">#update</a>
+    <li ><a href="#method-i-validate_category">#validate_category</a>
     
   </ul>
 </div>
@@ -95,6 +97,9 @@
 
   <section class="description">
     
+<p><strong><em>Bulletin</strong> controlador de los Boletines (Ver <a
+href="Bulletin.html">Bulletin</a>)</em></p>
+
   </section>
 
   
@@ -129,13 +134,19 @@
 
         <div class="method-description">
           
-          <p>POST /bulletins POST /bulletins.json</p>
+          <p>Crear Boletín</p>
+
+<p>Genera el nuevo boletín con los parametros permitidos de la clase <a
+href="Area.html">Area</a> y redirecciona la vista de esta.</p>
+
+<p>Utiliza la función de <a href="BulletinMailer.html">BulletinMailer</a> para
+enviar los correos a los respectivos usuarios.</p>
           
           
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/bulletins_controller.rb, line 38</span>
+            <pre><span class="ruby-comment"># File app/controllers/bulletins_controller.rb, line 49</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
         <span class="ruby-ivar">@bulletin</span> = <span class="ruby-constant">Bulletin</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">bulletin_params</span>)
         <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
@@ -178,43 +189,6 @@
       </div>
 
     
-      <div id="method-i-destroy" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">destroy</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>DELETE /bulletins/1 DELETE /bulletins/1.json</p>
-          
-          
-
-          
-          <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/bulletins_controller.rb, line 87</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
-        <span class="ruby-ivar">@bulletin</span>.<span class="ruby-identifier">destroy</span>
-        <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-                <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">bulletins_url</span>, <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Bulletin was successfully destroyed.&#39;</span> }
-                <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">head</span> <span class="ruby-value">:no_content</span> }
-        <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
       <div id="method-i-index" class="method-detail ">
         
         <div class="method-heading">
@@ -228,13 +202,16 @@
 
         <div class="method-description">
           
-          <p>GET /bulletins GET /bulletins.json</p>
+          <p>Vista Principal</p>
+
+<p>Genera la consulta de todos los <a href="Bulletin.html">Bulletin</a>
+páginados en 5 elementos</p>
           
           
 
           
           <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File app/controllers/bulletins_controller.rb, line 11</span>
+            <pre><span class="ruby-comment"># File app/controllers/bulletins_controller.rb, line 15</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
         <span class="ruby-ivar">@bulletins</span> = <span class="ruby-constant">Bulletin</span>.<span class="ruby-identifier">paginate</span>(<span class="ruby-identifier">page</span><span class="ruby-operator">:</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:page</span>],<span class="ruby-identifier">per_page</span><span class="ruby-operator">:</span> <span class="ruby-value">5</span>).<span class="ruby-identifier">all</span>
 <span class="ruby-keyword">end</span></pre>
@@ -261,13 +238,15 @@
 
         <div class="method-description">
           
-          <p>GET /bulletins/new</p>
+          <p>Vista Nuevo boletín</p>
+
+<p>Pérmite la creación de un nuevo boletín</p>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/controllers/bulletins_controller.rb, line 32</span>
+            <pre><span class="ruby-comment"># File app/controllers/bulletins_controller.rb, line 40</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
         <span class="ruby-ivar">@bulletin</span> = <span class="ruby-constant">Bulletin</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-keyword">end</span></pre>
@@ -294,13 +273,16 @@
 
         <div class="method-description">
           
-          <p>GET /bulletins/1 GET /bulletins/1.json</p>
+          <p>Vista específica</p>
+
+<p>Muestra la vista de un boletín en específico clasificado por ID Muestra la
+información de los últimas actividades del sitio.</p>
           
           
 
           
           <div class="method-source-code" id="show-source">
-            <pre><span class="ruby-comment"># File app/controllers/bulletins_controller.rb, line 17</span>
+            <pre><span class="ruby-comment"># File app/controllers/bulletins_controller.rb, line 23</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
         <span class="ruby-keyword">if</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">is_admin?</span>
                 <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Administración&quot;</span>, <span class="ruby-value">:sections_path</span>, <span class="ruby-identifier">except</span>[[<span class="ruby-value">:show</span>]
@@ -324,10 +306,18 @@
       </div>
 
     
-      <div id="method-i-update" class="method-detail ">
+    </section>
+  
+     <section id="private-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Private Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-bulletin_params" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">update</span><span
+          <span class="method-name">bulletin_params</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -337,23 +327,85 @@
 
         <div class="method-description">
           
-          <p>PATCH/PUT /bulletins/1 PATCH/PUT /bulletins/1.json</p>
+          <p>Parametros permitidos para creación un boletín.</p>
           
           
 
           
-          <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File app/controllers/bulletins_controller.rb, line 73</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
-        <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-                <span class="ruby-keyword">if</span> <span class="ruby-ivar">@bulletin</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">bulletin_params</span>)
-                        <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-ivar">@bulletin</span>, <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Bulletin was successfully updated.&#39;</span> }
-                        <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:show</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:ok</span>, <span class="ruby-identifier">location</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@bulletin</span> }
-                <span class="ruby-keyword">else</span>
-                        <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:edit</span> }
-                        <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@bulletin</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:unprocessable_entity</span> }
-                <span class="ruby-keyword">end</span>
-        <span class="ruby-keyword">end</span>
+          <div class="method-source-code" id="bulletin_params-source">
+            <pre><span class="ruby-comment"># File app/controllers/bulletins_controller.rb, line 121</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">bulletin_params</span> <span class="ruby-comment"># :doc:</span>
+        <span class="ruby-identifier">params</span>.<span class="ruby-identifier">require</span>(<span class="ruby-value">:bulletin</span>).<span class="ruby-identifier">permit</span>(<span class="ruby-value">:title</span>, <span class="ruby-value">:description</span>, <span class="ruby-value">:start_date</span>, <span class="ruby-value">:receiver</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-set_bulletin" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">set_bulletin</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Permite la consulta específica de un <a href="Bulletin.html">Bulletin</a>
+Utilizado para la vista específica.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="set_bulletin-source">
+            <pre><span class="ruby-comment"># File app/controllers/bulletins_controller.rb, line 116</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">set_bulletin</span> <span class="ruby-comment"># :doc:</span>
+        <span class="ruby-ivar">@bulletin</span> = <span class="ruby-constant">Bulletin</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-validate_category" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">validate_category</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Solo los administradores pueden acceder a las vistas de <a
+href="Bulletin.html">Bulletin</a> y generarlos.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="validate_category-source">
+            <pre><span class="ruby-comment"># File app/controllers/bulletins_controller.rb, line 108</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">validate_category</span> <span class="ruby-comment"># :doc:</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">is_admin?</span>
+                <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">root_path</span>, <span class="ruby-identifier">alert</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;Sólo un administrador puede trabajar la página de inicio.&quot;</span>
+        <span class="ruby-keyword">end</span>   
 <span class="ruby-keyword">end</span></pre>
           </div>
           

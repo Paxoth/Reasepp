@@ -1,3 +1,6 @@
+=begin rdoc
+  _**Event:** controlador de los Eventos (Ver Event)_
+=end
 class EventsController < ApplicationController
 	before_action :authenticate_user!, except: [:index, :listado, :show]
 	before_action :validate_category, except: [:index, :show, :listado,:searchEvent]
@@ -6,12 +9,18 @@ class EventsController < ApplicationController
 	add_breadcrumb "Inicio", :root_path
 	add_breadcrumb "Eventos", :events_path
 
-	# GET /events
-	# GET /events.json
+	#Vista Principal
+	#
+	#Genera la consulta de todos los eventos activos, ordenados por fecha de inicio.
+	#
+	#Vista en forma de calendario.
 	def index
 		@events = Event.order("start_time ASC").where(status: 1)
 	end
 
+	#Vista listado
+	#
+	#Genera la consulta de todos los eventos en sus diferentes estados.
 	def listado
 		@disponibles = Event.where(status: 1).paginate(page: params[:disponibles],per_page: 5).order("start_time ASC")
 		@realizados = Event.where(status: 2).order("updated_at ASC")
@@ -19,6 +28,7 @@ class EventsController < ApplicationController
 		@caducados = Event.where(status: 4).order("start_time ASC")
 	end
 
+	#Vista para buscar eventos a través de la consulta de una palabra.
 	def searchEvent
 		add_breadcrumb "Búsqueda"
 		@events = Event.order("start_time ASC").all
@@ -28,30 +38,37 @@ class EventsController < ApplicationController
 			@events = Event.order("start_time ASC").all
 		end
 	end
-	# GET /events/1
-	# GET /events/1.json
+	
+	#Vista específica
+	#
+	#Muestra un evento con toda su información. En caso de que la fecha del evento haya pasado, indica que el evento caducó.
 	def show
 		add_breadcrumb "Mostrar"
 		@comment = Comment.new
 		if @event.end_time < Time.now && @event.status == 1
 			@event.update(status: 4)
-      flash[:alert] = "La fecha límite del evento ya ha sido sobrepasada, por lo cual ha caducado."
+      		flash[:alert] = "La fecha límite del evento ya ha sido sobrepasada, por lo cual ha caducado."
 		end
 	end
 
-	# GET /events/new
+	# Nuevo evento
+	#
+	# Vista que permite la creación de un nuevo evento.
 	def new
 		add_breadcrumb "Nuevo evento"
 		@event = Event.new
 	end
 
-	# GET /events/1/edit
+	# Editar evento
+	#
+	# Vista que permite la edición de un evento que es capturado por su ID.
 	def edit
 		add_breadcrumb "Editar"
 	end
 
-	# POST /events
-	# POST /events.json
+	# Crear Evento
+	# Método que permite la cración de un evento bajo el nombre de un usuario coenctado.
+	# Valida que la fecha de inicio no sea mayor que la de término.
 	def create
 		@event = current_user.events.new(event_params)
 		@event.status = 1
@@ -76,8 +93,9 @@ class EventsController < ApplicationController
 		end
 	end
 
-	# PATCH/PUT /events/1
-	# PATCH/PUT /events/1.json
+	# Actualizar evento
+	#
+	# Método que permite actualizar los datos del evento. Valida las fechas.
 	def update
 		respond_to do |format|
 			if @event.update(event_params)
@@ -99,8 +117,7 @@ class EventsController < ApplicationController
 		end
 	end
 
-	# DELETE /events/1
-	# DELETE /events/1.json
+	# Eliminar evento, generado automáticamente por scaffold
 	def destroy
 		@event.destroy
 		respond_to do |format|
@@ -110,18 +127,18 @@ class EventsController < ApplicationController
 	end
 
 	private
-		def validate_category
+		#Valida que los usuarios que puedan generar eventos sean administradores.
+		def validate_category # :doc:
 			if !current_user.is_admin?
 				redirect_to root_path, alert: "Sólo un administrador puede trabajar los eventos."
 			end 
 		end
 
-		# Use callbacks to share common setup or constraints between actions.
+		
 		def set_event
 			@event = Event.find(params[:id])
 		end
 
-		# Never trust parameters from the scary internet, only allow the white list through.
 		def event_params
 			params.require(:event).permit(
 				:user_id, 

@@ -1,2 +1,2 @@
-module OfferingsHelper
+module OfferingsHelper # :nodoc:
 end

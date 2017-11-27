@@ -1,3 +1,6 @@
+=begin rdoc
+  _**Bulletin** controlador de los Boletines (Ver Bulletin)_
+=end
 class BulletinsController < ApplicationController
 	before_action :authenticate_user!
 	before_action :validate_category, except: [:show]
@@ -6,14 +9,17 @@ class BulletinsController < ApplicationController
 	add_breadcrumb "Administración", :sections_path, except:[:show]
 	add_breadcrumb "Boletines", :bulletins_path, except:[:show]
 
-	# GET /bulletins
-	# GET /bulletins.json
+	#Vista Principal
+	#
+	#Genera la consulta de todos los Bulletin páginados en 5 elementos
 	def index
 		@bulletins = Bulletin.paginate(page: params[:page],per_page: 5).all
 	end
 
-	# GET /bulletins/1
-	# GET /bulletins/1.json
+	#Vista específica
+	#
+	#Muestra la vista de un boletín en específico clasificado por ID
+	#Muestra la información de los últimas actividades del sitio.
 	def show
 		if current_user.is_admin?
 			add_breadcrumb "Administración", :sections_path, except:[:show]
@@ -28,13 +34,18 @@ class BulletinsController < ApplicationController
 		@experiences = Experience.where(['created_at >= ?',@bulletin.start_date])
 	end
 
-	# GET /bulletins/new
+	#Vista Nuevo boletín
+	#
+	#Pérmite la creación de un nuevo boletín
 	def new
 		@bulletin = Bulletin.new
 	end
 
-	# POST /bulletins
-	# POST /bulletins.json
+	#Crear Boletín
+	#
+	#Genera el nuevo boletín con los parametros permitidos de la clase Area y redirecciona la vista de esta.
+	#
+	#Utiliza la función de BulletinMailer para enviar los correos a los respectivos usuarios.
 	def create
 		@bulletin = Bulletin.new(bulletin_params)
 		respond_to do |format|
@@ -68,9 +79,9 @@ class BulletinsController < ApplicationController
 		end
 	end
 
-	# PATCH/PUT /bulletins/1
-	# PATCH/PUT /bulletins/1.json
-	def update
+	#Actualizar Boletín
+	#Función generada por scaffold, nunca utilizada
+	def update # :nodoc:
 		respond_to do |format|
 			if @bulletin.update(bulletin_params)
 				format.html { redirect_to @bulletin, notice: 'Bulletin was successfully updated.' }
@@ -82,9 +93,9 @@ class BulletinsController < ApplicationController
 		end
 	end
 
-	# DELETE /bulletins/1
-	# DELETE /bulletins/1.json
-	def destroy
+	#Eliminar Boletín
+	#Función generada por scaffold, nunca utilizada
+	def destroy # :nodoc:
 		@bulletin.destroy
 		respond_to do |format|
 			format.html { redirect_to bulletins_url, notice: 'Bulletin was successfully destroyed.' }
@@ -93,19 +104,21 @@ class BulletinsController < ApplicationController
 	end
 
 	private
-		def validate_category
+		#Solo los administradores pueden acceder a las vistas de Bulletin y generarlos.
+		def validate_category # :doc:
 			if !current_user.is_admin?
 				redirect_to root_path, alert: "Sólo un administrador puede trabajar la página de inicio."
 			end   
 		end
-		# Use callbacks to share common setup or constraints between actions.
 
-		def set_bulletin
+		#Permite la consulta específica de un Bulletin
+		#Utilizado para la vista específica.
+		def set_bulletin # :doc:
 			@bulletin = Bulletin.find(params[:id])
 		end
 
-		# Never trust parameters from the scary internet, only allow the white list through.
-		def bulletin_params
+		#Parametros permitidos para creación un boletín.
+		def bulletin_params # :doc:
 			params.require(:bulletin).permit(:title, :description, :start_date, :receiver)
 		end
 

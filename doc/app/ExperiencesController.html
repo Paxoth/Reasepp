@@ -99,6 +99,9 @@
 
   <section class="description">
     
+<p><strong><em>Experience:</strong> controlador de las Experiencias (Ver <a
+href="Experience.html">Experience</a>)</em></p>
+
   </section>
 
   
@@ -133,13 +136,18 @@
 
         <div class="method-description">
           
-          <p>POST /experiences POST /experiences.json</p>
+          <p>Crear Experiencia</p>
+
+<p>Método que permite crear una experiencia basada en un servicio
+(NestedResource)  Se preocupa de ver si la experiencia viene de una oferta
+o una solicitud para decidir quién es el responsable.  El profesor siempre
+debe ser responsable de las experiencias.</p>
           
           
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/experiences_controller.rb, line 52</span>
+            <pre><span class="ruby-comment"># File app/controllers/experiences_controller.rb, line 73</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
         <span class="ruby-ivar">@service</span> = <span class="ruby-identifier">servicio</span>
         <span class="ruby-ivar">@experience</span> = <span class="ruby-ivar">@service</span>.<span class="ruby-identifier">experiences</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">experience_params</span>)
@@ -186,13 +194,13 @@
 
         <div class="method-description">
           
-          <p>DELETE /experiences/1 DELETE /experiences/1.json</p>
+          <p>Permite eliminar una experiencia. Generada automáticamente por scaffold.</p>
           
           
 
           
           <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/experiences_controller.rb, line 94</span>
+            <pre><span class="ruby-comment"># File app/controllers/experiences_controller.rb, line 115</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
         <span class="ruby-ivar">@experience</span>.<span class="ruby-identifier">destroy</span>
         <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
@@ -223,13 +231,17 @@
 
         <div class="method-description">
           
-          <p>GET /experiences/1/edit</p>
+          <p>Vista de editar experiencias</p>
+
+<p>Permite editar expereincias de acuerdo a los parametros establecidos.
+Impide que un usuario que no sea el profesor creador del servicio padre
+pueda generar la experiencia.</p>
           
           
 
           
           <div class="method-source-code" id="edit-source">
-            <pre><span class="ruby-comment"># File app/controllers/experiences_controller.rb, line 22</span>
+            <pre><span class="ruby-comment"># File app/controllers/experiences_controller.rb, line 36</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">edit</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Editar&quot;</span>
     <span class="ruby-ivar">@service</span> = <span class="ruby-identifier">servicio</span>
@@ -261,15 +273,17 @@
 
         <div class="method-description">
           
-          
+          <p>Vista principal</p>
+
+<p>Genera la consulta de las experiencias paginadas de a 30 elementos.</p>
           
           
 
           
           <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File app/controllers/experiences_controller.rb, line 13</span>
+            <pre><span class="ruby-comment"># File app/controllers/experiences_controller.rb, line 19</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
-        <span class="ruby-ivar">@experiences</span> =<span class="ruby-constant">Experience</span>.<span class="ruby-identifier">paginate</span>(<span class="ruby-identifier">page</span><span class="ruby-operator">:</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:page</span>],<span class="ruby-identifier">per_page</span><span class="ruby-operator">:</span> <span class="ruby-value">5</span>).<span class="ruby-identifier">all</span>.<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;created_at DESC&quot;</span>)
+        <span class="ruby-ivar">@experiences</span> =<span class="ruby-constant">Experience</span>.<span class="ruby-identifier">paginate</span>(<span class="ruby-identifier">page</span><span class="ruby-operator">:</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:page</span>],<span class="ruby-identifier">per_page</span><span class="ruby-operator">:</span> <span class="ruby-value">30</span>).<span class="ruby-identifier">all</span>.<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;created_at DESC&quot;</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -294,13 +308,18 @@
 
         <div class="method-description">
           
-          
+          <p>Vista nueva experiencias</p>
+
+<p>Permite crear uan experiencia, basada un un servicio anteriormente
+generado. Las experiencias, siempre provienen de un servicio. En caso de
+que no provenga de un servicio se pueden generar experiencias documentadas
+(Ver <a href="Project.html">Project</a>)</p>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/controllers/experiences_controller.rb, line 17</span>
+            <pre><span class="ruby-comment"># File app/controllers/experiences_controller.rb, line 27</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
         <span class="ruby-ivar">@service</span> = <span class="ruby-identifier">servicio</span>
         <span class="ruby-ivar">@experience</span> = <span class="ruby-ivar">@service</span>.<span class="ruby-identifier">experiences</span>.<span class="ruby-identifier">new</span>
@@ -328,13 +347,16 @@
 
         <div class="method-description">
           
-          
+          <p>Vista que permite buscar experiencias a través de un match de palabras,
+utilizando la función search. La busqueda complementa tanto las
+experiencias como las experiencias documentadas ( <a
+href="Project.html">Project</a> )</p>
           
           
 
           
           <div class="method-source-code" id="searchExperience-source">
-            <pre><span class="ruby-comment"># File app/controllers/experiences_controller.rb, line 102</span>
+            <pre><span class="ruby-comment"># File app/controllers/experiences_controller.rb, line 125</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">searchExperience</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Búsqueda&quot;</span>
         <span class="ruby-ivar">@experiences</span> = <span class="ruby-constant">Experience</span>.<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;created_at DESC&quot;</span>).<span class="ruby-identifier">all</span>
@@ -370,13 +392,17 @@
 
         <div class="method-description">
           
-          
+          <p>Vista específica</p>
+
+<p>Permite mostrar los datos de una experiecias buscada por ID. También se
+pueden generar un pdf con la inforḿación de la experiencia (Ver <a
+href="ExperiencePdf.html">ExperiencePdf</a>)</p>
           
           
 
           
           <div class="method-source-code" id="show-source">
-            <pre><span class="ruby-comment"># File app/controllers/experiences_controller.rb, line 31</span>
+            <pre><span class="ruby-comment"># File app/controllers/experiences_controller.rb, line 49</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
         <span class="ruby-ivar">@experience</span> = <span class="ruby-constant">Experience</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
         <span class="ruby-keyword">if</span> <span class="ruby-ivar">@experience</span>.<span class="ruby-identifier">broker_id</span>.<span class="ruby-identifier">present?</span>
@@ -418,13 +444,15 @@
 
         <div class="method-description">
           
-          <p>PATCH/PUT /experiences/1 PATCH/PUT /experiences/1.json</p>
+          <p>Actualizar experiencia</p>
+
+<p>Permite actualizar los datos de la experiencia.</p>
           
           
 
           
           <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File app/controllers/experiences_controller.rb, line 78</span>
+            <pre><span class="ruby-comment"># File app/controllers/experiences_controller.rb, line 100</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
     <span class="ruby-ivar">@service</span> = <span class="ruby-identifier">servicio</span>
     <span class="ruby-ivar">@experience</span> = <span class="ruby-ivar">@service</span>.<span class="ruby-identifier">experiences</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])

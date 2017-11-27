@@ -1,3 +1,6 @@
+=begin rdoc
+  _**Offering:** controlador de las Ofertas de Servicio (Ver Offering)_
+=end
 class OfferingsController < ApplicationController
 	before_action :authenticate_user!
 	before_action :validate_category, except: [:index, :show, :searchOffering]

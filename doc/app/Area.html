@@ -75,6 +75,33 @@
 
   <section class="description">
     
+<p><em>Area es la entidad que representa las áreas de trabajo en la cual un
+proyecto AS está enfocado. Estas áreas de trabajo son las que están
+definidas por la Organización para la Coordinación del Desarrollo Económico
+(OCDE)</em></p>
+
+<p><strong>ATRIBUTOS</strong></p>
+<ul><li>
+<p><strong>Name</strong>: nombre específico del área.</p>
+</li><li>
+<p><strong>Discipline</strong>: Es la disciplina a la cual el área de trabajo
+pertenece (Medicina, Ingeniería, Ciencias Sociales, etc).</p>
+</li><li>
+<p><strong>Description</strong>: Es la descripción del área de trabajo, la que
+explica en qué consiste específicamente..</p>
+</li></ul>
+
+<p><strong>RELACIONES</strong></p>
+<ul><li>
+<p>has_many <a href="Request.html">Request</a></p>
+</li><li>
+<p>has_many <a href="Offering.html">Offering</a></p>
+</li><li>
+<p>has_many <a href="Service.html">Service</a></p>
+</li><li>
+<p>has_many <a href="Experience.html">Experience</a></p>
+</li></ul>
+
   </section>
 
   

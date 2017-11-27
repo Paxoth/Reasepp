@@ -85,28 +85,48 @@
 
   <section class="description">
     
-<pre>* *ENTIDAD EVENT*     :
-  - Entidad que representa los eventos que se pueden generar en la página de REASE: 
+<p><strong><em>Events</strong> es la entidad que representa los eventos que se
+pueden generar en la página de REASE. Son los eventos a los que invita a
+participar la red. Solo puede crearlo el administrador.</em></p>
 
-* *Atributos*    :
-  - +Title+ -&gt; the number of apples
-  - +Description+ -&gt; the number of oranges
-  - +Address+ -&gt; the number of pears
-  - +start_time -&gt; Fecha y hora en al cual se dará el inicio al evento
-  - +end_time -&gt; fecha y hora en la que terminará el evento
-  - +Status -&gt; Estado del evento, este depende de las fechas de inicio y término del evento.</pre>
+<p><strong>ATRIBUTOS</strong></p>
+<ul><li>
+<p><strong>title</strong>: Título del evento.</p>
+</li><li>
+<p><strong>description</strong>: Descripción del evento, es el contenido
+principal que podrán leer los demás usuarios.</p>
+</li><li>
+<p><strong>address</strong>: Dirección o ubicación en dónde se realizará el
+evento.</p>
+</li><li>
+<p><strong>start_time</strong>: Fecha y hora en al cual se dará el inicio al
+evento.</p>
+</li><li>
+<p><strong>end_time</strong>: fecha y hora en la que terminará el evento.</p>
+</li><li>
+<p><strong>status</strong>: Estado del evento, este depende de las fechas de
+inicio y término del evento.</p>
+<ol><li>
+<p><em>Disponible:</em> significa que el evento se realizará en un futuro o se
+está realizando.</p>
+</li><li>
+<p><em>Realizado:</em> significa que el evento ya se realizó y que fue marcado
+como realizado.</p>
+</li><li>
+<p><em>Cancelado:</em> Significa que el evento fue cancelado, no se elimina,
+para dejar un registro de él</p>
+</li><li>
+<p><em>Caducado:</em> Significa que pasó el tiempo del evento y aún así no se
+realizó.</p>
+</li></ol>
+</li></ul>
 
-<p>1: Disponible: significa que el evento se realizará en un futuro o se está
-realizando. 2: Realizado: significa que el evento ya se realizó y que fue
-marcado como realizado. 3: Cancelado: Significa que el evento fue
-cancelado, no se elimina, para dejar un registro de él 3: Caducado:
-Significa que pasó el tiempo del evento y aún así no se realizó.</p>
-
-<pre>* *Returns* :
-  - the total number of fruit as an integer
-* *Raises* :
-  - +ArgumentError+ -&gt; if any value is nil or negative
-      #.</pre>
+<p><strong>RELACIONES</strong></p>
+<ul><li>
+<p>belongs_to <a href="User.html">User</a></p>
+</li><li>
+<p>has_many <a href="Comment.html">Comment</a> como &#39;post&#39;</p>
+</li></ul>
 
   </section>
 
@@ -142,17 +162,17 @@ Significa que pasó el tiempo del evento y aún así no se realizó.</p>
 
         <div class="method-description">
           
-          <p>Función que permite que el buscador encuentre Eventos a través de match de
+          <p>Método que permite que el buscador encuentre Eventos a través de match de
 palabras en sus atributos.</p>
           
           
 
           
           <div class="method-source-code" id="search-source">
-            <pre><span class="ruby-comment"># File app/models/event.rb, line 34</span>
+            <pre><span class="ruby-comment"># File app/models/event.rb, line 35</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">search</span>(<span class="ruby-identifier">search</span>)
-        <span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;title LIKE ? or description LIKE ?&quot;</span>, <span class="ruby-node">&quot;%#{search}%&quot;</span>,<span class="ruby-node">&quot;%#{search}%&quot;</span>) 
-<span class="ruby-keyword">end</span></pre>
+            <span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;title LIKE ? or description LIKE ?&quot;</span>, <span class="ruby-node">&quot;%#{search}%&quot;</span>,<span class="ruby-node">&quot;%#{search}%&quot;</span>) 
+    <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>

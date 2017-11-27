@@ -89,6 +89,120 @@
 
   <section class="description">
     
+<p><strong><em>User</strong> es la entidad principal de toda la intranet,
+representando al usuario registrado en el sitio, el cual tiene ciertos
+privilegios dependiendo de su categoría, la cual le dará forma al sitio
+para poder ser poblado por los miembros de REASE.</em></p>
+
+<p><strong>ATRIBUTOS</strong></p>
+
+<p><em>User posee muchos atributos generados por la gema Devise, que permite
+hacer la autenticación con correo electrónico, confirmación y varias
+consultas útiles para el desarrollo de la plataforma</em></p>
+<ul><li>
+<p><strong>email</strong>: Correo electrónico del usuario.</p>
+</li><li>
+<p><strong>encrypted_password</strong>: Contraseña personal y encriptada del
+usuario, Esta se encuentra encripatada con el fin de que su lectura no sea
+permitida.</p>
+</li><li>
+<p><strong>reset_password_token</strong>: Atributo el cuál es utilizado para
+recuperar la contraseña vía mail en caso de que el usuario la olvide.</p>
+</li><li>
+<p><strong>reset_password_sent_at</strong>: Fecha en la cual se envía el mail
+de recuperación de contraseña.</p>
+</li><li>
+<p><strong>remember_created_at</strong>: Atributo que permite al sitio
+recordar los datos del usuario para mantenerse conectado.</p>
+</li><li>
+<p><strong>sign_in_count</strong>: Contador de la cantidad de veces que el
+usuario se ha conectado a la intranet.</p>
+</li><li>
+<p><strong>current_sign_in_at</strong>: Fecha de la conexión actual del
+usuario.</p>
+</li><li>
+<p><strong>last_sign_in_at</strong>: fecha de la última vez que el usuario se
+conectó a la intranet.</p>
+</li><li>
+<p><strong>confirmation_token</strong>: Información necesaria para qe el
+usuario confirme su nueva cuenta vía correo electrónico.</p>
+</li><li>
+<p><strong>confirmed_at</strong>: Fecha en la cual el usuario fue confirmado
+para su registro.</p>
+</li><li>
+<p><strong>confirmation_sent_at</strong>: Fecha en la cual se envió el correo
+de confirmación de registro del usuario.</p>
+</li><li>
+<p><strong>unconfirmed_email</strong>: Indica si el usuario confirmó su
+registro vía correo electrónico impidiendo su conección en caso de no estar
+confirmado.</p>
+</li><li>
+<p><strong>name</strong>: Nombre del usuario.</p>
+</li><li>
+<p><strong>autorization_level</strong>: Tipo de usuario</p>
+<ul><li>
+<p>Activo</p>
+</li><li>
+<p>Adherente</p>
+</li></ul>
+</li><li>
+<p><strong>category</strong>: Categoría o rol del usuario</p>
+<ol><li>
+<p>Profesor: capaz de crear Ofertas de Servicio (Ver <a
+href="Offering.html">Offering</a>). Responsable de los servicios ( <a
+href="Service.html">Service</a> ) y experiencias ( <a
+href="Experience.html">Experience</a> ).</p>
+</li><li>
+<p>Socio Comunitario: capaz de crear Solicitudes de Servicio (Ver <a
+href="Request.html">Request</a>)</p>
+</li><li>
+<p>Vinculador Social: capaz de crear Ofertas y Solicitudes. No se hace
+responsable de ellas.</p>
+</li></ol>
+</li><li>
+<p><strong>is_admin</strong>: Booleano que permite saber si el usuario es
+administrador del sitio REASE. Capaz de generar eventos ( <a
+href="Event.html">Event</a> )</p>
+</li><li>
+<p><strong>nickname</strong>: Apodo del usuario, el cuál sirve para referirse
+a él en comentarios y publicaciones.</p>
+</li><li>
+<p><strong>photo</strong>: Foto de perfil del usuario, la cual se desplegará
+en cada comentario y facilita la identificación para el resto de los
+usarios.</p>
+</li><li>
+<p><strong>description</strong>: Breve descripción del usuario que escribe de
+sí mismo, en caso de querer hacerlo, la cual será desplegada en su perfil.</p>
+</li></ul>
+
+<p><strong>RELACIONES</strong></p>
+<ul><li>
+<p>belongs_to <a href="Institution.html">Institution</a></p>
+</li><li>
+<p>has_many <a href="Section.html">Section</a></p>
+</li><li>
+<p>has_many <a href="Event.html">Event</a></p>
+</li><li>
+<p>has_many <a href="Comment.html">Comment</a></p>
+</li><li>
+<p>has_many <a href="Offering.html">Offering</a></p>
+</li><li>
+<p>has_many <a href="Request.html">Request</a></p>
+</li><li>
+<p>has_many <a href="Experience.html">Experience</a></p>
+</li><li>
+<p>has_many <a href="Project.html">Project</a></p>
+</li><li>
+<p>has_many accepted_services ( <a href="Service.html">Service</a> )</p>
+</li><li>
+<p>has_many created_services ( <a href="Service.html">Service</a> )</p>
+</li><li>
+<p>has_many taught_experiences ( <a href="Experience.html">Experience</a> )</p>
+</li><li>
+<p>has_many cooperated_experiences ( <a href="Experience.html">Experience</a>
+)</p>
+</li></ul>
+
   </section>
 
   
@@ -108,12 +222,14 @@
       
         <dt id="TEMP_EMAIL_PREFIX">TEMP_EMAIL_PREFIX
         
-        <dd>
+        <dd><p>Correo temporal en caso de su creación sin declaración de uno particula. No
+utilizado comúnmente.</p>
         
       
         <dt id="TEMP_EMAIL_REGEX">TEMP_EMAIL_REGEX
         
-        <dd>
+        <dd><p>Correo temporal en caso de su creación sin declaración de uno particula. No
+utilizado comúnmente.</p>
         
       
       </dl>
@@ -142,13 +258,15 @@
 
         <div class="method-description">
           
-          
+          <p>Método que permite la autentificación del usuario para ingreso de la
+intranet, buscando información del correo electrónico del usuario. Método
+generado por la gema Devise</p>
           
           
 
           
           <div class="method-source-code" id="find_for_oauth-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 41</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 89</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_for_oauth</span>(<span class="ruby-identifier">auth</span>, <span class="ruby-identifier">signed_in_resource</span> = <span class="ruby-keyword">nil</span>)
 
         <span class="ruby-comment"># Get the identity and user if they exist</span>
@@ -213,13 +331,14 @@
 
         <div class="method-description">
           
-          
+          <p>Método que permite que el buscador encuentre Usuarios a través de match de
+palabras en sus atributos.</p>
           
           
 
           
           <div class="method-source-code" id="search-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 36</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 83</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">search</span>(<span class="ruby-identifier">search</span>)
         <span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;nickname LIKE ? or name LIKE ? or email LIKE ?&quot;</span>, <span class="ruby-node">&quot;%#{search}%&quot;</span>, <span class="ruby-node">&quot;%#{search}%&quot;</span>, <span class="ruby-node">&quot;%#{search}%&quot;</span>) 
 <span class="ruby-keyword">end</span></pre>
@@ -254,15 +373,16 @@
 
         <div class="method-description">
           
-          
+          <p>Método que verifica si su correo electrónico fue confirmado a través del
+token de confirmación. Analiza que su correo no sea el por default.</p>
           
           
 
           
           <div class="method-source-code" id="email_verified-3F-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 83</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 132</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">email_verified?</span>
-<span class="ruby-keyword">self</span>.<span class="ruby-identifier">email</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">email</span> <span class="ruby-operator">!~</span> <span class="ruby-constant">TEMP_EMAIL_REGEX</span>
+        <span class="ruby-keyword">self</span>.<span class="ruby-identifier">email</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">email</span> <span class="ruby-operator">!~</span> <span class="ruby-constant">TEMP_EMAIL_REGEX</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           

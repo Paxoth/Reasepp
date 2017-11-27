@@ -85,6 +85,47 @@
 
   <section class="description">
     
+<p><strong><em>Institituion</strong> es la entidad representa las
+instituciones que están adheridas a REASE, las cuales servirán para indicar
+si algún servicio está relacionado con él y del mismo modo si un usuario
+pertenece a alguna de estas instituciones.</em> <em>Las instituciones
+fueron modificadas ahora para que los encargados AS puedan obtener
+información para la gestión, como datos de cuántas experiencias se han
+realizado dentro de un intervalo de tiempo</em></p>
+
+<p><strong>ATRIBUTOS</strong></p>
+<ul><li>
+<p><strong>description</strong>: Breve descripción de la institución. El
+encargado AS, debe ser responsable de completar este campo.</p>
+</li><li>
+<p><strong>name</strong>: Nombre de la institución.</p>
+</li><li>
+<p><strong>web</strong>: Sitio web que pertenece a la institución. El
+encargado AS, debe ser responsable de completar este campo.</p>
+</li><li>
+<p><strong>logo</strong>: Logotipo de la institución. El encargado AS, debe
+ser responsable de completar este campo.</p>
+</li><li>
+<p><strong>manager_id</strong>: id del usuario que representa al encargado AS.</p>
+</li></ul>
+
+<p><strong>RELACIONES</strong></p>
+<ul><li>
+<p>belongs_to <a href="User.html">User</a> : Usuario creador de la institución
+(Admin)</p>
+</li><li>
+<p>has_many <a href="User.html">User</a> : Usuarios que pertenecen a la
+institución.</p>
+</li><li>
+<p>has_many <a href="Offering.html">Offering</a></p>
+</li><li>
+<p>has_many <a href="Request.html">Request</a></p>
+</li><li>
+<p>has_many <a href="Service.html">Service</a></p>
+</li><li>
+<p>has_many <a href="Experience.html">Experience</a></p>
+</li></ul>
+
   </section>
 
   
@@ -119,14 +160,14 @@
 
         <div class="method-description">
           
-          <p>Función que permite que el buscador encuentre Instituciones a través de
+          <p>Método que permite que el buscador encuentre Instituciones a través de
 match de palabras en sus atributos.</p>
           
           
 
           
           <div class="method-source-code" id="search-source">
-            <pre><span class="ruby-comment"># File app/models/institution.rb, line 34</span>
+            <pre><span class="ruby-comment"># File app/models/institution.rb, line 40</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">search</span>(<span class="ruby-identifier">search</span>)
         <span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;name LIKE ? or web LIKE ?&quot;</span>, <span class="ruby-node">&quot;%#{search}%&quot;</span>,<span class="ruby-node">&quot;%#{search}%&quot;</span>) 
 <span class="ruby-keyword">end</span></pre>

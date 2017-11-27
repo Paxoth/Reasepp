@@ -1,3 +1,6 @@
+=begin rdoc
+  _**Interest Link:** controlador de los enlaces de interés (Ver InterestLink)_
+=end
 class InterestLinksController < ApplicationController
   before_action :authenticate_user!, except: [:show]
   before_action :validate_category, except: [:show]

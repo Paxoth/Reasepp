@@ -88,6 +88,8 @@
     
     <li ><a href="#method-i-update">#update</a>
     
+    <li ><a href="#method-i-validate_category">#validate_category</a>
+    
   </ul>
 </div>
 
@@ -101,6 +103,9 @@
 
   <section class="description">
     
+<p><strong><em>Event:</strong> controlador de los Eventos (Ver <a
+href="Event.html">Event</a>)</em></p>
+
   </section>
 
   
@@ -135,13 +140,15 @@
 
         <div class="method-description">
           
-          <p>POST /events POST /events.json</p>
+          <p>Crear Evento Método que permite la cración de un evento bajo el nombre de
+un usuario coenctado. Valida que la fecha de inicio no sea mayor que la de
+término.</p>
           
           
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/events_controller.rb, line 55</span>
+            <pre><span class="ruby-comment"># File app/controllers/events_controller.rb, line 72</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
         <span class="ruby-ivar">@event</span> = <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">events</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">event_params</span>)
         <span class="ruby-ivar">@event</span>.<span class="ruby-identifier">status</span> = <span class="ruby-value">1</span>
@@ -188,13 +195,13 @@
 
         <div class="method-description">
           
-          <p>DELETE /events/1 DELETE /events/1.json</p>
+          <p>Eliminar evento, generado automáticamente por scaffold</p>
           
           
 
           
           <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/events_controller.rb, line 104</span>
+            <pre><span class="ruby-comment"># File app/controllers/events_controller.rb, line 121</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
         <span class="ruby-ivar">@event</span>.<span class="ruby-identifier">destroy</span>
         <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
@@ -225,13 +232,15 @@
 
         <div class="method-description">
           
-          <p>GET /events/1/edit</p>
+          <p>Editar evento</p>
+
+<p>Vista que permite la edición de un evento que es capturado por su ID.</p>
           
           
 
           
           <div class="method-source-code" id="edit-source">
-            <pre><span class="ruby-comment"># File app/controllers/events_controller.rb, line 49</span>
+            <pre><span class="ruby-comment"># File app/controllers/events_controller.rb, line 65</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">edit</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Editar&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -258,13 +267,18 @@
 
         <div class="method-description">
           
-          <p>GET /events GET /events.json</p>
+          <p>Vista Principal</p>
+
+<p>Genera la consulta de todos los eventos activos, ordenados por fecha de
+inicio.</p>
+
+<p>Vista en forma de calendario.</p>
           
           
 
           
           <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File app/controllers/events_controller.rb, line 11</span>
+            <pre><span class="ruby-comment"># File app/controllers/events_controller.rb, line 17</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
         <span class="ruby-ivar">@events</span> = <span class="ruby-constant">Event</span>.<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;start_time ASC&quot;</span>).<span class="ruby-identifier">where</span>(<span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">1</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -291,13 +305,15 @@
 
         <div class="method-description">
           
-          
+          <p>Vista listado</p>
+
+<p>Genera la consulta de todos los eventos en sus diferentes estados.</p>
           
           
 
           
           <div class="method-source-code" id="listado-source">
-            <pre><span class="ruby-comment"># File app/controllers/events_controller.rb, line 15</span>
+            <pre><span class="ruby-comment"># File app/controllers/events_controller.rb, line 24</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">listado</span>
         <span class="ruby-ivar">@disponibles</span> = <span class="ruby-constant">Event</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">1</span>).<span class="ruby-identifier">paginate</span>(<span class="ruby-identifier">page</span><span class="ruby-operator">:</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:disponibles</span>],<span class="ruby-identifier">per_page</span><span class="ruby-operator">:</span> <span class="ruby-value">5</span>).<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;start_time ASC&quot;</span>)
         <span class="ruby-ivar">@realizados</span> = <span class="ruby-constant">Event</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">2</span>).<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;updated_at ASC&quot;</span>)
@@ -327,13 +343,15 @@
 
         <div class="method-description">
           
-          <p>GET /events/new</p>
+          <p>Nuevo evento</p>
+
+<p>Vista que permite la creación de un nuevo evento.</p>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/controllers/events_controller.rb, line 43</span>
+            <pre><span class="ruby-comment"># File app/controllers/events_controller.rb, line 57</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Nuevo evento&quot;</span>
         <span class="ruby-ivar">@event</span> = <span class="ruby-constant">Event</span>.<span class="ruby-identifier">new</span>
@@ -361,13 +379,13 @@
 
         <div class="method-description">
           
-          
+          <p>Vista para buscar eventos a través de la consulta de una palabra.</p>
           
           
 
           
           <div class="method-source-code" id="searchEvent-source">
-            <pre><span class="ruby-comment"># File app/controllers/events_controller.rb, line 22</span>
+            <pre><span class="ruby-comment"># File app/controllers/events_controller.rb, line 32</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">searchEvent</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Búsqueda&quot;</span>
         <span class="ruby-ivar">@events</span> = <span class="ruby-constant">Event</span>.<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;start_time ASC&quot;</span>).<span class="ruby-identifier">all</span>
@@ -400,21 +418,24 @@
 
         <div class="method-description">
           
-          <p>GET /events/1 GET /events/1.json</p>
+          <p>Vista específica</p>
+
+<p>Muestra un evento con toda su información. En caso de que la fecha del
+evento haya pasado, indica que el evento caducó.</p>
           
           
 
           
           <div class="method-source-code" id="show-source">
-            <pre><span class="ruby-comment"># File app/controllers/events_controller.rb, line 33</span>
-  <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
-          <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Mostrar&quot;</span>
-          <span class="ruby-ivar">@comment</span> = <span class="ruby-constant">Comment</span>.<span class="ruby-identifier">new</span>
-          <span class="ruby-keyword">if</span> <span class="ruby-ivar">@event</span>.<span class="ruby-identifier">end_time</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@event</span>.<span class="ruby-identifier">status</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
-                  <span class="ruby-ivar">@event</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">4</span>)
-<span class="ruby-identifier">flash</span>[<span class="ruby-value">:alert</span>] = <span class="ruby-string">&quot;La fecha límite del evento ya ha sido sobrepasada, por lo cual ha caducado.&quot;</span>
-          <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span></pre>
+            <pre><span class="ruby-comment"># File app/controllers/events_controller.rb, line 45</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
+        <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Mostrar&quot;</span>
+        <span class="ruby-ivar">@comment</span> = <span class="ruby-constant">Comment</span>.<span class="ruby-identifier">new</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-ivar">@event</span>.<span class="ruby-identifier">end_time</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@event</span>.<span class="ruby-identifier">status</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
+                <span class="ruby-ivar">@event</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">4</span>)
+        <span class="ruby-identifier">flash</span>[<span class="ruby-value">:alert</span>] = <span class="ruby-string">&quot;La fecha límite del evento ya ha sido sobrepasada, por lo cual ha caducado.&quot;</span>
+        <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -438,13 +459,15 @@
 
         <div class="method-description">
           
-          <p>PATCH/PUT /events/1 PATCH/PUT /events/1.json</p>
+          <p>Actualizar evento</p>
+
+<p>Método que permite actualizar los datos del evento. Valida las fechas.</p>
           
           
 
           
           <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File app/controllers/events_controller.rb, line 81</span>
+            <pre><span class="ruby-comment"># File app/controllers/events_controller.rb, line 99</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
         <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
                 <span class="ruby-keyword">if</span> <span class="ruby-ivar">@event</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">event_params</span>)
@@ -464,6 +487,49 @@
                         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@event</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:unprocessable_entity</span> }
                 <span class="ruby-keyword">end</span>
         <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="private-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Private Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-validate_category" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">validate_category</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Valida que los usuarios que puedan generar eventos sean administradores.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="validate_category-source">
+            <pre><span class="ruby-comment"># File app/controllers/events_controller.rb, line 131</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">validate_category</span> <span class="ruby-comment"># :doc:</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">is_admin?</span>
+                <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">root_path</span>, <span class="ruby-identifier">alert</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;Sólo un administrador puede trabajar los eventos.&quot;</span>
+        <span class="ruby-keyword">end</span> 
 <span class="ruby-keyword">end</span></pre>
           </div>
           

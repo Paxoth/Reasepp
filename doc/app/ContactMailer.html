@@ -58,7 +58,7 @@
   <h3>Parent</h3>
 
   
-  <p class="link"><a href="ApplicationMailer.html">ApplicationMailer</a>
+  <p class="link">ApplicationMailer
   
 </div>
 
@@ -87,6 +87,9 @@
 
   <section class="description">
     
+<p><strong><em>ContactMailer</strong> es utilizado para la generación de
+correos electrónicos de la página contacto del portal web de REASE.</em></p>
+
   </section>
 
   
@@ -121,13 +124,20 @@
 
         <div class="method-description">
           
-          
+          <p>Método que envía un correo electrónico al correo electrónico de REASE.</p>
+<ul><li>
+<p><strong>Argumentos</strong></p>
+<ul><li>
+<p>contact: datos del contacto enviado a través del formulario de la página de
+contacto (Ver <a href="Contact.html">Contact</a>)</p>
+</li></ul>
+</li></ul>
           
           
 
           
           <div class="method-source-code" id="contact_receiver-source">
-            <pre><span class="ruby-comment"># File app/mailers/contact_mailer.rb, line 8</span>
+            <pre><span class="ruby-comment"># File app/mailers/contact_mailer.rb, line 20</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">contact_receiver</span>(<span class="ruby-identifier">contact</span>)
         <span class="ruby-ivar">@contact</span> = <span class="ruby-identifier">contact</span>
         <span class="ruby-identifier">mail</span>(<span class="ruby-identifier">to</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;redrease@gmail.com&#39;</span>, <span class="ruby-identifier">subject</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Nuevo comentario para REASE de &#39;</span><span class="ruby-operator">+</span><span class="ruby-ivar">@contact</span>.<span class="ruby-identifier">name</span>)
@@ -155,13 +165,21 @@
 
         <div class="method-description">
           
-          
+          <p>Método que envía un correo electrónico al ususario que se intentó
+contactar.</p>
+<ul><li>
+<p><strong>Argumentos</strong></p>
+<ul><li>
+<p>contact: datos del contacto enviado a través del formulario de la página de
+contacto (Ver <a href="Contact.html">Contact</a>)</p>
+</li></ul>
+</li></ul>
           
           
 
           
           <div class="method-source-code" id="contact_sender-source">
-            <pre><span class="ruby-comment"># File app/mailers/contact_mailer.rb, line 4</span>
+            <pre><span class="ruby-comment"># File app/mailers/contact_mailer.rb, line 11</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">contact_sender</span>(<span class="ruby-identifier">contact</span>)
         <span class="ruby-ivar">@contact</span> = <span class="ruby-identifier">contact</span>
         <span class="ruby-identifier">mail</span>(<span class="ruby-identifier">to</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@contact</span>.<span class="ruby-identifier">email</span>, <span class="ruby-identifier">subject</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Su comentario ha sido enviado&#39;</span>)

@@ -76,6 +76,12 @@
     
     <li ><a href="#method-i-edit">#edit</a>
     
+    <li ><a href="#method-i-post">#post</a>
+    
+    <li ><a href="#method-i-post_url">#post_url</a>
+    
+    <li ><a href="#method-i-set_comment">#set_comment</a>
+    
     <li ><a href="#method-i-update">#update</a>
     
   </ul>
@@ -91,6 +97,12 @@
 
   <section class="description">
     
+<p><strong><em>Comment:</strong> controlador de los comentarios (Ver <a
+href="Comment.html">Comment</a>)</em></p>
+
+<p><em>Los comentarios se encuentran anidados a otra publicación (Nested
+Resources)</em></p>
+
   </section>
 
   
@@ -125,13 +137,16 @@
 
         <div class="method-description">
           
-          <p>POST /comments POST /comments.json</p>
+          <p>Crear comentario</p>
+
+<p>Genera un comentario y te redirecciona al sitio del la publicacion que fue
+comentada.</p>
           
           
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/comments_controller.rb, line 12</span>
+            <pre><span class="ruby-comment"># File app/controllers/comments_controller.rb, line 18</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
         <span class="ruby-ivar">@post</span> = <span class="ruby-identifier">post</span>
         <span class="ruby-ivar">@comment</span> = <span class="ruby-ivar">@post</span>.<span class="ruby-identifier">comments</span>.<span class="ruby-identifier">create</span>(<span class="ruby-identifier">comment_params</span>)
@@ -169,13 +184,13 @@
 
         <div class="method-description">
           
-          <p>DELETE /comments/1 DELETE /comments/1.json</p>
+          <p>Eliminar comentario y te redirecciona al post donde fue realizado.</p>
           
           
 
           
           <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/comments_controller.rb, line 45</span>
+            <pre><span class="ruby-comment"># File app/controllers/comments_controller.rb, line 50</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
         <span class="ruby-ivar">@comment</span>.<span class="ruby-identifier">destroy</span>
         <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
@@ -206,13 +221,13 @@
 
         <div class="method-description">
           
-          <p>GET /comments/1/edit</p>
+          <p>Método generada por scaffold, no utilizado</p>
           
           
 
           
           <div class="method-source-code" id="edit-source">
-            <pre><span class="ruby-comment"># File app/controllers/comments_controller.rb, line 7</span>
+            <pre><span class="ruby-comment"># File app/controllers/comments_controller.rb, line 12</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">edit</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -238,13 +253,14 @@
 
         <div class="method-description">
           
-          <p>PATCH/tPUT /comments/1 PATCH/PUT /comments/1.json</p>
+          <p>Editar comentario Permite al usuario editar un comentario con los
+parametros establecidos.</p>
           
           
 
           
           <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File app/controllers/comments_controller.rb, line 29</span>
+            <pre><span class="ruby-comment"># File app/controllers/comments_controller.rb, line 35</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
         <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
                 <span class="ruby-ivar">@post</span> = <span class="ruby-identifier">post</span>
@@ -257,6 +273,152 @@
                         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@comment</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:unprocessable_entity</span> }
                 <span class="ruby-keyword">end</span>
         <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="private-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Private Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-post" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">post</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Post hace referencia al elemento en donde se generará el comentario</p>
+<ul><li>
+<p><a href="Event.html">Event</a></p>
+</li><li>
+<p><a href="Request.html">Request</a></p>
+</li><li>
+<p><a href="Offering.html">Offering</a></p>
+</li><li>
+<p><a href="Service.html">Service</a></p>
+</li></ul>
+          
+          
+
+          
+          <div class="method-source-code" id="post-source">
+            <pre><span class="ruby-comment"># File app/controllers/comments_controller.rb, line 65</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">post</span> <span class="ruby-comment"># :doc:</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:event_id</span>]
+                <span class="ruby-identifier">id</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:event_id</span>]
+                <span class="ruby-constant">Event</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:event_id</span>])
+        <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:request_id</span>]
+                <span class="ruby-identifier">id</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:request_id</span>]
+                <span class="ruby-constant">Request</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:request_id</span>])                   
+        <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:offering_id</span>]
+                <span class="ruby-identifier">id</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:offering_id</span>]
+                <span class="ruby-constant">Offering</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:offering_id</span>])
+        <span class="ruby-keyword">else</span>
+                <span class="ruby-identifier">id</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:service_id</span>]
+                <span class="ruby-constant">Service</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:service_id</span>])
+        <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-post_url" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">post_url</span><span
+            class="method-args">(post)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Post_URL hace referencia a la dirección en donde se generará el comentario</p>
+<ul><li>
+<p><a href="Event.html">Event</a></p>
+</li><li>
+<p><a href="Request.html">Request</a></p>
+</li><li>
+<p><a href="Offering.html">Offering</a></p>
+</li><li>
+<p><a href="Service.html">Service</a></p>
+</li></ul>
+          
+          
+
+          
+          <div class="method-source-code" id="post_url-source">
+            <pre><span class="ruby-comment"># File app/controllers/comments_controller.rb, line 87</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">post_url</span>(<span class="ruby-identifier">post</span>) <span class="ruby-comment"># :doc:</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-constant">Event</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">post</span>
+                <span class="ruby-identifier">event_path</span>(<span class="ruby-identifier">post</span>)
+        <span class="ruby-keyword">elsif</span> <span class="ruby-constant">Request</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">post</span>
+                <span class="ruby-identifier">request_path</span>(<span class="ruby-identifier">post</span>)                  
+        <span class="ruby-keyword">elsif</span> <span class="ruby-constant">Offering</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">post</span>
+                <span class="ruby-identifier">offering_path</span>(<span class="ruby-identifier">post</span>)
+        <span class="ruby-keyword">else</span>
+                <span class="ruby-identifier">service_path</span>(<span class="ruby-identifier">post</span>)
+        <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-set_comment" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">set_comment</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Permite la consulta específica de un comentario Poco utilizado, ya que el
+comentario se desplega en otras vistas</p>
+          
+          
+
+          
+          <div class="method-source-code" id="set_comment-source">
+            <pre><span class="ruby-comment"># File app/controllers/comments_controller.rb, line 101</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">set_comment</span> <span class="ruby-comment"># :doc:</span>
+        <span class="ruby-ivar">@comment</span> = <span class="ruby-constant">Comment</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>]) 
 <span class="ruby-keyword">end</span></pre>
           </div>
           

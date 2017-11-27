@@ -58,7 +58,7 @@
   <h3>Parent</h3>
 
   
-  <p class="link"><a href="ApplicationMailer.html">ApplicationMailer</a>
+  <p class="link">ApplicationMailer
   
 </div>
 
@@ -85,6 +85,10 @@
 
   <section class="description">
     
+<p><strong><em>BulletinMailer</em></strong> es utilizada para la generación de
+los correos electrónicos con los boletines informativos generados por los
+administradores de la red.</p>
+
   </section>
 
   
@@ -119,13 +123,44 @@
 
         <div class="method-description">
           
-          
+          <p>Método que envía el correo eléctrónico con los datos necesarios de boletín.</p>
+<ul><li>
+<p><strong>Argumentos</strong></p>
+<ul><li>
+<p>user: Usuarios que recibirán los boletines (Ver <a
+href="User.html">User</a>)</p>
+<ul><li>
+<p>Activos</p>
+</li><li>
+<p>Adherentes</p>
+</li><li>
+<p>Todos</p>
+</li></ul>
+</li><li>
+<p>sections: Últimas noticias generadas (Ver <a
+href="Section.html">Section</a>)</p>
+</li><li>
+<p>events: Últimos eventos generadas (Ver <a href="Event.html">Event</a>)</p>
+</li><li>
+<p>offerings: Últimas Ofertas de servicios generadas (Ver <a
+href="Offering.html">Offering</a>)</p>
+</li><li>
+<p>requests: Últimas Solicitudes de servicios generadas (Ver <a
+href="Request.html">Request</a>)</p>
+</li><li>
+<p>services: Últimos Servicios generados (Ver <a
+href="Service.html">Service</a>)</p>
+</li><li>
+<p>experiences: Últimas Experiencias generadas (Ver <a
+href="Experience.html">Experience</a>)</p>
+</li></ul>
+</li></ul>
           
           
 
           
           <div class="method-source-code" id="bulletin-source">
-            <pre><span class="ruby-comment"># File app/mailers/bulletin_mailer.rb, line 4</span>
+            <pre><span class="ruby-comment"># File app/mailers/bulletin_mailer.rb, line 20</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">bulletin</span>(<span class="ruby-identifier">bulletin</span>,<span class="ruby-identifier">user</span>,<span class="ruby-identifier">sections</span>,<span class="ruby-identifier">events</span>,<span class="ruby-identifier">offerings</span>,<span class="ruby-identifier">requests</span>, <span class="ruby-identifier">services</span>, <span class="ruby-identifier">experiences</span>)
         <span class="ruby-ivar">@bulletin</span> = <span class="ruby-identifier">bulletin</span>
         <span class="ruby-ivar">@user</span> = <span class="ruby-identifier">user</span>
@@ -135,7 +170,7 @@
         <span class="ruby-ivar">@requests</span> = <span class="ruby-identifier">requests</span>
         <span class="ruby-ivar">@service</span> = <span class="ruby-identifier">services</span>
         <span class="ruby-ivar">@experience</span> = <span class="ruby-identifier">experiences</span>
-        <span class="ruby-identifier">mail</span>(<span class="ruby-identifier">to</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">email</span>, <span class="ruby-identifier">subject</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;REASE: &#39;</span><span class="ruby-operator">+</span><span class="ruby-ivar">@bulletin</span>.<span class="ruby-identifier">title</span>)
+        <span class="ruby-identifier">returnmail</span>(<span class="ruby-identifier">to</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">email</span>, <span class="ruby-identifier">subject</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;REASE: &#39;</span><span class="ruby-operator">+</span><span class="ruby-ivar">@bulletin</span>.<span class="ruby-identifier">title</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           

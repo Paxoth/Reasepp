@@ -64,7 +64,19 @@
 
     
     
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
     
+    <li ><a href="#method-i-ensure_signup_complete">#ensure_signup_complete</a>
+    
+    <li ><a href="#method-i-set_presentation">#set_presentation</a>
+    
+  </ul>
+</div>
+
   </div>
 </nav>
 
@@ -75,6 +87,9 @@
 
   <section class="description">
     
+<p>Controlador principal de la plataforma padre del resto de los
+controladores.</p>
+
   </section>
 
   
@@ -90,6 +105,92 @@
     
 
     
+     <section id="private-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Private Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-ensure_signup_complete" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">ensure_signup_complete</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Método que impide que un usuario navegue por la intranet, en caso de no
+haber confirmado su correo electrínico. (Ver <a href="User.html">User</a>)</p>
+          
+          
+
+          
+          <div class="method-source-code" id="ensure_signup_complete-source">
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 22</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">ensure_signup_complete</span> <span class="ruby-comment">#:doc:</span>
+        <span class="ruby-comment"># Ensure we don&#39;t go into an infinite loop</span>
+        <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">action_name</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;finish_signup&#39;</span>
+
+        <span class="ruby-comment"># Redirect to the &#39;finish_signup&#39; page if the user</span>
+        <span class="ruby-comment"># email hasn&#39;t been verified yet</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">current_user</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">email_verified?</span>
+                <span class="ruby-identifier">flash</span>[<span class="ruby-value">:alert</span>] = <span class="ruby-string">&quot;Aún su cuenta no ha sido confirmada&quot;</span>
+                <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">finish_signup_path</span>(<span class="ruby-identifier">current_user</span>)
+        <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-set_presentation" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">set_presentation</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Método que genera las consultas sobre eventos y links de interés que son
+mostrados en la barra lateral derecha en todas las vistas. (Ver <a
+href="Event.html">Event</a> y <a href="InterestLink.html">InterestLink</a>)</p>
+          
+          
+
+          
+          <div class="method-source-code" id="set_presentation-source">
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 16</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">set_presentation</span> <span class="ruby-comment">#:doc:</span>
+        <span class="ruby-ivar">@events</span> = <span class="ruby-constant">Event</span>.<span class="ruby-identifier">all</span>
+        <span class="ruby-ivar">@interest_links</span> = <span class="ruby-constant">InterestLink</span>.<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;name ASC&quot;</span>).<span class="ruby-identifier">all</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
   </section>
 </main>
 

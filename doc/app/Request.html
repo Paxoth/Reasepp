@@ -85,6 +85,60 @@
 
   <section class="description">
     
+<p><strong><em>Request</strong> es la entidad que hace referencia a las
+Solicitudes de Servicio que pueden generar los usuarios que sean del tipo
+usuario Socio Comunitario. Estas deben ser aceptadas por un usuario del
+tipo Profesor para pasar a ser un Servicio. .</em></p>
+
+<p><strong>ATRIBUTOS</strong></p>
+<ul><li>
+<p><strong>title</strong>: Título de la Solicitud de Servicio.</p>
+</li><li>
+<p><strong>description</strong>: Descripción general de la Solicitud de
+Servicio, en donde se dice qué es lo que se desea conseguir por realizar
+esta actividad.</p>
+</li><li>
+<p><strong>start_time</strong>: Fecha que el profesor planifica que comience
+la actividad planeada.</p>
+</li><li>
+<p><strong>end_time</strong>: Fecha que el profesor planifica que termine la
+actividad planeada.</p>
+</li><li>
+<p><strong>resume</strong>: Descripción breve de la Solicitud de Servicio, la
+cual será mostrada en las listas de Solicituds.</p>
+</li><li>
+<p><strong>status</strong>: estado del Servicio</p>
+<ol><li>
+<p>Disponible: está dentro de las fechas estimada.</p>
+</li><li>
+<p>Cancelado: la Solicitud de Servcio fue cancelada por el profesor</p>
+</li><li>
+<p>Caducado: ha pasado el tiempo estimado y la Solicitud ha caducado.</p>
+</li><li>
+<p>Servicio: Cuando un profesor y un socio comunitario se ponen de acuerdo, la
+Solicitud de Servicio pasa a estar en un estado de Servicio, para el cual
+se crea otro formulario (Ver entidad <a href="Service.html">Service</a>)</p>
+</li></ol>
+</li><li>
+<p><strong>location</strong>: Lugar donde se realizará la actividad (Trabajos
+futuros, conectar a GoogleMaps)</p>
+</li></ul>
+
+<p><strong>RELACIONES</strong></p>
+<ul><li>
+<p>belongs_to <a href="User.html">User</a></p>
+</li><li>
+<p>belongs_to <a href="Area.html">Area</a></p>
+</li><li>
+<p>belongs_to <a href="Institution.html">Institution</a></p>
+</li><li>
+<p>has_many <a href="Comment.html">Comment</a> como &#39;post&#39;</p>
+</li><li>
+<p>has_many <a href="Experience.html">Experience</a> como &#39;servicio&#39;</p>
+</li><li>
+<p>has_many Services como &#39;publication&#39;</p>
+</li></ul>
+
   </section>
 
   
@@ -119,14 +173,14 @@
 
         <div class="method-description">
           
-          <p>Función que permite que el buscador encuentre Solicitudes de Servicios a
+          <p>Método que permite que el buscador encuentre Solicitudes de Servicios a
 través de match de palabras en sus atributos.</p>
           
           
 
           
           <div class="method-source-code" id="search-source">
-            <pre><span class="ruby-comment"># File app/models/request.rb, line 41</span>
+            <pre><span class="ruby-comment"># File app/models/request.rb, line 48</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">search</span>(<span class="ruby-identifier">search</span>)
         <span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;title LIKE ? or description LIKE ? or resume LIKE ?&quot;</span>, <span class="ruby-node">&quot;%#{search}%&quot;</span>,<span class="ruby-node">&quot;%#{search}%&quot;</span>, <span class="ruby-node">&quot;%#{search}%&quot;</span>) 
 <span class="ruby-keyword">end</span></pre>

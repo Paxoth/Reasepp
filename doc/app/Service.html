@@ -85,6 +85,95 @@
 
   <section class="description">
     
+<p><strong><em>Service</strong> es la entidad que representa a los servicios
+activos de la intranet, el cual es el punto medio que indica que dos
+usuarios aceptaron colaborar juntos en un proyecto AS. <a
+href="Service.html">Service</a> tiene un comportamiento
+<strong>polimórfico</strong> para su relación con la publicación anterior
+(Ver <a href="Offering.html">Offering</a> y <a
+href="Request.html">Request</a>). Además tiene dos relaciones con <a
+href="User.html">User</a>, una para saber quién es el creador de la
+actividad AS y otro para el que aceptó trabajar con él. El profesor siempre
+será el responsable de la actividad.</em></p>
+
+<p><strong>ATRIBUTOS</strong></p>
+<ul><li>
+<p><strong>publication_id</strong>: Hace referencia a la publicación previa
+que dio pie a este servicio activo (Oferta o Solicitud)</p>
+</li><li>
+<p><strong>publication_type</strong>: índica si la publicación previa que dio
+pie a este servicio es una oferta o una solicitud.</p>
+</li><li>
+<p><strong>creator_id</strong>: Hace referencia al usuario que creó la
+publicación que dio pie a este servicio.</p>
+</li><li>
+<p><strong>acceptor_id</strong>: Hace referencia al usuario que colaborará con
+el creador de la publicación.</p>
+</li><li>
+<p><strong>title</strong>: Título del servicio activo.</p>
+</li><li>
+<p><strong>status</strong>: es el estado en que se encuentra el servicio</p>
+<ol><li>
+<p>Pendiente: La creación de un servicio parte como un mensaje en una Oferta o
+Solicitud, que cuando no se es respondida se encuentra en este estado.</p>
+</li><li>
+<p>Aceptado: Cuando el creador de la oferta acepta trabajar con el creador del
+servicio en forma de mensaje, pasa el servicio en estado aceptado.</p>
+</li><li>
+<p>Rechazado: Cuando el creador de la oferta desiste trabajar con el creador
+del servicio en forma de mensaje, este servicio es rechazado.</p>
+</li><li>
+<p>Activo: Cuando el servicio es aceptado y está dentro de sus periodos de
+<strong>start_time</strong> y <strong>end_time</strong> se encuentra
+activo.</p>
+</li><li>
+<p>Experiencia: Cuando el servicio se concreta de manera correcta el profesor
+responsable debe crear una Experiencia (Ver <a
+href="Experience.html">Experience</a>)</p>
+</li></ol>
+</li><li>
+<p><strong>message</strong>: Mensaje que deja un usuario para manifestar
+interés de trabajar junto al creador de la publicación previa que dio pie
+al servicio.</p>
+</li><li>
+<p><strong>description</strong>: Descripción del servicio activo.</p>
+</li><li>
+<p><strong>resume</strong>: Breve resumen del servicio activo el cuál se
+mostrará en un principio.</p>
+</li><li>
+<p><strong>start_time</strong>: Fecha de inicio del proyecto AS.</p>
+</li><li>
+<p><strong>end_time</strong>: Fecha de término del proyecto AS.</p>
+</li><li>
+<p><strong>learning_objectives</strong>: representa los objetivos de
+aprendizaje del proyecto AS.</p>
+</li><li>
+<p><strong>service_objectives</strong>: representa los objetivos de servicio
+del proyecto AS.</p>
+</li></ul>
+
+<p><strong>RELACIONES</strong></p>
+<ul><li>
+<p>belongs_to creator ( <a href="User.html">User</a> ): creador de la
+publicación</p>
+</li><li>
+<p>belongs_to acceptor ( <a href="User.html">User</a> ): usuario que acepta
+trabajar con el creador</p>
+</li><li>
+<p>belongs_to <a href="Institution.html">Institution</a></p>
+</li><li>
+<p>belongs_to Publication (Polimorfismo)</p>
+<ul><li>
+<p><a href="Offering.html">Offering</a></p>
+</li><li>
+<p><a href="Request.html">Request</a></p>
+</li></ul>
+</li><li>
+<p>has_many <a href="Experience.html">Experience</a></p>
+</li><li>
+<p>has_many <a href="Comment.html">Comment</a> como &#39;post&#39;</p>
+</li></ul>
+
   </section>
 
   
@@ -119,14 +208,14 @@
 
         <div class="method-description">
           
-          <p>Función que permite que el buscador encuentre Servicios a través de match
-de palabras en sus atributos.</p>
+          <p>Método que permite que el buscador encuentre Servicios a través de match de
+palabras en sus atributos.</p>
           
           
 
           
           <div class="method-source-code" id="search-source">
-            <pre><span class="ruby-comment"># File app/models/service.rb, line 34</span>
+            <pre><span class="ruby-comment"># File app/models/service.rb, line 52</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">search</span>(<span class="ruby-identifier">search</span>)
         <span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;title LIKE ? or message LIKE ? or description LIKE ? or resume LIKE ? &quot;</span>, <span class="ruby-node">&quot;%#{search}%&quot;</span>, <span class="ruby-node">&quot;%#{search}%&quot;</span>, <span class="ruby-node">&quot;%#{search}%&quot;</span>, <span class="ruby-node">&quot;%#{search}%&quot;</span>) 
 <span class="ruby-keyword">end</span></pre>

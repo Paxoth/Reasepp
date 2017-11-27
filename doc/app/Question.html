@@ -85,6 +85,21 @@
 
   <section class="description">
     
+<p><strong><em>Question</em></strong> es la entidad que hace referencia a los
+bloques de preguntas frecuentes que puede agregar los administradores al
+sitio, para que usuarios, tanto registrados como no puedan leer._</p>
+
+<p><strong>ATRIBUTOS</strong> * <strong>title</strong>: título de la pregunta,
+hace referencia a la pregunta frecuente en si. * <strong>answer</strong>:
+respuesta de la pregunta frecuente. * <strong>reader</strong>: Este
+atributo es utilizado para marcar si esta pregunta frecuente será enfocada
+para los usuarios conectados a la intranet o para usuarios desde el sitio
+web sin conexión.</p>
+
+<p><strong>RELACIONES:</strong></p>
+
+<pre>    Esta entidad no posee relaciones, ya que no es relevante qué un usuario quede a cargo de la pregunta frecuente.</pre>
+
   </section>
 
   
@@ -119,14 +134,14 @@
 
         <div class="method-description">
           
-          <p>Función que permite que el buscador encuentre Preguntas Frecuentes a través
+          <p>Método que permite que el buscador encuentre Preguntas Frecuentes a través
 de match de palabras en sus atributos.</p>
           
           
 
           
           <div class="method-source-code" id="search-source">
-            <pre><span class="ruby-comment"># File app/models/question.rb, line 21</span>
+            <pre><span class="ruby-comment"># File app/models/question.rb, line 22</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">search</span>(<span class="ruby-identifier">search</span>)
         <span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;title LIKE ? or answer LIKE ?&quot;</span>, <span class="ruby-node">&quot;%#{search}%&quot;</span>,<span class="ruby-node">&quot;%#{search}%&quot;</span>) 
 <span class="ruby-keyword">end</span></pre>

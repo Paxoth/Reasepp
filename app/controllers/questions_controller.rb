@@ -1,3 +1,6 @@
+=begin rdoc
+  _**Question:** controlador de las preguntas frecuentes (Ver Question)_
+=end
 class QuestionsController < ApplicationController
   before_action :authenticate_user!, except: [:show, :searchQuestion]
   before_action :validate_category, except: [:show,:searchQuestion]

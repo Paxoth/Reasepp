@@ -101,6 +101,9 @@
 
   <section class="description">
     
+<p><strong><em>Resource:</strong> controlador de los recursos descargables
+(Ver <a href="Resource.html">Resource</a>)</em></p>
+
   </section>
 
   
@@ -141,7 +144,7 @@
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/resources_controller.rb, line 44</span>
+            <pre><span class="ruby-comment"># File app/controllers/resources_controller.rb, line 47</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
   <span class="ruby-ivar">@resource</span> = <span class="ruby-constant">Resource</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">resource_params</span>)
 
@@ -184,7 +187,7 @@
 
           
           <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/resources_controller.rb, line 74</span>
+            <pre><span class="ruby-comment"># File app/controllers/resources_controller.rb, line 77</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
   <span class="ruby-ivar">@resource</span>.<span class="ruby-identifier">destroy</span>
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
@@ -221,7 +224,7 @@
 
           
           <div class="method-source-code" id="edit-source">
-            <pre><span class="ruby-comment"># File app/controllers/resources_controller.rb, line 36</span>
+            <pre><span class="ruby-comment"># File app/controllers/resources_controller.rb, line 39</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">edit</span>
   <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Administrar&quot;</span>, <span class="ruby-value">:sections_path</span>
   <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Recursos&quot;</span>, <span class="ruby-value">:resources_path</span> 
@@ -256,7 +259,7 @@
 
           
           <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File app/controllers/resources_controller.rb, line 10</span>
+            <pre><span class="ruby-comment"># File app/controllers/resources_controller.rb, line 13</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
   <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Administrar&quot;</span>, <span class="ruby-value">:sections_path</span>
   <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Recursos&quot;</span>, <span class="ruby-value">:resources_path</span> 
@@ -290,7 +293,7 @@
 
           
           <div class="method-source-code" id="muestra-source">
-            <pre><span class="ruby-comment"># File app/controllers/resources_controller.rb, line 15</span>
+            <pre><span class="ruby-comment"># File app/controllers/resources_controller.rb, line 18</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">muestra</span>
     <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Recursos&quot;</span>, <span class="ruby-value">:resources_muestra_path</span>
     <span class="ruby-ivar">@interest_links</span> = <span class="ruby-constant">InterestLink</span>.<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;created_at DESC&quot;</span>).<span class="ruby-identifier">all</span>
@@ -324,7 +327,7 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/controllers/resources_controller.rb, line 28</span>
+            <pre><span class="ruby-comment"># File app/controllers/resources_controller.rb, line 31</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
   <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Administrar&quot;</span>, <span class="ruby-value">:sections_path</span>
   <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Recursos&quot;</span>, <span class="ruby-value">:resources_path</span> 
@@ -360,7 +363,7 @@
 
           
           <div class="method-source-code" id="searchResource-source">
-            <pre><span class="ruby-comment"># File app/controllers/resources_controller.rb, line 82</span>
+            <pre><span class="ruby-comment"># File app/controllers/resources_controller.rb, line 85</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">searchResource</span>
   <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Recursos&quot;</span>, <span class="ruby-value">:resources_muestra_path</span> 
   <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Búsqueda&quot;</span>
@@ -400,7 +403,7 @@
 
           
           <div class="method-source-code" id="show-source">
-            <pre><span class="ruby-comment"># File app/controllers/resources_controller.rb, line 22</span>
+            <pre><span class="ruby-comment"># File app/controllers/resources_controller.rb, line 25</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
   <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Recursos&quot;</span>, <span class="ruby-value">:resources_muestra_path</span> 
   <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Detalle&quot;</span>
@@ -434,7 +437,7 @@
 
           
           <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File app/controllers/resources_controller.rb, line 60</span>
+            <pre><span class="ruby-comment"># File app/controllers/resources_controller.rb, line 63</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">if</span> <span class="ruby-ivar">@resource</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">resource_params</span>)

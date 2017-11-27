@@ -1,3 +1,6 @@
+=begin rdoc
+  _**Project:** controlador de las experiencias documentadas (Ver Project)_
+=end
 class ProjectsController < ApplicationController
   before_action :authenticate_user!
   before_action :validate_category, except: [:show, :index]

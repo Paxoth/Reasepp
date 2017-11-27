@@ -39,15 +39,17 @@
 			<table class="tabla-rease">
 				<tr>
 					<th><strong>Nombre</strong></th>
+					<th><strong>Responsable</strong></th>
 					<th><strong>Fecha</strong></th>
-					<th><strong>Descargar</strong></th>
+					
 
 				</tr>
-				<%@experiences.last(10).each do |experience|%>
+				<%@experiences.each do |experience|%>
 				<tr>
+					<%@profesor = User.where(id: experience.professor_id).first%>
 					<td><%=link_to truncate(experience.title, length: 60), experience%></td>
-					<td><%=l experience.created_at%></td>
-					<td><%=link_to image_tag("Extensiones/pdf.gif"), experience_path(experience, format: "pdf"), :target=>'_blank'%></td>
+					<td><%=link_to @profesor.nickname, user_path(@profesor)%></td>
+					<td><%=experience.created_at.strftime("%d / %m / %Y")%> <%=link_to image_tag("Extensiones/pdf.gif"), experience_path(experience, format: "pdf"), :target=>'_blank'%></td>
 				</tr>
 				<%end%>
 			</table>

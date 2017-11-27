@@ -1,4 +1,4 @@
-module DeviseHelper
+module DeviseHelper # :nodoc:
  def devise_error_messages!
   return '' if resource.errors.empty?
 

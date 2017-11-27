@@ -4,6 +4,7 @@
 		<%=@area.discipline%>: <%= @area.name %>
 	</div>
 	<div class="panel-body">
+		<%if @area.experiences.present?%>
 			<table class="tabla-rease">
 				<tr>
 					<th><strong>Nombre</strong></th>
@@ -18,8 +19,10 @@
 					<td><%=experience.created_at.strftime("%d / %m / %Y")%> <%=link_to image_tag("Extensiones/pdf.gif"), experience_path(experience, format: "pdf"), :target=>'_blank'%></td>
 				</tr>
 				<%end%>
-
 			</table>
+		<%else%>
+			<p>No se ha realizado ninguna experiencia en esta área de trabajo</p>
+		<%end%>
 	</div>
 </div>
 <%if user_signed_in? and current_user.is_admin?%>

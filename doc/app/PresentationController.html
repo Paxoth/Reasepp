@@ -97,6 +97,9 @@
 
   <section class="description">
     
+<p><strong><em>Presentation:</strong> controlador utilizado para desplegar las
+vistas del portal web.</em></p>
+
   </section>
 
   
@@ -137,7 +140,7 @@
 
           
           <div class="method-source-code" id="about-source">
-            <pre><span class="ruby-comment"># File app/controllers/presentation_controller.rb, line 40</span>
+            <pre><span class="ruby-comment"># File app/controllers/presentation_controller.rb, line 43</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">about</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Acerca de&quot;</span>, <span class="ruby-value">:presentation_estatuto_path</span>
         <span class="ruby-ivar">@events</span> = <span class="ruby-constant">Event</span>.<span class="ruby-identifier">all</span>
@@ -173,7 +176,7 @@
 
           
           <div class="method-source-code" id="aprendizaje-source">
-            <pre><span class="ruby-comment"># File app/controllers/presentation_controller.rb, line 28</span>
+            <pre><span class="ruby-comment"># File app/controllers/presentation_controller.rb, line 31</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">aprendizaje</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;¿Qué es AS?&quot;</span>, <span class="ruby-value">:presentation_aprendizaje_path</span>
         <span class="ruby-ivar">@sections</span> = <span class="ruby-constant">Section</span>.<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;priority ASC&quot;</span>).<span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;module = ?&quot;</span>,<span class="ruby-string">&quot;Aprendizaje Servicio&quot;</span>)
@@ -207,7 +210,7 @@
 
           
           <div class="method-source-code" id="estatuto-source">
-            <pre><span class="ruby-comment"># File app/controllers/presentation_controller.rb, line 33</span>
+            <pre><span class="ruby-comment"># File app/controllers/presentation_controller.rb, line 36</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">estatuto</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Estatuto&quot;</span>, <span class="ruby-value">:presentation_estatuto_path</span>
         <span class="ruby-ivar">@events</span> = <span class="ruby-constant">Event</span>.<span class="ruby-identifier">all</span>
@@ -243,7 +246,7 @@
 
           
           <div class="method-source-code" id="hacemos-source">
-            <pre><span class="ruby-comment"># File app/controllers/presentation_controller.rb, line 21</span>
+            <pre><span class="ruby-comment"># File app/controllers/presentation_controller.rb, line 24</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">hacemos</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;¿Qué hacemos?&quot;</span>, <span class="ruby-value">:presentation_hacemos_path</span>
         <span class="ruby-ivar">@resources</span> = <span class="ruby-constant">Resource</span>.<span class="ruby-identifier">paginate</span>(<span class="ruby-identifier">page</span><span class="ruby-operator">:</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:page</span>],<span class="ruby-identifier">per_page</span><span class="ruby-operator">:</span> <span class="ruby-value">10</span>).<span class="ruby-identifier">where</span>(<span class="ruby-identifier">category</span><span class="ruby-operator">:</span> <span class="ruby-value">1</span>).<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;date DESC&quot;</span>)
@@ -279,7 +282,7 @@
 
           
           <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File app/controllers/presentation_controller.rb, line 5</span>
+            <pre><span class="ruby-comment"># File app/controllers/presentation_controller.rb, line 8</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
         <span class="ruby-ivar">@sections</span> = <span class="ruby-constant">Section</span>.<span class="ruby-identifier">paginate</span>(<span class="ruby-identifier">page</span><span class="ruby-operator">:</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:page</span>],<span class="ruby-identifier">per_page</span><span class="ruby-operator">:</span> <span class="ruby-value">5</span>).<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;priority ASC&quot;</span>).<span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;module = ?&quot;</span>,<span class="ruby-string">&quot;Novedad&quot;</span>)
         <span class="ruby-keyword">if</span> <span class="ruby-identifier">user_signed_in?</span>
@@ -317,7 +320,7 @@
 
           
           <div class="method-source-code" id="searchPage-source">
-            <pre><span class="ruby-comment"># File app/controllers/presentation_controller.rb, line 46</span>
+            <pre><span class="ruby-comment"># File app/controllers/presentation_controller.rb, line 49</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">searchPage</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Búsqueda&quot;</span>
         <span class="ruby-keyword">if</span> <span class="ruby-identifier">user_signed_in?</span> <span class="ruby-comment">##SEARCH PARA LA INTRANET</span>
@@ -398,7 +401,7 @@
 
           
           <div class="method-source-code" id="somos-source">
-            <pre><span class="ruby-comment"># File app/controllers/presentation_controller.rb, line 14</span>
+            <pre><span class="ruby-comment"># File app/controllers/presentation_controller.rb, line 17</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">somos</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;¿Quiénes Somos?&quot;</span>, <span class="ruby-value">:presentation_somos_path</span> 
         <span class="ruby-ivar">@instituciones</span> = <span class="ruby-constant">Institution</span>.<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;name ASC&quot;</span>).<span class="ruby-identifier">all</span>

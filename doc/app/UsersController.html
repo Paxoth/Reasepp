@@ -97,6 +97,9 @@
 
   <section class="description">
     
+<p><strong><em>User:</strong> controlador de los Usuarios (Ver <a
+href="User.html">User</a>)</em></p>
+
   </section>
 
   
@@ -137,7 +140,7 @@
 
           
           <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 66</span>
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 69</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
         <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
         <span class="ruby-keyword">if</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">destroy</span>
@@ -173,7 +176,7 @@
 
           
           <div class="method-source-code" id="edit-source">
-            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 47</span>
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 50</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">edit</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Perfil&quot;</span>, <span class="ruby-value">:users_path</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Editar perfil de &quot;</span><span class="ruby-operator">+</span><span class="ruby-ivar">@user</span>.<span class="ruby-identifier">nickname</span>
@@ -207,7 +210,7 @@
 
           
           <div class="method-source-code" id="finish_signup-source">
-            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 74</span>
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 77</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">finish_signup</span>
         <span class="ruby-ivar">@sections</span> = <span class="ruby-constant">Section</span>.<span class="ruby-identifier">all</span>
         <span class="ruby-comment"># authorize! :update, @user </span>
@@ -250,7 +253,7 @@
 
           
           <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 7</span>
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 10</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Perfil&quot;</span>, <span class="ruby-value">:users_path</span>
         <span class="ruby-ivar">@user</span> = <span class="ruby-identifier">current_user</span>
@@ -297,7 +300,7 @@
 
           
           <div class="method-source-code" id="listarUsuarios-source">
-            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 25</span>
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 28</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">listarUsuarios</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Usuarios registrados&quot;</span>
         <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">paginate</span>(<span class="ruby-identifier">page</span><span class="ruby-operator">:</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:page</span>],<span class="ruby-identifier">per_page</span><span class="ruby-operator">:</span> <span class="ruby-value">20</span>).<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;nickname ASC&quot;</span>).<span class="ruby-identifier">all</span>
@@ -331,7 +334,7 @@
 
           
           <div class="method-source-code" id="show-source">
-            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 30</span>
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 33</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Perfil&quot;</span>, <span class="ruby-value">:users_path</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Perfil de &quot;</span><span class="ruby-operator">+</span><span class="ruby-ivar">@user</span>.<span class="ruby-identifier">nickname</span>
@@ -377,7 +380,7 @@
 
           
           <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 52</span>
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 55</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
         <span class="ruby-comment"># authorize! :update, @user</span>
         <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>

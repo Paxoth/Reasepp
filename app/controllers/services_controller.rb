@@ -1,3 +1,6 @@
+=begin rdoc
+  _**Service:** controlador de los servicios (Ver Service)_
+=end
 class ServicesController < ApplicationController
 	before_action :authenticate_user!
 	before_action :set_service, only: [:update, :destroy]

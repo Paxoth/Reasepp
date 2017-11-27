@@ -49,6 +49,8 @@ gem 'jquery-ui-rails'
 gem 'multi-dates-picker-rails'
 gem 'bootstrap-datepicker-rails'
 
+gem 'rdoc', '~> 4.2', '>= 4.2.2'
+
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

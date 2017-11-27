@@ -72,17 +72,21 @@
     
     <li ><a href="#method-i-create">#create</a>
     
-    <li ><a href="#method-i-destroy">#destroy</a>
-    
     <li ><a href="#method-i-edit">#edit</a>
     
     <li ><a href="#method-i-index">#index</a>
     
+    <li ><a href="#method-i-managment">#managment</a>
+    
     <li ><a href="#method-i-new">#new</a>
+    
+    <li ><a href="#method-i-set_breadcrumbs">#set_breadcrumbs</a>
     
     <li ><a href="#method-i-show">#show</a>
     
     <li ><a href="#method-i-update">#update</a>
+    
+    <li ><a href="#method-i-validate_category">#validate_category</a>
     
   </ul>
 </div>
@@ -97,6 +101,9 @@
 
   <section class="description">
     
+<p><strong><em>Institution:</strong> controlador de las instituciones (Ver <a
+href="Institution.html">Institution</a>)</em></p>
+
   </section>
 
   
@@ -131,13 +138,15 @@
 
         <div class="method-description">
           
-          <p>POST /institutions POST /institutions.json</p>
+          <p>Método para crear institución utilizando los parámetros establecidos.</p>
+
+<p>Generado automáticamente por scaffold.</p>
           
           
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/institutions_controller.rb, line 44</span>
+            <pre><span class="ruby-comment"># File app/controllers/institutions_controller.rb, line 55</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
 
         <span class="ruby-ivar">@institution</span> = <span class="ruby-constant">Institution</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">institution_params</span>)
@@ -150,43 +159,6 @@
                         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:new</span> }
                         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@institution</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:unprocessable_entity</span> }
                 <span class="ruby-keyword">end</span>
-        <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-destroy" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">destroy</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>DELETE /institutions/1 DELETE /institutions/1.json</p>
-          
-          
-
-          
-          <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/institutions_controller.rb, line 75</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
-        <span class="ruby-ivar">@institution</span>.<span class="ruby-identifier">destroy</span>
-        <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-                <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">institutions_url</span>, <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;La institución se ha eliminado.&#39;</span> }
-                <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">head</span> <span class="ruby-value">:no_content</span> }
         <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -212,13 +184,13 @@
 
         <div class="method-description">
           
-          <p>GET /institutions/1/edit</p>
+          <p>Vista de editar institución Solo puede ser accedida por un encargado AS</p>
           
           
 
           
           <div class="method-source-code" id="edit-source">
-            <pre><span class="ruby-comment"># File app/controllers/institutions_controller.rb, line 38</span>
+            <pre><span class="ruby-comment"># File app/controllers/institutions_controller.rb, line 48</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">edit</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Editar&quot;</span>, <span class="ruby-identifier">institutions_path</span>
 <span class="ruby-keyword">end</span></pre>
@@ -245,16 +217,65 @@
 
         <div class="method-description">
           
-          <p>GET /institutions GET /institutions.json</p>
+          <p>Vista principal</p>
+
+<p>Genera las consulta de todas las insituciones paginadas en grupos de 15
+elementos, ordenads por nombre.</p>
           
           
 
           
           <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File app/controllers/institutions_controller.rb, line 10</span>
+            <pre><span class="ruby-comment"># File app/controllers/institutions_controller.rb, line 14</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
-        
         <span class="ruby-ivar">@institutions</span> = <span class="ruby-constant">Institution</span>.<span class="ruby-identifier">paginate</span>(<span class="ruby-identifier">page</span><span class="ruby-operator">:</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:page</span>],<span class="ruby-identifier">per_page</span><span class="ruby-operator">:</span> <span class="ruby-value">15</span>).<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;name ASC&quot;</span>).<span class="ruby-identifier">all</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-managment" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">managment</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Vista de información para la gestión</p>
+
+<p>Vista utilizada para la realización de consultas específicas por fecha
+sobre la institución y sus respectivas experiencias realizadas. Genera las
+consultas de las áreas de trabajo ( <a href="Area.html">Area</a> ) para
+clasificación de las experiencias ( <a
+href="Experience.html">Experience</a> )</p>
+          
+          
+
+          
+          <div class="method-source-code" id="managment-source">
+            <pre><span class="ruby-comment"># File app/controllers/institutions_controller.rb, line 100</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">managment</span>
+        <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-ivar">@institution</span>.<span class="ruby-identifier">name</span>, <span class="ruby-ivar">@institution</span>
+        <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Información&quot;</span>, <span class="ruby-identifier">managment_path</span>(<span class="ruby-ivar">@institution</span>)
+        <span class="ruby-ivar">@fecha_inicio</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:fecha_inicio</span>]
+        <span class="ruby-ivar">@fecha_termino</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:fecha_termino</span>]
+        <span class="ruby-keyword">if</span>(<span class="ruby-ivar">@fecha_inicio</span>.<span class="ruby-identifier">present?</span> <span class="ruby-keyword">and</span> <span class="ruby-ivar">@fecha_termino</span>.<span class="ruby-identifier">present?</span>)
+                <span class="ruby-ivar">@experiences</span> = <span class="ruby-ivar">@institution</span>.<span class="ruby-identifier">experiences</span>.<span class="ruby-identifier">created_between</span>(<span class="ruby-ivar">@fecha_inicio</span>.<span class="ruby-identifier">to_date</span>,<span class="ruby-ivar">@fecha_termino</span>.<span class="ruby-identifier">to_date</span>);
+                <span class="ruby-ivar">@areas</span> = <span class="ruby-constant">Area</span>.<span class="ruby-identifier">all</span>
+        <span class="ruby-keyword">end</span>
+        
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -279,15 +300,15 @@
 
         <div class="method-description">
           
-          <p>GET /institutions/new</p>
+          <p>Vista nueva institución Solo puede ser accedida por un administrador</p>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/controllers/institutions_controller.rb, line 32</span>
+            <pre><span class="ruby-comment"># File app/controllers/institutions_controller.rb, line 41</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
-        <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Nueva institucion&quot;</span>, <span class="ruby-identifier">institutions_path</span>
+        <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Nueva institucion&quot;</span>
         <span class="ruby-ivar">@institution</span> = <span class="ruby-constant">Institution</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -313,13 +334,21 @@
 
         <div class="method-description">
           
-          <p>GET /institutions/1 GET /institutions/1.json</p>
+          <p>Vista principal de las experiencias</p>
+
+<p>Se realizan las consultas de todos los usuarios clasificados por categoría
+(Ver <a href="User.html">User</a>).</p>
+
+<p>Se muestra la información sobre el encargado AS (manager).</p>
+
+<p>Se muestran los datos de las experiencias y los impactos que han generado
+dentro de las comunidades y estudiantes.</p>
           
           
 
           
           <div class="method-source-code" id="show-source">
-            <pre><span class="ruby-comment"># File app/controllers/institutions_controller.rb, line 17</span>
+            <pre><span class="ruby-comment"># File app/controllers/institutions_controller.rb, line 25</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-ivar">@institution</span>.<span class="ruby-identifier">name</span>, <span class="ruby-ivar">@institution</span> 
         <span class="ruby-ivar">@professors</span> = <span class="ruby-ivar">@institution</span>.<span class="ruby-identifier">users</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">category</span><span class="ruby-operator">:</span> <span class="ruby-value">2</span>)
@@ -356,13 +385,15 @@
 
         <div class="method-description">
           
-          <p>PATCH/PUT /institutions/1 PATCH/PUT /institutions/1.json</p>
+          <p>Método para actualizar institución utilizando los parámetros establecidos.</p>
+
+<p>Generado automáticamente por scaffold.</p>
           
           
 
           
           <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File app/controllers/institutions_controller.rb, line 61</span>
+            <pre><span class="ruby-comment"># File app/controllers/institutions_controller.rb, line 73</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
         <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
                 <span class="ruby-keyword">if</span> <span class="ruby-ivar">@institution</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">institution_params</span>)
@@ -372,6 +403,95 @@
                         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:edit</span> }
                         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@institution</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:unprocessable_entity</span> }
                 <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="private-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Private Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-set_breadcrumbs" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">set_breadcrumbs</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Añade breadcrumbs al sitio dependiendo del tipo de usuario que esté
+conectado.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="set_breadcrumbs-source">
+            <pre><span class="ruby-comment"># File app/controllers/institutions_controller.rb, line 116</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">set_breadcrumbs</span> <span class="ruby-comment"># :doc:</span>
+        <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Inicio&quot;</span>, <span class="ruby-value">:root_path</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">user_signed_in?</span>
+                <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;¿Quiénes somos?&quot;</span>, <span class="ruby-value">:presentation_somos_path</span>
+                
+        <span class="ruby-keyword">else</span>
+                <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Instituciones&quot;</span>, <span class="ruby-identifier">institutions_path</span>
+        <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-validate_category" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">validate_category</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Valida que solo un administrador pueda crear una institución. Valida que
+solo el encargado AS (manager_id) pueda operar sobre varias vistas de la
+institución.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="validate_category-source">
+            <pre><span class="ruby-comment"># File app/controllers/institutions_controller.rb, line 128</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">validate_category</span> <span class="ruby-comment"># :doc:</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@institution</span>.<span class="ruby-identifier">manager_id</span>.<span class="ruby-identifier">blank?</span>
+                <span class="ruby-keyword">if</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">id</span> <span class="ruby-operator">!=</span> <span class="ruby-ivar">@institution</span>.<span class="ruby-identifier">manager_id</span>
+                        <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">root_path</span>, <span class="ruby-identifier">alert</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;Sólo el encargado AS puede trabajar sobre esta institución.&quot;</span>
+                <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">elsif</span> <span class="ruby-operator">!</span><span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">is_admin?</span>
+                <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">root_path</span>, <span class="ruby-identifier">alert</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;Solo un admin puede trabajar sobre las insituciones, mientras no haya encargado AS.&quot;</span>
         <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>

@@ -93,7 +93,8 @@
 
   <section class="description">
     
-<p>margin arriba 1.24 abajo 2.5 abajo 3 y 3</p>
+<p><strong><em>Project PDF:</strong> generador del documento .PDF de una
+experiencia documentada (Ver <a href="Project.html">Project</a>)</em></p>
 
   </section>
 
@@ -129,7 +130,9 @@
 
         <div class="method-description">
           
-          
+          <p>Funcion que inicializa el documento, dandole el formato respectivo.</p>
+
+<p>Llama a los métodos con la información de las experiencias.</p>
           
           
             <div class="method-calls-super">
@@ -140,7 +143,7 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/pdfs/project_pdf.rb, line 5</span>
+            <pre><span class="ruby-comment"># File app/pdfs/project_pdf.rb, line 8</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">project</span>) 
         <span class="ruby-keyword">super</span>(<span class="ruby-value">:margin</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-value">90</span>,<span class="ruby-value">90</span>,<span class="ruby-value">90</span>,<span class="ruby-value">90</span>], <span class="ruby-value">:page_size=</span><span class="ruby-operator">&gt;</span><span class="ruby-string">&#39;LETTER&#39;</span>)
         <span class="ruby-ivar">@project</span> = <span class="ruby-identifier">project</span>
@@ -183,13 +186,13 @@
 
         <div class="method-description">
           
-          
+          <p>Información sobre la actividad y sus objetivos</p>
           
           
 
           
           <div class="method-source-code" id="project_activity-source">
-            <pre><span class="ruby-comment"># File app/pdfs/project_pdf.rb, line 65</span>
+            <pre><span class="ruby-comment"># File app/pdfs/project_pdf.rb, line 72</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">project_activity</span>
         <span class="ruby-identifier">text</span> <span class="ruby-string">&quot;\n\n III Antecedentes de la actividad de Aprendizaje Servicio:&quot;</span>, <span class="ruby-identifier">size</span><span class="ruby-operator">:</span> <span class="ruby-value">12</span>, <span class="ruby-identifier">style</span><span class="ruby-operator">:</span> <span class="ruby-value">:bold</span>
         <span class="ruby-identifier">text</span> <span class="ruby-string">&quot;\n&lt;b&gt;Objetivos de aprendizaje y/o competencias asociadas:&quot;</span>, <span class="ruby-identifier">size</span><span class="ruby-operator">:</span> <span class="ruby-value">11</span>, <span class="ruby-identifier">indent_paragraphs</span><span class="ruby-operator">:</span> <span class="ruby-value">30</span>, <span class="ruby-identifier">align</span><span class="ruby-operator">:</span> <span class="ruby-value">:justify</span>, <span class="ruby-value">:inline_format</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span>
@@ -234,13 +237,13 @@
 
         <div class="method-description">
           
-          
+          <p>Título del pdf</p>
           
           
 
           
           <div class="method-source-code" id="project_title-source">
-            <pre><span class="ruby-comment"># File app/pdfs/project_pdf.rb, line 17</span>
+            <pre><span class="ruby-comment"># File app/pdfs/project_pdf.rb, line 21</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">project_title</span>
         <span class="ruby-identifier">text</span> <span class="ruby-string">&quot;\n\nFORMATO SISTEMATIZACIÓN ACTIVIDADES APRENDIZAJE SERVICIO&quot;</span>, <span class="ruby-identifier">size</span><span class="ruby-operator">:</span> <span class="ruby-value">13</span>, <span class="ruby-identifier">style</span><span class="ruby-operator">:</span> <span class="ruby-value">:bold</span>, <span class="ruby-identifier">align</span><span class="ruby-operator">:</span> <span class="ruby-value">:center</span>
         <span class="ruby-identifier">text</span> <span class="ruby-node">&quot;TÍTULO: #{@project.title}&quot;</span>,<span class="ruby-identifier">size</span><span class="ruby-operator">:</span> <span class="ruby-value">13</span>, <span class="ruby-identifier">style</span><span class="ruby-operator">:</span> <span class="ruby-value">:bold</span>, <span class="ruby-identifier">align</span><span class="ruby-operator">:</span> <span class="ruby-value">:center</span>
@@ -269,13 +272,13 @@
 
         <div class="method-description">
           
-          
+          <p>Información general de la experiencia</p>
           
           
 
           
           <div class="method-source-code" id="projects_general-source">
-            <pre><span class="ruby-comment"># File app/pdfs/project_pdf.rb, line 23</span>
+            <pre><span class="ruby-comment"># File app/pdfs/project_pdf.rb, line 28</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">projects_general</span>
         <span class="ruby-identifier">text</span> <span class="ruby-string">&quot;\n\n I Antecedentes generales:&quot;</span>, <span class="ruby-identifier">size</span><span class="ruby-operator">:</span> <span class="ruby-value">12</span>, <span class="ruby-identifier">style</span><span class="ruby-operator">:</span> <span class="ruby-value">:bold</span>
         <span class="ruby-identifier">text</span> <span class="ruby-node">&quot;\n&lt;b&gt;Universidad:&lt;/b&gt; #{@project.institution.name}&quot;</span>, <span class="ruby-identifier">size</span><span class="ruby-operator">:</span> <span class="ruby-value">11</span>, <span class="ruby-identifier">indent_paragraphs</span><span class="ruby-operator">:</span> <span class="ruby-value">30</span>, <span class="ruby-identifier">align</span><span class="ruby-operator">:</span> <span class="ruby-value">:justify</span>, <span class="ruby-value">:inline_format</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span>
@@ -325,13 +328,13 @@
 
         <div class="method-description">
           
-          
+          <p>Información sobre los responsables de la experiencia</p>
           
           
 
           
           <div class="method-source-code" id="projects_information-source">
-            <pre><span class="ruby-comment"># File app/pdfs/project_pdf.rb, line 50</span>
+            <pre><span class="ruby-comment"># File app/pdfs/project_pdf.rb, line 56</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">projects_information</span>
         <span class="ruby-identifier">text</span> <span class="ruby-string">&quot;\n\n II Datos de los responsables:&quot;</span>, <span class="ruby-identifier">size</span><span class="ruby-operator">:</span> <span class="ruby-value">12</span>, <span class="ruby-identifier">style</span><span class="ruby-operator">:</span> <span class="ruby-value">:bold</span>
         <span class="ruby-identifier">text</span> <span class="ruby-node">&quot;\n&lt;b&gt;Nombre profesor responsable:&lt;/b&gt; #{@project.user.name}&quot;</span>, <span class="ruby-identifier">size</span><span class="ruby-operator">:</span> <span class="ruby-value">11</span>, <span class="ruby-identifier">indent_paragraphs</span><span class="ruby-operator">:</span> <span class="ruby-value">30</span>, <span class="ruby-identifier">align</span><span class="ruby-operator">:</span> <span class="ruby-value">:justify</span>, <span class="ruby-value">:inline_format</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span>

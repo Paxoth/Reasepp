@@ -1,3 +1,6 @@
+=begin rdoc
+  _**Presentation:** controlador utilizado para desplegar las vistas del portal web._
+=end
 class PresentationController < ApplicationController
 	before_action :set_presentation, except: [:estatuto]
 	add_breadcrumb "Inicio", :root_path

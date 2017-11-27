@@ -1,3 +1,6 @@
+=begin rdoc
+  _**Resource:** controlador de los recursos descargables (Ver Resource)_
+=end
 class ResourcesController < ApplicationController
   before_action :authenticate_user!
   before_action :validate_category, except: [:show,:muestra,:searchResource]

@@ -97,6 +97,9 @@
 
   <section class="description">
     
+<p><strong><em>Interest Link:</strong> controlador de los enlaces de interés
+(Ver <a href="InterestLink.html">InterestLink</a>)</em></p>
+
   </section>
 
   
@@ -137,7 +140,7 @@
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/interest_links_controller.rb, line 35</span>
+            <pre><span class="ruby-comment"># File app/controllers/interest_links_controller.rb, line 38</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
   <span class="ruby-ivar">@interest_link</span> = <span class="ruby-constant">InterestLink</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">interest_link_params</span>)
 
@@ -180,7 +183,7 @@
 
           
           <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/interest_links_controller.rb, line 65</span>
+            <pre><span class="ruby-comment"># File app/controllers/interest_links_controller.rb, line 68</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
   <span class="ruby-ivar">@interest_link</span>.<span class="ruby-identifier">destroy</span>
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
@@ -217,7 +220,7 @@
 
           
           <div class="method-source-code" id="edit-source">
-            <pre><span class="ruby-comment"># File app/controllers/interest_links_controller.rb, line 29</span>
+            <pre><span class="ruby-comment"># File app/controllers/interest_links_controller.rb, line 32</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">edit</span>
   <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Editar enlace&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -250,7 +253,7 @@
 
           
           <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File app/controllers/interest_links_controller.rb, line 12</span>
+            <pre><span class="ruby-comment"># File app/controllers/interest_links_controller.rb, line 15</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
   <span class="ruby-ivar">@interest_links</span> = <span class="ruby-constant">InterestLink</span>.<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;created_at DESC&quot;</span>).<span class="ruby-identifier">all</span>
 <span class="ruby-keyword">end</span></pre>
@@ -283,7 +286,7 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/controllers/interest_links_controller.rb, line 23</span>
+            <pre><span class="ruby-comment"># File app/controllers/interest_links_controller.rb, line 26</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
   <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Nuevo enlace&quot;</span>
   <span class="ruby-ivar">@interest_link</span> = <span class="ruby-constant">InterestLink</span>.<span class="ruby-identifier">new</span>
@@ -317,7 +320,7 @@
 
           
           <div class="method-source-code" id="show-source">
-            <pre><span class="ruby-comment"># File app/controllers/interest_links_controller.rb, line 18</span>
+            <pre><span class="ruby-comment"># File app/controllers/interest_links_controller.rb, line 21</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
   <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Mostrar enlace&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -350,7 +353,7 @@
 
           
           <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File app/controllers/interest_links_controller.rb, line 51</span>
+            <pre><span class="ruby-comment"># File app/controllers/interest_links_controller.rb, line 54</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">if</span> <span class="ruby-ivar">@interest_link</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">interest_link_params</span>)

@@ -1,3 +1,6 @@
+=begin rdoc
+  _**Request:** controlador de las Solicitudes de Servicio (Ver Request)_
+=end
 class RequestsController < ApplicationController
 	before_action :authenticate_user!
 	before_action :validate_category, except: [:index, :show, :searchRequest]

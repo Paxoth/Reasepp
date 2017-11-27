@@ -85,6 +85,14 @@
 
   <section class="description">
     
+<p><strong><em>Identity</em></strong>_ esta entidad fue creada para poder dar
+paso a la gema Omniauth y permitir la conexión a través de Facebook.</p>
+
+<p><strong>RELACIONES</strong></p>
+<ul><li>
+<p>belongs_to <a href="User.html">User</a></p>
+</li></ul>
+
   </section>
 
   
@@ -125,7 +133,7 @@
 
           
           <div class="method-source-code" id="find_for_oauth-source">
-            <pre><span class="ruby-comment"># File app/models/identity.rb, line 8</span>
+            <pre><span class="ruby-comment"># File app/models/identity.rb, line 14</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_for_oauth</span>(<span class="ruby-identifier">auth</span>)
         <span class="ruby-identifier">find_or_create_by</span>(<span class="ruby-identifier">uid</span><span class="ruby-operator">:</span> <span class="ruby-identifier">auth</span>.<span class="ruby-identifier">uid</span>, <span class="ruby-identifier">provider</span><span class="ruby-operator">:</span> <span class="ruby-identifier">auth</span>.<span class="ruby-identifier">provider</span>)
 <span class="ruby-keyword">end</span></pre>

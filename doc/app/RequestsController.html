@@ -99,6 +99,9 @@
 
   <section class="description">
     
+<p><strong><em>Request:</strong> controlador de las Solicitudes de Servicio
+(Ver <a href="Request.html">Request</a>)</em></p>
+
   </section>
 
   
@@ -139,7 +142,7 @@
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/requests_controller.rb, line 44</span>
+            <pre><span class="ruby-comment"># File app/controllers/requests_controller.rb, line 47</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
         <span class="ruby-ivar">@request</span> = <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">requests</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">defined_params</span>)
         <span class="ruby-keyword">if</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">category</span> <span class="ruby-operator">==</span> <span class="ruby-value">3</span> <span class="ruby-comment">#El creador es vinculador social</span>
@@ -189,7 +192,7 @@
 
           
           <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/requests_controller.rb, line 82</span>
+            <pre><span class="ruby-comment"># File app/controllers/requests_controller.rb, line 85</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
         <span class="ruby-constant">Request</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>]).<span class="ruby-identifier">destroy</span>
         <span class="ruby-identifier">flash</span>[<span class="ruby-value">:notice</span>] = <span class="ruby-string">&quot;La solicitud de servicio se ha eliminado&quot;</span>
@@ -224,7 +227,7 @@
 
           
           <div class="method-source-code" id="edit-source">
-            <pre><span class="ruby-comment"># File app/controllers/requests_controller.rb, line 37</span>
+            <pre><span class="ruby-comment"># File app/controllers/requests_controller.rb, line 40</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">edit</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Editar&quot;</span>
         <span class="ruby-keyword">if</span> <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">user_id</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">id</span>
@@ -260,7 +263,7 @@
 
           
           <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File app/controllers/requests_controller.rb, line 11</span>
+            <pre><span class="ruby-comment"># File app/controllers/requests_controller.rb, line 14</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
         <span class="ruby-ivar">@disponible</span> = <span class="ruby-constant">Request</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">1</span>).<span class="ruby-identifier">paginate</span>(<span class="ruby-identifier">page</span><span class="ruby-operator">:</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:page</span>],<span class="ruby-identifier">per_page</span><span class="ruby-operator">:</span> <span class="ruby-value">5</span>).<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;created_at DESC&quot;</span>)
         <span class="ruby-ivar">@cancelada</span> = <span class="ruby-constant">Request</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">2</span>).<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;created_at DESC&quot;</span>)
@@ -300,7 +303,7 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/controllers/requests_controller.rb, line 32</span>
+            <pre><span class="ruby-comment"># File app/controllers/requests_controller.rb, line 35</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Nueva solicitud&quot;</span>
         <span class="ruby-ivar">@request</span> = <span class="ruby-constant">Request</span>.<span class="ruby-identifier">new</span>
@@ -334,7 +337,7 @@
 
           
           <div class="method-source-code" id="searchRequest-source">
-            <pre><span class="ruby-comment"># File app/controllers/requests_controller.rb, line 88</span>
+            <pre><span class="ruby-comment"># File app/controllers/requests_controller.rb, line 91</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">searchRequest</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Búsqueda&quot;</span>
         <span class="ruby-ivar">@requests</span> = <span class="ruby-constant">Request</span>.<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;created_at DESC&quot;</span>).<span class="ruby-identifier">all</span>
@@ -373,7 +376,7 @@
 
           
           <div class="method-source-code" id="show-source">
-            <pre><span class="ruby-comment"># File app/controllers/requests_controller.rb, line 22</span>
+            <pre><span class="ruby-comment"># File app/controllers/requests_controller.rb, line 25</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Mostrar&quot;</span>
         <span class="ruby-ivar">@comment</span> = <span class="ruby-constant">Comment</span>.<span class="ruby-identifier">new</span>
@@ -412,7 +415,7 @@
 
           
           <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File app/controllers/requests_controller.rb, line 65</span>
+            <pre><span class="ruby-comment"># File app/controllers/requests_controller.rb, line 68</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
         <span class="ruby-keyword">if</span> <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">update_attributes</span>(<span class="ruby-identifier">defined_params</span>)
                 <span class="ruby-keyword">if</span> <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">start_time</span> <span class="ruby-operator">&lt;</span> <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">created_at</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>.<span class="ruby-identifier">days</span>

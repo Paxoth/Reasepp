@@ -1,3 +1,6 @@
+=begin rdoc
+  _**User:** controlador de los Usuarios (Ver User)_
+=end
 class UsersController < ApplicationController
 	before_action :authenticate_user!
 	before_action :validate_category, only: [:edit,:update]

@@ -75,6 +75,35 @@
 
   <section class="description">
     
+<p><strong><em>Comments</strong> Son los comentarios que puede realizar un
+usuario, en las ofertas de servicios, solicitudes de servicios, servicios
+activos y eventos.</em></p>
+
+<p><strong>ATRIBUTOS</strong></p>
+<ul><li>
+<p><strong>body</strong>: Corresponde al texto del comentario.</p>
+</li><li>
+<p>__post_i__d: Corresponde al id de la publicación cual se está comentado la
+cual, como ya se mencionó, corresponde a ofertas de servicios, solicitudes
+de servicios, servicios activos y eventos.</p>
+</li><li>
+<p><strong>post_type</strong>: Indica qué tipo publicación se está comentando.</p>
+</li></ul>
+
+<p><strong>RELACIONES</strong></p>
+<ul><li>
+<p>belongs_to <a href="User.html">User</a></p>
+</li><li>
+<p>belongs_to Post (Polimorfismo)</p>
+<ul><li>
+<p><a href="Offering.html">Offering</a></p>
+</li><li>
+<p><a href="Request.html">Request</a></p>
+</li><li>
+<p><a href="Service.html">Service</a></p>
+</li></ul>
+</li></ul>
+
   </section>
 
   

@@ -1,3 +1,6 @@
+=begin rdoc
+  _**Section:** controlador de las secciones (Ver Section)_
+=end
 class SectionsController < ApplicationController
 	before_action :authenticate_user!, except: [:show]
 	before_action :validate_category, except: [:show]

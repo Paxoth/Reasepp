@@ -85,6 +85,43 @@
 
   <section class="description">
     
+<p><strong><em>Section</strong> es la entidad principal del portal web REASE.
+Fue creada para la clasificación de los diferentes publicaciones que pueden
+realizar los administradores del sitio, las cuales se desplegarán de manera
+ordenada en el sitio web.</em></p>
+
+<p><strong>ATRIBUTOS</strong></p>
+<ul><li>
+<p><strong>title</strong>: Título de la publicación.</p>
+</li><li>
+<p><strong>module</strong>: módulo o clasificación de las publicaciones que
+representan las secciones.</p>
+<ul><li>
+<p>Novedad: clasificación para las noticias presentadas en la página
+principal.</p>
+</li><li>
+<p>Aprendizaje Servicio: clasificación para la página de ¿Qué es el
+aprendizaje y servicio?</p>
+</li><li>
+<p>Hacemos: clasificación para el módulo de ¿Qué hacemos?</p>
+</li><li>
+<p>Somos: clasificación para el módulo de ¿Quiénes somos?</p>
+</li><li>
+<p>Estatuto: clasificación para el módulo del estatuto, en donde se pueden
+publicar los árticulos de este.</p>
+</li></ul>
+</li><li>
+<p><strong>body</strong>: Contenido o cuerpo de la publicación.</p>
+</li><li>
+<p><strong>priority</strong>: Prioridad de la publicación para dar un orden de
+estas.</p>
+</li></ul>
+
+<p><strong>RELACIONES</strong></p>
+<ul><li>
+<p>belongs_to <a href="User.html">User</a></p>
+</li></ul>
+
   </section>
 
   
@@ -119,14 +156,14 @@
 
         <div class="method-description">
           
-          <p>Función que permite que el buscador encuentre Secciones a través de match
-de palabras en sus atributos.</p>
+          <p>Método que permite que el buscador encuentre Secciones a través de match de
+palabras en sus atributos.</p>
           
           
 
           
           <div class="method-source-code" id="search-source">
-            <pre><span class="ruby-comment"># File app/models/section.rb, line 27</span>
+            <pre><span class="ruby-comment"># File app/models/section.rb, line 31</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">search</span>(<span class="ruby-identifier">search</span>)
         <span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;title LIKE ? or body LIKE ? or module LIKE ?&quot;</span>, <span class="ruby-node">&quot;%#{search}%&quot;</span>, <span class="ruby-node">&quot;%#{search}%&quot;</span>, <span class="ruby-node">&quot;%#{search}%&quot;</span>) 
 <span class="ruby-keyword">end</span></pre>

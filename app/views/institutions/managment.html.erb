@@ -4,40 +4,88 @@
 	<div class="panel-heading">
 		Información Global
 	</div>
-	<div class="panel-body">
-		<p><strong>Experiencias totales</strong>: <%=@institution.experiences.count%><br></p>
-		<p><strong>Estudiantes impactados </strong>: <%=@institution.experiences.sum("participants")%></p>
-		<p><strong>Miembros de comunidades impactados </strong>: <%=@institution.experiences.sum("benefited")%></p>
+	<div class="panel-body" style="text-align: left;">
+		<li><strong>Experiencias totales</strong>: <%=@institution.experiences.count%><br></li>
+		<li><strong>Estudiantes impactados </strong>: <%=@institution.experiences.sum("participants")%></lu>
+		<li><strong>Miembros de comunidades impactados </strong>: <%=@institution.experiences.sum("benefited")%></li>
 	</div>
 </div>
+
 <div class="panel panel-default panelRease">
 	<div class="panel-heading">
 		Información de gestión
 	</div>
-	<div class="panel-body">
+	<div class="panel-body" style="text-align: left;">
 		<p class="note">Seleccione el intervalo de fechas que desea consultar información</p>
-		<div class="input-group input-daterange">
-			<%= text_field_tag 'fecha_inicio', nil, :class=> 'form-control', placeholder: 'Fecha Inicio', id:'fecha_inicio', value: @fecha_inicio %>
-			<div class="input-group-addon">hasta</div>
-			<%= text_field_tag 'fecha_termino', nil, :class=> 'form-control', placeholder: 'Fecha Término', id:'fecha_termino', value: @fecha_termino %>
+		<div class="row">
+			<div class="col-sm-9">
+				<div class="input-group input-daterange">
+					<%= text_field_tag 'fecha_inicio', nil, :class=> 'form-control', placeholder: 'Fecha Inicio', id:'fecha_inicio', value: @fecha_inicio %>
+					<span class="input-group-addon">
+						Hasta
+					</span>
+					<%= text_field_tag 'fecha_termino', nil, :class=> 'form-control', placeholder: 'Fecha Término', id:'fecha_termino', value: @fecha_termino %>
+				</div>
+			</div>
+			<div class="col-sm-3">
+				<%= link_to 'Buscar experiencias', managment_path(@institution), :class => 'btn', id:'EnviarFechas' %>
+			</div>
 		</div>
-		<%= link_to 'Enviar Fechas', managment_path(@institution), :class => 'btn btnCRUD', id:'EnviarFechas' %>
+		
 		<%if @experiences.present?%>
-			<h2>Impactos</h2>		
-			<p><strong>Experiencias realizadas</strong>: <%=@experiences.count%><br></p>
-			<p><strong>Estudiantes impactados </strong>: <%=@experiences.sum("participants")%></p>
-			<p><strong>Miembros de comunidades impactados </strong>: <%=@experiences.sum("benefited")%></p>
+			<hr>
+			<h2>Experiencias</h2>
+			<table class="tabla-rease">
+				<tr>
+					<th><strong>Nombre</strong></th>
+					<th><strong>Responsable</strong></th>
+					<th><strong>Fecha</strong></th>
+				</tr>
+				<%@experiences.each do |experience|%>
+				<tr>
+					<%@profesor = User.where(id: experience.professor_id).first%>
+					<td><%=link_to truncate(experience.title, length: 60), experience%></td>
+					<td><%=link_to @profesor.nickname, user_path(@profesor)%></td>
+					<td><%=experience.created_at.strftime("%d / %m / %Y")%> <%=link_to image_tag("Extensiones/pdf.gif"), experience_path(experience, format: "pdf"), :target=>'_blank'%></td>
+				</tr>
+				<%end%>
+			</table>
 
-			<h2>Experiencias por área</h2>
-			<%Area.all.each do |area|%>
-				<%if @experiences.by_area(area.id).present?%>
-					<%=area.discipline%>: <%=area.name%>			
-					<%@experiences.by_area(area.id).each do |exp|%>
-						<p><%=link_to exp.title, exp%> </p>
-						<hr>
+			<hr>
+			<h2>Impacto</h2>
+			<li><strong>Experiencias totales</strong>: <%=@experiences.count%><br></li>
+			<li><strong>Estudiantes impactados </strong>: <%=@experiences.sum("participants")%></lu>
+			<li><strong>Miembros de comunidades impactados </strong>: <%=@experiences.sum("benefited")%></li>
+			
+			<hr>
+			<h2>Áreas de conocimiento</h2>
+			<table class="tabla-rease">
+				<tr>
+					<th><strong>Área de trabajo</strong></th>
+					<th><strong>Nombre</strong></th>
+					<th><strong>Responsable</strong></th>
+					<th><strong>Fecha</strong></th>
+				</tr>
+				<%@areas.each do |area|%>
+					<%count = 0%>
+					<%if @experiences.by_area(area.id).present?%>
+						<%@experiences.by_area(area.id).each do |experience|%>
+							<tr>
+								<%if count == 0%>				
+									<td rowspan="<%=@experiences.by_area(area.id).count%>"><%=truncate(area.discipline+": "+area.name, length: 30)%></td>
+									<%count = 1%>
+								<%end%>
+								<%@profesor = User.where(id: experience.professor_id).first%>
+								<td><%=link_to truncate(experience.title, length: 60), experience%></td>
+								<td><%=link_to @profesor.nickname, user_path(@profesor)%></td>
+								<td><%=experience.created_at.strftime("%d / %m / %Y")%> <%=link_to image_tag("Extensiones/pdf.gif"), experience_path(experience, format: "pdf"), :target=>'_blank'%></td>
+							</tr>
+						<%end%>
 					<%end%>
-				<%end%>			
-			<%end%>
+				<%end%>
+			</table>
+		<%else%>
+			<p>No hay experiencias entre las fechas mencionadas</p>
 		<%end%>
 	</div>
 </div>
@@ -61,3 +109,4 @@
 	});
 
 </script>
+

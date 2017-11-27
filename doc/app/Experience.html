@@ -85,6 +85,91 @@
 
   <section class="description">
     
+<p><strong><em>Experience</strong> es la entidad que representa a las
+experiencias de servicio, la etapa final del ciclo de vida de un servicio.
+Al ser finalmente un documento físico, tiene atributos que representan
+todos los campos de este documento.</em></p>
+
+<p><strong>ATRIBUTOS</strong></p>
+<ul><li>
+<p><strong>Formato de sitematización</strong> Gran parte de los atributos de
+experience representan al formulario que se debe llenar para completar el
+documento <em>“Formato Sistematización Actividades Aprendizaje
+Servicio“</em></p>
+<ul><li>
+<p>description</p>
+</li><li>
+<p>faculty</p>
+</li><li>
+<p>department</p>
+</li><li>
+<p>course_name</p>
+</li><li>
+<p>course_type</p>
+</li><li>
+<p>course_type_other</p>
+</li><li>
+<p>period</p>
+</li><li>
+<p>professor_phone</p>
+</li><li>
+<p>professor_degree</p>
+</li><li>
+<p>learning_objectives</p>
+</li><li>
+<p>service_objectives</p>
+</li><li>
+<p>frequency</p>
+</li><li>
+<p>weekly_hours</p>
+</li><li>
+<p>participants</p>
+</li><li>
+<p>students_level</p>
+</li><li>
+<p>community_partner</p>
+</li><li>
+<p>organization_type</p>
+</li><li>
+<p>benefited</p>
+</li><li>
+<p>results</p>
+</li><li>
+<p>tools</p>
+</li><li>
+<p>reflection_moments</p>
+</li></ul>
+</li><li>
+<p><strong>title</strong>: Título de la experiencia.</p>
+</li><li>
+<p><strong>start_time</strong>: Fecha de inicio del proyecto AS.</p>
+</li><li>
+<p><strong>end_time</strong>: Fecha de término del proyecto AS.</p>
+</li><li>
+<p><strong>professor_id</strong>: Hace referencia al profesor responsable del
+proyecto AS. (Ver entidad <a href="User.html">User</a>)</p>
+</li><li>
+<p><strong>partner_id</strong>: Hace referencia al socio colaborador del
+proyecto AS. (Ver entidad <a href="User.html">User</a>)</p>
+</li><li>
+<p><strong>broker_id</strong>: Hace referencia al vinculaor social que
+eventualmetne pudo haber tenido la idea de la actividad AS. (Ver entidad <a
+href="User.html">User</a>)</p>
+</li></ul>
+
+<p><strong>RELACIONES</strong></p>
+<ul><li>
+<p>belongs_to proffesor ( <a href="User.html">User</a> )</p>
+</li><li>
+<p>belongs_to partner ( <a href="User.html">User</a> )</p>
+</li><li>
+<p>belongs_to <a href="Institution.html">Institution</a></p>
+</li><li>
+<p>belongs_to <a href="Area.html">Area</a></p>
+</li><li>
+<p>belongs_to <a href="Service.html">Service</a></p>
+</li></ul>
+
   </section>
 
   
@@ -119,14 +204,14 @@
 
         <div class="method-description">
           
-          <p>Función que permite que el buscador encuentre Experiencias a través de
-match de palabras en sus atributos.</p>
+          <p>Método que permite que el buscador encuentre Experiencias a través de match
+de palabras en sus atributos.</p>
           
           
 
           
           <div class="method-source-code" id="search-source">
-            <pre><span class="ruby-comment"># File app/models/experience.rb, line 26</span>
+            <pre><span class="ruby-comment"># File app/models/experience.rb, line 57</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">search</span>(<span class="ruby-identifier">search</span>)
         <span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;faculty LIKE ? or department LIKE ? or course_name LIKE ? or course_type LIKE ? or period LIKE ? or learning_objectives LIKE ? or service_objectives LIKE ? or benefited LIKE ? or results LIKE ? or tools LIKE ? or description LIKE ? or reflection_moments LIKE ? or title LIKE ?&quot;</span>, <span class="ruby-node">&quot;%#{search}%&quot;</span>,<span class="ruby-node">&quot;%#{search}%&quot;</span>, <span class="ruby-node">&quot;%#{search}%&quot;</span>, <span class="ruby-node">&quot;%#{search}%&quot;</span>,<span class="ruby-node">&quot;%#{search}%&quot;</span>, <span class="ruby-node">&quot;%#{search}%&quot;</span>, <span class="ruby-node">&quot;%#{search}%&quot;</span>,<span class="ruby-node">&quot;%#{search}%&quot;</span>, <span class="ruby-node">&quot;%#{search}%&quot;</span>, <span class="ruby-node">&quot;%#{search}%&quot;</span>,<span class="ruby-node">&quot;%#{search}%&quot;</span>, <span class="ruby-node">&quot;%#{search}%&quot;</span> , <span class="ruby-node">&quot;%#{search}%&quot;</span>) 
 <span class="ruby-keyword">end</span></pre>
