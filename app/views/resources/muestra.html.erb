@@ -1,5 +1,5 @@
 <h1>Recursos</h1>
-<%if current_user.category == 1%>
+<%if current_user.is_admin?%>
 	<%= link_to 'Agregar nuevo recurso', new_resource_path, :class=>"btn btn-lg btnAdmin" %>
 <%end%>
 <div class="buscador">

@@ -1,4 +1,5 @@
-class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
+class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController # :nodoc:
+  
   def self.provides_callback_for(provider)
     class_eval %Q{
       def #{provider}

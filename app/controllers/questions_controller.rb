@@ -1,3 +1,10 @@
+=begin rdoc
+  _**Question:** controlador de las preguntas frecuentes (Ver Question)._
+
+  _Las preguntas frecuentes son visualizadas por cualquier usuario, incluyendo aquellos que no están conectados, pero solamente pueden ser administradas por usuarios administradores._
+  
+  _La mayoría de los métodos son generados automáticametne por scaffold y no poseen cambio alguno_
+=end
 class QuestionsController < ApplicationController
   before_action :authenticate_user!, except: [:show, :searchQuestion]
   before_action :validate_category, except: [:show,:searchQuestion]
@@ -7,18 +14,18 @@ class QuestionsController < ApplicationController
   add_breadcrumb "Administrar", :sections_path
   add_breadcrumb "Preguntas frecuentes", :questions_path
 
-  # GET /questions
-  # GET /questions.json
-  def index
+
+  def index # :nodoc:
     @questions = Question.all
   end
 
-  # GET /questions/1
-  # GET /questions/1.json
-  def show
+  def show # :nodoc:
     add_breadcrumb "Mostrar"
   end
 
+  #Vista de búsqueda de preguntas frecuentes
+  #
+  #Vista que permite utilizar los métodos de search para realizar búsqueda por palabras
   def searchQuestion
     add_breadcrumb "Búsqueda"
     @questions = Question.order("created_at DESC").all
@@ -33,20 +40,16 @@ class QuestionsController < ApplicationController
     end
   end
 
-  # GET /questions/new
-  def new
+  def new # :nodoc:
     add_breadcrumb "Nuevo"
     @question = Question.new
   end
 
-  # GET /questions/1/edit
-  def edit
+  def edit # :nodoc:
     add_breadcrumb "Editar"
   end
 
-  # POST /questions
-  # POST /questions.json
-  def create
+  def create # :nodoc:
     @question = Question.new(question_params)
 
     respond_to do |format|
@@ -60,9 +63,7 @@ class QuestionsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /questions/1
-  # PATCH/PUT /questions/1.json
-  def update
+  def update # :nodoc:
     respond_to do |format|
       if @question.update(question_params)
         format.html { redirect_to @question, notice: 'Se ha modificado la pregunta.' }
@@ -74,9 +75,7 @@ class QuestionsController < ApplicationController
     end
   end
 
-  # DELETE /questions/1
-  # DELETE /questions/1.json
-  def destroy
+  def destroy # :nodoc:
     @question.destroy
     respond_to do |format|
       format.html { redirect_to questions_url, notice: 'Se ha eliminado la pregunta.' }
@@ -85,19 +84,19 @@ class QuestionsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_question
       @question = Question.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def question_params
       params.require(:question).permit(:title, :answer, :reader)
     end
 
-    def validate_category
-      if current_user.category != 1
-      redirect_to root_path, alert: "Sólo un administrador puede trabajar las preguntas frecuentes."
+    #Se valida que solo un usuario sea el capaz de acceder a ciertas vistas de preguntas frecuentes.
+    def validate_category # :doc:
+      if !current_user.is_admin?
+        redirect_to root_path, alert: "Sólo un administrador puede trabajar las preguntas frecuentes."
       end   
     end
 end

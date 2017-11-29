@@ -1,2 +1,2 @@
-module BulletinsHelper
+module BulletinsHelper # :nodoc:
 end

@@ -1,2 +1,2 @@
-module PresentationHelper
+module PresentationHelper # :nodoc:
 end

@@ -118,8 +118,6 @@ p.navbar-text.navbar-right
 {
 	margin: 0;
 	width: 100%;
-	max-width: 96%;
-
 }
 
 .tabRease>li>a
@@ -152,5 +150,8 @@ p.navbar-text.navbar-right
 	border: solid 1px;
 	border-color: #30aaaa;
 	background: white;
-	max-width: 96%;
+}
+.ReaseDiv
+{
+	margin: 2%;
 }

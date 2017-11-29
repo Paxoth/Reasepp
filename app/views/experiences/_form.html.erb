@@ -6,6 +6,7 @@
       <% end %>
   <% end %>
 
+
 <div class="panel panel-default panelRease" >
     <div class="panel-heading">I. Antecedentes generales</div>
     <div class="panel-body">
@@ -56,9 +57,24 @@
 			<%= f.label :period, "Periodo del curso: "%>
 			<%= f.select(:period, [['I semestre', 1],['II semestre', 2],['Cada semestre', 3],['Anual', 4]], {:include_blank => '-- Periodo del curso --' }, { :class => 'form-control', :required => true }) %>
 		</p></div>
+	
+	</div>
+</div>
+
+<div class="panel panel-default panelRease">
+	<div class="panel-heading">
+		II. Datos de los responsables
+	</div>
+	<div class="panel-dody">
+		
 		<div class="field"><p>
 			<%= f.label :professor_name, "Nombre profesor responsable: "%>
 			<%=current_user.name%>			
+		</p></div>
+
+		<div class="field"><p>
+			<%= f.label :professor_email, "Correo electrónico profesor responsable: "%>
+			<%=current_user.email%>			
 		</p></div>
 
 		<div class="field"><p>
@@ -78,11 +94,19 @@
 				<%= @service.acceptor.name %>
 			<%end%>		
 		</p></div>
+		
+		<%if @broker.present?%>
+			<div class="field"><p>
+				<%= f.label :broker_id, "Vinculador social: "%>
+				<%= @broker.name%>
+			</p></div>
+		<%end%>
 
 	</div>
 </div>
+
 <div class="panel panel-default panelRease" >
-	<div class="panel-heading">II. Antecedentes de la actividad de Aprendizaje Servicio </div>
+	<div class="panel-heading">III. Antecedentes de la actividad de Aprendizaje Servicio </div>
 	<div class="panel-body">
 
 
@@ -115,18 +139,13 @@
 		</p></div>
 
 		<div class="field"><p>
-			<%= f.label :institutional_support, "Respaldo institucional: "%>
-			<%= f.select(:institutional_support, [['Cuenta con respaldo institucional', 1],['Corresponde a una iniciativa individual del profesor', 2]],{:include_blank => '-- Respaldo institucional (Seleccione una opción) --' } ,{ :class => 'form-control', :required => true }) %>
-		</p></div>
-
-		<div class="field"><p>
 			<%= f.label :frequency, "Frecuencia: "%>
 			<%= f.text_field :frequency, :class => 'form-control', :placeholder => '¿Con que frecuencia se realiza?', :required => true%>
 		</p></div>
 
 		<div class="field"><p>
 			<%= f.label :weekly_hours, "Horas cronológicas semanales: " %>
-			<%= f.text_field :weekly_hours, :class => 'form-control', :placeholder => 'Horas cronológicas semanales',:required => true%>
+			<%= f.number_field :weekly_hours, :class => 'form-control', :placeholder => 'Horas cronológicas semanales',:required => true%>
 		</p></div>
 
 		<div class="field"><p>
@@ -145,8 +164,8 @@
 		</p></div>	
 
 		<div class="field"><p>
-			<%= f.label :benefit, "Número de beneficiados: " %>
-			<%= f.text_field :benefit, :class => 'form-control', :placeholder => 'Número de beneficiados directos con toda la actividad o proyecto'%>
+			<%= f.label :benefited, "Número de beneficiados: " %>
+			<%= f.number_field :benefited, :class => 'form-control', :placeholder => 'Número de beneficiados directos con toda la actividad o proyecto'%>
 		</p></div>	
 		
 		<div class="field"><p>

@@ -1,4 +1,4 @@
-module ApplicationHelper
+module ApplicationHelper # :nodoc:
   def resource_name
     :user
   end

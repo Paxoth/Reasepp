@@ -1,6 +1,16 @@
 <h1>Detalles de la solicitud de servicio</h1>
 
+<% if @request.user.category == 3%> 
+<!--Mensajes iniciales para saber si la solicitud fue creada por un vinculador y tiene un socio comunitario a cargo-->
+	<%if current_user.category == 4%>
+		<% flash[:alert] = current_user.nickname+", esta solicitud aún no tiene un socio comunitario a cargo. Deja un comentario en caso de querer dirigir esta solicitud de servicio" %>
+	<%elsif @request.user == current_user%>
+		<% flash[:alert] = current_user.nickname+", contacta a un socio comunitario que se haga responsable de tu solicitud de servicio" %>
+	<%end%>
+<% end %>
+
 <% if user_signed_in? && current_user.category != 2 %>
+<!-- Botones de editar  eliminar solamente para el usuario responsable -->
 	<% if @request.user.id == current_user.id %>
 		<%if @request.status != 4%>
 			<%= link_to 'Editar ', edit_request_path(@request), :class => "btn btn-lg btnCRUD" %>
@@ -30,6 +40,7 @@
 				Caducado
 			<% elsif @request.status == 4%>
 				Aceptado para servicio
+				<p class="note"> <%=link_to "Dirígete a la pestaña de Servicios para visualizarlo", services_index_activos_path%></p>
 			<%end%>
 		</p>
 
@@ -42,40 +53,70 @@
 		<%end%>
 
 		<%if @request.institution_id.present?%>
-			<p><strong>Institución: </strong> <%= @request.institution.name%></p>
+			<p><strong>Institución: </strong> <%= link_to @request.institution.name, @request.institution%></p>
 		<%end%>
 		<%if @request.location.present?%>
 			<p><strong>Ubicación de desarrollo: </strong> <%= @request.location%></p>
 		<%end%>
 		
+		<!-- Creador es la persona que creó inicialmente la solicitud -->
 		<p><strong>Creado por:</strong>
-		<%= link_to @request.user.nickname, user_path(@request.user.id) %>
-		<%if !@request.user.photo.blank?%>
-			<%= image_tag @request.user.photo.url(:mini), :class =>"RoundPicture" %>
-		<%end %>
-		<p>
-
-		<h2>Manifestaciones</h2>
-		<% if @aceptados.blank?%>
-			<%if @request.services.count == 0%>
-				<p>Aún no se han manifestado para participar en este servicio</p>
-			<%elsif @request.services.count == 1%>
-				<p>Se ha manifestado <strong>1</strong> persona para este proyecto</p>
-				<%= link_to "Ver peticiones", request_services_path(@request), :class=>'btn btnCRUD'%>
+			<% if @request.broker_id.present?%>
+				<%= link_to @broker.nickname, user_path(@broker) %>
+				<%if !@broker.photo.blank?%>
+					<%= image_tag @broker.photo.url(:mini), :class =>"RoundPicture" %>
+				<%end %>
 			<%else%>
-				<p>Se han manifestado <strong><%=@request.services.count%></strong> personas para este proyecto</p>
-				<%= link_to "Ver peticiones", request_services_path(@request), :class=>'btn btnCRUD'%>
+				<%= link_to @request.user.nickname, user_path(@request.user.id) %>
+				<%if !@request.user.photo.blank?%>
+					<%= image_tag @request.user.photo.url(:mini), :class =>"RoundPicture" %>
+				<%end %>
 			<%end%>
-
-			<% if @request.user != current_user and current_user.category == 2%>
-				<%if @petition.blank?%>
-					<%= link_to "Manifestar interés de trabajo", new_request_service_path(@request), :class=>'btn btnCRUD'%>
+		</p>
+		<!-- Socio comunitario responsable no necesariamente es el creador -->
+		<p><strong>Socio comunitario responsable:</strong>
+			<% if !@request.broker_id.present?%>
+				<%= link_to @request.user.nickname, user_path(@request.user.id) %>
+				<%if !@request.user.photo.blank?%>
+					<%= image_tag @request.user.photo.url(:mini), :class =>"RoundPicture" %>
+				<%end %>
+			<%else%>
+				<%if @request.user.category == 4%>
+					<%= link_to @request.user.nickname, user_path(@request.user.id) %>
+					<%if !@request.user.photo.blank?%>
+						<%= image_tag @request.user.photo.url(:mini), :class =>"RoundPicture" %>
+					<%end %>
+				<%else%>
+					Aún no se ha asignado un socio comunitario responsable.
 				<%end%>
 			<%end%>
-			
-		<%else%>
-			<% @aceptados.each do |aceptado|%>
-				<p><%= link_to aceptado.acceptor.nickname, aceptado.acceptor%> ha aceptado a trabajar con <%= link_to aceptado.creator.nickname, aceptado.creator%></p>
+			<p>
+		</p>
+
+		<%if @request.user.category == 4%> <!--Verificar que hay un usuario responsable asignado-->
+			<h1>Manifestaciones</h1>
+			<!-- Visualización de los socios que deseen trabajar junto con el profesor en el servicio -->
+			<% if @aceptados.blank?%>
+				<%if @request.services.count == 0%>
+					<p>Aún no se han manifestado para participar en este servicio</p>
+				<%elsif @request.services.count == 1%>
+					<p>Se ha manifestado <strong>1</strong> persona para este proyecto</p>
+					<%= link_to "Ver peticiones", request_services_path(@request), :class=>'btn btnCRUD'%>
+				<%else%>
+					<p>Se han manifestado <strong><%=@request.services.count%></strong> personas para este proyecto</p>
+					<%= link_to "Ver peticiones", request_services_path(@request), :class=>'btn btnCRUD'%>
+				<%end%>
+
+				<% if @request.user != current_user and current_user.category == 2%>
+					<%if @petition.blank?%>
+						<%= link_to "Manifestar interés de trabajo", new_request_service_path(@request), :class=>'btn btnCRUD'%>
+					<%end%>
+				<%end%>
+				
+			<%else%>
+				<% @aceptados.each do |aceptado|%>
+					<p><%= link_to aceptado.acceptor.nickname, aceptado.acceptor%> ha aceptado a trabajar con <%= link_to aceptado.creator.nickname, aceptado.creator%></p>
+				<%end%>
 			<%end%>
 		<%end%>
 	</div>
@@ -92,21 +133,30 @@
 			<%if user_signed_in? %>
 				<%=render 'comments/formRequest'%>
 			<%end%>
-			<% @request.comments.order('created_at DESC').each do |comment|%>
-			<hr>
-			<p>	
-				<%if comment.user.photo.present?%>
-					<%= image_tag comment.user.photo.url(:mini), :class =>"RoundPicture" %> 
-				<%else%>
-					<%= image_tag ("mini/missingPhoto.png") %> 
-				<%end %>
-				<%= link_to comment.user.nickname, comment.user%> [ <%=comment.created_at.strftime("%d/%m/%Y - %H:%M")%> ]: 	<%=raw comment.body%>
-				<%if user_signed_in? %>
-					<%if current_user == comment.user or current_user.category == 1 %> - 
-						<%= link_to 'Eliminar', request_comment_path(@request,comment), method: :delete, data: { confirm: '¿Está seguro de eliminar el comentario?' }%>
+			<% @request.comments.order('created_at DESC').each do |comment|%><hr>
+				<div class="div-justify">
+					<%if comment.user.photo.present?%>
+						<%= image_tag comment.user.photo.url(:mini), :class =>"RoundPicture" %> 
+					<%else%>
+						<%= image_tag ("mini/missingPhoto.png") %> 
+					<%end %>
+					<%= link_to comment.user.nickname, comment.user%> [ <%=comment.created_at.strftime("%d/%m/%Y - %H:%M")%> ]: 	<%=raw comment.body%>
+					<%if user_signed_in? %>
+						<%if current_user == comment.user or current_user.is_admin?%> - 
+							<%= link_to 'Eliminar', request_comment_path(@request,comment), method: :delete, data: { confirm: '¿Está seguro de eliminar el comentario?' }%>
+						<%end%>
+
+							<!-- Formulario escondido, que permite al vinculador creador nombrar a un socio comunitario como responsable de la solicitud -->
+							<%if current_user.id == @request.broker_id && comment.user.category == 4 && @request.user.category != 4%>
+								<%= form_for @request, :html => { :class => "form-inline", :id=>'name_partner' } do |f| %>
+									<%= f.hidden_field :user_id, :value=> comment.user.id%>
+									<%confirm = '¿Está seguro que desea nombrar a '+comment.user.nickname+' como socio comunitario responsable de esta solicitud de servicio?' %>
+									- <%= link_to 'Nombrar Socio Responsable', "#", :onclick => "$('#name_partner').submit()", :data => {confirm: confirm}%>
+								<%end%>
+							<%end%>
+
 					<%end%>
-				<%end%>
-			</p>
+				</div>
 			<%end%>
 		</div>
 	</div>

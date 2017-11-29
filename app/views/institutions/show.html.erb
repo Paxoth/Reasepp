@@ -1,31 +1,16 @@
-<h1>Institución</h1>
-<div class="panel panel-default panelRease" >
-	<div class="panel-heading">
-		<%= @institution.name %>
-	</div>
-	<div class="panel-body">
-		<h2>Página Web:</h2>
-		<%= @institution.web %>
-		<h2>Logo institucional</h2>
-		<%= image_tag @institution.logo.url(:mini) %>
-	</div>
-</div>
-<%if user_signed_in? %>
-<%= link_to 'Editar', edit_institution_path(@institution), :class =>"btn btn-lg" %>
-<%= link_to 'Volver', institutions_path, :class =>"btn btn-lg" %>
-<%end%>
+<h1><%= @institution.name %></h1>
 
-<div class="panel panel-default panelRease">
-	<div class="panel-heading">
-		Profesores que pertenecen a <%= @institution.name %> 
-	</div>
-	<div class="panel-body">
-		 	<p><% @professors.each  do |user|%>
-				<%if user.photo.present?%>
-					<%=link_to image_tag(user.photo.url(:mini),:class=>'RoundPicture'),user%>
-				<%else%>
-					<%=link_to image_tag("mini/miniphoto.png",:class=>'RoundPicture'),user%>
-				<%end%>
-			<%end%></p>
-	</div>
-</div>
+<%if user_signed_in?%>
+    <%if (current_user.is_admin? and !@manager.present?) or current_user==@manager%>
+        <%= link_to 'Editar', edit_institution_path(@institution), :class =>"btn btn-lg btnCRUD" %>
+        <%=link_to "Información de gestión", managment_path(@institution), :class=>'btn btn-lg btnCRUD'%>
+    <%end%>
+<%end%>
+<%= link_to 'Volver', :back, :class =>"btn btn-lg btnCRUD" %>
+
+<div class="ReaseDiv">
+    
+    <%= render 'datas'%>
+    <%= render 'impacts'%>
+    <%= render 'members'%>
+</div>  

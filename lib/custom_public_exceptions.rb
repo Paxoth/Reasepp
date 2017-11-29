@@ -1,4 +1,4 @@
-class CustomPublicExceptions < ActionDispatch::PublicExceptions
+class CustomPublicExceptions < ActionDispatch::PublicExceptions # :nodoc:
   def call(env)
     status = env["PATH_INFO"][1..-1]
 

@@ -1,6 +1,6 @@
 <h1>Detalles del evento</h1>
 
-<% if user_signed_in? && current_user.category == 1  %>
+<% if user_signed_in? && current_user.is_admin?  %>
 	<% if @event.user.id == current_user.id %>
 		<%= link_to 'Editar evento', edit_event_path(@event), :class => "btn btn-lg btnCRUD" %>
 		<%= link_to 'Eliminar evento', @event, method: :delete, data: { confirm: '¿Está seguro de eliminar el evento?' }, :class => "btn btn-lg btnCRUD" %>
@@ -68,7 +68,7 @@
 					<%end %>
 					<%= link_to comment.user.nickname, comment.user%> [ <%=comment.created_at.strftime("%d/%m/%Y - %H:%M")%> ]: 	<%=raw comment.body%>
 					<%if user_signed_in? %>
-						<%if current_user == comment.user or current_user.category == 1 %> - 
+						<%if current_user == comment.user or current_user.is_admin? %> - 
 							<%= link_to 'Eliminar', event_comment_path(@event,comment), method: :delete, data: { confirm: '¿Está seguro de eliminar el comentario?' }%>
 						<%end%>
 					<%end%>

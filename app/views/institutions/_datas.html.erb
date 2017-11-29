@@ -1,0 +1,96 @@
+<ul class="nav nav-tabs tabRease nav-justified">
+	<li id="info2" onclick="info2()"><a>Información</a></li>
+	<%if user_signed_in?%>
+		<li id="info3" onclick="info3()"><a>Ofertas de Servicios (<%=@offerings.count%>)</a></li>
+		<li id="info4" onclick="info4()"><a>Solicitudes de Servicios (<%=@requests.count%>)</a></li>
+	<%end%>
+
+</ul>
+<div class="borderTab">
+	<div id="DatosPrincipales">
+		<h2>Datos importantes</h2>
+		<br><%= image_tag @institution.logo.url(:mini) %>
+		<p><strong>Sitio web:</strong> <%= link_to @institution.name, @institution.web%></p>
+		<p>
+			<strong>AS para <%=@institution.name%>: </strong>
+			<%if @institution.description.present?%>
+				<i>"<%=@institution.description%>"</i>
+			<%else%>
+				El encargado aún no ha escrito sobre su institución.
+			<%end%>
+			<p><%=@institution.name%> es parte del sitio REASE desde el <%=l @institution.created_at%></p>
+		</p>
+	</div>
+
+	<div id="ofertas">
+		<%if @offerings.present? %>
+			<% @offerings.each do |offering| %>
+				<div class="panel panel-default panelRease">
+					<div class="panel-heading">
+						<%if offering.user == current_user %>
+							<i class="glyphicon glyphicon-tags"></i>
+						<%end%>
+						<%= link_to offering.title, offering, :class=>'a-white' %>
+					</div>
+					<div class="panel-body">
+						<p><%=raw offering.resume %></p>
+					</div>
+				</div>
+			<%end%>
+		<%else%>
+			<p>Actualmente <%@institution.name%> no posee Ofertas de Servicios activas</p>
+		<%end%>
+	</div>
+
+	<div id="solicitudes">
+		<%if @requests.present? %>
+			<% @requests.each do |request| %>
+				<div class="panel panel-default panelRease">
+					<div class="panel-heading">
+						<%if request.user == current_user %>
+							<i class="glyphicon glyphicon-tags"></i>
+						<%end%>
+						<%= link_to request.title, request, :class=>'a-white' %>
+					</div>
+					<div class="panel-body">
+						<p><%=raw request.resume %></p>
+					</div>
+				</div>
+			<%end%>
+		<%else%>
+			<p>Actualmente <%@institution.name%> no posee Solicitudes de Servicios activas</p>
+		<%end%>
+	</div>
+</div>
+	<script type="text/javascript">
+
+	document.getElementById("info2").className = "active";	
+	document.getElementById('DatosPrincipales').style.display='block';
+	document.getElementById('ofertas').style.display='none';
+	document.getElementById('solicitudes').style.display='none';
+
+	function info2(){		
+	document.getElementById('DatosPrincipales').style.display='block';
+	document.getElementById('ofertas').style.display='none';
+	document.getElementById('solicitudes').style.display='none';
+	document.getElementById("info2").className = "active";
+	document.getElementById("info3").className = "";
+	document.getElementById("info4").className = "";
+	}
+	function info3(){
+	document.getElementById('DatosPrincipales').style.display='none';
+	document.getElementById('ofertas').style.display='block';
+	document.getElementById('solicitudes').style.display='none';
+	document.getElementById("info2").className = "";
+	document.getElementById("info3").className = "active";
+	document.getElementById("info4").className = "";
+	}
+	function info4(){		
+	document.getElementById('DatosPrincipales').style.display='none';
+	document.getElementById('ofertas').style.display='none';
+	document.getElementById('solicitudes').style.display='block';
+	document.getElementById("info2").className = "";
+	document.getElementById("info3").className = "";
+	document.getElementById("info4").className = "active";
+	}
+</script>

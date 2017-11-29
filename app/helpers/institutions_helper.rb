@@ -1,2 +1,2 @@
-module InstitutionsHelper
+module InstitutionsHelper # :nodoc:
 end

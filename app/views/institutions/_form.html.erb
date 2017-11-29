@@ -6,25 +6,32 @@
 		<% end %>
 	<% end %>
 
-<div class="panel panel-default panelRease" >
-	<div class="panel-heading">
-		Datos de la institución
-	</div>
-	<div class="panel-body">
-		<p class="note">*Todos los campos obligatorios</p>
-		<div class="field"><p>
-			<%= f.label :name, "Nombre: "%>
-			<%= f.text_field :name, :class => 'form-control', :placeholder => 'Nombre',:required=>true %>
-		</p></div>
-		<div class="field"><p>
-			<%= f.label :web, "Pagina web: "%>
-			<%= f.text_field :web,  :class => 'form-control', :placeholder => 'Página web. Ejemplo: http://www.ejemplo.com',:required=>true %>
-		</p></div>
-		<div class="field">
-			<p><%= f.file_field :logo %></p>
+	<div class="panel panel-default panelRease" >
+		<div class="panel-heading">
+			Datos de la institución
 		</div>
-	</div>	
-</div>
+		<div class="panel-body">
+			<p class="note">*Todos los campos obligatorios</p>
+			<div class="field"><p>
+				<%= f.label :name, "Nombre: "%>
+				<%= f.text_field :name, :class => 'form-control', :placeholder => 'Nombre',:required=>true %>
+			</p></div>
+
+			<%if current_user.id == @institution.manager_id%>		
+				<div class="field"><p>
+					<%= f.label :web, "Pagina web: "%>
+					<%= f.text_field :web,  :class => 'form-control', :placeholder => 'Página web. Ejemplo: http://www.ejemplo.com',:required=>true %>
+				</p></div>
+				<div class="field">
+					<p><%= f.file_field :logo %></p>
+				</div>
+				<div class="field"><p>
+					<%= f.label :description, "¿Qué es para tu institución el Aprendizaje Servicio?"%>
+					<%= f.text_field :description,  :class => 'form-control', :required=>true %>
+				</p></div>
+			<%end%>
+		</div>	
+	</div>
 	<%= f.submit orden, :class=>"btn btn-lg btnCRUD" %>
 	<%= link_to 'Volver', institutions_path, :class =>"btn btn-lg btnCRUD" %>
 <% end %>

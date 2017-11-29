@@ -1,14 +1,16 @@
+=begin rdoc
+_**Bulletin** es la entidad que representa los boletines informativos. Estos son los boletines que los administradores pueden enviar vía correo electrónico a los demás usuarios. Siendo estos boletines capaces de contener las últimas actualizaciones realizadas en la intranet._
+
+**ATRIBUTOS**
+
+*	__title__: Título del boletín.
+*	__description__: Descripción del boletín que es el cuerpo principal del mail que se envía.
+*	__start_date__: Fecha desde la cual se tomarán las actualizaciones de la página para ser adjuntadas en el mail que se envía.
+*	__receiver__: Opción para decidir qué tipo de usuario recibirá el boletín.
+
+=end
+
 class Bulletin < ActiveRecord::Base
-	#ENTIDAD BULLETIN
-		#Utilizado para generar los boletines informativos que se pueden enviar a los miembros de REASE
-		#indicando las próximas actividades y actualizaciones del sitio
-	
-	#ATRIBUTOS:
-		#title: Título del boletín informativo
-		#description: Descripción o cuerpo del boletín, donde se escribe la noticia
-		#start_date: Fecha desde la cual se adjuntarán las actualizaciones de la página
-		#receiver: Tipo de adhesión de los usuarios que recibirán el boletín a su correo (Activo, adherente, todos) 
-		
 	#VALIDACIONES
 	validates :title, presence: true, uniqueness: true
 	validates :description, presence: true
