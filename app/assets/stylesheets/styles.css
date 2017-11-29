@@ -1,15 +1,35 @@
 /* 
 	styles.css
-	Estilos para la página de ANEIB
 	Creados por PazBustos
 */
-
+/* 16px = 12pt = 100% = 1em*/
 /*Formato principal*/
+
+body{
+background: #ffffff;
+	background: -moz-linear-gradient(-45deg,  #ffffff 65%, #30aaaa 100%, #bf6e4e 100%);
+	background: -webkit-gradient(linear, left top, right bottom, color-stop(65%,#ffffff), color-stop(100%,#30aaaa), color-stop(100%,#bf6e4e));
+	background: -webkit-linear-gradient(-45deg,  #ffffff 65%,#30aaaa 100%,#bf6e4e 100%);
+	background: -o-linear-gradient(-45deg,  #ffffff 65%,#30aaaa 100%,#bf6e4e 100%);
+	background: -ms-linear-gradient(-45deg,  #ffffff 65%,#30aaaa 100%,#bf6e4e 100%);
+	background: linear-gradient(135deg,  #ffffff 65%,#30aaaa 100%,#bf6e4e 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#bf6e4e',GradientType=1 );
+	color: black;
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+	font-size: 14px;
+	min-height:  100%;
+    margin:  0px auto;
+    padding: 0px auto;
+}
+
 #wrapper {
-	padding: 0;
-	margin: 0;
-	min-height:100%;
-	position:relative;
+	border-color: #30aaaa;
+	height:auto !important; /* real browsers */
+	height:100%; /* IE6: treaded as min-height*/
+	min-height:600px; /* real browsers */
+	max-width: 1100px;
+	margin: 0.5em auto;
+	padding-top: 75px;
 }
 #header {
 	margin: 0;
@@ -22,13 +42,10 @@
 
 }
 #footer {
-	padding: 0;
-	margin: 0;
-	background:#30bbbb;
-	width:100%;
-	position:absolute;
-	bottom:0;
-	left:0;
+
+	background-color: #30bbbb;
+	text-align: center;
+	width: 100%;
 }
 /*link básicos estilos rease*/
 
@@ -60,13 +77,16 @@ section#contenedor
 	padding: 0;
 	text-align: center;
 }
-section#principal, aside
+section#principal_intranet, section#principal_portal, aside
 {
 	display: inline-block;
 	min-width: 300px;
 	vertical-align: top;
 	width: 65%;
     min-height: 100%;
+}
+section#principal_intranet{
+	width: 100%;
 }
 article
 {
@@ -78,23 +98,6 @@ aside
 	min-width: 250px;
 }
 /*Gradiente de color al cuerpo y font y tamaño letra*/
-body
-{
-	background: #ffffff;
-	background: -moz-linear-gradient(-45deg,  #ffffff 65%, #30aaaa 100%, #bf6e4e 100%);
-	background: -webkit-gradient(linear, left top, right bottom, color-stop(65%,#ffffff), color-stop(100%,#30aaaa), color-stop(100%,#bf6e4e));
-	background: -webkit-linear-gradient(-45deg,  #ffffff 65%,#30aaaa 100%,#bf6e4e 100%);
-	background: -o-linear-gradient(-45deg,  #ffffff 65%,#30aaaa 100%,#bf6e4e 100%);
-	background: -ms-linear-gradient(-45deg,  #ffffff 65%,#30aaaa 100%,#bf6e4e 100%);
-	background: linear-gradient(135deg,  #ffffff 65%,#30aaaa 100%,#bf6e4e 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#bf6e4e',GradientType=1 );
-	color: black;
-	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
-	font-size: 14px;
-	padding-top: 75px;
-	height: 100%;
-	min-height: 100hv;
-}
 
 /*pies de la página para contacto*/
 footer
@@ -146,7 +149,6 @@ p
 	line-height: 1.7em;
 
 }
-
 
 
 /*CLASES*/
@@ -286,6 +288,11 @@ p
 	margin-top:8px;
 	margin-right: 5px;
 	max-height: 40px;
+}
+#logoFooter{
+	margin-top:8px;
+	margin-right: 5px;
+	max-height: 100px;
 }
 
 #pies /*estilo a la barra del footer*/

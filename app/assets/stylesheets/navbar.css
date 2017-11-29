@@ -155,3 +155,25 @@ p.navbar-text.navbar-right
 {
 	margin: 2%;
 }
+.dropdown-menu > li > a{
+	padding: 1em;
+	font-weight: bold;
+	color: grey;
+    min-width: 250px;
+}
+.dropdown-menu > li > a:hover{
+	color: white;   
+	background: #30aaaa; 
+	background-image: -webkit-linear-gradient(top, #30aaaa, #30bbbb);
+	background-image: -moz-linear-gradient(top, #30aaaa, #30bbbb);
+	background-image: -ms-linear-gradient(top, #30aaaa, #30bbbb);
+	background-image: -o-linear-gradient(top, #30aaaa, #30bbbb);
+	background-image: linear-gradient(to bottom, #30aaaa, #30bbbb);
+}
+.dropdown-menu > li.active > a {
+	color: white;
+	background: #30aaaa;
+}
+.dropdown-menu > li.active > a:hover {
+	background: #30cccc;
+}

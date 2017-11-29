@@ -141,6 +141,20 @@ print("\tSeed:\tRecursos creados y subidos\n")
 
 print("\nGENERACIÓN DE DATOS DUMMIES PARA LAS PRUEBAS DE INFORMACIÓN DE GESTION DE LA INSTITUCIÓN\n")
 
+
+print("\nINSERTANDO TEXTOS BASES PARA POBLAR SISTEMA\n")
+
+(1..30).step(1) do |n|
+	modulos = ["Novedad","Aprendizaje Servicio","Somos","Hacemos","Estatuto"]
+	Section.create(
+		id: n,
+		title: "Seccion de prueba "+n.to_s,
+		module: modulos.sample,
+		body: "Texto de prueba numero"+n.to_s+", esto será escrito como una prueba.",
+		priority: rand(1..3)
+	)
+end
+
 Institution.all.each do |institution|
 	institution.created_at = Time.now+(rand*(30)).days-(rand(5..40)).months
 	institution.save
@@ -472,4 +486,3 @@ print("\n\tSeed:\tCreando Experiencias basados en los servicios: ")
 	service_aux.save
 end
 print("\n\tSeed:\tExperiencias de pruebas creadas [200]\n")
-
