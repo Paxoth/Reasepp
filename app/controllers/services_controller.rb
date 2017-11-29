@@ -1,5 +1,12 @@
 =begin rdoc
   _**Service:** controlador de los servicios (Ver Service)_
+  
+  _Service es el resultado de cuando un Offering o un Request son aceptados tanto por el profesor y el socio comunitario ( User )._
+  
+  _Service parte como un mensaje anidado a la publicación anterior, el cual en caso de que se concrete el profesor llena los demás campos._
+
+  _Muchos servicios son rechazados, por lo que pueden existir y nunca ser utilizados, aún así dejan registro._
+
 =end
 class ServicesController < ApplicationController
 	before_action :authenticate_user!
@@ -12,13 +19,24 @@ class ServicesController < ApplicationController
 
 	add_breadcrumb "Inicio", :root_path
 	add_breadcrumb "Servicios", :services_index_activos_path
+	
+	#Vista principal de mensajes
+	#
+	#Al ser anidada a una publicación se pueden ver los mensajes de manifestaciones de interés por parte de los usuarios por trabajar juntos.
 	def index
-
 	end
+
+	#Vista principal de servicios activos
+	#
+	#Vista en donde se mostrarán todos los servicios activos, aceptados por ambos usuarios ( User )
 	def index_activos
 		@activos = Service.paginate(page: params[:page],per_page: 5).where(status: 4).order("updated_at DESC")
 	end
 
+	#Vista específica
+	#
+	#Vista en donde se podrá ver los datos del servicio.
+	#Se hace las consultas de las experiencias relacionadas al servicio, para mostrarlas en caso de existir.
 	def show
 		@comment = Comment.new
 		@service = Service.find(params[:id])
@@ -29,6 +47,11 @@ class ServicesController < ApplicationController
 		end
 	end
 
+	#Vista nuevo servicio
+	#
+	#Basada en una publicación previa ( Offering y Request ).
+	#
+	#Se debe considerar que se crea un service en forma de mensaje el cual pertenece a la publicación previa.
 	def new
 		@publication = publication
 		@service = @publication.services.new
@@ -39,6 +62,13 @@ class ServicesController < ApplicationController
 		add_breadcrumb "Solicitar participación"
 	end
 
+	#Editar servicio
+	#
+	#Para editar servicio depende mucho del tipo de usuario ( User category) que perenezca.
+	#
+	#Los servicios creados por socios comunitarios, solo pueden editarse cuando esten en forma de mensaje.
+	#
+	#Los servicios cuando estan en estado activo, solo pueden editarlos profesores.
 	def edit
 		add_breadcrumb "Editar servicio"
 		@publication = publication
@@ -66,6 +96,11 @@ class ServicesController < ApplicationController
 		end
 	end
 
+	#Método crear servicio
+	#
+	#Cuando se crea el servicio se toman los datos del usuario y las publicación previa para rellenar los campos iniciales.
+	#
+	#Recordar que los servicios comienzan como mensaje.
 	def create
 		@publication = publication
 		@service = @publication.services.new(service_params)
@@ -92,6 +127,10 @@ class ServicesController < ApplicationController
 		end
 	end
 
+	#Método actualizar servicio
+	#
+	#Cuando se hace el match entre el profesor y el socio comunitario, el profesor debe poder editar el servicio con los respectivos datos de este.
+	# Para ello es que se validan las fechas, y se cambian los estados de las publicaciones previas a "servicio".
 	def update
 		@publication = publication
 		@service = @publication.services.find(params[:id])
@@ -118,7 +157,7 @@ class ServicesController < ApplicationController
 		end
 	end
 
-	def destroy
+	def destroy # :nodoc:
 		@service.destroy
 			respond_to do |format|
 			format.html { redirect_to services_url, notice: 'El servicio se ha eliminado correctamente.' }
@@ -126,6 +165,7 @@ class ServicesController < ApplicationController
 		end
 	end
 
+	#Vista para realizar búsquedas de servicios activos a través del método search ( Service ).
 	def searchService
 		add_breadcrumb "Búsqueda"
 		@service = Service.where(status: 2).order("created DESC")
@@ -137,7 +177,9 @@ class ServicesController < ApplicationController
 	end
 
 	private
-		def publication
+
+		#Como Service está anidado a una publicación (NestedResource) se debe realizaar la búsqueda del ID de la publicación previa ( Offering y Request )
+		def publication # :doc:
 			if params[:request_id]
 				id = params[:request_id]
 				Request.find(params[:request_id])     
@@ -147,7 +189,8 @@ class ServicesController < ApplicationController
 			end
 		end 
 
-		def publication_url(publication)
+		#Método que recibe una publicación y devuelve su URL
+		def publication_url(publication) # :doc:
 			if Request === publication
 				request_path(publication)      
 			else
@@ -155,7 +198,12 @@ class ServicesController < ApplicationController
 			end
 		end
 
-		def validate_category_new
+		#Se valida quiénes son capaces de crear mensajes de manifiesto de interés.
+		#
+		#Los profesores manifiestan interes en solicitudes de servicio ( Request ).
+		#
+		#Los socios comunitarios manifiestan interés en ofertas de servicio ( Offering)
+		def validate_category_new # :doc:
 			if Request === publication
 				if current_user.category != 2
 					redirect_to root_path, alert: "Solo un profesor puede pedir trabajar en esta solicitud de servicio."
@@ -167,19 +215,25 @@ class ServicesController < ApplicationController
 			end
 		end
 
-		def validate_professor
+		#Valida que solo un profesor sea capaz de ingresar a ciertas vistas
+		def validate_professor # :doc:
 			if current_user.category != 2
 				redirect_to root_path, alert: "Solo un profesor puede editar este servicio"
 			end
 		end
 
-		def validate_owner
+		#Valida que el creador de la publicación prubea sea capaz de acceder a ciertas vitas.
+		def validate_owner # :doc:
 			if current_user == publication.user
 				redirect_to root_path, alert: "No puede generar una petición para su propia publicación"
 			end			
 		end
 
-		def set_status
+		#Para la vista de mensajes se separan por estado, en donde.
+		#1. Pendiente: mensaje que aun no se ha respondido
+		#2. Aceptado: creador de la publicacion acepta trabajar con el que manifestó interés
+		#3. Rechazado: creador de la publicación rechaza oferta de trabajar.
+		def set_status # :doc:
 			@publication = publication
 			@services = publication.services.all
 			@pendientes = @services.where(status: 1).order("updated_at DESC")

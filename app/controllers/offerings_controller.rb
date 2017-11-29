@@ -13,16 +13,21 @@ class OfferingsController < ApplicationController
 	add_breadcrumb "Inicio", :root_path
 	add_breadcrumb "Ofertas", :offerings_path
 
-	# GET /offerings
-	# GET /offerings.json
+	#Vista principal
+	#
+	#Consulta por todas las Ofertas de servicio clasificadas por estados.
 	def index
 		@disponible = Offering.where(status: 1).paginate(page: params[:page],per_page: 5).order("created_at DESC")
 		@cancelada = Offering.where(status: 2).order("created_at DESC")
 		@caducada = Offering.where(status: 3).order("created_at DESC")
 	end
 
-	# GET /offerings/1
-	# GET /offerings/1.json
+	#Vista Específica
+	#
+	#Consulta por los comentarios generados en esta oferta, del mismo modo que permite generar un nuevo comentario.
+	#Cambia el estado de la oferta en caso de que su tiempo final sea superado.
+	#
+	#Los comentarios tienen funciones extras desde sus views (Nombrar profesor responsable)
 	def show
 		add_breadcrumb "Mostrar"
 		@comment = Comment.new
@@ -33,14 +38,17 @@ class OfferingsController < ApplicationController
 		end
 	end
 
-
-	# GET /offerings/new
+	#Vista de nueva oferta de servicio
+	#
+	#Generada automáticamente por scaffold.
 	def new
 		add_breadcrumb "Nueva oferta"
 		@offering = Offering.new
 	end
 
-	# GET /offerings/1/edit
+	#Vista de nueva oferta de servicio
+	#
+	#Redirecciona en caso de que el usuario intenta editar la oferta no sea el creador de la oferta.
 	def edit
 		add_breadcrumb "Editar"
 		if @offering.user_id != current_user.id 
@@ -48,8 +56,10 @@ class OfferingsController < ApplicationController
 		end
 	end
 
-	# POST /offerings
-	# POST /offerings.json
+	#Método que permite crear la Oferta de servicio.
+	#
+	#Creado desde un usuario, impidiendole crearlo si no es un profesor o un vinculador social.
+	#Además se validan las fechas que estén dentro de valores válidos.
 	def create
 		@offering = current_user.offerings.new(offering_params)
 		
@@ -60,23 +70,25 @@ class OfferingsController < ApplicationController
 		@offering.status = 1
 		@offering.start_time = Time.now
 		respond_to do |format|
-		if @offering.save
-			if @offering.end_time + 1.minutes < @offering.start_time
-				@offering.update(end_time: @offering.start_time) 
-				flash[:alert] = "La fecha de término no puede ser menor a la de inicio, esta se ha modificado automáticamente"
+			if @offering.save
+				if @offering.end_time + 1.minutes < @offering.start_time
+					@offering.update(end_time: @offering.start_time) 
+					flash[:alert] = "La fecha de término no puede ser menor a la de inicio, esta se ha modificado automáticamente"
 
+				end
+				format.html { redirect_to @offering, notice: 'La oferta de servicio ha sido creada correctamente.' }
+				format.json { render :show, status: :created, location: @offering }
+			else
+				format.html { render :new }
+				format.json { render json: @offering.errors, status: :unprocessable_entity }
 			end
-			format.html { redirect_to @offering, notice: 'La oferta de servicio ha sido creada correctamente.' }
-			format.json { render :show, status: :created, location: @offering }
-		else
-			format.html { render :new }
-			format.json { render json: @offering.errors, status: :unprocessable_entity }
-		end
 		end
 	end
 
-	# PATCH/PUT /offerings/1
-	# PATCH/PUT /offerings/1.json
+	#Actualizar la oferta de servicio
+	#
+	#Permite actualizar la oferta de servicio de acuerdo a los parámetros establecidos.
+	#Además se preocupa de validar las fechas de manera correcta.
 	def update
 		respond_to do |format|
 			if @offering.update(offering_params)
@@ -98,9 +110,9 @@ class OfferingsController < ApplicationController
 		end
 	end
 
-	# DELETE /offerings/1
-	# DELETE /offerings/1.json
-	def destroy
+	# No utilizado comunmente, puesto que la oferta se le cambia el estado a cancelado.
+	# Generado automáticamente con scaffold.
+	def destroy # :nodoc:
 		@offering.destroy
 		respond_to do |format|
 			format.html { redirect_to offerings_url, notice: 'Se ha eliminado la oferta de servicio.' }
@@ -108,6 +120,7 @@ class OfferingsController < ApplicationController
 		end
 	end
 
+	#Vista que permite generar una consulta a través de la función search de Offering utilizando los parámetros de un input.
 	def searchOffering
 		add_breadcrumb "Búsqueda"
 		@offerings = Offering.order("created_at DESC").all
@@ -119,41 +132,35 @@ class OfferingsController < ApplicationController
 	
 	end
 
-	def professor #Vista que permitirá a un vinculador elegir a un profesor responsable de la oferta.
-		if current_user != @offering.user || @offering.user.category != 3
-			redirect_to root_path, alert: "Esta acción es solo valida cuando una oferta no tiene profesor responsable."
-		else
-			
-		end 
-	end
-
 	private
-		def validate_category
+		#Redirecciona a los socios comunitarios a la página inicial para que no puedan realizara acciones solo permitidas por los profesores  y vinculadores sociales.
+		def validate_category # :doc
 			if current_user.category == 4 
 				redirect_to root_path, alert: "Su categoría de socio comunitario no permite ésta acción."
 			end  
 		end
 
-		# Use callbacks to share common setup or constraints between actions.
 		def set_offering
 			@offering = Offering.find(params[:id])
 		end
 
-		def set_area
+		#Se realiza las consultas de áreas de trabajo para poder asignarselas a las ofertas ( Area)
+		def set_area # :doc:
 			@areas = Area.order("discipline ASC").order("name ASC").all     
 		end
 
-		def unique_petition
+		#Consulta del servicio específico que haya sido aceptado por el profesor.
+		def unique_petition # :doc:
 			@petition = @offering.services.where(:creator_id => current_user.id)
 		end
 
-		def set_broker
+		#Consulta que busca al usuario vinculador social en caso de ser el creador de la Oferta de servicio.
+		def set_broker # :doc:
 			if @offering.broker_id.present?
 				@broker = User.where(id: @offering.broker_id).first
 			end
 		end
-
-		# Never trust parameters from the scary internet, only allow the white list through.
+		
 		def offering_params
 			params.require(:offering).permit(
 				:user_id, 

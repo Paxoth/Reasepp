@@ -98,7 +98,9 @@
   <section class="description">
     
 <p><strong><em>Presentation:</strong> controlador utilizado para desplegar las
-vistas del portal web.</em></p>
+vistas del portal web. Utiliza comunmente información de <a
+href="Section.html">Section</a>, pero este controlador es solo pensado para
+vistas específicas de usuarios visitantes, es decir, offline.</em></p>
 
   </section>
 
@@ -134,13 +136,16 @@ vistas del portal web.</em></p>
 
         <div class="method-description">
           
-          
+          <p>Vista de las preguntas frecuentes y créditos del sistema</p>
+
+<p>Genera las consultas de las preguntas frecuentes ( <a
+href="Question.html">Question</a> )</p>
           
           
 
           
           <div class="method-source-code" id="about-source">
-            <pre><span class="ruby-comment"># File app/controllers/presentation_controller.rb, line 43</span>
+            <pre><span class="ruby-comment"># File app/controllers/presentation_controller.rb, line 72</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">about</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Acerca de&quot;</span>, <span class="ruby-value">:presentation_estatuto_path</span>
         <span class="ruby-ivar">@events</span> = <span class="ruby-constant">Event</span>.<span class="ruby-identifier">all</span>
@@ -170,13 +175,16 @@ vistas del portal web.</em></p>
 
         <div class="method-description">
           
-          
+          <p>Vista del módulo AprendizajeServicio</p>
+
+<p>Muestra las secciones de la categoría “Aprendizaje Servicio” ( <a
+href="Section.html">Section</a> )</p>
           
           
 
           
           <div class="method-source-code" id="aprendizaje-source">
-            <pre><span class="ruby-comment"># File app/controllers/presentation_controller.rb, line 31</span>
+            <pre><span class="ruby-comment"># File app/controllers/presentation_controller.rb, line 54</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">aprendizaje</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;¿Qué es AS?&quot;</span>, <span class="ruby-value">:presentation_aprendizaje_path</span>
         <span class="ruby-ivar">@sections</span> = <span class="ruby-constant">Section</span>.<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;priority ASC&quot;</span>).<span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;module = ?&quot;</span>,<span class="ruby-string">&quot;Aprendizaje Servicio&quot;</span>)
@@ -204,13 +212,16 @@ vistas del portal web.</em></p>
 
         <div class="method-description">
           
-          
+          <p>Vista del módulo AprendizajeServicio</p>
+
+<p>Muestra las secciones de la categoría “Estatuto” ( <a
+href="Section.html">Section</a> )</p>
           
           
 
           
           <div class="method-source-code" id="estatuto-source">
-            <pre><span class="ruby-comment"># File app/controllers/presentation_controller.rb, line 36</span>
+            <pre><span class="ruby-comment"># File app/controllers/presentation_controller.rb, line 62</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">estatuto</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Estatuto&quot;</span>, <span class="ruby-value">:presentation_estatuto_path</span>
         <span class="ruby-ivar">@events</span> = <span class="ruby-constant">Event</span>.<span class="ruby-identifier">all</span>
@@ -240,13 +251,19 @@ vistas del portal web.</em></p>
 
         <div class="method-description">
           
-          
+          <p>Vista del módulo ¿Qué hacemos?</p>
+
+<p>Se muestras las actas de las últimas asambleas ( <a
+href="Resource.html">Resource</a> )</p>
+
+<p>Ademas de las secciones de la categoría “somos” ( <a
+href="Section.html">Section</a> )</p>
           
           
 
           
           <div class="method-source-code" id="hacemos-source">
-            <pre><span class="ruby-comment"># File app/controllers/presentation_controller.rb, line 24</span>
+            <pre><span class="ruby-comment"># File app/controllers/presentation_controller.rb, line 44</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">hacemos</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;¿Qué hacemos?&quot;</span>, <span class="ruby-value">:presentation_hacemos_path</span>
         <span class="ruby-ivar">@resources</span> = <span class="ruby-constant">Resource</span>.<span class="ruby-identifier">paginate</span>(<span class="ruby-identifier">page</span><span class="ruby-operator">:</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:page</span>],<span class="ruby-identifier">per_page</span><span class="ruby-operator">:</span> <span class="ruby-value">10</span>).<span class="ruby-identifier">where</span>(<span class="ruby-identifier">category</span><span class="ruby-operator">:</span> <span class="ruby-value">1</span>).<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;date DESC&quot;</span>)
@@ -276,13 +293,25 @@ vistas del portal web.</em></p>
 
         <div class="method-description">
           
-          
+          <p>Vista principal del portal web</p>
+
+<p>Muestra las últimas 5 noticias ordenadas por prioridad ( <a
+href="Section.html">Section</a> ).</p>
+
+<p>También realiza la consulta pa mostrar los usuarios registrados en las
+últimas 2 semanas ( <a href="User.html">User</a> ).</p>
+
+<p>Realiza la consulta de la última acta. ( <a
+href="Resource.html">Resource</a>)</p>
+
+<p>Muestra la información del último boletín generado ( <a
+href="Bulletin.html">Bulletin</a> )</p>
           
           
 
           
           <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File app/controllers/presentation_controller.rb, line 8</span>
+            <pre><span class="ruby-comment"># File app/controllers/presentation_controller.rb, line 18</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
         <span class="ruby-ivar">@sections</span> = <span class="ruby-constant">Section</span>.<span class="ruby-identifier">paginate</span>(<span class="ruby-identifier">page</span><span class="ruby-operator">:</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:page</span>],<span class="ruby-identifier">per_page</span><span class="ruby-operator">:</span> <span class="ruby-value">5</span>).<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;priority ASC&quot;</span>).<span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;module = ?&quot;</span>,<span class="ruby-string">&quot;Novedad&quot;</span>)
         <span class="ruby-keyword">if</span> <span class="ruby-identifier">user_signed_in?</span>
@@ -314,13 +343,16 @@ vistas del portal web.</em></p>
 
         <div class="method-description">
           
-          
+          <p>Vista que permite buscar diferentes consultas a través de un match de
+palabras, utilizando la función search de diferentes entidades. Divida las
+consultas tanto para la intranet (user_signed_in?), como para el portal web
+(!user_signed_in?).</p>
           
           
 
           
           <div class="method-source-code" id="searchPage-source">
-            <pre><span class="ruby-comment"># File app/controllers/presentation_controller.rb, line 49</span>
+            <pre><span class="ruby-comment"># File app/controllers/presentation_controller.rb, line 81</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">searchPage</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Búsqueda&quot;</span>
         <span class="ruby-keyword">if</span> <span class="ruby-identifier">user_signed_in?</span> <span class="ruby-comment">##SEARCH PARA LA INTRANET</span>
@@ -395,13 +427,19 @@ vistas del portal web.</em></p>
 
         <div class="method-description">
           
-          
+          <p>Vista del módulo ¿Quiénes somos?</p>
+
+<p>Se muestras las instituciones adheridas ( <a
+href="Institution.html">Institution</a> )</p>
+
+<p>Ademas de las secciones de la categoría “somos” ( <a
+href="Section.html">Section</a> )</p>
           
           
 
           
           <div class="method-source-code" id="somos-source">
-            <pre><span class="ruby-comment"># File app/controllers/presentation_controller.rb, line 17</span>
+            <pre><span class="ruby-comment"># File app/controllers/presentation_controller.rb, line 32</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">somos</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;¿Quiénes Somos?&quot;</span>, <span class="ruby-value">:presentation_somos_path</span> 
         <span class="ruby-ivar">@instituciones</span> = <span class="ruby-constant">Institution</span>.<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;name ASC&quot;</span>).<span class="ruby-identifier">all</span>

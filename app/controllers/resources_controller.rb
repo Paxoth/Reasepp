@@ -1,5 +1,9 @@
 =begin rdoc
   _**Resource:** controlador de los recursos descargables (Ver Resource)_
+
+  _Los recursos son creados generalmente por administradores o usuarios específicos_
+
+  _La mayoría de los métodos fueron generados automáticamente por scaffold y no fueron modificados, por lo que no se documentan_
 =end
 class ResourcesController < ApplicationController
   before_action :authenticate_user!
@@ -8,43 +12,42 @@ class ResourcesController < ApplicationController
   before_action :set_categorizated, only: [:index, :muestra]
 
   add_breadcrumb "Inicio", :root_path
-  # GET /resources
-  # GET /resources.json
-  def index
+
+  #Vista principal
+  #
+  #Utilizada para los adminstradores puedan operar los recursos existentes y crear nuevos.
+  def index 
     add_breadcrumb "Administrar", :sections_path
     add_breadcrumb "Recursos", :resources_path 
   end
 
+  #Vista de muestra
+  #
+  #Vista para los usuarios no adminsitradores, en donde podrán descargar los recursos disponibles.
   def muestra
       add_breadcrumb "Recursos", :resources_muestra_path
       @interest_links = InterestLink.order("created_at DESC").all
   end
 
-  # GET /resources/1
-  # GET /resources/1.json
-  def show
+  def show # :nodoc:
     add_breadcrumb "Recursos", :resources_muestra_path 
     add_breadcrumb "Detalle"
   end
 
-  # GET /resources/new
-  def new
+  def new # :nodoc:
     add_breadcrumb "Administrar", :sections_path
     add_breadcrumb "Recursos", :resources_path 
     add_breadcrumb "Nuevo recurso"
     @resource = Resource.new
   end
 
-  # GET /resources/1/edit
-  def edit
+  def edit # :nodoc:
     add_breadcrumb "Administrar", :sections_path
     add_breadcrumb "Recursos", :resources_path 
     add_breadcrumb "Editar recurso"
   end
 
-  # POST /resources
-  # POST /resources.json
-  def create
+  def create # :nodoc:
     @resource = Resource.new(resource_params)
 
     respond_to do |format|
@@ -58,9 +61,7 @@ class ResourcesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /resources/1
-  # PATCH/PUT /resources/1.json
-  def update
+  def update # :nodoc:
     respond_to do |format|
       if @resource.update(resource_params)
         format.html { redirect_to @resource, notice: 'El recurso se ha modificado exitosamente' }
@@ -72,9 +73,7 @@ class ResourcesController < ApplicationController
     end
   end
 
-  # DELETE /resources/1
-  # DELETE /resources/1.json
-  def destroy
+  def destroy # :nodoc:
     @resource.destroy
     respond_to do |format|
       format.html { redirect_to resources_url, notice: 'El recurso se ha eliminado.' }
@@ -82,6 +81,9 @@ class ResourcesController < ApplicationController
     end
   end
 
+  #Vista de búsqueda de recursos
+  #
+  #Vista que utiliza los métodos search para hacer búsqueda de recursos a través de palabras (Ver Resource)
   def searchResource
     add_breadcrumb "Recursos", :resources_muestra_path 
     add_breadcrumb "Búsqueda"
@@ -95,25 +97,27 @@ class ResourcesController < ApplicationController
 
   private
 
-    def validate_category
+    #Validar que solo un administrador peuda acceder a ciertas vistas de recursos descargables.
+    def validate_category # :doc:
       if !current_user.is_admin?
       redirect_to root_path, alert: "Sólo un administrador puede trabajar las actas."
       end   
     end
 
-    # Use callbacks to share common setup or constraints between actions.
     def set_resource
       @resource = Resource.find(params[:id])
     end
 
-    def set_categorizated
+    #Hace llamadas a diferentes consultas de acuerdo a la categoría de ellos.
+    #Esto con el fin de hacer las consultas necesarias en las diferentes ventanas de las vistas de recursos.
+    def set_categorizated # :doc:
       @actas = Resource.where(category: 1).order("date DESC")
       @plantillas = Resource.where(category: 2).order("created_at DESC")
       @formacion = Resource.where(category: 3).order("created_at DESC")
       @enlaces = Resource.where(category: 4).order("name DESC")
       @otros = Resource.where(category: 5).order("created_at DESC")
     end
-    # Never trust parameters from the scary internet, only allow the white list through.
+    
     def resource_params
       params.require(:resource).permit(:name, :date, :archive,:description, :category)
     end

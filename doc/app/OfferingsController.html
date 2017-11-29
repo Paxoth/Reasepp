@@ -72,19 +72,21 @@
     
     <li ><a href="#method-i-create">#create</a>
     
-    <li ><a href="#method-i-destroy">#destroy</a>
-    
     <li ><a href="#method-i-edit">#edit</a>
     
     <li ><a href="#method-i-index">#index</a>
     
     <li ><a href="#method-i-new">#new</a>
     
-    <li ><a href="#method-i-professor">#professor</a>
-    
     <li ><a href="#method-i-searchOffering">#searchOffering</a>
     
+    <li ><a href="#method-i-set_area">#set_area</a>
+    
+    <li ><a href="#method-i-set_broker">#set_broker</a>
+    
     <li ><a href="#method-i-show">#show</a>
+    
+    <li ><a href="#method-i-unique_petition">#unique_petition</a>
     
     <li ><a href="#method-i-update">#update</a>
     
@@ -138,13 +140,17 @@
 
         <div class="method-description">
           
-          <p>POST /offerings POST /offerings.json</p>
+          <p>Método que permite crear la Oferta de servicio.</p>
+
+<p>Creado desde un usuario, impidiendole crearlo si no es un profesor o un
+vinculador social. Además se validan las fechas que estén dentro de valores
+válidos.</p>
           
           
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/offerings_controller.rb, line 53</span>
+            <pre><span class="ruby-comment"># File app/controllers/offerings_controller.rb, line 63</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
         <span class="ruby-ivar">@offering</span> = <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">offerings</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">offering_params</span>)
         
@@ -155,55 +161,18 @@
         <span class="ruby-ivar">@offering</span>.<span class="ruby-identifier">status</span> = <span class="ruby-value">1</span>
         <span class="ruby-ivar">@offering</span>.<span class="ruby-identifier">start_time</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>
         <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-        <span class="ruby-keyword">if</span> <span class="ruby-ivar">@offering</span>.<span class="ruby-identifier">save</span>
-                <span class="ruby-keyword">if</span> <span class="ruby-ivar">@offering</span>.<span class="ruby-identifier">end_time</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>.<span class="ruby-identifier">minutes</span> <span class="ruby-operator">&lt;</span> <span class="ruby-ivar">@offering</span>.<span class="ruby-identifier">start_time</span>
-                        <span class="ruby-ivar">@offering</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">end_time</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@offering</span>.<span class="ruby-identifier">start_time</span>) 
-                        <span class="ruby-identifier">flash</span>[<span class="ruby-value">:alert</span>] = <span class="ruby-string">&quot;La fecha de término no puede ser menor a la de inicio, esta se ha modificado automáticamente&quot;</span>
+                <span class="ruby-keyword">if</span> <span class="ruby-ivar">@offering</span>.<span class="ruby-identifier">save</span>
+                        <span class="ruby-keyword">if</span> <span class="ruby-ivar">@offering</span>.<span class="ruby-identifier">end_time</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>.<span class="ruby-identifier">minutes</span> <span class="ruby-operator">&lt;</span> <span class="ruby-ivar">@offering</span>.<span class="ruby-identifier">start_time</span>
+                                <span class="ruby-ivar">@offering</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">end_time</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@offering</span>.<span class="ruby-identifier">start_time</span>) 
+                                <span class="ruby-identifier">flash</span>[<span class="ruby-value">:alert</span>] = <span class="ruby-string">&quot;La fecha de término no puede ser menor a la de inicio, esta se ha modificado automáticamente&quot;</span>
 
+                        <span class="ruby-keyword">end</span>
+                        <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-ivar">@offering</span>, <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;La oferta de servicio ha sido creada correctamente.&#39;</span> }
+                        <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:show</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:created</span>, <span class="ruby-identifier">location</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@offering</span> }
+                <span class="ruby-keyword">else</span>
+                        <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:new</span> }
+                        <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@offering</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:unprocessable_entity</span> }
                 <span class="ruby-keyword">end</span>
-                <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-ivar">@offering</span>, <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;La oferta de servicio ha sido creada correctamente.&#39;</span> }
-                <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:show</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:created</span>, <span class="ruby-identifier">location</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@offering</span> }
-        <span class="ruby-keyword">else</span>
-                <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:new</span> }
-                <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@offering</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:unprocessable_entity</span> }
-        <span class="ruby-keyword">end</span>
-        <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-destroy" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">destroy</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>DELETE /offerings/1 DELETE /offerings/1.json</p>
-          
-          
-
-          
-          <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/offerings_controller.rb, line 103</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
-        <span class="ruby-ivar">@offering</span>.<span class="ruby-identifier">destroy</span>
-        <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-                <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">offerings_url</span>, <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Se ha eliminado la oferta de servicio.&#39;</span> }
-                <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">head</span> <span class="ruby-value">:no_content</span> }
         <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -229,13 +198,16 @@
 
         <div class="method-description">
           
-          <p>GET /offerings/1/edit</p>
+          <p>Vista de nueva oferta de servicio</p>
+
+<p>Redirecciona en caso de que el usuario intenta editar la oferta no sea el
+creador de la oferta.</p>
           
           
 
           
           <div class="method-source-code" id="edit-source">
-            <pre><span class="ruby-comment"># File app/controllers/offerings_controller.rb, line 44</span>
+            <pre><span class="ruby-comment"># File app/controllers/offerings_controller.rb, line 52</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">edit</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Editar&quot;</span>
         <span class="ruby-keyword">if</span> <span class="ruby-ivar">@offering</span>.<span class="ruby-identifier">user_id</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">id</span> 
@@ -265,13 +237,15 @@
 
         <div class="method-description">
           
-          <p>GET /offerings GET /offerings.json</p>
+          <p>Vista principal</p>
+
+<p>Consulta por todas las Ofertas de servicio clasificadas por estados.</p>
           
           
 
           
           <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File app/controllers/offerings_controller.rb, line 18</span>
+            <pre><span class="ruby-comment"># File app/controllers/offerings_controller.rb, line 19</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
         <span class="ruby-ivar">@disponible</span> = <span class="ruby-constant">Offering</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">1</span>).<span class="ruby-identifier">paginate</span>(<span class="ruby-identifier">page</span><span class="ruby-operator">:</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:page</span>],<span class="ruby-identifier">per_page</span><span class="ruby-operator">:</span> <span class="ruby-value">5</span>).<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;created_at DESC&quot;</span>)
         <span class="ruby-ivar">@cancelada</span> = <span class="ruby-constant">Offering</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">2</span>).<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;created_at DESC&quot;</span>)
@@ -300,53 +274,18 @@
 
         <div class="method-description">
           
-          <p>GET /offerings/new</p>
+          <p>Vista de nueva oferta de servicio</p>
+
+<p>Generada automáticamente por scaffold.</p>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/controllers/offerings_controller.rb, line 38</span>
+            <pre><span class="ruby-comment"># File app/controllers/offerings_controller.rb, line 44</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Nueva oferta&quot;</span>
         <span class="ruby-ivar">@offering</span> = <span class="ruby-constant">Offering</span>.<span class="ruby-identifier">new</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-professor" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">professor</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="professor-source">
-            <pre><span class="ruby-comment"># File app/controllers/offerings_controller.rb, line 122</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">professor</span> <span class="ruby-comment">#Vista que permitirá a un vinculador elegir a un profesor responsable de la oferta.</span>
-        <span class="ruby-keyword">if</span> <span class="ruby-identifier">current_user</span> <span class="ruby-operator">!=</span> <span class="ruby-ivar">@offering</span>.<span class="ruby-identifier">user</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@offering</span>.<span class="ruby-identifier">user</span>.<span class="ruby-identifier">category</span> <span class="ruby-operator">!=</span> <span class="ruby-value">3</span>
-                <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">root_path</span>, <span class="ruby-identifier">alert</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;Esta acción es solo valida cuando una oferta no tiene profesor responsable.&quot;</span>
-        <span class="ruby-keyword">else</span>
-                
-        <span class="ruby-keyword">end</span> 
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -371,13 +310,14 @@
 
         <div class="method-description">
           
-          
+          <p>Vista que permite generar una consulta a través de la función search de <a
+href="Offering.html">Offering</a> utilizando los parámetros de un input.</p>
           
           
 
           
           <div class="method-source-code" id="searchOffering-source">
-            <pre><span class="ruby-comment"># File app/controllers/offerings_controller.rb, line 111</span>
+            <pre><span class="ruby-comment"># File app/controllers/offerings_controller.rb, line 124</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">searchOffering</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Búsqueda&quot;</span>
         <span class="ruby-ivar">@offerings</span> = <span class="ruby-constant">Offering</span>.<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;created_at DESC&quot;</span>).<span class="ruby-identifier">all</span>
@@ -411,13 +351,20 @@
 
         <div class="method-description">
           
-          <p>GET /offerings/1 GET /offerings/1.json</p>
+          <p>Vista Específica</p>
+
+<p>Consulta por los comentarios generados en esta oferta, del mismo modo que
+permite generar un nuevo comentario. Cambia el estado de la oferta en caso
+de que su tiempo final sea superado.</p>
+
+<p>Los comentarios tienen funciones extras desde sus views (Nombrar profesor
+responsable)</p>
           
           
 
           
           <div class="method-source-code" id="show-source">
-            <pre><span class="ruby-comment"># File app/controllers/offerings_controller.rb, line 26</span>
+            <pre><span class="ruby-comment"># File app/controllers/offerings_controller.rb, line 31</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Mostrar&quot;</span>
         <span class="ruby-ivar">@comment</span> = <span class="ruby-constant">Comment</span>.<span class="ruby-identifier">new</span>
@@ -450,13 +397,16 @@
 
         <div class="method-description">
           
-          <p>PATCH/PUT /offerings/1 PATCH/PUT /offerings/1.json</p>
+          <p>Actualizar la oferta de servicio</p>
+
+<p>Permite actualizar la oferta de servicio de acuerdo a los parámetros
+establecidos. Además se preocupa de validar las fechas de manera correcta.</p>
           
           
 
           
           <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File app/controllers/offerings_controller.rb, line 80</span>
+            <pre><span class="ruby-comment"># File app/controllers/offerings_controller.rb, line 92</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
         <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
                 <span class="ruby-keyword">if</span> <span class="ruby-ivar">@offering</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">offering_params</span>)
@@ -476,6 +426,117 @@
                         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@offering</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:unprocessable_entity</span> }
                 <span class="ruby-keyword">end</span>
         <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="private-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Private Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-set_area" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">set_area</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Se realiza las consultas de áreas de trabajo para poder asignarselas a las
+ofertas ( <a href="Area.html">Area</a>)</p>
+          
+          
+
+          
+          <div class="method-source-code" id="set_area-source">
+            <pre><span class="ruby-comment"># File app/controllers/offerings_controller.rb, line 148</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">set_area</span> <span class="ruby-comment"># :doc:</span>
+        <span class="ruby-ivar">@areas</span> = <span class="ruby-constant">Area</span>.<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;discipline ASC&quot;</span>).<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;name ASC&quot;</span>).<span class="ruby-identifier">all</span>     
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-set_broker" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">set_broker</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Consulta que busca al usuario vinculador social en caso de ser el creador
+de la Oferta de servicio.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="set_broker-source">
+            <pre><span class="ruby-comment"># File app/controllers/offerings_controller.rb, line 158</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">set_broker</span> <span class="ruby-comment"># :doc:</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-ivar">@offering</span>.<span class="ruby-identifier">broker_id</span>.<span class="ruby-identifier">present?</span>
+                <span class="ruby-ivar">@broker</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">id</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@offering</span>.<span class="ruby-identifier">broker_id</span>).<span class="ruby-identifier">first</span>
+        <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-unique_petition" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">unique_petition</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Consulta del servicio específico que haya sido aceptado por el profesor.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="unique_petition-source">
+            <pre><span class="ruby-comment"># File app/controllers/offerings_controller.rb, line 153</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">unique_petition</span> <span class="ruby-comment"># :doc:</span>
+        <span class="ruby-ivar">@petition</span> = <span class="ruby-ivar">@offering</span>.<span class="ruby-identifier">services</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:creator_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">id</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           

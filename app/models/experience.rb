@@ -50,8 +50,11 @@ class Experience < ActiveRecord::Base
 	belongs_to :area
 	belongs_to :service
 
+    #Consulta por todas las experiencias entre dos fechas.
 	scope :created_between, lambda {|start_date, end_date| where("created_at >= ? AND created_at <= ?", start_date, end_date )}
-	scope :by_area, ->(area_id) { where("area_id = ?", area_id)}
+	
+    #Consulta por todas las experiencias que pertenezcan a un área de trabajo.
+    scope :by_area, ->(area_id) { where("area_id = ?", area_id)} 
 	
 	#Método que permite que el buscador encuentre Experiencias a través de match de palabras en sus atributos.
 	def self.search(search)

@@ -72,17 +72,11 @@
     
     <li ><a href="#method-i-create">#create</a>
     
-    <li ><a href="#method-i-destroy">#destroy</a>
-    
-    <li ><a href="#method-i-edit">#edit</a>
-    
     <li ><a href="#method-i-index">#index</a>
-    
-    <li ><a href="#method-i-new">#new</a>
     
     <li ><a href="#method-i-show">#show</a>
     
-    <li ><a href="#method-i-update">#update</a>
+    <li ><a href="#method-i-validate_category">#validate_category</a>
     
   </ul>
 </div>
@@ -134,13 +128,15 @@
 
         <div class="method-description">
           
-          <p>POST /projects POST /projects.json</p>
+          <p>Vista de crear experiencia documentada.</p>
+
+<p>La experiencia documentada quedará bajo el nombre del profesor que la creó.</p>
           
           
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/projects_controller.rb, line 48</span>
+            <pre><span class="ruby-comment"># File app/controllers/projects_controller.rb, line 53</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
   <span class="ruby-ivar">@project</span> = <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">projects</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">project_params</span>)
   <span class="ruby-ivar">@project</span>.<span class="ruby-identifier">professor_name</span> = <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">name</span>
@@ -165,76 +161,6 @@
       </div>
 
     
-      <div id="method-i-destroy" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">destroy</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>DELETE /projects/1 DELETE /projects/1.json</p>
-          
-          
-
-          
-          <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/projects_controller.rb, line 79</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
-  <span class="ruby-ivar">@project</span>.<span class="ruby-identifier">destroy</span>
-  <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">projects_url</span>, <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;La experiencia se ha eliminado.&#39;</span> }
-    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">head</span> <span class="ruby-value">:no_content</span> }
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-edit" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">edit</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>GET /projects/1/edit</p>
-          
-          
-
-          
-          <div class="method-source-code" id="edit-source">
-            <pre><span class="ruby-comment"># File app/controllers/projects_controller.rb, line 42</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">edit</span>
-  <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Editar&quot;</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
       <div id="method-i-index" class="method-detail ">
         
         <div class="method-heading">
@@ -248,49 +174,18 @@
 
         <div class="method-description">
           
-          <p>GET /projects GET /projects.json</p>
+          <p>Vista principal</p>
+
+<p>Genera la consulta de las experiencias documentadas paginadas de a 30
+elementos.</p>
           
           
 
           
           <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File app/controllers/projects_controller.rb, line 15</span>
+            <pre><span class="ruby-comment"># File app/controllers/projects_controller.rb, line 16</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
-  <span class="ruby-ivar">@projects</span> = <span class="ruby-constant">Project</span>.<span class="ruby-identifier">paginate</span>(<span class="ruby-identifier">page</span><span class="ruby-operator">:</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:page</span>],<span class="ruby-identifier">per_page</span><span class="ruby-operator">:</span> <span class="ruby-value">5</span>).<span class="ruby-identifier">all</span>.<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;created_at DESC&quot;</span>)
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-new" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">new</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>GET /projects/new</p>
-          
-          
-
-          
-          <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/controllers/projects_controller.rb, line 36</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
-  <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Nueva experiencia reportada&quot;</span>
-  <span class="ruby-ivar">@project</span> = <span class="ruby-constant">Project</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-ivar">@projects</span> = <span class="ruby-constant">Project</span>.<span class="ruby-identifier">paginate</span>(<span class="ruby-identifier">page</span><span class="ruby-operator">:</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:page</span>],<span class="ruby-identifier">per_page</span><span class="ruby-operator">:</span> <span class="ruby-value">30</span>).<span class="ruby-identifier">all</span>.<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;created_at DESC&quot;</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -315,13 +210,16 @@
 
         <div class="method-description">
           
-          <p>GET /projects/1 GET /projects/1.json</p>
+          <p>Vista específica</p>
+
+<p>Permite la visualización de la experiencia documentada, además de la
+formación de su pdf ( <a href="ProjectPdf.html">ProjectPdf</a> )</p>
           
           
 
           
           <div class="method-source-code" id="show-source">
-            <pre><span class="ruby-comment"># File app/controllers/projects_controller.rb, line 21</span>
+            <pre><span class="ruby-comment"># File app/controllers/projects_controller.rb, line 23</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
   <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Mostrar&quot;</span>
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
@@ -345,10 +243,18 @@
       </div>
 
     
-      <div id="method-i-update" class="method-detail ">
+    </section>
+  
+     <section id="private-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Private Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-validate_category" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">update</span><span
+          <span class="method-name">validate_category</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -358,23 +264,18 @@
 
         <div class="method-description">
           
-          <p>PATCH/PUT /projects/1 PATCH/PUT /projects/1.json</p>
+          <p>Valida que solo un profesor sea capaz de generar, crear y editar
+experiencias documentadas.</p>
           
           
 
           
-          <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File app/controllers/projects_controller.rb, line 65</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
-  <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@project</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">project_params</span>)
-      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-ivar">@project</span>, <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;La experiencia se ha modificado exitosamente.&#39;</span> }
-      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:show</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:ok</span>, <span class="ruby-identifier">location</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@project</span> }
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:edit</span> }
-      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@project</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:unprocessable_entity</span> }
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
+          <div class="method-source-code" id="validate_category-source">
+            <pre><span class="ruby-comment"># File app/controllers/projects_controller.rb, line 99</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">validate_category</span> <span class="ruby-comment"># :doc:</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">category</span> <span class="ruby-operator">!=</span> <span class="ruby-value">2</span>
+    <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">root_path</span>, <span class="ruby-identifier">alert</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;Sólo un profesor puede trabajar las experiencias.&quot;</span>
+  <span class="ruby-keyword">end</span>   
 <span class="ruby-keyword">end</span></pre>
           </div>
           

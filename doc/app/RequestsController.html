@@ -72,8 +72,6 @@
     
     <li ><a href="#method-i-create">#create</a>
     
-    <li ><a href="#method-i-destroy">#destroy</a>
-    
     <li ><a href="#method-i-edit">#edit</a>
     
     <li ><a href="#method-i-index">#index</a>
@@ -82,9 +80,15 @@
     
     <li ><a href="#method-i-searchRequest">#searchRequest</a>
     
+    <li ><a href="#method-i-set_broker">#set_broker</a>
+    
     <li ><a href="#method-i-show">#show</a>
     
+    <li ><a href="#method-i-unique_petition">#unique_petition</a>
+    
     <li ><a href="#method-i-update">#update</a>
+    
+    <li ><a href="#method-i-validate_category">#validate_category</a>
     
   </ul>
 </div>
@@ -136,13 +140,17 @@
 
         <div class="method-description">
           
-          
+          <p>Método que permite crear la solicitud de servicio.</p>
+
+<p>Creado desde un usuario, impidiendole crearlo si no es un socio comunitario
+o un vinculador social. Además se validan las fechas que estén dentro de
+valores válidos.</p>
           
           
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/requests_controller.rb, line 47</span>
+            <pre><span class="ruby-comment"># File app/controllers/requests_controller.rb, line 66</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
         <span class="ruby-ivar">@request</span> = <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">requests</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">defined_params</span>)
         <span class="ruby-keyword">if</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">category</span> <span class="ruby-operator">==</span> <span class="ruby-value">3</span> <span class="ruby-comment">#El creador es vinculador social</span>
@@ -173,41 +181,6 @@
       </div>
 
     
-      <div id="method-i-destroy" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">destroy</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/requests_controller.rb, line 85</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
-        <span class="ruby-constant">Request</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>]).<span class="ruby-identifier">destroy</span>
-        <span class="ruby-identifier">flash</span>[<span class="ruby-value">:notice</span>] = <span class="ruby-string">&quot;La solicitud de servicio se ha eliminado&quot;</span>
-        <span class="ruby-identifier">redirect_to</span> <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;index&#39;</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
       <div id="method-i-edit" class="method-detail ">
         
         <div class="method-heading">
@@ -221,13 +194,16 @@
 
         <div class="method-description">
           
-          
+          <p>Vista de nueva solicitud de servicio</p>
+
+<p>Redirecciona en caso de que el usuario intenta editar la solicitud no sea
+el creador de esta.</p>
           
           
 
           
           <div class="method-source-code" id="edit-source">
-            <pre><span class="ruby-comment"># File app/controllers/requests_controller.rb, line 40</span>
+            <pre><span class="ruby-comment"># File app/controllers/requests_controller.rb, line 55</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">edit</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Editar&quot;</span>
         <span class="ruby-keyword">if</span> <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">user_id</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">id</span>
@@ -257,13 +233,15 @@
 
         <div class="method-description">
           
-          
+          <p>Vista principal</p>
+
+<p>Consulta por todas las solicitud de servicio clasificadas por estados.</p>
           
           
 
           
           <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File app/controllers/requests_controller.rb, line 14</span>
+            <pre><span class="ruby-comment"># File app/controllers/requests_controller.rb, line 17</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
         <span class="ruby-ivar">@disponible</span> = <span class="ruby-constant">Request</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">1</span>).<span class="ruby-identifier">paginate</span>(<span class="ruby-identifier">page</span><span class="ruby-operator">:</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:page</span>],<span class="ruby-identifier">per_page</span><span class="ruby-operator">:</span> <span class="ruby-value">5</span>).<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;created_at DESC&quot;</span>)
         <span class="ruby-ivar">@cancelada</span> = <span class="ruby-constant">Request</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">2</span>).<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;created_at DESC&quot;</span>)
@@ -297,13 +275,15 @@
 
         <div class="method-description">
           
-          
+          <p>Vista de nueva solicitud de servicio</p>
+
+<p>Generada automáticamente por scaffold.</p>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/controllers/requests_controller.rb, line 35</span>
+            <pre><span class="ruby-comment"># File app/controllers/requests_controller.rb, line 47</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Nueva solicitud&quot;</span>
         <span class="ruby-ivar">@request</span> = <span class="ruby-constant">Request</span>.<span class="ruby-identifier">new</span>
@@ -331,13 +311,14 @@
 
         <div class="method-description">
           
-          
+          <p>Vista que permite generar una consulta a través de la función search de <a
+href="Request.html">Request</a> utilizando los parámetros de un input.</p>
           
           
 
           
           <div class="method-source-code" id="searchRequest-source">
-            <pre><span class="ruby-comment"># File app/controllers/requests_controller.rb, line 91</span>
+            <pre><span class="ruby-comment"># File app/controllers/requests_controller.rb, line 116</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">searchRequest</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Búsqueda&quot;</span>
         <span class="ruby-ivar">@requests</span> = <span class="ruby-constant">Request</span>.<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;created_at DESC&quot;</span>).<span class="ruby-identifier">all</span>
@@ -370,20 +351,27 @@
 
         <div class="method-description">
           
-          
+          <p>Vista Específica</p>
+
+<p>Consulta por los comentarios generados en esta solicitud, del mismo modo
+que permite generar un nuevo comentario. Cambia el estado de la solicitud
+en caso de que su tiempo final sea superado.</p>
+
+<p>Los comentarios tienen funciones extras desde sus views (Nombrar profesor
+responsable)</p>
           
           
 
           
           <div class="method-source-code" id="show-source">
-            <pre><span class="ruby-comment"># File app/controllers/requests_controller.rb, line 25</span>
+            <pre><span class="ruby-comment"># File app/controllers/requests_controller.rb, line 34</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Mostrar&quot;</span>
         <span class="ruby-ivar">@comment</span> = <span class="ruby-constant">Comment</span>.<span class="ruby-identifier">new</span>
         <span class="ruby-ivar">@aceptados</span> = <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">services</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;status= 2 or status= 4&quot;</span>)
         <span class="ruby-keyword">if</span> <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">end_time</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">status</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
                 <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">3</span>)
-                <span class="ruby-identifier">flash</span>[<span class="ruby-value">:alert</span>] = <span class="ruby-string">&quot;La fecha límite de la solicitud ya ha sido sobrepasada. La oferta ha caducado&quot;</span>
+                <span class="ruby-identifier">flash</span>[<span class="ruby-value">:alert</span>] = <span class="ruby-string">&quot;La fecha límite de la solicitud ya ha sido sobrepasada. La solicitud ha caducado&quot;</span>
         <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -409,13 +397,16 @@
 
         <div class="method-description">
           
-          
+          <p>Actualizar la solicitud de servicio</p>
+
+<p>Permite actualizar la solicitud de servicio de acuerdo a los parámetros
+establecidos. Además se preocupa de validar las fechas de manera correcta.</p>
           
           
 
           
           <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File app/controllers/requests_controller.rb, line 68</span>
+            <pre><span class="ruby-comment"># File app/controllers/requests_controller.rb, line 91</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
         <span class="ruby-keyword">if</span> <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">update_attributes</span>(<span class="ruby-identifier">defined_params</span>)
                 <span class="ruby-keyword">if</span> <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">start_time</span> <span class="ruby-operator">&lt;</span> <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">created_at</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>.<span class="ruby-identifier">days</span>
@@ -431,6 +422,120 @@
         <span class="ruby-keyword">else</span>
                 <span class="ruby-identifier">render</span> <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;edit&#39;</span>
         <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="private-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Private Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-set_broker" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">set_broker</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Consulta que busca al usuario vinculador social en caso de ser el creador
+de la Solicitud de servicio.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="set_broker-source">
+            <pre><span class="ruby-comment"># File app/controllers/requests_controller.rb, line 139</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">set_broker</span> <span class="ruby-comment"># :doc:</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">broker_id</span>.<span class="ruby-identifier">present?</span>
+                <span class="ruby-ivar">@broker</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">id</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">broker_id</span>).<span class="ruby-identifier">first</span>
+        <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-unique_petition" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">unique_petition</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Consulta del servicio específico que haya sido aceptado por el socio
+comunitario.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="unique_petition-source">
+            <pre><span class="ruby-comment"># File app/controllers/requests_controller.rb, line 146</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">unique_petition</span> <span class="ruby-comment"># :doc:</span>
+        <span class="ruby-ivar">@petition</span> = <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">services</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:creator_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">id</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-validate_category" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">validate_category</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Redirecciona a los profesores a la página inicial para que no puedan
+realizara acciones solo permitidas por los socios y vinculadores sociales.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="validate_category-source">
+            <pre><span class="ruby-comment"># File app/controllers/requests_controller.rb, line 128</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">validate_category</span> <span class="ruby-comment"># :doc:</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">category</span> <span class="ruby-operator">==</span> <span class="ruby-value">2</span> 
+                <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">root_path</span>, <span class="ruby-identifier">alert</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;Su categoría de profesor no permite ésta acción.&quot;</span>
+        <span class="ruby-keyword">end</span>  
 <span class="ruby-keyword">end</span></pre>
           </div>
           

@@ -1,5 +1,7 @@
 =begin rdoc
   _**Contact:** controlador de la página de Contacto (Ver Contact)_
+
+  _Este controlador fue creado en su mayoría automáticamente por scaffold_
 =end
 class ContactsController < ApplicationController
   before_action :set_contact, only: [:show, :edit, :update, :destroy]
@@ -8,7 +10,7 @@ class ContactsController < ApplicationController
   add_breadcrumb "Contacto", :contacts_path
 
   #Vista principal de la página de contacto
-  def index
+  def index # :nodoc:
     @contact = Contact.new
   end
 
@@ -26,8 +28,8 @@ class ContactsController < ApplicationController
   def edit # :nodoc:
   end 
 
-  # POST /contacts
-  # POST /contacts.json
+  #Método crear contacto
+  #Al generar el contacto se utiliada los mailer para poder enviar lo correos tanto a el usuario como a la página de REASE.
   def create
     @contact = Contact.new(contact_params)
 
@@ -45,7 +47,7 @@ class ContactsController < ApplicationController
   end
 
   # Generado automáticamente por scaffold, no utilizado
-  def update
+  def update # :nodoc:
     respond_to do |format|
       if @contact.update(contact_params)
         format.html { redirect_to @contact, notice: '' }

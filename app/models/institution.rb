@@ -8,7 +8,7 @@ _Las instituciones fueron modificadas ahora para que los encargados AS puedan ob
 *	__name__: Nombre de la institución.
 *	__web__: Sitio web que pertenece a la institución. El encargado AS, debe ser responsable de completar este campo.
 *	__logo__: Logotipo de la institución. El encargado AS, debe ser responsable de completar este campo.
-*	__manager_id__: id del usuario que representa al encargado AS.
+*	__manager_id__: id del usuario que representa al encargado AS ( User ).
 
 **RELACIONES**
 

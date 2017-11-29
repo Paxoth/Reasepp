@@ -70,21 +70,13 @@
 
   <ul class="link-list" role="directory">
     
-    <li ><a href="#method-i-create">#create</a>
-    
-    <li ><a href="#method-i-edit">#edit</a>
-    
     <li ><a href="#method-i-index">#index</a>
     
     <li ><a href="#method-i-managment">#managment</a>
     
-    <li ><a href="#method-i-new">#new</a>
-    
     <li ><a href="#method-i-set_breadcrumbs">#set_breadcrumbs</a>
     
     <li ><a href="#method-i-show">#show</a>
-    
-    <li ><a href="#method-i-update">#update</a>
     
     <li ><a href="#method-i-validate_category">#validate_category</a>
     
@@ -123,85 +115,6 @@ href="Institution.html">Institution</a>)</em></p>
        <header>
          <h3>Public Instance Methods</h3>
        </header>
-
-    
-      <div id="method-i-create" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">create</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>Método para crear institución utilizando los parámetros establecidos.</p>
-
-<p>Generado automáticamente por scaffold.</p>
-          
-          
-
-          
-          <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/institutions_controller.rb, line 55</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
-
-        <span class="ruby-ivar">@institution</span> = <span class="ruby-constant">Institution</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">institution_params</span>)
-
-        <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-                <span class="ruby-keyword">if</span> <span class="ruby-ivar">@institution</span>.<span class="ruby-identifier">save</span>
-                        <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-ivar">@institution</span>, <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;La institución se ha creado exitosamente.&#39;</span> }
-                        <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:show</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:created</span>, <span class="ruby-identifier">location</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@institution</span> }
-                <span class="ruby-keyword">else</span>
-                        <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:new</span> }
-                        <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@institution</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:unprocessable_entity</span> }
-                <span class="ruby-keyword">end</span>
-        <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-edit" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">edit</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>Vista de editar institución Solo puede ser accedida por un encargado AS</p>
-          
-          
-
-          
-          <div class="method-source-code" id="edit-source">
-            <pre><span class="ruby-comment"># File app/controllers/institutions_controller.rb, line 48</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">edit</span>
-        <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Editar&quot;</span>, <span class="ruby-identifier">institutions_path</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
 
     
       <div id="method-i-index" class="method-detail ">
@@ -265,7 +178,7 @@ href="Experience.html">Experience</a> )</p>
 
           
           <div class="method-source-code" id="managment-source">
-            <pre><span class="ruby-comment"># File app/controllers/institutions_controller.rb, line 100</span>
+            <pre><span class="ruby-comment"># File app/controllers/institutions_controller.rb, line 96</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">managment</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-ivar">@institution</span>.<span class="ruby-identifier">name</span>, <span class="ruby-ivar">@institution</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Información&quot;</span>, <span class="ruby-identifier">managment_path</span>(<span class="ruby-ivar">@institution</span>)
@@ -276,40 +189,6 @@ href="Experience.html">Experience</a> )</p>
                 <span class="ruby-ivar">@areas</span> = <span class="ruby-constant">Area</span>.<span class="ruby-identifier">all</span>
         <span class="ruby-keyword">end</span>
         
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-new" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">new</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>Vista nueva institución Solo puede ser accedida por un administrador</p>
-          
-          
-
-          
-          <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/controllers/institutions_controller.rb, line 41</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
-        <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Nueva institucion&quot;</span>
-        <span class="ruby-ivar">@institution</span> = <span class="ruby-constant">Institution</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -372,49 +251,6 @@ dentro de las comunidades y estudiantes.</p>
       </div>
 
     
-      <div id="method-i-update" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">update</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>Método para actualizar institución utilizando los parámetros establecidos.</p>
-
-<p>Generado automáticamente por scaffold.</p>
-          
-          
-
-          
-          <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File app/controllers/institutions_controller.rb, line 73</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
-        <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-                <span class="ruby-keyword">if</span> <span class="ruby-ivar">@institution</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">institution_params</span>)
-                        <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-ivar">@institution</span>, <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;La institución se ha modificado exitosamente&#39;</span> }
-                        <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:show</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:ok</span>, <span class="ruby-identifier">location</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@institution</span> }
-                <span class="ruby-keyword">else</span>
-                        <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:edit</span> }
-                        <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@institution</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:unprocessable_entity</span> }
-                <span class="ruby-keyword">end</span>
-        <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
     </section>
   
      <section id="private-instance-5Buntitled-5D-method-details" class="method-section">
@@ -443,7 +279,7 @@ conectado.</p>
 
           
           <div class="method-source-code" id="set_breadcrumbs-source">
-            <pre><span class="ruby-comment"># File app/controllers/institutions_controller.rb, line 116</span>
+            <pre><span class="ruby-comment"># File app/controllers/institutions_controller.rb, line 112</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">set_breadcrumbs</span> <span class="ruby-comment"># :doc:</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Inicio&quot;</span>, <span class="ruby-value">:root_path</span>
         <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">user_signed_in?</span>
@@ -484,7 +320,7 @@ institución.</p>
 
           
           <div class="method-source-code" id="validate_category-source">
-            <pre><span class="ruby-comment"># File app/controllers/institutions_controller.rb, line 128</span>
+            <pre><span class="ruby-comment"># File app/controllers/institutions_controller.rb, line 124</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">validate_category</span> <span class="ruby-comment"># :doc:</span>
         <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@institution</span>.<span class="ruby-identifier">manager_id</span>.<span class="ruby-identifier">blank?</span>
                 <span class="ruby-keyword">if</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">id</span> <span class="ruby-operator">!=</span> <span class="ruby-ivar">@institution</span>.<span class="ruby-identifier">manager_id</span>

@@ -38,22 +38,20 @@ class InstitutionsController < ApplicationController
 
 	#Vista nueva institución
 	#Solo puede ser accedida por un administrador
-	def new
+	def new # :nodoc:
 		add_breadcrumb "Nueva institucion"
 		@institution = Institution.new
 	end
 
 	#Vista de editar institución
 	#Solo puede ser accedida por un encargado AS
-	def edit
+	def edit # :nodoc:
 		add_breadcrumb "Editar", institutions_path
 	end
 
 	#Método para crear institución utilizando los parámetros establecidos.
-	#
 	#Generado automáticamente por scaffold.
-	def create
-
+	def create # :nodoc:
 		@institution = Institution.new(institution_params)
 
 		respond_to do |format|
@@ -68,9 +66,8 @@ class InstitutionsController < ApplicationController
 	end
 
 	#Método para actualizar institución utilizando los parámetros establecidos.
-	#
 	#Generado automáticamente por scaffold.
-	def update
+	def update # :nodoc:
 		respond_to do |format|
 			if @institution.update(institution_params)
 				format.html { redirect_to @institution, notice: 'La institución se ha modificado exitosamente' }
@@ -83,7 +80,6 @@ class InstitutionsController < ApplicationController
 	end
 
 	#Método para actualizar institución utilizando los parámetros establecidos.
-	#
 	#Generado automáticamente por scaffold. No utilizado.
 	def destroy # :nodoc:
 		@institution.destroy

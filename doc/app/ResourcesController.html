@@ -70,23 +70,15 @@
 
   <ul class="link-list" role="directory">
     
-    <li ><a href="#method-i-create">#create</a>
-    
-    <li ><a href="#method-i-destroy">#destroy</a>
-    
-    <li ><a href="#method-i-edit">#edit</a>
-    
     <li ><a href="#method-i-index">#index</a>
     
     <li ><a href="#method-i-muestra">#muestra</a>
     
-    <li ><a href="#method-i-new">#new</a>
-    
     <li ><a href="#method-i-searchResource">#searchResource</a>
     
-    <li ><a href="#method-i-show">#show</a>
+    <li ><a href="#method-i-set_categorizated">#set_categorizated</a>
     
-    <li ><a href="#method-i-update">#update</a>
+    <li ><a href="#method-i-validate_category">#validate_category</a>
     
   </ul>
 </div>
@@ -103,6 +95,12 @@
     
 <p><strong><em>Resource:</strong> controlador de los recursos descargables
 (Ver <a href="Resource.html">Resource</a>)</em></p>
+
+<p><em>Los recursos son creados generalmente por administradores o usuarios
+específicos</em></p>
+
+<p><em>La mayoría de los métodos fueron generados automáticamente por scaffold
+y no fueron modificados, por lo que no se documentan</em></p>
 
   </section>
 
@@ -125,121 +123,6 @@
        </header>
 
     
-      <div id="method-i-create" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">create</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>POST /resources POST /resources.json</p>
-          
-          
-
-          
-          <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/resources_controller.rb, line 47</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
-  <span class="ruby-ivar">@resource</span> = <span class="ruby-constant">Resource</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">resource_params</span>)
-
-  <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@resource</span>.<span class="ruby-identifier">save</span>
-      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-ivar">@resource</span>, <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;El recurso se ha creado exitosamente.&#39;</span> }
-      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:show</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:created</span>, <span class="ruby-identifier">location</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@resource</span> }
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:new</span> }
-      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@resource</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:unprocessable_entity</span> }
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-destroy" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">destroy</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>DELETE /resources/1 DELETE /resources/1.json</p>
-          
-          
-
-          
-          <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/resources_controller.rb, line 77</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
-  <span class="ruby-ivar">@resource</span>.<span class="ruby-identifier">destroy</span>
-  <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">resources_url</span>, <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;El recurso se ha eliminado.&#39;</span> }
-    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">head</span> <span class="ruby-value">:no_content</span> }
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-edit" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">edit</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>GET /resources/1/edit</p>
-          
-          
-
-          
-          <div class="method-source-code" id="edit-source">
-            <pre><span class="ruby-comment"># File app/controllers/resources_controller.rb, line 39</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">edit</span>
-  <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Administrar&quot;</span>, <span class="ruby-value">:sections_path</span>
-  <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Recursos&quot;</span>, <span class="ruby-value">:resources_path</span> 
-  <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Editar recurso&quot;</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
       <div id="method-i-index" class="method-detail ">
         
         <div class="method-heading">
@@ -253,14 +136,17 @@
 
         <div class="method-description">
           
-          <p>GET /resources GET /resources.json</p>
+          <p>Vista principal</p>
+
+<p>Utilizada para los adminstradores puedan operar los recursos existentes y
+crear nuevos.</p>
           
           
 
           
           <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File app/controllers/resources_controller.rb, line 13</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
+            <pre><span class="ruby-comment"># File app/controllers/resources_controller.rb, line 19</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span> 
   <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Administrar&quot;</span>, <span class="ruby-value">:sections_path</span>
   <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Recursos&quot;</span>, <span class="ruby-value">:resources_path</span> 
 <span class="ruby-keyword">end</span></pre>
@@ -287,52 +173,19 @@
 
         <div class="method-description">
           
-          
+          <p>Vista de muestra</p>
+
+<p>Vista para los usuarios no adminsitradores, en donde podrán descargar los
+recursos disponibles.</p>
           
           
 
           
           <div class="method-source-code" id="muestra-source">
-            <pre><span class="ruby-comment"># File app/controllers/resources_controller.rb, line 18</span>
+            <pre><span class="ruby-comment"># File app/controllers/resources_controller.rb, line 27</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">muestra</span>
     <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Recursos&quot;</span>, <span class="ruby-value">:resources_muestra_path</span>
     <span class="ruby-ivar">@interest_links</span> = <span class="ruby-constant">InterestLink</span>.<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;created_at DESC&quot;</span>).<span class="ruby-identifier">all</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-new" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">new</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>GET /resources/new</p>
-          
-          
-
-          
-          <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/controllers/resources_controller.rb, line 31</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
-  <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Administrar&quot;</span>, <span class="ruby-value">:sections_path</span>
-  <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Recursos&quot;</span>, <span class="ruby-value">:resources_path</span> 
-  <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Nuevo recurso&quot;</span>
-  <span class="ruby-ivar">@resource</span> = <span class="ruby-constant">Resource</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -357,13 +210,16 @@
 
         <div class="method-description">
           
-          
+          <p>Vista de búsqueda de recursos</p>
+
+<p>Vista que utiliza los métodos search para hacer búsqueda de recursos a
+través de palabras (Ver <a href="Resource.html">Resource</a>)</p>
           
           
 
           
           <div class="method-source-code" id="searchResource-source">
-            <pre><span class="ruby-comment"># File app/controllers/resources_controller.rb, line 85</span>
+            <pre><span class="ruby-comment"># File app/controllers/resources_controller.rb, line 87</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">searchResource</span>
   <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Recursos&quot;</span>, <span class="ruby-value">:resources_muestra_path</span> 
   <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Búsqueda&quot;</span>
@@ -384,10 +240,18 @@
       </div>
 
     
-      <div id="method-i-show" class="method-detail ">
+    </section>
+  
+     <section id="private-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Private Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-set_categorizated" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">show</span><span
+          <span class="method-name">set_categorizated</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -397,16 +261,21 @@
 
         <div class="method-description">
           
-          <p>GET /resources/1 GET /resources/1.json</p>
+          <p>Hace llamadas a diferentes consultas de acuerdo a la categoría de ellos.
+Esto con el fin de hacer las consultas necesarias en las diferentes
+ventanas de las vistas de recursos.</p>
           
           
 
           
-          <div class="method-source-code" id="show-source">
-            <pre><span class="ruby-comment"># File app/controllers/resources_controller.rb, line 25</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
-  <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Recursos&quot;</span>, <span class="ruby-value">:resources_muestra_path</span> 
-  <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Detalle&quot;</span>
+          <div class="method-source-code" id="set_categorizated-source">
+            <pre><span class="ruby-comment"># File app/controllers/resources_controller.rb, line 113</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">set_categorizated</span> <span class="ruby-comment"># :doc:</span>
+  <span class="ruby-ivar">@actas</span> = <span class="ruby-constant">Resource</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">category</span><span class="ruby-operator">:</span> <span class="ruby-value">1</span>).<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;date DESC&quot;</span>)
+  <span class="ruby-ivar">@plantillas</span> = <span class="ruby-constant">Resource</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">category</span><span class="ruby-operator">:</span> <span class="ruby-value">2</span>).<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;created_at DESC&quot;</span>)
+  <span class="ruby-ivar">@formacion</span> = <span class="ruby-constant">Resource</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">category</span><span class="ruby-operator">:</span> <span class="ruby-value">3</span>).<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;created_at DESC&quot;</span>)
+  <span class="ruby-ivar">@enlaces</span> = <span class="ruby-constant">Resource</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">category</span><span class="ruby-operator">:</span> <span class="ruby-value">4</span>).<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;name DESC&quot;</span>)
+  <span class="ruby-ivar">@otros</span> = <span class="ruby-constant">Resource</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">category</span><span class="ruby-operator">:</span> <span class="ruby-value">5</span>).<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;created_at DESC&quot;</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -418,10 +287,10 @@
       </div>
 
     
-      <div id="method-i-update" class="method-detail ">
+      <div id="method-i-validate_category" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">update</span><span
+          <span class="method-name">validate_category</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -431,23 +300,18 @@
 
         <div class="method-description">
           
-          <p>PATCH/PUT /resources/1 PATCH/PUT /resources/1.json</p>
+          <p>Validar que solo un administrador peuda acceder a ciertas vistas de
+recursos descargables.</p>
           
           
 
           
-          <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File app/controllers/resources_controller.rb, line 63</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
-  <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@resource</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">resource_params</span>)
-      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-ivar">@resource</span>, <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;El recurso se ha modificado exitosamente&#39;</span> }
-      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:show</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:ok</span>, <span class="ruby-identifier">location</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@resource</span> }
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:edit</span> }
-      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@resource</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:unprocessable_entity</span> }
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
+          <div class="method-source-code" id="validate_category-source">
+            <pre><span class="ruby-comment"># File app/controllers/resources_controller.rb, line 101</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">validate_category</span> <span class="ruby-comment"># :doc:</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">is_admin?</span>
+  <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">root_path</span>, <span class="ruby-identifier">alert</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;Sólo un administrador puede trabajar las actas.&quot;</span>
+  <span class="ruby-keyword">end</span>   
 <span class="ruby-keyword">end</span></pre>
           </div>
           

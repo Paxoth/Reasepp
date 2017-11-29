@@ -4,7 +4,7 @@ _**Comments** Son los comentarios que puede realizar un usuario, en las ofertas 
 **ATRIBUTOS**
 
 *	__body__: Corresponde al texto del comentario.
-*	__post_i__d: Corresponde al id de la publicación cual se está comentado la cual, como ya se mencionó, corresponde a ofertas de servicios, solicitudes de servicios, servicios activos y eventos.
+*	__post_id__: Corresponde al id de la publicación cual se está comentado la cual, como ya se mencionó, corresponde a ofertas de servicios, solicitudes de servicios, servicios activos y eventos.
 *	__post_type__: Indica qué tipo publicación se está comentando.
 
 **RELACIONES**
