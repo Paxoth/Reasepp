@@ -27,7 +27,7 @@
  *= require plugins/table.min.css
  *= require plugins/video.min.css
  *= require bootstrap-datepicker3
-
+ *= require dataTables/jquery.dataTables
  */
 
 .form-signin

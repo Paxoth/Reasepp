@@ -5,20 +5,26 @@
 	</div>
 	<div class="panel-body">
 		<%if @area.experiences.present?%>
-			<table class="tabla-rease">
-				<tr>
-					<th><strong>Nombre</strong></th>
-					<th><strong>Responsable</strong></th>
-					<th><strong>Fecha</strong></th>
-				</tr>
-				<%@area.experiences.each do |experience|%>
-				<tr>
-					<%@profesor = User.where(id: experience.professor_id).first%>
-					<td><%=link_to truncate(experience.title, length: 60), experience%></td>
-					<td><%=link_to @profesor.nickname, user_path(@profesor)%></td>
-					<td><%=experience.created_at.strftime("%d / %m / %Y")%> <%=link_to image_tag("Extensiones/pdf.gif"), experience_path(experience, format: "pdf"), :target=>'_blank'%></td>
-				</tr>
-				<%end%>
+			<table class="tabla-rease" id="experience_dt">
+				<thead>
+					<tr>
+						<th><strong>Nombre</strong></th>
+						<th><strong>Responsable</strong></th>
+						<th><strong>Institución</strong></th>
+						<th><strong>Fecha</strong></th>
+					</tr>
+				</thead>
+				</tbody>
+					<%@area.experiences.each do |experience|%>
+					<tr>
+						<%@profesor = User.where(id: experience.professor_id).first%>
+						<td><%=link_to truncate(experience.title, length: 60), experience%></td>
+						<td><%=link_to @profesor.nickname, user_path(@profesor)%></td>
+						<td><%=link_to @profesor.institution.name, institution_path(@profesor.institution)%></td>
+						<td><%=experience.created_at.strftime("%d / %m / %Y")%> <%=link_to image_tag("Extensiones/pdf.gif"), experience_path(experience, format: "pdf"), :target=>'_blank'%></td>
+					</tr>
+					<%end%>
+				</table>
 			</table>
 		<%else%>
 			<p>No se ha realizado ninguna experiencia en esta área de trabajo</p>
@@ -29,3 +35,13 @@
 	<%= link_to 'Editar', edit_area_path(@area), :class =>"btn btn-lg" %>
 <%end%>
 <%= link_to 'Volver', areas_path, :class =>"btn btn-lg" %>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#experience_dt').DataTable({
+			"language": {
+				"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+			}
+		});
+	} );
+</script>

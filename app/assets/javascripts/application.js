@@ -50,3 +50,4 @@
 //= require plugins/url.min.js
 //= require plugins/video.min.js
 //= require languages/es.js
+//= require dataTables/jquery.dataTables

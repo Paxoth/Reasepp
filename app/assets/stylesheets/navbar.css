@@ -172,8 +172,8 @@ p.navbar-text.navbar-right
 }
 .dropdown-menu > li.active > a {
 	color: white;
-	background: #30aaaa;
+	background: #30cccc;
 }
 .dropdown-menu > li.active > a:hover {
-	background: #30cccc;
+	background: #30aaaa;
 }

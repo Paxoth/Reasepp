@@ -11,24 +11,33 @@
 		Listado de areas de trabajo
 	</div>
 	<div class="panel-body">
-		<table class="tabla-rease">
-			<tr>
-				<th><strong>Disciplina</strong></th>
-				<th><strong>Área</strong></th>
-				<th><strong>Experiencias realizadas</strong></th>
-				
-
-			</tr>
-			<% @areas.each do |area| %>
-			<tr>
-				<td><%=area.discipline%>:</td>
-				<td><%=area.name%></td>
-				<td>
-					<%=area.experiences.count%> experiencias  
-					<%= link_to '<i class="glyphicon glyphicon-circle-arrow-right"></i>'.html_safe, area%>
-				</td>
-			</tr>
-			<%end%>
+		<table class="tabla-rease" id="areas_dt">
+			<thead>
+				<tr>
+					<th><strong>Disciplina</strong></th>
+					<th><strong>Área</strong></th>
+					<th><strong>Experiencias realizadas</strong></th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @areas.each do |area| %>
+					<tr>
+						<td><%=area.discipline%>:</td>
+						<td><%=area.name%></td>
+						<td>
+							<%=area.experiences.count%> experiencias  
+							<%= link_to '<i class="glyphicon glyphicon-circle-arrow-right"></i>'.html_safe, area%>
+						</td>
+					</tr>
+				<%end%>
+				</tbody>
+			<tfoot>
+				<tr>
+					<th><strong>Disciplina</strong></th>
+					<th><strong>Área</strong></th>
+					<th><strong>Experiencias realizadas</strong></th>
+				</tr>
+			</tfoot>
 		</table>
 	</div>
 </div>
@@ -44,4 +53,11 @@
 			}
 		)
 	})
+	$(document).ready(function() {
+		$('#areas_dt').DataTable({
+			"language": {
+				"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+			}
+		});
+	} );
 </script>

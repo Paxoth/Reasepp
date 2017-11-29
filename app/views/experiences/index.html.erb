@@ -23,25 +23,37 @@
 	</div>
 	<div class="panel-body">
 		<%if @experiences.present?%>
-			<div class="panel-body">
-				<table class="tabla-rease">
-					<tr>
-						<th><strong>Nombre</strong></th>
-						<th><strong>Responsable</strong></th>
-						<th><strong>Fecha</strong></th>				
-					</tr>
-					<%@experiences.each do |experience|%>
-					<tr>
-						<%@profesor = User.where(id: experience.professor_id).first%>
-						<td><%=link_to truncate(experience.title, length: 60), experience%></td>
-						<td><%=link_to @profesor.nickname, user_path(@profesor)%></td>
-						<td><%=experience.created_at.strftime("%d / %m / %Y")%> <%=link_to image_tag("Extensiones/pdf.gif"), experience_path(experience, format: "pdf"), :target=>'_blank'%></td>
-					</tr>
-					<%end%>
-
+			<div class="panel-body" >
+				<table id="experience_dt" class="display" cellspacing="0" width="100%">
+					<thead>
+						<tr>
+							<th><strong>Nombre</strong></th>
+							<th><strong>Responsable</strong></th>
+							<th><strong>Institución</strong></th>
+							<th><strong>Fecha</strong></th>				
+						</tr>
+					</thead>
+					<tbody>
+						<%@experiences.each do |experience|%>
+							<tr>
+								<%@profesor = User.where(id: experience.professor_id).first%>
+								<td><%=link_to truncate(experience.title, length: 60), experience%></td>
+								<td><%=link_to @profesor.nickname, user_path(@profesor)%></td>
+								<td><%=link_to @profesor.institution.name, institution_path(@profesor.institution)%></td>
+								<td><%=experience.created_at.strftime("%d / %m / %Y")%> <%=link_to image_tag("Extensiones/pdf.gif"), experience_path(experience, format: "pdf"), :target=>'_blank'%></td>
+							</tr>
+						<%end%>
+					</tbody>
+					<tfoot>
+						<tr>
+							<th><strong>Nombre</strong></th>
+							<th><strong>Responsable</strong></th>
+							<th><strong>Institución</strong></th>
+							<th><strong>Fecha</strong></th>				
+						</tr>
+					</tfoot>
 				</table>
 			</div>	
-			<%= will_paginate @experiences%>
 		<%else%>
 			<p>No hay experiencias disponibles</p>
 		<%end%>
@@ -62,4 +74,12 @@
 			}
 		)
 	})
+
+$(document).ready(function() {
+	$('#experience_dt').DataTable({
+		"language": {
+			"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+		}
+	});
+} );
 </script>

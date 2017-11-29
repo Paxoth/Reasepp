@@ -1,57 +1,36 @@
 <h2>Impactos por experiencias</h2>
 <ul class="nav nav-tabs tabRease nav-justified">
 	<li id="impact1" onclick="impact1()"><a>Impactos Globales</a></li>
-	<li id="impact2" onclick="impact2()"><a>Impactos Semestrales</a></li>
-	<li id="impact3" onclick="impact3()"><a>Experiencias</a></li>
+	<li id="impact2" onclick="impact2()"><a>Experiencias</a></li>
 </ul>
 
 <div class="borderTab">
-	<div id="Global">
-		<h2>Impactos Globales</h2>
-		<p><strong>Experiencias totales</strong>: <%=@experiences.count%><br></p>
-		<p><strong>Estudiantes impactados </strong>: <%=@experiences.sum("participants")%></p>
-		<p><strong>Miembros de comunidades impactados </strong>: <%=@experiences.sum("benefited")%></p>
-	</div>
-	<div id="Semestral">
-		<h2>Impactos Semestrales</h2>
-		<%@year_aux = 0%>
-		<%@experiences.order("created_at ASC").each do |experience|%>
-		<u>
-			
-			<% if @year_aux != experience.created_at.year%>
-				<%@year_aux = experience.created_at.year%>
-				<h1><%=@year_aux%></h1>
-			<%else%>						
-				<%if experience.created_at.month < 6%>
-					<p>1: <%= experience.created_at.month %></p>
-				<%else%>
-					<p>2: <%= experience.created_at.month %></p>
-				<%end%>
-			<%end%>
-		</u>
-		<%end%>
-
-		
+	<div id="Global" class="panel-body" style="text-align: left;">
+		<li><strong>Experiencias totales</strong>: <%=@institution.experiences.count%><br></li>
+		<li><strong>Estudiantes impactados </strong>: <%=@institution.experiences.sum("participants")%></li>
+		<li><strong>Miembros de comunidades impactados </strong>: <%=@institution.experiences.sum("benefited")%></li>
 	</div>
 	<div id="Experiencias">
-		<h2>Ultimas experiencia realizadas</h2>
 		<div class="panel-body">
-			<table class="tabla-rease">
-				<tr>
-					<th><strong>Nombre</strong></th>
-					<th><strong>Responsable</strong></th>
-					<th><strong>Fecha</strong></th>
-					
+			<table class="tabla-rease" id="experience_dt">
+				<thead>
+					<tr>
+						<th><strong>Nombre</strong></th>
+						<th><strong>Responsable</strong></th>
+						<th><strong>Fecha</strong></th>
+					</tr>
 
-				</tr>
-				<%@experiences.each do |experience|%>
-				<tr>
-					<%@profesor = User.where(id: experience.professor_id).first%>
-					<td><%=link_to truncate(experience.title, length: 60), experience%></td>
-					<td><%=link_to @profesor.nickname, user_path(@profesor)%></td>
-					<td><%=experience.created_at.strftime("%d / %m / %Y")%> <%=link_to image_tag("Extensiones/pdf.gif"), experience_path(experience, format: "pdf"), :target=>'_blank'%></td>
-				</tr>
+				</thead>
+				<tbody>
+					<%@experiences.each do |experience|%>
+					<tr>
+						<%@profesor = User.where(id: experience.professor_id).first%>
+						<td><%=link_to truncate(experience.title, length: 60), experience%></td>
+						<td><%=link_to @profesor.nickname, user_path(@profesor)%></td>
+						<td><%=experience.created_at.strftime("%d / %m / %Y")%> <%=link_to image_tag("Extensiones/pdf.gif"), experience_path(experience, format: "pdf"), :target=>'_blank'%></td>
+					</tr>
 				<%end%>
+				</tbody>
 			</table>
 		</div>	
 	</div>
@@ -60,32 +39,26 @@
 <script type="text/javascript">
 	document.getElementById("impact1").className = "active";	
 	document.getElementById('Global').style.display='block';
-	document.getElementById('Semestral').style.display='none';
 	document.getElementById('Experiencias').style.display='none';
 
 	function impact1(){		
 	document.getElementById('Global').style.display='block';
 	document.getElementById('Experiencias').style.display='none';
-	document.getElementById('Semestral').style.display='none';
 	document.getElementById("impact1").className = "active";
 	document.getElementById("impact2").className = "";
-	document.getElementById("impact3").className = "";
-
 	}
 	function impact2(){
 	document.getElementById('Global').style.display='none';
-	document.getElementById('Semestral').style.display='block';
-	document.getElementById('Experiencias').style.display='none';
-	document.getElementById("impact1").className = "";
-	document.getElementById("impact2").className = "active";
-	document.getElementById("impact3").className = "";
-	}
-	function impact3(){
-	document.getElementById('Global').style.display='none';
-	document.getElementById('Semestral').style.display='none';
 	document.getElementById('Experiencias').style.display='block';
 	document.getElementById("impact1").className = "";
-	document.getElementById("impact2").className = "";
-	document.getElementById("impact3").className = "active";
+	document.getElementById("impact2").className = "active";
 	}
+
+	$(document).ready(function() {
+		$('#experience_dt').DataTable({
+			"language": {
+				"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+			}
+		});
+	} );
 </script>

@@ -18,7 +18,7 @@ class ExperiencesController < ApplicationController
 	#
 	#Genera la consulta de las experiencias paginadas de a 30 elementos.
 	def index
-		@experiences =Experience.paginate(page: params[:page],per_page: 30).all.order("created_at DESC")
+		@experiences =Experience.all
 	end
 
 	#Vista nueva experiencias
