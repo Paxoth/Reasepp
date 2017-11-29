@@ -11,6 +11,7 @@ class ExperiencesController < ApplicationController
 
 
 	add_breadcrumb "Inicio", :root_path
+	add_breadcrumb "Actividades AS"
 	add_breadcrumb "Experiencias", :experiences_path
 
 	#Vista principal

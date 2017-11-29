@@ -60,20 +60,9 @@
 					<% if !user_signed_in? %>
 						<%= render "partials/intranet"%>
 					<%else%>
-						<%= render "partials/user"%>						
-						<%= link_to "Recursos", resources_muestra_path, :class=>'btn btnAside' %>
-						<%= link_to "Instituciones Adheridas", institutions_path, :class=>'btn btnAside' %>
-
+							
 					<%end%>
-
-					<div  class="panel panel-default panelClick">
-						<div class="panel-heading">
-							<%= link_to 'Calendario de eventos <i class="glyphicon glyphicon-circle-arrow-left"></i>'.html_safe, events_path, :id => "calendarPanelTitle"%>
-						</div>
-						<div class="panel-body" id = "calendarAside">
-						</div>
-					</div>
-					<%= render "partials/interest_links"%>
+					
 				</aside>
 			</section>
 		</div>
@@ -86,24 +75,6 @@
 			</div>
 		</div>
 	</div>
-
-
-
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$('#calendarAside').fullCalendar({
-				buttonText: {
-					today: '',
-					day: 'Día',
-					week:'Semana',
-					month:'Mes'
-				},
-				events: '/events.json',
-				monthNames: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
-				dayNamesShort: ['Dom','Lun','Mar', 'Mie', 'Jue', 'Vie', 'Sab']
-			})
-		});
-	</script>
 
 	</body>
 </html>

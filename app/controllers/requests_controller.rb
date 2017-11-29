@@ -9,7 +9,8 @@ class RequestsController < ApplicationController
 	before_action :set_broker, only: [:show]
 
 	add_breadcrumb "Inicio", :root_path
-	add_breadcrumb "Solicitudes", :requests_path
+	add_breadcrumb "Actividades AS"
+	add_breadcrumb "Solicitudes de Servicio", :requests_path
 	
 	#Vista principal
 	#

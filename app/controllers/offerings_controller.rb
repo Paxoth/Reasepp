@@ -11,7 +11,8 @@ class OfferingsController < ApplicationController
 
 
 	add_breadcrumb "Inicio", :root_path
-	add_breadcrumb "Ofertas", :offerings_path
+	add_breadcrumb "Actividades AS"
+	add_breadcrumb "Ofertas de Servicio", :offerings_path
 
 	#Vista principal
 	#
