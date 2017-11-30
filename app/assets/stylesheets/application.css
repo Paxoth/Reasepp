@@ -12,6 +12,7 @@
  *
  *= require fullcalendar
  *= require_tree .
+ *= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
  *= require_self
  *= require froala_editor.min.css
  *= require froala_style.min.css
@@ -26,8 +27,7 @@
  *= require plugins/line_breaker.min.css
  *= require plugins/table.min.css
  *= require plugins/video.min.css
- *= require bootstrap-datepicker3
- *= require dataTables/jquery.dataTables
+ *= require bootstrap-datepicker3 
  */
 
 .form-signin

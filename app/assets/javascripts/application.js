@@ -12,14 +12,16 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require dataTables/jquery.dataTables
+//= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
 //= require jquery-ui
-//= require jquery-ui.multidatespicker
+//= require twitter/bootstrap
 //= require bootstrap-datepicker
 //= require fullcalendar
 
-//= require twitter/bootstrap
 //= require turbolinks
 //= require_tree .
+
 #= require twitter/bootstrap/transition
 #= require twitter/bootstrap/alert
 #= require twitter/bootstrap/modal
@@ -50,4 +52,3 @@
 //= require plugins/url.min.js
 //= require plugins/video.min.js
 //= require languages/es.js
-//= require dataTables/jquery.dataTables

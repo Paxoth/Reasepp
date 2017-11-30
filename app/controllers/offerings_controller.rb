@@ -18,7 +18,7 @@ class OfferingsController < ApplicationController
 	#
 	#Consulta por todas las Ofertas de servicio clasificadas por estados.
 	def index
-		@disponible = Offering.where(status: 1).paginate(page: params[:page],per_page: 5).order("created_at DESC")
+		@disponible = Offering.where(status: 1).order("created_at DESC")
 		@cancelada = Offering.where(status: 2).order("created_at DESC")
 		@caducada = Offering.where(status: 3).order("created_at DESC")
 	end

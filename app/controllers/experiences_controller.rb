@@ -123,6 +123,8 @@ class ExperiencesController < ApplicationController
 
 	#Vista que permite buscar experiencias a través de un match de palabras, utilizando la función search.
 	#La busqueda complementa tanto las experiencias como las experiencias documentadas ( Project )
+	#
+	#*NOTA IMPORTANTE:* a pesar de que esta vista funciona de manera correcta, fue quitada por Maximiiano Pérez porque la búsuqeda de DataTables es suficientemente eficiente.
 	def searchExperience
 		add_breadcrumb "Búsqueda"
 		@experiences = Experience.order("created_at DESC").all

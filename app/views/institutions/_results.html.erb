@@ -1,38 +1,36 @@
-<h2>Impactos por experiencias</h2>
+<h2>Resultados por Experiencias</h2>
 <ul class="nav nav-tabs tabRease nav-justified">
 	<li id="impact1" onclick="impact1()"><a>Impactos Globales</a></li>
 	<li id="impact2" onclick="impact2()"><a>Experiencias</a></li>
 </ul>
 
-<div class="borderTab">
-	<div id="Global" class="panel-body" style="text-align: left;">
+<div class="borderTab ">
+	<div id="Global" style="text-align: left;" class="padding15">
 		<li><strong>Experiencias totales</strong>: <%=@institution.experiences.count%><br></li>
 		<li><strong>Estudiantes impactados </strong>: <%=@institution.experiences.sum("participants")%></li>
 		<li><strong>Miembros de comunidades impactados </strong>: <%=@institution.experiences.sum("benefited")%></li>
 	</div>
-	<div id="Experiencias">
-		<div class="panel-body">
-			<table class="tabla-rease" id="experience_dt">
-				<thead>
-					<tr>
-						<th><strong>Nombre</strong></th>
-						<th><strong>Responsable</strong></th>
-						<th><strong>Fecha</strong></th>
-					</tr>
+	<div id="Experiencias" class="padding15">
+		<table class="table table-striped display">
+			<thead>
+				<tr>
+					<th><strong>Nombre</strong></th>
+					<th><strong>Responsable</strong></th>
+					<th><strong>Fecha</strong></th>
+				</tr>
 
-				</thead>
-				<tbody>
-					<%@experiences.each do |experience|%>
-					<tr>
-						<%@profesor = User.where(id: experience.professor_id).first%>
-						<td><%=link_to truncate(experience.title, length: 60), experience%></td>
-						<td><%=link_to @profesor.nickname, user_path(@profesor)%></td>
-						<td><%=experience.created_at.strftime("%d / %m / %Y")%> <%=link_to image_tag("Extensiones/pdf.gif"), experience_path(experience, format: "pdf"), :target=>'_blank'%></td>
-					</tr>
-				<%end%>
-				</tbody>
-			</table>
-		</div>	
+			</thead>
+			<tbody>
+				<%@experiences.each do |experience|%>
+				<tr>
+					<%@profesor = User.where(id: experience.professor_id).first%>
+					<td><%=link_to truncate(experience.title, length: 60), experience%></td>
+					<td><%=link_to @profesor.nickname, user_path(@profesor)%></td>
+					<td><%=experience.created_at.strftime("%d / %m / %Y")%> <%=link_to image_tag("Extensiones/pdf.gif"), experience_path(experience, format: "pdf"), :target=>'_blank'%></td>
+				</tr>
+			<%end%>
+			</tbody>
+		</table>	
 	</div>
 </div>
 
@@ -53,12 +51,4 @@
 	document.getElementById("impact1").className = "";
 	document.getElementById("impact2").className = "active";
 	}
-
-	$(document).ready(function() {
-		$('#experience_dt').DataTable({
-			"language": {
-				"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
-			}
-		});
-	} );
 </script>

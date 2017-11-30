@@ -16,7 +16,7 @@ class RequestsController < ApplicationController
 	#
 	#Consulta por todas las solicitud de servicio clasificadas por estados.
 	def index
-		@disponible = Request.where(status: 1).paginate(page: params[:page],per_page: 5).order("created_at DESC")
+		@disponible = Request.where(status: 1).order("created_at DESC")
 		@cancelada = Request.where(status: 2).order("created_at DESC")
 		@caducada = Request.where(status: 3).order("created_at DESC")
 		if params[:search]

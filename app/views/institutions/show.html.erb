@@ -11,6 +11,27 @@
 <div class="ReaseDiv">
     
     <%= render 'datas'%>
-    <%= render 'impacts'%>
+    <%= render 'results'%>
     <%= render 'members'%>
 </div>  
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('table.display').DataTable({
+			"language": {
+				"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+			},
+		});
+	} );
+
+	$(document).ready(function() {
+		$('table.member').DataTable({
+			"language": {
+				"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+			},
+			"bInfo" : false,
+		});
+		
+	} );
+</script>
+

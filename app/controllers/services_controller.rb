@@ -31,7 +31,7 @@ class ServicesController < ApplicationController
 	#
 	#Vista en donde se mostrarán todos los servicios activos, aceptados por ambos usuarios ( User )
 	def index_activos
-		@activos = Service.paginate(page: params[:page],per_page: 5).where(status: 4).order("updated_at DESC")
+		@activos = Service.where(status: 4).order("updated_at DESC")
 	end
 
 	#Vista específica

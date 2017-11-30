@@ -22,41 +22,83 @@
 		</p>
 	</div>
 
-	<div id="ofertas">
+	<div id="ofertas" class="padding15">
 		<%if @offerings.present? %>
-			<% @offerings.each do |offering| %>
-				<div class="panel panel-default panelRease">
-					<div class="panel-heading">
-						<%if offering.user == current_user %>
-							<i class="glyphicon glyphicon-tags"></i>
-						<%end%>
-						<%= link_to offering.title, offering, :class=>'a-white' %>
-					</div>
-					<div class="panel-body">
-						<p><%=raw offering.resume %></p>
-					</div>
-				</div>
-			<%end%>
+			<table class="table table-striped display">
+				<thead>
+					<tr>
+						<th>Nombre</th>
+						<th>Responsable</th>
+						<th>Fecha inicio</th>
+						<th>Fecha término</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @offerings.each do |offering| %>
+						<tr>
+							<td><%= link_to offering.title, offering%></td>
+							<td>
+								<%if offering.user.category == 3%>
+									Sin profesor responsable
+								<%else%>
+									<%= link_to offering.user.name, offering.user%>
+								<%end%>
+							</td>
+							<td><%= offering.start_time%></td>
+							<td><%= offering.end_time%></td>
+						</tr>
+					<%end%>
+				</tbody>
+				<tfoot>
+					<tr>
+						<th>Nombre</th>
+						<th>Responsable</th>
+						<th>Fecha inicio</th>
+						<th>Fecha término</th>
+					</tr>
+				</tfoot>
+			</table>
 		<%else%>
 			<p>Actualmente <%@institution.name%> no posee Ofertas de Servicios activas</p>
 		<%end%>
 	</div>
 
-	<div id="solicitudes">
+	<div id="solicitudes" class="padding15">
 		<%if @requests.present? %>
-			<% @requests.each do |request| %>
-				<div class="panel panel-default panelRease">
-					<div class="panel-heading">
-						<%if request.user == current_user %>
-							<i class="glyphicon glyphicon-tags"></i>
-						<%end%>
-						<%= link_to request.title, request, :class=>'a-white' %>
-					</div>
-					<div class="panel-body">
-						<p><%=raw request.resume %></p>
-					</div>
-				</div>
-			<%end%>
+			<table class="table table-striped display">
+				<thead>
+					<tr>
+						<th>Nombre</th>
+						<th>Responsable</th>
+						<th>Fecha inicio</th>
+						<th>Fecha término</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @requests.each do |request| %>
+						<tr>
+							<td><%= link_to request.title, request%></td>
+							<td>
+								<%if request.user.category == 3%>
+									Sin socio responsable
+								<%else%>
+									<%= link_to request.user.name, request.user%>
+								<%end%>
+							</td>
+							<td><%= request.start_time%></td>
+							<td><%= request.end_time%></td>
+						</tr>
+					<%end%>
+				</tbody>
+				<tfoot>
+					<tr>
+						<th>Nombre</th>
+						<th>Responsable</th>
+						<th>Fecha inicio</th>
+						<th>Fecha término</th>
+					</tr>
+				</tfoot>
+			</table>
 		<%else%>
 			<p>Actualmente <%@institution.name%> no posee Solicitudes de Servicios activas</p>
 		<%end%>

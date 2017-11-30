@@ -1,46 +1,56 @@
 <h1>Servicios Activos: <button type="button" class="btn btn-default btnWhite" id:"btnService" data-trigger="focus" data-container="body" data-toggle="btnService"> ? </button></h1>
 
-<div class="buscador">
-	<%= form_tag(services_searchService_path, :method => "post",:class=>"form-inline") do %>
-	<div class="input-group">
-		<%= text_field_tag :search, params[:search], placeholder: "Buscar servicios",:class => 'form-control',:required=>true %>
-		<span class="input-group-btn">
-			<%= button_tag(type: "submit", class: "btn btn-default ") do %>
-				<i class="glyphicon glyphicon-search"></i>
-			<% end %>
-		</span>
+<div class="panel panel-default panelRease">
+	<div class="panel-heading">
+		Ofertas de servicios disponibles
 	</div>
-	<%end%>
+	<div class="panel-body">
+		<%if @activos.present?%>
+			<table class="table table-striped" id="service_dt">
+				<thead>
+					<tr>
+						<th><strong>Nombre</strong></th>
+						<th><strong>Profesor</strong></th>
+						<th><strong>Socio</strong></th>
+						<th><strong>Fecha Inicio</strong></th>
+						<th><strong>Fecha Término</strong></th>				
+					</tr>
+				</thead>
+				<tbody>
+					<% @activos.each do |service| %>
+						<tr>
+							<%creator =  User.where(id: service.creator_id).first%>
+							<%acceptor =  User.where(id: service.acceptor_id).first%>
+							<td> <%=link_to truncate(service.title, length: 60), service%>
+							</td>
+							<%if service.publication_type == "Request"%>
+								<td><%= link_to creator.name, creator%></td>
+								<td><%= link_to acceptor.name, acceptor%></td>
+							<%else%>
+								<td><%= link_to acceptor.name, acceptor%></td>
+								<td><%= link_to creator.name, creator%></td>								
+							<%end%>
+							<td><%= service.start_time%></td>
+							<td><%= service.end_time%></td>
+						</tr>
+					<%end%>
+				</tbody>
+				<tfoot>
+					<tr>
+						<th><strong>Nombre</strong></th>
+						<th><strong>Profesor</strong></th>
+						<th><strong>Socio</strong></th>
+						<th><strong>Fecha Inicio</strong></th>
+						<th><strong>Fecha Término</strong></th>				
+					</tr>
+				</tfoot>
+			</table>
+		<%else%>			
+			<p>No hay ofertas de servicio disponibles</p>	
+		<%end%>
+	</div>
 </div>
 
-<%if @activos.present?%>
-	<% @activos.each do |activo| %>
-		<div class="panel panel-default panelRease">
-			<div class="panel-heading">
-				<%if activo.creator == current_user or activo.acceptor == current_user %>
-					<i class="glyphicon glyphicon-tags"></i>
-				<%end%>
-				<%=activo.title%>
-			</div>
-			<div class="panel-body">
-				<h2>Resumen:</h2>
-				<p><%=activo.resume%></p>
-				<%= link_to "Ver servicio",activo, :class =>'btn btnCRUD'%>
-			</div>
-		</div>
-	<%end%>
-<%else%>
-		<div class="panel panel-default panelRease">
-			<div class="panel-heading">
-				Servicios Activos
-			</div>
-			<div class="panel-body">
-				<p>No hay servicios activos disponibles</p>
-			</div>
-		</div>
-<%end%>
-
-<%= will_paginate @activos %>
 <script type="text/javascript">
 	$(function () {
 		$('[data-toggle="btnService"]').popover(
@@ -52,4 +62,12 @@
 			}
 		)
 	})
+
+	$(document).ready(function() {
+		$('#service_dt').DataTable({
+			"language": {
+				"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+			},
+		});
+	} );
 </script>

@@ -220,6 +220,9 @@ p
 	max-width: 30px;
 	display: inline-block;
 }
+.padding15{
+	padding: 15px;
+}
 .popoverImage
 {
 	width: 650px;
@@ -251,6 +254,9 @@ p
 {
 	background: #30bbbb;
 	color: white;
+}
+.to_left{
+	text-align: left;
 }
 .sesion .btn-block
 {
@@ -358,3 +364,24 @@ p
 }
 
 
+/*Datatables*/
+.pagination>li>a, .pagination>li>span {
+	color: #30aaaa;
+}
+.pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus{
+	background-color: #30aaaa;
+	border-color: #30cccc;
+}
+table.dataTable thead > tr > th,.table > tfoot > tr > th {
+	text-align: center;
+}
+table.dataTable > tr:hover{
+	background: #30aaaa;
+	color: white;
+
+}
+table.dataTable tbody > tr:hover, table.dataTable tbody > tr:hover a{
+	background: #30aaaa;
+	color: white;
+	
+}
