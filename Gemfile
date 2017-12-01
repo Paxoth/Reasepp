@@ -45,7 +45,7 @@ gem 'multi-dates-picker-rails'
 gem 'bootstrap-datepicker-rails'
 gem 'jquery-datatables-rails'
 
-gem  'pg', '0.21.0', group: :production
+gem  'pg', group: :production
 gem 'rails_12factor', group: :production
 
 
