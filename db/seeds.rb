@@ -486,3 +486,15 @@ print("\n\tSeed:\tCreando Experiencias basados en los servicios: ")
 	service_aux.save
 end
 print("\n\tSeed:\tExperiencias de pruebas creadas [200]\n")
+
+User.create([{
+	email: 'edmundo.leiva@usach.cl',
+	password: 'rease2017',
+	name: 'Edmundo Leiva Lobos',
+	nickname: 'Profe Edmundo', 
+	category: 2, 
+	autorization_level: 1, 
+	confirmed_at: Time.now,
+}])
+
+Institution.last.manager_id = User.last.id
