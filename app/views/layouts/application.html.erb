@@ -38,6 +38,9 @@
 							<%= render "partials/intranet"%>				
 						</aside>
 					<%else%>
+						<%if current_user.institution_id==14%>
+							<%= stylesheet_link_tag "usach", :media => "all" %>
+						<%end%>
 						<section id="principal_intranet">
 							<article>
 								<%= bootstrap_flash %>
