@@ -1,0 +1,44 @@
+<%if current_user.institution_id.present?%>
+	<%@institution = Institution.where(id: current_user.institution_id).first%>
+	
+	<%if @institution.name=="Universidad de Santiago de Chile"%>
+		<div class="footer-usach"">
+			<div class="no_breakline_left">
+					<%= image_tag("Institutions/usach/footerorangeblue.jpg") %>
+			</div>
+			<div >
+				<br>
+				<%= link_to 'Solicitudes de Servicio', requests_path %>
+				<%= link_to 'Ofertas de Servicios', offerings_path %>
+				<%= link_to 'Servicios Activos', services_index_activos_path %>
+				<%= link_to 'Experiencias Registradas', experiences_path %>	
+				<div class="footer-left">
+					<br>
+					<p>Universidad de Santiago de Chile. Avenida Libertador Bernardo O'Higgins nº 3363. Estación Central. Santiago. Chile.</p>
+					<p>Mesa central (562) 2 718 00 00</p> 
+				</div>
+				<div class="footer-right">
+					<br>
+					<%= link_to(image_tag("logoblanco.png", :class=>'logo_footer'),root_path) %>
+					<%= link_to(image_tag("Institutions/logo_usach_blanco.png", :class=>'logo_footer'),@institution.web) %>
+				</div>
+			</div>			
+		</div>
+	<%end%>	
+
+
+	<%if @institution.name=="Universidad Técnica Metropolitana"%>
+	<%end%>
+<%else%>
+	<div id="footer">
+		<!--Pie de página-->
+		<div  id="pies" class = "navbar-default pies">
+			REASE - Red Nacional de Aprendizaje Servicio
+			<br>
+			Contacto: redrease@gmail.com
+			<br>
+			<%= link_to(image_tag("logoblanco.png", id: "logoFooter"),root_path) %>
+		</div>
+	</div>		
+<%end%>
+

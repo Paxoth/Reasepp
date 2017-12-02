@@ -14,6 +14,7 @@
 		<%= favicon_link_tag 'apple-touch-icon-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png' %>
 		<%= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
 		<%= javascript_include_tag "application" %>
+		<%= render "partials/Institutions/customization"%>
 	</head>
 	<body>
 		<div id="wrapper">
@@ -21,11 +22,12 @@
 				<header>
 					<%= render "partials/navigation"%>
 				</header>
+				
+			</div>
+			<div id="content">
 				<ol class="breadcrumb">
 					<%= render_breadcrumbs :tag => :li, :separator => "" %>
 				</ol>
-			</div>
-			<div id="content">
 				<section id="contenedor">
 					<% if !user_signed_in? %>
 						<section id="principal_portal">
@@ -38,9 +40,6 @@
 							<%= render "partials/intranet"%>				
 						</aside>
 					<%else%>
-						<%if current_user.institution_id==14%>
-							<%= stylesheet_link_tag "usach", :media => "all" %>
-						<%end%>
 						<section id="principal_intranet">
 							<article>
 								<%= bootstrap_flash %>
@@ -51,15 +50,19 @@
 				</section>
 			</div>
 		</div>
-		<div id="footer">
-			<!--Pie de página-->
-			<div  id="pies" class = "navbar-default pies">
-				REASE - Red Nacional de Aprendizaje Servicio
-				<br>
-				Contacto: redrease@gmail.com
-				<br>
-				<%= link_to(image_tag("logoblanco.png", id: "logoFooter"),root_path) %>
-			</div>
-		</div>		
+		<%if user_signed_in?%>	
+			<%= render "partials/Institutions/footers"%>
+		<%else%>	
+			<div id="footer">
+				<!--Pie de página-->
+				<div  id="pies" class = "navbar-default pies">
+					REASE - Red Nacional de Aprendizaje Servicio
+					<br>
+					Contacto: redrease@gmail.com
+					<br>
+					<%= link_to(image_tag("logoblanco.png", id: "logoFooter"),root_path) %>
+				</div>
+			</div>		
+		<%end%>
 	</body>
 </html>

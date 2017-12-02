@@ -38,7 +38,7 @@ background: #ffffff;
 #content {
 	margin: 0;
 	padding: 0;
-	padding-bottom: 135px;
+	padding-bottom: 75px;
 
 }
 #footer {
@@ -257,6 +257,17 @@ p
 }
 .to_left{
 	text-align: left;
+}
+.to_right{
+	text-align: right;
+}
+.no_breakline_right{
+	display: inline-block;
+	float: right;
+}
+.no_breakline_left{
+	display: inline-block;
+	float: left;
 }
 .sesion .btn-block
 {

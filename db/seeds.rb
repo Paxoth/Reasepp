@@ -260,6 +260,7 @@ print("\n\tSeed:\tCreando ofertas con profesores: ")
 		location: "Ubicación de prueba generada por seed #"+n.to_s, 
 		institution_id: professor_aux.institution_id
 	)
+	print(professor_aux_id.to_s+" ")
 end
 print("\n\tSeed:\tOfertas de pruebas por profesores creadas [250]\n")
 
@@ -498,3 +499,4 @@ User.create([{
 }])
 
 Institution.last.manager_id = User.last.id
+Institution.last.save

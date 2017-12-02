@@ -20,7 +20,7 @@ gem 'turbolinks', '2.5.3'
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
-gem 'mysql2', '~> 0.3.18', group: :development
+gem 'mysql2', '~> 0.3.18'#, group: :development
 gem "therubyracer", '0.12.2'
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
 gem 'unicorn', '5.0.1'
@@ -46,8 +46,8 @@ gem 'bootstrap-datepicker-rails'
 gem 'jquery-datatables-rails'
 
 #HEROKU
-gem 'pg', '0.18.1', group: :production
-gem 'rails_12factor', group: :production
+#gem 'pg', '0.18.1', group: :production
+#gem 'rails_12factor', group: :production
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

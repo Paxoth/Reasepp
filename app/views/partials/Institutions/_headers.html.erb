@@ -1,0 +1,25 @@
+<%if user_signed_in?%>
+	<%if current_user.institution_id.present?%>
+		<%@institution = Institution.where(id: current_user.institution_id).first%>
+		
+		<%if @institution.name=="Universidad de Santiago de Chile"%>
+			<div class="header_usach">
+				<div class="header_center">
+					<%=link_to 'Universidad de Santiago de Chile', @institution%>
+					<div class="to_right no_breakline_right">
+						<%=link_to image_tag("Institutions/twitter.png"), "https://twitter.com/usach", :target=>'_blank'%>
+						<%=link_to image_tag("Institutions/facebook.png"), "https://www.facebook.com/universidaddesantiago/", :target=>'_blank'%>
+						<%=link_to image_tag("Institutions/youtube.png"), "https://www.youtube.com/user/digecapusach", :target=>'_blank'%>
+						<%=link_to image_tag("Institutions/linkedin.png"), "https://www.linkedin.com/school/universidad-de-santiago-de-chile/", :target=>'_blank'%>
+						<%=link_to image_tag("Institutions/instagram.png"), "https://www.instagram.com/udesantiagocl/", :target=>'_blank'%>
+					</div>
+				</div>				
+			</div>
+		<%end%>
+		
+
+
+		<%if @institution.name=="Universidad Técnica Metropolitana"%>
+		<%end%>
+	<%end%>
+<%end%>
