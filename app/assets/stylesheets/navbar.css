@@ -1,5 +1,16 @@
 /*****BARRA NAVEGADORA ***/
 /*sombras y efectos de la barra navegadora*/
+.banner-rease{
+	padding: 1em;
+	max-height: 120px;
+}
+.movdb-header {
+	width: 100%;
+}
+
+.navbar{
+	position: relative;
+}
 .navbar-default .navbar-nav>li>a
 {
 	text-align: center;

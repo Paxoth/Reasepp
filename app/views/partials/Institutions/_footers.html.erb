@@ -20,7 +20,7 @@
 				<div class="footer-right">
 					<br>
 					<%= link_to(image_tag("logoblanco.png", :class=>'logo_footer'),root_path) %>
-					<%= link_to(image_tag("Institutions/logo_usach_blanco.png", :class=>'logo_footer'),@institution.web) %>
+					<%= link_to(image_tag("Institutions/usach/logo_usach_blanco.png", :class=>'logo_footer'),@institution.web) %>
 				</div>
 			</div>			
 		</div>
@@ -28,6 +28,19 @@
 
 
 	<%if @institution.name=="Universidad Técnica Metropolitana"%>
+		<style>
+			@import url('https://fonts.googleapis.com/css?family=Oswald');
+		</style> 
+		<div class="footer-utem"">
+			<p >SIGUENOS EN:
+<%=link_to image_tag("Institutions/utem/twitter.png"), "https://twitter.com/usach", :target=>'_blank'%>
+<%=link_to image_tag("Institutions/utem/facebook.png"), "https://www.facebook.com/universidaddesantiago/", :target=>'_blank'%>
+<%=link_to image_tag("Institutions/utem/youtube.png"), "https://www.youtube.com/user/digecapusach", :target=>'_blank'%>
+<%=link_to image_tag("Institutions/utem/linkedin.png"), "https://www.linkedin.com/school/universidad-de-santiago-de-chile/", :target=>'_blank'%>
+<%=link_to image_tag("Institutions/utem/instagram.png"), "https://www.instagram.com/udesantiagocl/", :target=>'_blank'%>
+		</p>
+		<p>Dieciocho 161 - Santiago, Chile. Metro Moneda - Fono: 2787 7500</p>
+		</div>
 	<%end%>
 <%else%>
 	<div id="footer">

@@ -29,12 +29,8 @@ background: #ffffff;
 	min-height:600px; /* real browsers */
 	max-width: 1100px;
 	margin: 0.5em auto;
-	padding-top: 75px;
 }
-#header {
-	margin: 0;
-	padding: 0;
-}
+
 #content {
 	margin: 0;
 	padding: 0;

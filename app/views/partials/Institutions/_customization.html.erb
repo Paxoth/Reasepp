@@ -3,9 +3,8 @@
 		<%@institution = Institution.where(id: current_user.institution_id).first%>
 		<%if @institution.name=="Universidad de Santiago de Chile"%>
 			<%= stylesheet_link_tag "Institutions/usach", :media => "all" %>
-		<%end%>
-		<%if @institution.name=="Universidad Técnica Metropolitana"%>
-			<%= stylesheet_link_tag "utem", :media => "all" %>
+		<%elsif @institution.name=="Universidad Técnica Metropolitana"%>
+			<%= stylesheet_link_tag "Institutions/utem", :media => "all" %>
 		<%end%>
 	<%end%>
 <%end%>

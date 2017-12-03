@@ -99,7 +99,8 @@ institution_list = [
 	[11,"#{Rails.root}/public/institution/uchile.png", "Universidad de Chile", "http://www.uchile.cl/"],
 	[12,"#{Rails.root}/public/institution/uconce.gif", "Universidad de Concepción", "http://www.udec.cl/pexterno/"],
 	[13,"#{Rails.root}/public/institution/ufro.png", "Universidad de la Frontera", "http://www.ufro.cl/"],
-	[14,"#{Rails.root}/public/institution/usach.png", "Universidad de Santiago de Chile", "http://rsu.usach.cl/"]
+	[14,"#{Rails.root}/public/institution/usach.png", "Universidad de Santiago de Chile", "http://rsu.usach.cl/"],
+	[15,"#{Rails.root}/public/institution/utem.png", "Universidad Técnica Metropolitana", "http://www.utem.cl/"]
 ]
 
 institution_list.each do |id, logo,name, web|
@@ -178,7 +179,7 @@ print("\n\tSeed:\tUsarios básicos asignados a usach:")
 
 print("\n\tSeed:\tCreando profesores: ")
 (1..100).step(1) do |n|
-	inst_id = rand(1..14)
+	inst_id = rand(1..15)
 	inst_aux = Institution.where(id:inst_id).first
 	inst_days = (inst_aux.created_at.to_date..Time.now.to_date).count
 	user_created = inst_aux.created_at+rand(inst_days-10).days+rand(200).minutes
@@ -199,7 +200,7 @@ print("\n\tSeed:\tprofesores de pruebas creados [100=>5-104]\n")
 
 print("\n\tSeed:\tCreando socios: ")
 (1..100).step(1) do |n|
-	inst_id = rand(1..14)
+	inst_id = rand(1..15)
 	inst_aux = Institution.where(id:inst_id).first
 	inst_days = (inst_aux.created_at.to_date..Time.now.to_date).count
 	user_created = inst_aux.created_at+rand(inst_days-10).days+rand(200).minutes
@@ -221,7 +222,7 @@ print("\n\tSeed:\tSocios de pruebas creados [100=>105-204] \n")
 
 print("\n\tSeed:\tCreando Vinculadores: ")
 (1..100).step(1) do |n|
-	inst_id = rand(1..14)
+	inst_id = rand(1..15)
 	inst_aux = Institution.where(id:inst_id).first
 	inst_days = (inst_aux.created_at.to_date..Time.now.to_date).count
 	user_created = inst_aux.created_at+rand(inst_days-10).days+rand(200).minutes
@@ -497,6 +498,15 @@ User.create([{
 	autorization_level: 1, 
 	confirmed_at: Time.now,
 }])
-
-Institution.last.manager_id = User.last.id
-Institution.last.save
+usach = Institution.where(id:14).first
+utem = Institution.where(id:15).first
+edmundo = User.last
+edmundo.institution = usach
+profesor = User.where(id:2).first
+profesor.institution = utem
+usach.manager_id = edmundo.id
+utem.manager_id = profesor.id
+usach.save
+utem.save
+profesor.save
+edmundo.save

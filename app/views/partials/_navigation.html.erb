@@ -1,7 +1,10 @@
+<div class="movdb-header">
+	<%= render "partials/Institutions/headers"%>
+</div> 
+
 <nav class="navbar navbar-default BarraNavegadora navbar-fixed-top">
-	<%= render "partials/Institutions/headers"%>	
+		
 	<div class="container-fluid">
-		<!-- Brand and toggle get grouped for better mobile display -->
 		<div class="navbar-header">
 			<%= link_to(image_tag("logoblanco.png", id: "logoNav"),root_path) %>
 			<button type="button" class="navbar-toggle btn-nav" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -9,7 +12,6 @@
 			</button>
 		</div>
 
-		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<% if !user_signed_in? %>
 				<ul class="nav navbar-nav" >
@@ -140,7 +142,11 @@
 	</div>
 </div>
 
+
+
+
 <script type="text/javascript">
+	
 	$(document).ready(function() {
 		$('#calendar_inside').fullCalendar({
 			buttonText: {
@@ -158,4 +164,16 @@
 	$('#modal_calendar').on('shown.bs.modal', function () {
 	   $("#calendar_inside").fullCalendar('render');
 	});
+
+	$(document).ready(function(){
+		$(window).scroll(function(){
+			if ($(window).scrollTop() >= 120){
+				$('.navbar').css('position','fixed');
+			}
+			else{
+				$('.navbar').css('position','relative');
+			}
+		});
+	});
+
 </script>

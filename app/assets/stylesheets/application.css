@@ -13,6 +13,7 @@
  *= require fullcalendar
  *= require_tree .
  *= stub Institutions/usach
+ *= stub Institutions/utem
  *= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
  *= require_self
  *= require froala_editor.min.css
