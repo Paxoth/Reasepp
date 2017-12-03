@@ -4,7 +4,7 @@ class ChangeTypeToExperience < ActiveRecord::Migration
 		change_column :experiences, :weekly_hours, :text
 		change_column :experiences, :benefit, :text
 		change_column :experiences, :students_level, :text
-		change_column :experiences, :professor_degree, 'integer USING CAST(product_code AS integer)'
+		change_column :experiences, :professor_degree, 'integer USING CAST(professor_degree AS integer)'
 		remove_reference :experiences, :offering
 		remove_reference :experiences, :request
 		add_reference :experiences, :service
