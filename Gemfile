@@ -46,8 +46,8 @@ gem 'bootstrap-datepicker-rails'
 gem 'jquery-datatables-rails'
 
 #HEROKU
-#gem 'pg', '0.18.1', group: :production
-#gem 'rails_12factor', group: :production
+gem 'pg', '0.18.1', group: :production
+gem 'rails_12factor', group: :production
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
