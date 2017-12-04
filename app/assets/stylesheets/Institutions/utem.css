@@ -212,12 +212,12 @@ p.navbar-text.navbar-right
 }
 
 /*BOTONES*/
-.btnSomos, .btnHacemos, .btnAdmin, .btnCRUD, .btn-nav, .btn-lg{
+.btnSomos, .btnHacemos, .btnAdmin, .btnCRUD, .btn-nav, .btn-lg, .btn-social{
 	background: #021C36;
 	color: white;
 	border-radius: 0;
 }
-.btnSomos:hover, .btnHacemos:hover, .btnAdmin:hover, .btnCRUD:hover, .btn-nav:hover, .btn-lg:hover{
+.btnSomos:hover, .btnHacemos:hover, .btnAdmin:hover, .btnCRUD:hover, .btn-nav:hover, .btn-lg:hover, .btn-social:hover{
 	background: #3399CC;
 }
 

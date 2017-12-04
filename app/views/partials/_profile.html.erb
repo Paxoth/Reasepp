@@ -34,20 +34,20 @@
 		<%if !@user.description.blank? %>
 			<p><strong>Sobre mí:</strong> <%= @user.description%></p>
 		<%end%>
-		<%if @user.faceboook.present%>		
-			<%= link_to '<i class="fa fa-facebook"></i>'.html_safe,root_path, :class=>'btn btn-social'%>
+		<%if @user.facebook.present?%>		
+			<%= link_to '<i class="fa fa-facebook"></i>'.html_safe,@user.facebook, :class=>'btn btn-social', :target=>"_blank"%>
 		<%end%>
-		<%if @user.instragram.present%>
-			<%= link_to '<i class="fa fa-instagram"></i>'.html_safe,root_path, :class=>'btn btn-social'%>
+		<%if @user.instagram.present?%>
+			<%= link_to '<i class="fa fa-instagram"></i>'.html_safe,@user.instagram, :class=>'btn btn-social', :target=>"_blank"%>
 		<%end%>
-		<%if @user.linkedin.present%>
-			<%= link_to '<i class="fa fa-linkedin"></i>'.html_safe,root_path, :class=>'btn btn-social'%>
+		<%if @user.linkedin.present?%>
+			<%= link_to '<i class="fa fa-linkedin"></i>'.html_safe,@user.linkedin, :class=>'btn btn-social', :target=>"_blank"%>
 		<%end%>
-		<%if @user.twitter.present%>
-			<%= link_to '<i class="fa fa-twitter"></i>'.html_safe,root_path, :class=>'btn btn-social'%>
+		<%if @user.twitter.present?%>
+			<%= link_to '<i class="fa fa-twitter"></i>'.html_safe,@user.twitter, :class=>'btn btn-social', :target=>"_blank"%>
 		<%end%>	
-		<%if @user.youtube.present%>
-			<%= link_to '<i class="fa fa-youtube"></i>'.html_safe,root_path, :class=>'btn btn-social'%>
+		<%if @user.youtube.present?%>
+			<%= link_to '<i class="fa fa-youtube"></i>'.html_safe,@user.youtube, :class=>'btn btn-social', :target=>"_blank"%>
 		<%end%>
 	</div>
 	<%if @experiences.present?%>

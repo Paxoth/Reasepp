@@ -39,6 +39,34 @@
 				<%= f.file_field :photo %>
 				<p class="note">** Usted debe aparecer vertical en la foto a subir.</p>
 			
+			<h2>Redes sociales</h2>
+
+			<div class="padding15">
+				<div class="input-group">
+					<span class="input-group-addon social-addon"><i class="fa fa-facebook"></i></span>
+					<%= f.text_field :facebook, :class => 'form-control',:placeholder=>'https://www.facebook.com/ejemplo' %>
+				</div>
+			
+				<div class="input-group">
+					<span class="input-group-addon social-addon"><i class="fa fa-instagram"></i></span>
+					<%= f.text_field :instagram, :class => 'form-control',:placeholder=>"https://www.instagram.com/ejemplo" %>
+				</div>
+
+				<div class="input-group">
+					<span class="input-group-addon social-addon"><i class="fa fa-linkedin"></i></span>
+					<%= f.text_field :linkedin, :class => 'form-control', :placeholder=>"https://www.linkedin.com/in/ejemplo" %>
+				</div>
+
+				<div class="input-group">
+					<span class="input-group-addon social-addon"><i class="fa fa-twitter"></i></span>
+					<%= f.text_field :twitter, :class => 'form-control',:placeholder=>"https://twitter.com/ejemplo" %>
+				</div>
+
+				<div class="input-group">
+					<span class="input-group-addon social-addon"><i class="fa fa-youtube"></i></span>
+					<%= f.text_field :youtube, :class => 'form-control', :placeholder=>"https://www.youtube.com/user/ejemplo" %>
+				</div>
+			</div>					
 			<div data-toggle="collapse" data-target="#CambiarPass">
 					<h2>Modificar contraseña</h2>	
 					<p>Si desea modificar su contraseña <u style="color: #30aaaa;">seleccione aquí</u></p>

@@ -203,18 +203,17 @@ p.navbar-text.navbar-right
 }
 
 /*BOTONES*/
-.btnSomos, .btnHacemos, .btnAdmin, .btnCRUD, .btn-nav, .btn-lg{
+.btnSomos, .btnHacemos, .btnAdmin, .btnCRUD, .btn-nav, .btn-lg, .btn-social{
 	background: #EA7600;
 	color: white;
 	border-radius: 0;
 }
-.btnSomos:hover, .btnHacemos:hover, .btnAdmin:hover, .btnCRUD:hover, .btn-nav:hover, .btn-lg:hover{
+.btnSomos:hover, .btnHacemos:hover, .btnAdmin:hover, .btnCRUD:hover, .btn-nav:hover, .btn-lg:hover, .btn-social:hover{
 	background: #EA7600;
 }
 
 .btn-social{
-	background: #EA7600;
-	color: white;
+	border-radius: 100%;
 }
 /*DATATABLES*/
 .pagination>li>a, .pagination>li>span {
