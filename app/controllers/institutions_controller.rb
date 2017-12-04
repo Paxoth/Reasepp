@@ -140,6 +140,13 @@ class InstitutionsController < ApplicationController
 				:name, 
 				:web, 
 				:logo, 
-				:manager_id)
+				:description,
+				:manager_id,
+				:facebook,
+				:instagram,
+				:linkedin,
+				:twitter,
+				:youtube
+				)
 		end
 end

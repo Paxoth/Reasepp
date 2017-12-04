@@ -18,8 +18,24 @@
 			<%else%>
 				El encargado aún no ha escrito sobre su institución.
 			<%end%>
-			<p><%=@institution.name%> es parte del sitio REASE desde el <%=l @institution.created_at%></p>
-		</p>
+			<hr>
+			<%if @institution.facebook.present?%>		
+				<%= link_to '<i class="fa fa-facebook"></i>'.html_safe,@institution.facebook, :class=>'btn btn-social', :target=>"_blank"%>
+			<%end%>
+			<%if @institution.instagram.present?%>
+				<%= link_to '<i class="fa fa-instagram"></i>'.html_safe,@institution.instagram, :class=>'btn btn-social', :target=>"_blank"%>
+			<%end%>
+			<%if @institution.linkedin.present?%>
+				<%= link_to '<i class="fa fa-linkedin"></i>'.html_safe,@institution.linkedin, :class=>'btn btn-social', :target=>"_blank"%>
+			<%end%>
+			<%if @institution.twitter.present?%>
+				<%= link_to '<i class="fa fa-twitter"></i>'.html_safe,@institution.twitter, :class=>'btn btn-social', :target=>"_blank"%>
+			<%end%>	
+			<%if @institution.youtube.present?%>
+				<%= link_to '<i class="fa fa-youtube"></i>'.html_safe,@institution.youtube, :class=>'btn btn-social', :target=>"_blank"%>
+			<%end%>
+				<p><%=@institution.name%> es parte del sitio REASE desde el <%=l @institution.created_at%></p>
+			</p>
 	</div>
 
 	<div id="ofertas" class="padding15">
