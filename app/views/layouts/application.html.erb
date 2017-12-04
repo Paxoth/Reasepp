@@ -45,7 +45,7 @@
 				</section>
 			</div>
 		</div>
-		<%if user_signed_in?%>	
+		<%if user_signed_in? and current_user.institution_custom?%>	
 			<%= render "partials/Institutions/footers"%>
 		<%else%>	
 			<div id="footer">

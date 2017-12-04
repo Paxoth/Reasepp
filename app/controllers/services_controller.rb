@@ -184,7 +184,7 @@ class ServicesController < ApplicationController
 			if params[:request_id]
 				id = params[:request_id]
 				Request.find(params[:request_id])     
-			else
+			elsif params[:offering_id]
 				id = params[:offering_id]
 				Offering.find(params[:offering_id])
 			end
@@ -235,11 +235,15 @@ class ServicesController < ApplicationController
 		#2. Aceptado: creador de la publicacion acepta trabajar con el que manifestó interés
 		#3. Rechazado: creador de la publicación rechaza oferta de trabajar.
 		def set_status # :doc:
-			@publication = publication
-			@services = publication.services.all
-			@pendientes = @services.where(status: 1).order("updated_at DESC")
-			@aceptados = @services.where(status: 2).order("updated_at DESC")
-			@rechazados = @services.where(status: 3).order("updated_at DESC")
+			if publication.present?
+				@publication = publication
+				@services = publication.services.all
+				@pendientes = @services.where(status: 1).order("updated_at DESC")
+				@aceptados = @services.where(status: 2).order("updated_at DESC")
+				@rechazados = @services.where(status: 3).order("updated_at DESC")
+			else
+				redirect_to root_path,alert: "No puedes acceder a este sitio"
+			end
 		end	
 
 		def set_service

@@ -33,11 +33,22 @@
 		</style> 
 		<div class="footer-utem"">
 			<p >SIGUENOS EN:
-<%=link_to image_tag("Institutions/utem/twitter.png"), "https://twitter.com/usach", :target=>'_blank'%>
-<%=link_to image_tag("Institutions/utem/facebook.png"), "https://www.facebook.com/universidaddesantiago/", :target=>'_blank'%>
-<%=link_to image_tag("Institutions/utem/youtube.png"), "https://www.youtube.com/user/digecapusach", :target=>'_blank'%>
-<%=link_to image_tag("Institutions/utem/linkedin.png"), "https://www.linkedin.com/school/universidad-de-santiago-de-chile/", :target=>'_blank'%>
-<%=link_to image_tag("Institutions/utem/instagram.png"), "https://www.instagram.com/udesantiagocl/", :target=>'_blank'%>
+			<%if current_user.institution.twitter.present?%>
+				<%=link_to image_tag("Institutions/utem/twitter.png"), @institution.twitter, :target=>'_blank'%>
+			<%end%>
+			<%if current_user.institution.facebook.present?%>
+				<%=link_to image_tag("Institutions/utem/facebook.png"), @institution.facebook, :target=>'_blank'%>
+			<%end%>
+			<%if current_user.institution.youtube.present?%>
+				<%=link_to image_tag("Institutions/utem/youtube.png"), @institution.youtube, :target=>'_blank'%>
+			<%end%>
+			<%if current_user.institution.linkedin.present?%>
+				<%=link_to image_tag("Institutions/utem/linkedin.png"), @institution.linkedin, :target=>'_blank'%>
+			<%end%>
+			<%if current_user.institution.instagram.present?%>
+				<%=link_to image_tag("Institutions/utem/instagram.png"),@institution.instagram, :target=>'_blank'%>
+			<%end%>
+
 		</p>
 		<p>Dieciocho 161 - Santiago, Chile. Metro Moneda - Fono: 2787 7500</p>
 		</div>

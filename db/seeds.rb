@@ -7,7 +7,6 @@ Request.destroy_all
 Service.destroy_all
 Experience.destroy_all
 
-
 User.create([{
 	email: 'coordinacion.rease@gmail.com',
 	password: 'rease2017',
@@ -30,7 +29,6 @@ usuarios_prueba_list.each do |email, password, name, nickname, category, autoriz
   User.create( email: email, password: password, name: name, nickname: nickname, category: category, autorization_level:autorization_level, confirmed_at: Time.now)
 end
 print("\tSeed:\tUsuarios profesor, Vinculador y Socio Comunitario creados\n")
-
 
 area_list = [
 	[1,"Ciencias Naturales","Matemáticas","Disciplina: Ciencias Naturales"],
@@ -258,7 +256,7 @@ print("\n\tSeed:\tCreando ofertas con profesores: ")
 		end_time: Time.now+rand*(20).days, 
 		resume: "Resumen de prueba generada por seed #"+n.to_s, 
 		status: 1, 
-		area_id: (rand*42), 
+		area_id: rand(1..42), 
 		location: "Ubicación de prueba generada por seed #"+n.to_s, 
 		institution_id: professor_aux.institution_id
 	)
@@ -373,7 +371,7 @@ print("\n\tSeed:\tCreando servicios con profesores responsables: ")
 			publication_type: "Request", 
 			creator_id: professor_aux.id, #Creador de servicio, no de la solicitud
 			acceptor_id: publication_aux.user_id, #Creador de la solicitud
-			area_id: publication_aux.area_id, 
+			area_id: publication_aux.area.id, 
 			institution_id: professor_aux.institution_id, #institucioon del profesor
 			title: "Servicio basado en solicitud de prueba generada por seed #"+publication_aux.id.to_s, 
 			status: 4,
@@ -404,7 +402,7 @@ print("\n\tSeed:\tCreando servicios con profesores responsables: ")
 			publication_type: "Offering", 
 			creator_id: partner_aux.id, #Creador del servicio, no de la oferta
 			acceptor_id: publication_aux.user_id, #Creador de la oferta
-			area_id: publication_aux.area_id, 
+			area_id: publication_aux.area.id, 
 			institution_id: publication_aux.institution_id, #intitucion del profesor
 			title: "Servicio basado en la Oferta de prueba generada por seed #"+publication_aux.id.to_s, 
 			status: 4,
@@ -507,6 +505,16 @@ profesor = User.where(id:2).first
 profesor.institution = utem
 usach.manager_id = edmundo.id
 utem.manager_id = profesor.id
+utem.facebook = "https://www.facebook.com/utem.cl"
+utem.instagram = "https://www.instagram.com/utem.cl/"
+utem.linkedin = "https://www.linkedin.com/school/15092438/"
+utem.twitter = "https://twitter.com/utem"
+utem.youtube = "https://www.youtube.com/channel/UCOD3DHD_bafDGzGPYxTtRRw"
+usach.facebook = "https://www.facebook.com/universidaddesantiago/"
+usach.instagram = "https://www.instagram.com/udesantiagocl/"
+usach.linkedin = "https://www.linkedin.com/school/universidad-de-santiago-de-chile/"
+usach.twitter = "https://twitter.com/usach"
+usach.youtube = "https://www.youtube.com/user/digecapusach"
 usach.save
 utem.save
 profesor.save

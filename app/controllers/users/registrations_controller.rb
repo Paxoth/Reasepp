@@ -30,7 +30,8 @@
         :instagram,
         :linkedin,
         :twitter,
-        :youtube
+        :youtube,
+        :institution_custom
         ) }
     end
     

@@ -126,7 +126,8 @@ class UsersController < ApplicationController
 			:instagram,
 			:linkedin,
 			:twitter,
-			:youtube ] # extend with your own params
+			:youtube,
+			:institution_custom ] # extend with your own params
      	accessible << [ :password, :password_confirmation ] unless params[:user][:password].blank?
       	params.require(:user).permit(accessible)
 	end

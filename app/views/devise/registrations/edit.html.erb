@@ -35,6 +35,9 @@
 				<%= f.select :institution_id, @institutions.collect {|ins| [ins.name, ins.id]},{:include_blank => "Institución a la que pertenece (Opcional)"},{ :class => 'form-control'} %>
 				<p class="note">* Si no se encuentra su institución comuníquese con un administrador</p>
 			</p></div>
+			
+			<p><%= f.check_box :institution_custom? %> <%= f.label :institution_custom, "Usar colores institucionales"%> <button type="button" class="btn btn-default btnWhite" id:"btnCustom"  data-trigger="focus" data-container="body" data-toggle="btnCustom"> ? </button></p>
+
 			<h2>Foto de perfil (**)</h2>	
 				<%= f.file_field :photo %>
 				<p class="note">** Usted debe aparecer vertical en la foto a subir.</p>
@@ -93,3 +96,16 @@
 		</div>
 	</div>
 <% end %>
+
+<script type="text/javascript">
+$(function () {
+	$('[data-toggle="btnCustom"]').popover(
+	{
+		title: 'Sitio web personalizado',
+		html: 'true', 
+		content: '<p><strong>Colores institucionales: </strong>Algunas de las instituciones del adheridas a REASE presentan sus colores insitucionales dentro del sitio. Si marcas esta opción y tu insitución posee los colores, se desplegará el sitio con aquellos estilos.</p>'
+		}
+	)
+})
+
+</script>
