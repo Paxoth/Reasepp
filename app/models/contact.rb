@@ -7,6 +7,9 @@ _**Contact** es la entidad utilizada para generar mensajes de contacto por parte
 *	__email__: correo electrónico del emisor del mensaje de contacto
 *	__body__: cuerpo del mensaje de contacto
 
+**RELACIONES**
+
+_Esta entidad no posee relación ya que no posee la necesidad de conectarse con ninguna otra entidad, por su forma externa de uso._
 =end
 class Contact < ActiveRecord::Base
 	#Validaciones

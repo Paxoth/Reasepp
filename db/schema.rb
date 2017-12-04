@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171023201026) do
+ActiveRecord::Schema.define(version: 20171203234759) do
 
   create_table "areas", force: :cascade do |t|
     t.string "description", limit: 255
@@ -23,9 +23,10 @@ ActiveRecord::Schema.define(version: 20171023201026) do
     t.string   "title",       limit: 255
     t.text     "description", limit: 65535
     t.date     "start_date"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
     t.integer  "receiver",    limit: 4
+    t.integer  "user_id",     limit: 4,     default: 1
   end
 
   create_table "comments", force: :cascade do |t|
@@ -115,14 +116,20 @@ ActiveRecord::Schema.define(version: 20171023201026) do
     t.integer  "logo_file_size",    limit: 4
     t.datetime "logo_updated_at"
     t.integer  "manager_id",        limit: 4
+    t.text     "twitter",           limit: 65535
+    t.text     "facebook",          limit: 65535
+    t.text     "youtube",           limit: 65535
+    t.text     "linkedin",          limit: 65535
+    t.text     "instagram",         limit: 65535
   end
 
   create_table "interest_links", force: :cascade do |t|
     t.string   "name",        limit: 255
     t.string   "url",         limit: 255
     t.text     "description", limit: 65535
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.integer  "user_id",     limit: 4,     default: 1
   end
 
   create_table "offerings", force: :cascade do |t|
@@ -184,8 +191,9 @@ ActiveRecord::Schema.define(version: 20171023201026) do
     t.text     "title",      limit: 65535
     t.text     "answer",     limit: 65535
     t.integer  "reader",     limit: 4
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.integer  "user_id",    limit: 4,     default: 1
   end
 
   create_table "requests", force: :cascade do |t|
@@ -215,6 +223,7 @@ ActiveRecord::Schema.define(version: 20171023201026) do
     t.datetime "archive_updated_at"
     t.integer  "category",             limit: 4,     default: 1
     t.text     "description",          limit: 65535
+    t.integer  "user_id",              limit: 4,     default: 1
   end
 
   create_table "sections", force: :cascade do |t|
@@ -277,6 +286,12 @@ ActiveRecord::Schema.define(version: 20171023201026) do
     t.datetime "photo_updated_at"
     t.text     "description",            limit: 65535
     t.boolean  "is_admin",               limit: 1,     default: false
+    t.boolean  "institution_custom",     limit: 1,     default: false
+    t.text     "twitter",                limit: 65535
+    t.text     "facebook",               limit: 65535
+    t.text     "youtube",                limit: 65535
+    t.text     "linkedin",               limit: 65535
+    t.text     "instagram",              limit: 65535
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

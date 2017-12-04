@@ -29,6 +29,7 @@ _User posee muchos atributos generados por la gema Devise, que permite hacer la 
 *	__nickname__: Apodo del usuario, el cuál sirve para referirse a él en comentarios y publicaciones.
 *	__photo__: Foto de perfil del usuario, la cual se desplegará en cada comentario y facilita la identificación para el resto de los usarios.
 *	__description__: Breve descripción del usuario que escribe de sí mismo, en caso de querer hacerlo, la cual será desplegada en su perfil.
+*	__Twitter, Facebook, Instagram, Linkedin y Youtube__: Atributos que hacen referencias a las redes sociales que pueda poseer el usuario.
 
 **RELACIONES**
 
@@ -44,7 +45,10 @@ _User posee muchos atributos generados por la gema Devise, que permite hacer la 
 *   has_many created_services  ( Service ) 
 *   has_many taught_experiences ( Experience )
 *   has_many cooperated_experiences  ( Experience )
-
+*   has_many Questions
+*   has_many InterestLink
+*   has_many Resource
+*   has_many Bulletin
 =end
 class User < ActiveRecord::Base
 	#Correo temporal en caso de su creación sin declaración de uno particula. No utilizado comúnmente.
@@ -64,6 +68,10 @@ class User < ActiveRecord::Base
 	has_many :requests
 	has_many :experiences
 	has_many :projects
+	has_many :questions
+	has_many :interest_links
+	has_many :resources
+	has_many :bulletins
 
 	has_many :accepted_services,:class_name => "Service"
 	has_many :created_services, :class_name => "Service"

@@ -6,13 +6,16 @@ _**Question**_ es la entidad que hace referencia a los bloques de preguntas frec
 *	__answer__: respuesta de la pregunta frecuente.
 *	__reader__: Este atributo es utilizado para marcar si esta pregunta frecuente será enfocada para los usuarios conectados a la intranet o para usuarios desde el sitio web sin conexión.
 
-**RELACIONES:**
+**RELACIONES**
 
-	Esta entidad no posee relaciones, ya que no es relevante qué un usuario quede a cargo de la pregunta frecuente.
+*   belongs_to User
 
 =end
 
 class Question < ActiveRecord::Base
+	#RELACIONES
+	belongs_to :user
+
 	#VALIDACIONES:
 	validates :title, presence: true, uniqueness: true #no pueden haber dos titulos iguales
 	validates :answer, presence: true

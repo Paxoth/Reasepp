@@ -34,6 +34,21 @@
 		<%if !@user.description.blank? %>
 			<p><strong>Sobre mí:</strong> <%= @user.description%></p>
 		<%end%>
+		<%if @user.faceboook.present%>		
+			<%= link_to '<i class="fa fa-facebook"></i>'.html_safe,root_path, :class=>'btn btn-social'%>
+		<%end%>
+		<%if @user.instragram.present%>
+			<%= link_to '<i class="fa fa-instagram"></i>'.html_safe,root_path, :class=>'btn btn-social'%>
+		<%end%>
+		<%if @user.linkedin.present%>
+			<%= link_to '<i class="fa fa-linkedin"></i>'.html_safe,root_path, :class=>'btn btn-social'%>
+		<%end%>
+		<%if @user.twitter.present%>
+			<%= link_to '<i class="fa fa-twitter"></i>'.html_safe,root_path, :class=>'btn btn-social'%>
+		<%end%>	
+		<%if @user.youtube.present%>
+			<%= link_to '<i class="fa fa-youtube"></i>'.html_safe,root_path, :class=>'btn btn-social'%>
+		<%end%>
 	</div>
 	<%if @experiences.present?%>
 		<div class="panel-footer">

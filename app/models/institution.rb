@@ -9,6 +9,7 @@ _Las instituciones fueron modificadas ahora para que los encargados AS puedan ob
 *	__web__: Sitio web que pertenece a la institución. El encargado AS, debe ser responsable de completar este campo.
 *	__logo__: Logotipo de la institución. El encargado AS, debe ser responsable de completar este campo.
 *	__manager_id__: id del usuario que representa al encargado AS ( User ).
+*	__Twitter, Facebook, Instagram, Linkedin y Youtube__: Atributos que hacen referencias a las redes sociales que pueda poseer el usuario.
 
 **RELACIONES**
 

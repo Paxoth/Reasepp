@@ -13,8 +13,16 @@ _**Resource** es la entidad que hace referencia a los Recursos que posee el siti
     4. Enlaces útiles
     5. Otros
 *	__description__: Descripción del recurso.
+
+**RELACIONES**
+
+*   belongs_to User
 =end
+
 class Resource < ActiveRecord::Base
+	
+	#RELACIONES
+	belongs_to :user
 
 	#VALIDACIONES
 	has_attached_file :archive

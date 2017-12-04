@@ -8,9 +8,16 @@ _**Bulletin** es la entidad que representa los boletines informativos. Estos son
 *	__start_date__: Fecha desde la cual se tomarán las actualizaciones de la página para ser adjuntadas en el mail que se envía.
 *	__receiver__: Opción para decidir qué tipo de usuario recibirá el boletín.
 
+**RELACIONES**
+
+*   belongs_to User
 =end
 
 class Bulletin < ActiveRecord::Base
+
+	#RELACIONES
+	belongs_to :user
+
 	#VALIDACIONES
 	validates :title, presence: true, uniqueness: true
 	validates :description, presence: true

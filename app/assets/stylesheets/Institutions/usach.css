@@ -212,6 +212,10 @@ p.navbar-text.navbar-right
 	background: #EA7600;
 }
 
+.btn-social{
+	background: #EA7600;
+	color: white;
+}
 /*DATATABLES*/
 .pagination>li>a, .pagination>li>span {
 	color: #EA7600;

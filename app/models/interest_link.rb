@@ -7,9 +7,16 @@ _**Interest Link** es la entidad que representa los links de interés que se des
 *	__url__: Dirección del sitio al cual redirecciona.
 *	__description__: Breve descripción del sitio al cual redirecciona.
 
+**RELACIONES**
+
+*   belongs_to User
 =end
 
 class InterestLink < ActiveRecord::Base
+
+	#RELACIONES
+	belongs_to :user
+
 	#VALIDACIONES
 	validates :name, presence: true, uniqueness: true
 	validates :url, presence: true, uniqueness: true

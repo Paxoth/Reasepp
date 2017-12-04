@@ -28,7 +28,7 @@
 						<%@actas.each do |resource|%>
 							<tr>
 								<td><%=resource.name%></td>
-								<td><%=resource.id%></td>
+								<td><%=link_to resource.user.nickname, resource.user%></td>
 								<td><%=resource.date%></td>
 								<td><%= render 'extensiones', :resource => resource %></td>
 							</tr>

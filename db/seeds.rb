@@ -10,7 +10,7 @@ Experience.destroy_all
 
 User.create([{
 	email: 'coordinacion.rease@gmail.com',
-	password: 'rease2015',
+	password: 'rease2017',
 	name: 'Coordinación',
 	nickname: 'Admin', 
 	category: 2, 
@@ -21,9 +21,9 @@ User.create([{
 print("\tSeed:\tUsuario Administrador creado\n")
 
 usuarios_prueba_list =[
-	["profesor@rease.cl",'rease2015', 'profesor Prueba', 'profesor', 2, 1],
-	["vinculador@rease.cl",'rease2015', 'Vinculador Prueba', 'Vinculador', 3, 1],
-	["socio@rease.cl",'rease2015', 'Socio Prueba', 'Socio',4,1]
+	["profesor@rease.cl",'rease2017', 'profesor Prueba', 'profesor', 2, 1],
+	["vinculador@rease.cl",'rease2017', 'Vinculador Prueba', 'Vinculador', 3, 1],
+	["socio@rease.cl",'rease2017', 'Socio Prueba', 'Socio',4,1]
 ]
 
 usuarios_prueba_list.each do |email, password, name, nickname, category, autorization_level|
@@ -140,6 +140,11 @@ end
 
 print("\tSeed:\tRecursos creados y subidos\n")
 
+Institution.all.each do |institution|
+	institution.created_at = Time.now+(rand*(30)).days-(rand(5..40)).months
+	institution.save
+end
+
 print("\nGENERACIÓN DE DATOS DUMMIES PARA LAS PRUEBAS DE INFORMACIÓN DE GESTION DE LA INSTITUCIÓN\n")
 
 
@@ -156,10 +161,6 @@ print("\nINSERTANDO TEXTOS BASES PARA POBLAR SISTEMA\n")
 	)
 end
 
-Institution.all.each do |institution|
-	institution.created_at = Time.now+(rand*(30)).days-(rand(5..40)).months
-	institution.save
-end
 
 print("\n\tSeed:\tAsignado usuarios básicos cargos dentro de la usach")
 	profesor = User.where(id:2).first

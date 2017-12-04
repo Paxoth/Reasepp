@@ -104,17 +104,19 @@
 							<%= render "partials/interest_links"%>
 						</ul>
 					</li>
-				</ul>
-				<ul class="nav navbar-nav navbar-right">
 					<%if current_user.is_admin?%>
-						<li>
-							<%= link_to '<i class="glyphicon glyphicon-cog"></i>'.html_safe, sections_path,:class=>"rightNav"%>
+						<li role="presentation" class="<%= 'active' if current_page?(sections_path) %>">
+							<%= link_to "Administración", sections_path%>
 						</li>
 					<%end%>	
+				</ul>
+
+				<ul class="nav navbar-nav navbar-right">
+					<li>
+						<%= link_to '<i class="glyphicon glyphicon-user"></i>'.html_safe, users_path,:class=>"rightNav"%>
+					</li>
 					<li>
 					<%= link_to '<i class="glyphicon glyphicon-calendar"></i>'.html_safe, '#', {:class=>"rightNav", 'data-toggle' => 'modal', 'data-container' => 'body', 'data-target'=>"#modal_calendar" } %>
-
-
 					</li>
 					<li>
 						<%= link_to '<i class="glyphicon glyphicon-question-sign"></i>'.html_safe, presentation_about_path,:class=>"rightNav"%>
