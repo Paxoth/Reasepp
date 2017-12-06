@@ -1,14 +1,20 @@
+=begin rdoc
+  _**Comment:** controlador de los comentarios (Ver Comment)_
+
+  _Los comentarios se encuentran anidados a otra publicación (Nested Resources)_
+=end
 class CommentsController < ApplicationController
 	before_action :authenticate_user!
 	before_action :set_comment, only: [:update, :destroy]
 	before_action :authenticate_user!
 
-	# GET /comments/1/edit
+	#Método generada por scaffold, no utilizado
 	def edit
 	end
 
-	# POST /comments
-	# POST /comments.json
+	# Crear comentario
+	#
+	# Genera un comentario y te redirecciona al sitio del la publicacion que fue comentada.
 	def create
 		@post = post
 		@comment = @post.comments.create(comment_params)
@@ -24,8 +30,8 @@ class CommentsController < ApplicationController
 		end
 	end
 
-	# PATCH/tPUT /comments/1
-	# PATCH/PUT /comments/1.json
+	#Editar comentario
+	#Permite al usuario editar un comentario con los parametros establecidos.
 	def update
 		respond_to do |format|
 			@post = post
@@ -40,8 +46,7 @@ class CommentsController < ApplicationController
 		end
 	end
 
-	# DELETE /comments/1
-	# DELETE /comments/1.json
+	# Eliminar comentario y te redirecciona al post donde fue realizado.
 	def destroy
 		@comment.destroy
 		respond_to do |format|
@@ -51,8 +56,13 @@ class CommentsController < ApplicationController
 	end
 
 	private
-
-		def post
+		#Post hace referencia al elemento en donde se generará el comentario
+		#
+		#*	Event
+		#*	Request
+		#*	Offering
+		#*	Service
+		def post # :doc:
 			if params[:event_id]
 				id = params[:event_id]
 				Event.find(params[:event_id])
@@ -68,7 +78,13 @@ class CommentsController < ApplicationController
 			end
 		end 
 
-		def post_url(post)
+		#Post_URL hace referencia a la dirección en donde se generará el comentario
+		#
+		#*	Event
+		#*	Request
+		#*	Offering
+		#*	Service
+		def post_url(post) # :doc:
 			if Event === post
 				event_path(post)
 			elsif Request === post
@@ -80,12 +96,14 @@ class CommentsController < ApplicationController
 			end
 		end
 
-		def set_comment
-			@comment = Comment.find(params[:id])
+		#Permite la consulta específica de un comentario
+		#Poco utilizado, ya que el comentario se desplega en otras vistas
+		def set_comment # :doc:
+			@comment = Comment.find(params[:id]) 
 		end
 
-		# Never trust parameters from the scary internet, only allow the white list through.
-		def comment_params
+		#Parametros permitidos para creación un comentario.
+		def comment_params 
 			params.require(:comment).permit(:user_id, :event_id, :offering_id, :request_id, :body, :post_id, :post_type)
 		end
 end

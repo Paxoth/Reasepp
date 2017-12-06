@@ -1,36 +1,54 @@
+=begin rdoc
+  _**Areas** controlador de las áreas de trabajo (Ver Area)_
+=end
 class AreasController < ApplicationController
   before_action :authenticate_user!, except: [:show]
-  before_action :validate_category, except: [:show]
+  before_action :validate_category, except: [:show, :index]
   before_action :set_area, only: [:show, :edit, :update, :destroy]
-
   add_breadcrumb "Inicio", :root_path
-  add_breadcrumb "Administración", :sections_path
+  
 
-  # GET /areas
-  # GET /areas.json
+  #Vista Principal
+  #
+  #Genera la consulta de las áreas ordenadas por disciplina y nombre.  
   def index
+    add_breadcrumb "Experiencias", experiences_path
     add_breadcrumb "Areas de Trabajo", areas_path 
-    @areas = Area.paginate(page: params[:page],per_page: 15).order("discipline ASC").order("name ASC").all
+    @areas = Area.order("discipline ASC").order("name ASC").all
   end
 
-  # GET /areas/1
-  # GET /areas/1.json
+
+  #Vista específica
+  #
+  #Muestra la vista de un área en específico clasificado por ID
   def show
+    add_breadcrumb "Experiencias", experiences_path
+    add_breadcrumb "Areas de Trabajo", areas_path 
+    add_breadcrumb @area.name
   end
 
-  # GET /areas/new
+  #Vista Nueva área
+  #
+  #Pérmite la creación de una nueva área de trabajo
   def new
-    add_breadcrumb "Nueva Area de Trabajo", areas_path
+    add_breadcrumb "Experiencias", experiences_path
+    add_breadcrumb "Areas de Trabajo", areas_path 
+    add_breadcrumb "Nueva Area de Trabajo"
     @area = Area.new
   end
 
-  # GET /areas/1/edit
+  #Vista Editar área
+  #
+  #Pérmite la edición de un área de trabajo ya generado.
   def edit
-    add_breadcrumb "Editar", areas_path
+    add_breadcrumb "Experiencias", experiences_path
+    add_breadcrumb "Areas de Trabajo", areas_path 
+    add_breadcrumb "Editar"
   end
 
-  # POST /areas
-  # POST /areas.json
+  #Crear área
+  #
+  #Genera la nueva área con los parametros permitidos de la clase Area y redirecciona la vista de esta.
   def create
     @area = Area.new(area_params)
 
@@ -45,8 +63,9 @@ class AreasController < ApplicationController
     end
   end
 
-  # PATCH/PUT /areas/1
-  # PATCH/PUT /areas/1.json
+  #Actualizar área
+  #
+  #Genera el cambio realizado a través de la vista de editar área con los parametros permitidos de la clase Area y redirecciona la vista de esta.
   def update
     respond_to do |format|
       if @area.update(area_params)
@@ -59,8 +78,9 @@ class AreasController < ApplicationController
     end
   end
 
-  # DELETE /areas/1
-  # DELETE /areas/1.json
+  #Eliminar área
+  #
+  #Permite eliminar de la base de datos el área de trabajo
   def destroy
     @area.destroy
     respond_to do |format|
@@ -71,19 +91,23 @@ class AreasController < ApplicationController
 
   private
 
-    def validate_category
-      if current_user.category != 1
-      redirect_to root_path, alert: "Sólo un administrador puede trabajar la página de inicio."
+    #Confirma que el único capaz de entrar a vistas de Area sea un administrador.
+    #
+    #Excepto a la vista principal y la específica.
+    def validate_category # :doc:
+      if !current_user.is_admin?
+        redirect_to root_path, alert: "Sólo un administrador puede trabajar la página de inicio."
       end   
     end
 
-    # Use callbacks to share common setup or constraints between actions.
-    def set_area
+    #Permite la consulta específica de un área de trabajo
+    #Utilizado para la vista específica y la edición de un área.
+    def set_area # :doc:
       @area = Area.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def area_params
+    #Parametros permitidos para creación y edición de un área de trabajo.
+    def area_params # :doc:
       params.require(:area).permit(:name, :description, :discipline)
     end
 end

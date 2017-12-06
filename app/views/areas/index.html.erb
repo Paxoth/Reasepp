@@ -1,18 +1,62 @@
-<h1>Administrar áreas de trabajo </h1>
-<%= link_to 'Agregar área de trabajo', new_area_path, :class=>"btn btn-lg btnAdmin" %><br>
+<%if current_user.is_admin?%>
+	<h1>Administrar Área de trabajo </h1>
+	<%= link_to 'Agregar área de trabajo', new_area_path, :class=>"btn btn-lg btnAdmin" %><br>
+<%end%>
+
+<h1>Experiencias por áreas de trabajo <button type="button" class="btn btn-default btnWhite" id:"btnAreas" data-trigger="focus" data-container="body" data-toggle="btnAreas"> ? </button> </h1>
+<%= link_to 'Volver a Experiencias', experiences_path, :class=>"btn btn-lg " %><br>
 
 <div class="panel panel-default panelRease">
 	<div class="panel-heading">
 		Listado de areas de trabajo
 	</div>
 	<div class="panel-body">
-		<% @areas.each do |area| %>
-			<p><strong><%=area.discipline%>: </strong><%=area.name%> - 
-			<%= link_to 'Ver detalle', area %> -
-			<%= link_to 'Borrar área', area, method: :delete, data: { confirm: '¿Seguro que desea eliminar esta área?' } %>
-			</p>
-		<%end%>
-		<%= will_paginate @areas %>	
+		<table class="table table-striped display">
+			<thead>
+				<tr>
+					<th><strong>Disciplina</strong></th>
+					<th><strong>Área</strong></th>
+					<th><strong>Experiencias realizadas</strong></th>
+					<th><strong>Ver</strong></th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @areas.each do |area| %>
+					<tr>
+						<td><%=area.discipline%>:</td>
+						<td><%=area.name%></td>
+						<td><%=area.experiences.count%></td>
+						<td><%= link_to '<i class="glyphicon glyphicon-circle-arrow-right"></i>'.html_safe, area%></td>
+					</tr>
+				<%end%>
+				</tbody>
+			<tfoot>
+				<tr>
+					<th><strong>Disciplina</strong></th>
+					<th><strong>Área</strong></th>
+					<th><strong>Experiencias realizadas</strong></th>
+				</tr>
+			</tfoot>
+		</table>
 	</div>
 </div>
 
+<script type="text/javascript">
+	$(function () {
+		$('[data-toggle="btnAreas"]').popover(
+			{
+				title: 'Áreas de Trabajo',
+				html: 'true', 
+				content: '<p>Las <strong>Areas de Trabajo</strong> son áreas de conocimiento o disciplinas establecidas por la OCDE, las cuales son utilizadas por REASE para clasificar las diferentes experiencias.',
+				template: '<div class="popover popover-rease"><div class="arrow"></div><div class="popover-inner"><h3 class="popover-title"></h3><div class="popover-content"><p></p></div></div></div>'
+			}
+		)
+	})
+	$(document).ready(function() {
+		$('table.display').DataTable({
+			"language": {
+				"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+			}
+		});
+	} );
+</script>

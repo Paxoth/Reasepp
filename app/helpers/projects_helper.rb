@@ -1,2 +1,2 @@
-module ProjectsHelper
+module ProjectsHelper # :nodoc:
 end

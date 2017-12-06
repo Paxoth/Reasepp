@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8">
+
+<title>class User - Rails Application Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script src="./js/jquery.js"></script>
+<script src="./js/darkfish.js"></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link">ActiveRecord::Base
+  
+</div>
+
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-c-find_for_oauth">::find_for_oauth</a>
+    
+    <li ><a href="#method-c-search">::search</a>
+    
+    <li ><a href="#method-i-email_verified-3F">#email_verified?</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-User">
+  <h1 id="class-User" class="class">
+    class User
+  </h1>
+
+  <section class="description">
+    
+<p><strong><em>User</strong> es la entidad principal de toda la intranet,
+representando al usuario registrado en el sitio, el cual tiene ciertos
+privilegios dependiendo de su categoría, la cual le dará forma al sitio
+para poder ser poblado por los miembros de REASE.</em></p>
+
+<p><strong>ATRIBUTOS</strong></p>
+
+<p><em>User posee muchos atributos generados por la gema Devise, que permite
+hacer la autenticación con correo electrónico, confirmación y varias
+consultas útiles para el desarrollo de la plataforma</em></p>
+<ul><li>
+<p><strong>email</strong>: Correo electrónico del usuario.</p>
+</li><li>
+<p><strong>encrypted_password</strong>: Contraseña personal y encriptada del
+usuario, Esta se encuentra encripatada con el fin de que su lectura no sea
+permitida.</p>
+</li><li>
+<p><strong>reset_password_token</strong>: Atributo el cuál es utilizado para
+recuperar la contraseña vía mail en caso de que el usuario la olvide.</p>
+</li><li>
+<p><strong>reset_password_sent_at</strong>: Fecha en la cual se envía el mail
+de recuperación de contraseña.</p>
+</li><li>
+<p><strong>remember_created_at</strong>: Atributo que permite al sitio
+recordar los datos del usuario para mantenerse conectado.</p>
+</li><li>
+<p><strong>sign_in_count</strong>: Contador de la cantidad de veces que el
+usuario se ha conectado a la intranet.</p>
+</li><li>
+<p><strong>current_sign_in_at</strong>: Fecha de la conexión actual del
+usuario.</p>
+</li><li>
+<p><strong>last_sign_in_at</strong>: fecha de la última vez que el usuario se
+conectó a la intranet.</p>
+</li><li>
+<p><strong>confirmation_token</strong>: Información necesaria para qe el
+usuario confirme su nueva cuenta vía correo electrónico.</p>
+</li><li>
+<p><strong>confirmed_at</strong>: Fecha en la cual el usuario fue confirmado
+para su registro.</p>
+</li><li>
+<p><strong>confirmation_sent_at</strong>: Fecha en la cual se envió el correo
+de confirmación de registro del usuario.</p>
+</li><li>
+<p><strong>unconfirmed_email</strong>: Indica si el usuario confirmó su
+registro vía correo electrónico impidiendo su conección en caso de no estar
+confirmado.</p>
+</li><li>
+<p><strong>name</strong>: Nombre del usuario.</p>
+</li><li>
+<p><strong>autorization_level</strong>: Tipo de usuario</p>
+<ul><li>
+<p>Activo</p>
+</li><li>
+<p>Adherente</p>
+</li></ul>
+</li><li>
+<p><strong>category</strong>: Categoría o rol del usuario</p>
+<ol><li>
+<p>Profesor: capaz de crear Ofertas de Servicio (Ver <a
+href="Offering.html">Offering</a>). Responsable de los servicios ( <a
+href="Service.html">Service</a> ) y experiencias ( <a
+href="Experience.html">Experience</a> ).</p>
+</li><li>
+<p>Socio Comunitario: capaz de crear Solicitudes de Servicio (Ver <a
+href="Request.html">Request</a>)</p>
+</li><li>
+<p>Vinculador Social: capaz de crear Ofertas y Solicitudes. No se hace
+responsable de ellas.</p>
+</li></ol>
+</li><li>
+<p><strong>is_admin</strong>: Booleano que permite saber si el usuario es
+administrador del sitio REASE. Capaz de generar eventos ( <a
+href="Event.html">Event</a> )</p>
+</li><li>
+<p><strong>nickname</strong>: Apodo del usuario, el cuál sirve para referirse
+a él en comentarios y publicaciones.</p>
+</li><li>
+<p><strong>photo</strong>: Foto de perfil del usuario, la cual se desplegará
+en cada comentario y facilita la identificación para el resto de los
+usarios.</p>
+</li><li>
+<p><strong>description</strong>: Breve descripción del usuario que escribe de
+sí mismo, en caso de querer hacerlo, la cual será desplegada en su perfil.</p>
+</li></ul>
+
+<p><strong>RELACIONES</strong></p>
+<ul><li>
+<p>belongs_to <a href="Institution.html">Institution</a></p>
+</li><li>
+<p>has_many <a href="Section.html">Section</a></p>
+</li><li>
+<p>has_many <a href="Event.html">Event</a></p>
+</li><li>
+<p>has_many <a href="Comment.html">Comment</a></p>
+</li><li>
+<p>has_many <a href="Offering.html">Offering</a></p>
+</li><li>
+<p>has_many <a href="Request.html">Request</a></p>
+</li><li>
+<p>has_many <a href="Experience.html">Experience</a></p>
+</li><li>
+<p>has_many <a href="Project.html">Project</a></p>
+</li><li>
+<p>has_many accepted_services ( <a href="Service.html">Service</a> )</p>
+</li><li>
+<p>has_many created_services ( <a href="Service.html">Service</a> )</p>
+</li><li>
+<p>has_many taught_experiences ( <a href="Experience.html">Experience</a> )</p>
+</li><li>
+<p>has_many cooperated_experiences ( <a href="Experience.html">Experience</a>
+)</p>
+</li></ul>
+
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+      
+        <dt id="TEMP_EMAIL_PREFIX">TEMP_EMAIL_PREFIX
+        
+        <dd><p>Correo temporal en caso de su creación sin declaración de uno particula. No
+utilizado comúnmente.</p>
+        
+      
+        <dt id="TEMP_EMAIL_REGEX">TEMP_EMAIL_REGEX
+        
+        <dd><p>Correo temporal en caso de su creación sin declaración de uno particula. No
+utilizado comúnmente.</p>
+        
+      
+      </dl>
+    </section>
+    
+
+    
+
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-find_for_oauth" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">find_for_oauth</span><span
+            class="method-args">(auth, signed_in_resource = nil)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Método que permite la autentificación del usuario para ingreso de la
+intranet, buscando información del correo electrónico del usuario. Método
+generado por la gema Devise</p>
+          
+          
+
+          
+          <div class="method-source-code" id="find_for_oauth-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 89</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_for_oauth</span>(<span class="ruby-identifier">auth</span>, <span class="ruby-identifier">signed_in_resource</span> = <span class="ruby-keyword">nil</span>)
+
+        <span class="ruby-comment"># Get the identity and user if they exist</span>
+        <span class="ruby-identifier">identity</span> = <span class="ruby-constant">Identity</span>.<span class="ruby-identifier">find_for_oauth</span>(<span class="ruby-identifier">auth</span>)
+
+        <span class="ruby-comment"># If a signed_in_resource is provided it always overrides the existing user</span>
+        <span class="ruby-comment"># to prevent the identity being locked with accidentally created accounts.</span>
+        <span class="ruby-comment"># Note that this may leave zombie accounts (with no associated identity) which</span>
+        <span class="ruby-comment"># can be cleaned up at a later date.</span>
+        <span class="ruby-identifier">user</span> = <span class="ruby-identifier">signed_in_resource</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">signed_in_resource</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">identity</span>.<span class="ruby-identifier">user</span>
+
+        <span class="ruby-comment"># Create the user if needed</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">nil?</span>
+
+                <span class="ruby-comment"># Get the existing user by email if the provider gives us a verified email.</span>
+                <span class="ruby-comment"># If no verified email was provided we assign a temporary email and ask the</span>
+                <span class="ruby-comment"># user to verify it on the next step via UsersController.finish_signup</span>
+                <span class="ruby-identifier">email_is_verified</span> = <span class="ruby-identifier">auth</span>.<span class="ruby-identifier">info</span>.<span class="ruby-identifier">email</span> <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">auth</span>.<span class="ruby-identifier">info</span>.<span class="ruby-identifier">verified</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">auth</span>.<span class="ruby-identifier">info</span>.<span class="ruby-identifier">verified_email</span>)
+                <span class="ruby-identifier">email</span> = <span class="ruby-identifier">auth</span>.<span class="ruby-identifier">info</span>.<span class="ruby-identifier">email</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">email_is_verified</span>
+                <span class="ruby-identifier">user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:email</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">email</span>).<span class="ruby-identifier">first</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">email</span>
+
+                <span class="ruby-comment"># Create the user if it&#39;s a new registration</span>
+                <span class="ruby-keyword">if</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">nil?</span>
+                        <span class="ruby-identifier">user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>(
+                                <span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-identifier">auth</span>.<span class="ruby-identifier">extra</span>.<span class="ruby-identifier">raw_info</span>.<span class="ruby-identifier">name</span>,
+                                <span class="ruby-comment">#username: auth.info.nickname || auth.uid,</span>
+                                <span class="ruby-identifier">email</span><span class="ruby-operator">:</span> <span class="ruby-identifier">email</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">email</span> <span class="ruby-operator">:</span> <span class="ruby-node">&quot;#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com&quot;</span>,
+                                <span class="ruby-identifier">password</span><span class="ruby-operator">:</span> <span class="ruby-constant">Devise</span>.<span class="ruby-identifier">friendly_token</span>[<span class="ruby-value">0</span>,<span class="ruby-value">20</span>]
+                        )
+                        <span class="ruby-identifier">user</span>.<span class="ruby-identifier">skip_confirmation!</span>
+                        <span class="ruby-identifier">user</span>.<span class="ruby-identifier">save!</span>
+                <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-comment"># Associate the identity with the user if needed</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">identity</span>.<span class="ruby-identifier">user</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">user</span>
+                <span class="ruby-identifier">identity</span>.<span class="ruby-identifier">user</span> = <span class="ruby-identifier">user</span>
+                <span class="ruby-identifier">identity</span>.<span class="ruby-identifier">save!</span>
+        <span class="ruby-keyword">end</span>
+        <span class="ruby-identifier">user</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-search" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">search</span><span
+            class="method-args">(search)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Método que permite que el buscador encuentre Usuarios a través de match de
+palabras en sus atributos.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="search-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 83</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">search</span>(<span class="ruby-identifier">search</span>)
+        <span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;nickname LIKE ? or name LIKE ? or email LIKE ?&quot;</span>, <span class="ruby-node">&quot;%#{search}%&quot;</span>, <span class="ruby-node">&quot;%#{search}%&quot;</span>, <span class="ruby-node">&quot;%#{search}%&quot;</span>) 
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-email_verified-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">email_verified?</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Método que verifica si su correo electrónico fue confirmado a través del
+token de confirmación. Analiza que su correo no sea el por default.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="email_verified-3F-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 132</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">email_verified?</span>
+        <span class="ruby-keyword">self</span>.<span class="ruby-identifier">email</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">email</span> <span class="ruby-operator">!~</span> <span class="ruby-constant">TEMP_EMAIL_REGEX</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.3.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

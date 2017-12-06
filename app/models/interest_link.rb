@@ -1,17 +1,27 @@
-class InterestLink < ActiveRecord::Base
-	#ENTIDAD INTEREST LINK
-	#representan links de interés que son relevantes para la institución, los cuales son mostrados en lá página principal.
+=begin rdoc
+_**Interest Link** es la entidad que representa los links de interés que se despliegan a lo largo de  la intranet, que contienen información relacionada al Aprendizaje Servicio._
 
-	#ATRIBUTOS:
-		#name: nombre del enlace que será mostrado en la página principal
-		#url: dirección del enlace para ser dirigido
-		#description: descripción del enlace
+**ATRIBUTOS**
+
+*	__name__: Nombre del sitio al cual redirecciona.
+*	__url__: Dirección del sitio al cual redirecciona.
+*	__description__: Breve descripción del sitio al cual redirecciona.
+
+**RELACIONES**
+
+*   belongs_to User
+=end
+
+class InterestLink < ActiveRecord::Base
+
+	#RELACIONES
+	belongs_to :user
 
 	#VALIDACIONES
 	validates :name, presence: true, uniqueness: true
 	validates :url, presence: true, uniqueness: true
 
-	#Función para usar el buscador de link de interés de acuerdo algun match entre las palabras y los valores de los atributos de esta.
+	#Método que permite que el buscador encuentre Enlaces de Interés a través de match de palabras en sus atributos.
 	def self.search(search)
 		where("name LIKE ? or description LIKE ?", "%#{search}%","%#{search}%") 
 	end

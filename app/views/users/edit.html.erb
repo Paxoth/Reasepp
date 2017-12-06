@@ -1,16 +1,16 @@
 <h1>Administrar tipo de usuario de <%=@user.nickname%></h1>
-<%if @user.category == 1%>
+<%if @user.is_admin?%>
 	<div class="panel panel-default panelRease">
 		<div class="panel-heading">
 			¡USUARIO ADMINISTRADOR!
 		</div>
 		<div class="panel-body">
-			<p>No se puede cambiar el tipo de adhesión ni rol de usuario de los administradores</p>
-	<%= link_to "Volver", sections_path, :class=>'btn btn-lg btnCRUD' %>
+			<p>Le recordamos que este usuario es administrador, lo que implica que posee deberes frente al trabajo a realizar en el sitio REASE.</p>
+			<p>Tenga precaución en las decisiones que tomará al editar las características del presente usuario.</p>
 		</div>
 	</div>
 
-<%else%>
+<%end%>
 <%= form_for @user do |f| %>
 
 	<div class="panel panel-default panelRease" >
@@ -21,7 +21,9 @@
 				<p><%= f.label :category, "Rol de usuario" %>
 				<button type="button" class="btn btn-default btnWhite" id:"btnTipoUsuario"  data-trigger="focus" data-container="body" data-toggle="btnRolUsuario"> ? </button></p>
 
-				<%= f.select(:category, [['Administrador', 1],['Profesor', 2],['Vinculador Social', 3],['Socio comunitario', 4]], {:include_blank => '-- Seleccione una Opción --' }, { :class => 'form-control', :required => true }) %>
+				<%= f.select(:category, [['Profesor', 2],['Vinculador Social', 3],['Socio comunitario', 4]], {:include_blank => '-- Seleccione una Opción --' }, { :class => 'form-control', :required => true }) %>
+
+				<p><%= f.check_box :is_admin? %> <%= f.label :is_admin, "Usuario administrador"%> <button type="button" class="btn btn-default btnWhite" id:"btnAdmin"  data-trigger="focus" data-container="body" data-toggle="btnAdmin"> ? </button></p>
 			</div>
 
 			<div class="field">
@@ -41,7 +43,7 @@
 	<%= link_to "Eliminar Usuario", @user, method: :delete, data: { confirm: "¿Está seguro que desea eliminar este usuario?" },:class=>'btn btn-lg btnCRUD' %>
 
 <% end %>
-<% end %>
+
 
 <script type="text/javascript">
 $(function () {
@@ -53,12 +55,23 @@ $(function () {
   }
   	)
 })
+
+$(function () {
+  $('[data-toggle="btnAdmin"]').popover(
+  {
+  	title: 'El usuario Adminsistrador',
+  	html: 'true', 
+    content: '<p><strong>Administrador: </strong>El usuario administrador puede editar el contenido del sitio del visitante, agregar eventos y editar los privilegios de otros usuarios, también se comporta de la forma que corresponde dependiendo de su nivel de adhesion a la red y su rol de usuario, pero debe cumplir con las exigencias de la mantención del sitio web de REASE.</p>'
+  }
+  	)
+})
+
 $(function () {
   $('[data-toggle="btnRolUsuario"]').popover(
   {
   	title: 'Rol de usuario',
   	html: 'true', 
-    content: '<p><strong>Administrador: </strong>El usuario administrador puede editar el contenido del sitio del visitante, agregar eventos y editar los privilegios de otros usuarios.</p><p><strong>Profesor:</strong> El usuario podrá publicar ofertas de actividades AS, crear servicios activos y documentar una experiencia dentro del sitio.</p><p><strong>Socio comunitario:</strong> El usuario podrá solamente publicar solicitudes de actividades AS y aceptar trabajar con un profesor.</p><p><strong>Vinculador social: </strong> Puede publicar ofertas y solicitudes, pero no puede generar servicios ni documentar experiencias.</p>'
+    content: '<p><strong>Profesor:</strong> El usuario podrá publicar ofertas de actividades AS, crear servicios activos y documentar una experiencia dentro del sitio.</p><p><strong>Socio comunitario:</strong> El usuario podrá solamente publicar solicitudes de actividades AS y aceptar trabajar con un profesor.</p><p><strong>Vinculador social: </strong> Puede publicar ofertas y solicitudes, pero no puede generar servicios ni documentar experiencias.</p>'
 
   }
   	)

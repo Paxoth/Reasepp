@@ -1,0 +1,112 @@
+<%if current_user.institution_id.present?%>
+	<%@institution = Institution.where(id: current_user.institution_id).first%>
+	
+	<%if @institution.name=="Universidad de Santiago de Chile"%>
+		<div class="footer-usach"">
+			<div class="no_breakline_left">
+					<%= image_tag("Institutions/usach/footerorangeblue.jpg") %>
+			</div>
+			<div >
+				<br>
+				<%= link_to 'Solicitudes de Servicio', requests_path %>
+				<%= link_to 'Ofertas de Servicios', offerings_path %>
+				<%= link_to 'Servicios Activos', services_index_activos_path %>
+				<%= link_to 'Experiencias Registradas', experiences_path %>	
+				<div class="footer-left">
+					<br>
+					<p>Universidad de Santiago de Chile. Avenida Libertador Bernardo O'Higgins nº 3363. Estación Central. Santiago. Chile.</p>
+					<p>Mesa central (562) 2 718 00 00</p> 
+				</div>
+				<div class="footer-right">
+					<br>
+					<%= link_to(image_tag("logoblanco.png", :class=>'logo_footer'),root_path) %>
+					<%= link_to(image_tag("Institutions/usach/logo_usach_blanco.png", :class=>'logo_footer'),@institution.web) %>
+				</div>
+			</div>			
+		</div>
+	<%end%>	
+
+
+	<%if @institution.name=="Universidad Técnica Metropolitana"%>
+		<style>
+			@import url('https://fonts.googleapis.com/css?family=Oswald');
+		</style> 
+		<div class="footer-utem"">
+			<div class="footer-dark-blue">
+				<div class="footer-row footer-top">
+					<strong  ">CONÉCTATE CON NOSOTROS:</strong>
+					<%if current_user.institution.twitter.present?%>
+						<%=link_to image_tag("Institutions/utem/twitter.png"), @institution.twitter, :target=>'_blank', :class=>"social-utem"%>
+					<%end%>
+					<%if current_user.institution.facebook.present?%>
+						<%=link_to image_tag("Institutions/utem/facebook.png"), @institution.facebook, :target=>'_blank', :class=>"social-utem"%>
+					<%end%>
+					<%if current_user.institution.youtube.present?%>
+						<%=link_to image_tag("Institutions/utem/youtube.png"), @institution.youtube, :target=>'_blank', :class=>"social-utem"%>
+					<%end%>
+					<%if current_user.institution.linkedin.present?%>
+						<%=link_to image_tag("Institutions/utem/linkedin.png"), @institution.linkedin, :target=>'_blank', :class=>"social-utem"%>
+					<%end%>
+				
+					<div class="no_breakline_right">
+						<%=image_tag "Institutions/utem/acreditacion.png"%>
+					</div>
+					
+				</div>
+			</div>
+			<div class="footer-blue">
+				<div class="footer-row footer-middle">
+
+					<div class="footer-column">
+						<h4>VITE</h4>
+							<p><%= link_to 'Vicerrectoría de Transferencia Tecnológica y Extensión', "https://vtte.utem.cl/vtte/", :class=>'a-white' %></p>
+							<p><%= link_to 'Sellos', "https://vtte.utem.cl/sellos/",:class=>'a-white' %></p>
+							<p><%= link_to 'Políticas de VCM', "https://sitios.vtte.utem.cl//principal/wp-content/uploads/sites/2/2016/07/politicas_vinculacion_con_el_medio_vtte_utem.pdf",:class=>'a-white' %></p>
+					</div>
+					<div class="footer-column">
+						<h4>NUESTROS SITIOS</h4>
+							<p><%= link_to 'Red de Egresados y Títulados UTEM', "https://ret.utem.cl/", :class=>'a-white' %></p>
+							<p><%= link_to 'Ediciones UTEM', "https://editorial.utem.cl/",:class=>'a-white' %></p>
+							<p><%= link_to 'Dirección de Capaciación y Postítulo', "https://direcap.utem.cl/",:class=>'a-white' %></p>
+							<p><%= link_to 'SISAV VITTE', "https://sisav.utem.cl/",:class=>'a-white' %>	</p>
+					</div>
+					<div class="footer-column">
+						<h4>UTEM</h4>
+							<p><%= link_to 'Universidad', @institution.web, :class=>'a-white' %></p>
+							<p><%= link_to 'Agenda', "https://vtte.utem.cl/actividades/",:class=>'a-white' %></p>
+							<p><%= link_to 'Políticas de Privacidad', "http://transparencia.utem.cl/politica-de-privacidad/",:class=>'a-white' %></p>
+							<p><%= link_to 'REKO', "http://reko.utem.cl/portal/",:class=>'a-white' %>	</p>
+					</div>
+					<div class="footer-column">
+						<h4>ACTIVIDADES AS</h4>
+							<p><%= link_to 'Solicitudes de Servicio', requests_path, :class=>'a-white' %></p>
+							<p><%= link_to 'Ofertas de Servicios', offerings_path,:class=>'a-white' %></p>
+							<p><%= link_to 'Servicios Activos', services_index_activos_path,:class=>'a-white' %></p>
+							<p><%= link_to 'Experiencias Registradas', experiences_path,:class=>'a-white' %>	</p>
+					</div>
+				</div>				
+			</div>
+			<div class="footer-dark-blue">
+				<div class=" footer-row footer-bottom">
+					<p>Padre Felipe Gómez de Vidaurre 1488 – Santiago, Chile. Fono: (+56 2) 2 787 7500
+					<br> 
+					Diseño y desarrollo: <%= link_to 'Vicerrectoria de Transferencia Tecnologica y Extensión – UTEM', "http://vtte.utem.cl/", :class=>'a-blue'%> 
+					<br>
+					Soporte informático: VTTE y SISEI</p>
+				</div>
+			</div>
+		</div>
+	<%end%>
+<%else%>
+	<div id="footer">
+		<!--Pie de página-->
+		<div  id="pies" class = "navbar-default pies">
+			REASE - Red Nacional de Aprendizaje Servicio
+			<br>
+			Contacto: redrease@gmail.com
+			<br>
+			<%= link_to(image_tag("logoblanco.png", id: "logoFooter"),root_path) %>
+		</div>
+	</div>		
+<%end%>
+

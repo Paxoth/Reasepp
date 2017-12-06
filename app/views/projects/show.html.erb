@@ -13,7 +13,7 @@
     <h3>I. Antecedentes generales</h3>
     <div  class="experiencia">
       <p><strong>Area: </strong><%=@project.area.name%></p>
-      <p><strong>Institución: </strong><%=link_to @project.institution.name, @project.institution.web%></p>
+      <p><strong>Institución: </strong><%=link_to @project.institution.name, @project.institution%></p>
       <p><strong>Facultad: </strong><%=@project.faculty%></p>
       <p><strong>Departamento: </strong><%=@project.department%></p>
       <p><strong>Nombre de Asignatura/curso: </strong><%=@project.course_name%></p>
@@ -35,9 +35,12 @@
         Anual
       <%end%>
 
-      </p>
-      <p><strong>Nombre profesor responsable: </strong> <%=link_to @project.professor_name, @project.user%></p>
-      <p><strong>Correo del profesor: </strong><%=@project.professor_email%></p>
+    </div>
+
+  <h3>II. Datos de los responsables</h3>
+    <div  class="experiencia">
+      <p><strong>Nombre profesor responsable: </strong> <%=link_to @project.user.name, @project.user%></p>
+      <p><strong>Correo del profesor: </strong><%=@project.user.email%></p>
       <p><strong>Número del profesor: </strong><%=@project.professor_phone%></p>
       <p><strong>Grado académico del profesor: </strong>
         <%if @project.professor_degree == 1%> Licenciado <%end%>
@@ -47,7 +50,7 @@
       <p><strong>Nombre del socio comunitario responsable: </strong> <%=@project.partner%></p>
     </div>
 
-    <h3>II. Antecedentes de la actividad de Aprendizaje Servicio </h3>
+    <h3>III. Antecedentes de la actividad de Aprendizaje Servicio </h3>
     <div class="experiencia">
       <p><strong>Objetivos de aprendizaje y/o Competencias asociadas</strong></p>
         <p><%=@project.learning_objectives%></p><br>
@@ -58,22 +61,13 @@
       <p><strong>Descripción del Proyecto de AS: </strong></p>
         <p><%=@project.description%></p><br>
 
-      <p><strong>La presente experiencia: </strong>
-        <%if @project.institutional_support == 1%> 
-          Cuenta con respaldo institucional.
-        <%end%>
-        <%if @project.institutional_support == 2%> 
-          Corresponde a una iniciativa individual del profesor.
-        <%end%>
-      </p>
-
       <p><strong>¿Con qué frecuencia se realiza? </strong><%=@project.frequency%></p>
       <p><strong>Horas cronológicas semanales: </strong><%=@project.weekly_hours%></p>
       <p><strong>Número estudiantes participantes: </strong><%=@project.participants%></p>
       <p><strong>Nivel de la carrera de los Estudiantes: </strong><%=@project.students_level%></p>
       
       <p><strong>Tipo de organización comunitaria: </strong><%=@project.organization_type%></p>
-      <p><strong>Número de beneficiados directos con toda la actividad o proyecto: </strong><%=@project.benefit%></p>
+      <p><strong>Número de beneficiados directos de la comunidad con toda la actividad o proyecto: </strong><%=@project.benefited%></p>
 
       <p><strong>Resultados de aprendizaje: </strong></p>
         <p><%=@project.results%></p><br>

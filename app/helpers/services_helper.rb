@@ -1,2 +1,2 @@
-module ServicesHelper
+module ServicesHelper # :nodoc:
 end

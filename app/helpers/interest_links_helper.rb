@@ -1,2 +1,2 @@
-module InterestLinksHelper
+module InterestLinksHelper # :nodoc:
 end

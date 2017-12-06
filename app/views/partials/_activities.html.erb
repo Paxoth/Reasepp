@@ -1,0 +1,150 @@
+<%if @user.category != 4%>
+	<%if @offerings.present?%>
+		<h1>Ofertas de Servicio activas de <%=@user.nickname%></h1>
+
+		<ul class="nav nav-tabs tabRease nav-justified">
+			<%count = 0%>
+			<% @offerings.each do |offering| %>
+				<%count+=1%>
+				<li id="offering<%= offering.id -%>" onclick="offering<%= offering.id -%>()"><a>Oferta <%=count%></a></li>
+			<%end%>
+		</ul>
+		<div class="borderTab">
+			<% @offerings.each do |offering| %>
+				<div id="oferta<%=offering.id -%>">
+					<h2>Nombre</h2>
+					<p><%=offering.title%></p>
+					<h2>Descripción</h2>
+					<p><%=raw offering.description %></p>
+
+					<h2> Información </h2>
+
+					<p><strong>Fecha de licitación de inicio: </strong><%=l offering.start_time %></p>
+
+					<p><strong>Fecha de licitación de término: </strong><%=l offering.end_time %></p>
+					
+					<%if offering.area_id.present?%>
+						<p><strong>Área de trabajo: </strong> <%= offering.area.name%></p>
+					<%end%>
+
+					<%if offering.institution_id.present?%>
+						<p><strong>Institución: </strong> <%= link_to offering.institution.name, offering.institution%></p>
+					<%end%>
+
+					<%if offering.location.present?%>
+						<p><strong>Ubicación de desarrollo: </strong> <%= offering.location%></p>
+					<%end%>
+
+					<%= link_to "Ir a la Oferta", offering, :class=>'btn btnCRUD'%>
+				</div>
+			<%end%>
+		</div>
+		<script type="text/javascript">
+			<% @offerings.each do |offering| %>
+				<%if offering == @offerings.first%>
+					document.getElementById("offering<%= offering.id -%>").className = "active";	
+					document.getElementById('oferta<%= offering.id -%>').style.display='block';	
+				<%else%>
+					document.getElementById('oferta<%= offering.id -%>').style.display='none';	
+				<%end%>
+			<%end%>
+			<% @offerings.each do |offering| %>
+				function offering<%= offering.id -%>(){
+					<% @offerings.each do |offeringIn| %>
+						<%if offering == offeringIn%>
+							document.getElementById("offering<%= offeringIn.id -%>").className = "active";	
+							document.getElementById('oferta<%= offeringIn.id -%>').style.display='block';	
+						<%else%>
+							document.getElementById("offering<%= offeringIn.id -%>").className = "";	
+							document.getElementById('oferta<%= offeringIn.id -%>').style.display='none';
+						<%end%>
+					<%end%>
+				}
+			<%end%>
+		</script>
+	<%else%>
+		<div class="panel panel-default panelRease">
+			<div class="panel-heading">
+				Ofertas de servicios de <%=@user.nickname%>
+			</div>
+			<div class="panel-body">
+				<p>Actualmente este usuario no tiene ofertas de servicios disponibles</p>
+			</div>
+		</div>
+	<%end%>
+<%end%>
+
+<%if @user.category != 2%>
+	<%if @requests.present?%>
+		<h1>Solicitudes de Servicio activas de <%=@user.nickname%></h1>
+		<ul class="nav nav-tabs tabRease nav-justified">
+			<%count = 0%>
+			<% @requests.each do |request| %>
+				<%count+=1%>
+				<li id="request<%= request.id -%>" onclick="request<%= request.id -%>()"><a>Solicitud <%=count%></a></li>
+			<%end%>
+		</ul>
+		<div class="borderTab">
+			<% @requests.each do |request| %>
+				<div id="solicitud<%=request.id -%>">
+					<h2>Nombre</h2>
+					<p><%=request.title%></p>
+					<h2>Descripción</h2>
+					<p><%=raw request.description %></p>
+
+					<h2> Información </h2>
+
+					<p><strong>Fecha de licitación de inicio: </strong><%=l request.start_time %></p>
+
+					<p><strong>Fecha de licitación de término: </strong><%=l request.end_time %></p>
+					
+					<%if request.area_id.present?%>
+						<p><strong>Área de trabajo: </strong> <%= request.area.name%></p>
+					<%end%>
+
+					<%if request.institution_id.present?%>
+						<p><strong>Institución: </strong> <%= link_to request.institution.name, request.institution%></p>
+					<%end%>
+
+					<%if request.location.present?%>
+						<p><strong>Ubicación de desarrollo: </strong> <%= request.location%></p>
+					<%end%>
+
+					<%= link_to "Ir a la Solicitud", request, :class=>'btn btnCRUD'%>
+				</div>
+			<%end%>
+		</div>
+		<script type="text/javascript">
+			<% @requests.each do |request| %>
+				<%if request == @requests.first%>
+					document.getElementById("request<%= request.id -%>").className = "active";	
+					document.getElementById('solicitud<%= request.id -%>').style.display='block';	
+				<%else%>
+					document.getElementById('solicitud<%= request.id -%>').style.display='none';	
+				<%end%>
+			<%end%>
+			<% @requests.each do |request| %>
+				function request<%= request.id -%>(){
+					<% @requests.each do |requestIn| %>
+						<%if request == requestIn%>
+							document.getElementById("request<%= requestIn.id -%>").className = "active";	
+							document.getElementById('solicitud<%= requestIn.id -%>').style.display='block';	
+						<%else%>
+							document.getElementById("request<%= requestIn.id -%>").className = "";	
+							document.getElementById('solicitud<%= requestIn.id -%>').style.display='none';
+						<%end%>
+					<%end%>
+				}
+			<%end%>
+		</script>
+	<%else%>
+		<div class="panel panel-default panelRease">
+			<div class="panel-heading">
+				Solicitudes de servicios de <%=@user.nickname%>
+			</div>
+			<div class="panel-body">
+				<p>Actualmente este usuario no tiene solicitudes de servicios disponibles</p>
+			</div>
+		</div>
+	<%end%>
+<%end%>

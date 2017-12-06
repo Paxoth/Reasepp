@@ -1,0 +1,37 @@
+<%if user_signed_in? and current_user.institution_id.present? and current_user.institution_custom?%>
+	<%@institution = Institution.where(id: current_user.institution_id).first%>
+	
+	<%if @institution.name=="Universidad de Santiago de Chile"%>
+		<div class="header_usach">
+			<div class="header_center">
+				<%=link_to 'Universidad de Santiago de Chile', @institution%>
+				<div class="to_right no_breakline_right">
+				<%if @institution.twitter.present?%>
+					<%=link_to image_tag("Institutions/usach/twitter.png"), @institution.twitter, :target=>'_blank'%>
+				<%end%>
+				<%if @institution.facebook.present?%>
+					<%=link_to image_tag("Institutions/usach/facebook.png"), @institution.facebook, :target=>'_blank'%>
+				<%end%>
+				<%if @institution.youtube.present?%>
+					<%=link_to image_tag("Institutions/usach/youtube.png"), @institution.youtube, :target=>'_blank'%>
+				<%end%>
+				<%if @institution.linkedin.present?%>
+					<%=link_to image_tag("Institutions/usach/linkedin.png"), @institution.linkedin, :target=>'_blank'%>
+				<%end%>
+				<%if @institution.instagram.present?%>
+					<%=link_to image_tag("Institutions/usach/instagram.png"),@institution.instagram, :target=>'_blank'%>
+				<%end%>
+					</div>
+				</div>				
+		</div>
+
+	<%elsif @institution.name=="Universidad Técnica Metropolitana"%>
+		<div class="header-utem">
+			<%=link_to image_tag("Institutions/utem/logo.png", :class=>"banner-rease"), "https://www.utem.cl", :target=>'_blank'%>
+		</div>
+	<%else%>
+		<%=image_tag("rease-header.png", :class=>"banner-rease")%>
+	<%end%>
+<%else%>
+	<%=image_tag("rease-header.png", :class=>"banner-rease")%>
+<%end%>

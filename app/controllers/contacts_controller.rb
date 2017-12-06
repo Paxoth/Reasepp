@@ -1,38 +1,40 @@
+=begin rdoc
+  _**Contact:** controlador de la página de Contacto (Ver Contact)_
+
+  _Este controlador fue creado en su mayoría automáticamente por scaffold_
+=end
 class ContactsController < ApplicationController
   before_action :set_contact, only: [:show, :edit, :update, :destroy]
 
   add_breadcrumb "Inicio", :root_path
   add_breadcrumb "Contacto", :contacts_path
 
-  # GET /contacts
-  # GET /contacts.json
-  def index
+  #Vista principal de la página de contacto
+  def index # :nodoc:
     @contact = Contact.new
   end
 
-  # GET /contacts/1
-  # GET /contacts/1.json
-  def show
+  #Generado automáticamente por scaffold, no utilizado
+  def show # :nodoc:
     add_breadcrumb "Nuevo comentario", :contacts_path
   end
 
-  # GET /contacts/new
-  def new
+  #Generado automáticamente por scaffold, no utilizado
+  def new# :nodoc:
     @contact = Contact.new
   end
 
-  # GET /contacts/1/edit
-  def edit
-  end
+  #Generado automáticamente por scaffold, no utilizado
+  def edit # :nodoc:
+  end 
 
-  # POST /contacts
-  # POST /contacts.json
+  #Método crear contacto
+  #Al generar el contacto se utiliada los mailer para poder enviar lo correos tanto a el usuario como a la página de REASE.
   def create
     @contact = Contact.new(contact_params)
 
     respond_to do |format|
       if @contact.save
-       # Tell the UserMailer to send a welcome email after save
         ContactMailer.contact_receiver(@contact).deliver
         ContactMailer.contact_sender(@contact).deliver
         format.html { redirect_to @contact, notice: 'Su mensaje ha sido enviado' }
@@ -44,9 +46,8 @@ class ContactsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /contacts/1
-  # PATCH/PUT /contacts/1.json
-  def update
+  # Generado automáticamente por scaffold, no utilizado
+  def update # :nodoc:
     respond_to do |format|
       if @contact.update(contact_params)
         format.html { redirect_to @contact, notice: '' }
@@ -58,9 +59,8 @@ class ContactsController < ApplicationController
     end
   end
 
-  # DELETE /contacts/1
-  # DELETE /contacts/1.json
-  def destroy
+  # Generado automáticamente por scaffold, no utilizado
+  def destroy # :nodoc:
     @contact.destroy
     respond_to do |format|
       format.html { redirect_to contacts_url, notice: '' }
@@ -69,12 +69,11 @@ class ContactsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_contact
       @contact = Contact.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def contact_params
       params.require(:contact).permit(:name, :email, :body)
     end

@@ -1,0 +1,141 @@
+<h1>Información para la gestión de <%=@institution.name%></h1>
+
+<div class="panel panel-default panelRease">
+	<div class="panel-heading">
+		Información Global
+	</div>
+	<div class="panel-body to_left">
+		<li><strong>Experiencias totales</strong>: <%=@institution.experiences.count%><br></li>
+		<li><strong>Estudiantes impactados </strong>: <%=@institution.experiences.sum("participants")%></lu>
+		<li><strong>Miembros de comunidades impactados </strong>: <%=@institution.experiences.sum("benefited")%></li>
+	</div>
+</div>
+
+<div class="panel panel-default panelRease">
+	<div class="panel-heading">
+		Información de gestión
+	</div>
+	<div class="panel-body">
+		<p class="note">Seleccione el intervalo de fechas que desea consultar información</p>
+		<div class="row">
+			<div class="col-sm-9">
+				<div class="input-group input-daterange">
+					<%= text_field_tag 'fecha_inicio', nil, :class=> 'form-control', placeholder: 'Fecha Inicio', id:'fecha_inicio', value: @fecha_inicio %>
+					<span class="input-group-addon">
+						Hasta
+					</span>
+					<%= text_field_tag 'fecha_termino', nil, :class=> 'form-control', placeholder: 'Fecha Término', id:'fecha_termino', value: @fecha_termino %>
+				</div>
+			</div>
+			<div class="col-sm-3">
+				<%= link_to 'Buscar experiencias', managment_path(@institution), :class => 'btn btn-manage', id:'EnviarFechas' %>
+			</div>
+		</div>
+		
+		<%if @experiences.present?%>
+			<hr>
+			<h2>Experiencias</h2>
+			<table class="table table-striped display">
+				<thead>
+					<tr>
+						<th><strong>Nombre</strong></th>
+						<th><strong>Responsable</strong></th>
+						<th><strong>Disciplina</strong></th>
+						<th><strong>Fecha</strong></th>
+					</tr>
+				</thead>
+				<tbody>
+					<%@experiences.each do |experience|%>
+					<tr>
+						<%@profesor = User.where(id: experience.professor_id).first%>
+						<td><%=link_to truncate(experience.title, length: 60), experience%></td>
+						<td><%=link_to @profesor.nickname, user_path(@profesor)%></td>
+						<%if experience.area.present?%>
+							<td><%=experience.area.name.truncate(60)%></td>
+						<%else%>
+							<td>Sin area asignada</td>
+						<%end%>
+						<td><%=experience.created_at.strftime("%d / %m / %Y")%> <%=link_to image_tag("Extensiones/pdf.gif"), experience_path(experience, format: "pdf"), :target=>'_blank'%></td>
+					</tr>
+					<%end%>
+				</tbody>
+			</table>
+
+			<div class="to_left">
+				<hr>
+				<h2>Resultados las experiencias</h2>
+				<li><strong>Experiencias totales</strong>: <%=@experiences.count%><br></li>
+				<li><strong>Estudiantes impactados </strong>: <%=@experiences.sum("participants")%></lu>
+				<li><strong>Miembros de comunidades impactados </strong>: <%=@experiences.sum("benefited")%></li>
+				<hr>
+			</div>
+			<h2>Áreas de conocimiento</h2>
+			<table class="table table-striped" id="area_dt">
+				<thead>
+					<tr>
+						<th><strong>Disciplina</strong></th>
+						<th><strong>Área</strong></th>
+						<th><strong>Experiencias realizadas</strong></th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @areas.each do |area| %>
+						<%if @experiences.by_area(area.id).present?%>
+							<tr>
+								<td><%=area.discipline%></td>
+								<td><%=area.name%></td>
+								<td><%=@experiences.by_area(area.id).count%></td>
+							</tr>
+						<%end%>
+					<%end%>
+				</tbody>
+			</table>
+		<%else%>
+			<p>No hay experiencias entre las fechas mencionadas</p>
+		<%end%>
+	</div>
+</div>
+<script type="text/javascript">
+	var firstDate = new Date("<%= @institution.created_at %>");
+	$('.input-daterange input').each(function() {
+		$(this).datepicker({
+			language: "es",
+			todayBtn: "linked",
+			todayHighlight: true,
+			endDate: "today",
+			startDate: firstDate
+			}
+		);
+	});
+
+	$("#EnviarFechas").click(function() {
+		$(this).attr("href", function() {
+			return this.href + "?fecha_inicio=" + $('#fecha_inicio').val() + "&fecha_termino=" + $('#fecha_termino').val();
+		});
+	});
+
+	$(document).ready(function() {
+		$('table.display').DataTable({
+			"language": {
+				"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+			},
+			"scrollY": "400px",
+			"scrollCollapse": true,
+			"paging": false,
+		});
+	} );
+
+	$(document).ready(function() {
+		$('#area_dt').DataTable({
+			"language": {
+				"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+			},
+			"scrollY": "300px",
+			"scrollCollapse": true,
+			"paging": false,
+			"bInfo" : false
+
+		});
+		
+	} );
+</script>

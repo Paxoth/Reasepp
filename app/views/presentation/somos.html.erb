@@ -68,7 +68,7 @@ La Red Nacional de Aprendizaje Servicio Chile reúne  a profesores, estudiantes,
 
 <%if @instituciones.present?%>
 	<% @instituciones.each do |institution| %>
-		<%= link_to(image_tag(institution.logo.url(:mini)), institution.web, :id=>"logoInstituciones", :target => "_blank") %>
+		<%= link_to(image_tag(institution.logo.url(:mini)), institution, :id=>"logoInstituciones") %>
 	<%end%>
 <%else%>
 	Aún no se han agregado insituciones.

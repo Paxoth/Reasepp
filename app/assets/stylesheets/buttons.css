@@ -83,6 +83,13 @@
 	font-size: 12px;
 	padding: 7px;
 }
+.btn-social{
+	margin:0;
+	font-size: 18px;
+	font-weight: bold;
+	border-radius: 2em;
+	min-width: 2.5em;
+}
 .btnWhite, .btnWhite:visited
 {
 	color: black;
@@ -90,6 +97,7 @@
 	background: white;
 	margin-left: 0;
 }
+
 .btnWhite:hover
 {
 	color: black;
@@ -127,4 +135,8 @@
 #btnPerdfil
 {
 	margin-top: 0px;
+}
+.social-addon{
+	min-width: 5em;
+	font-size: 18px;
 }

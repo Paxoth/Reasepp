@@ -1,6 +1,10 @@
+<div class="movdb-header">
+	<%= render "partials/Institutions/headers"%>
+</div> 
+
 <nav class="navbar navbar-default BarraNavegadora navbar-fixed-top">
+		
 	<div class="container-fluid">
-		<!-- Brand and toggle get grouped for better mobile display -->
 		<div class="navbar-header">
 			<%= link_to(image_tag("logoblanco.png", id: "logoNav"),root_path) %>
 			<button type="button" class="navbar-toggle btn-nav" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -8,7 +12,6 @@
 			</button>
 		</div>
 
-		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<% if !user_signed_in? %>
 				<ul class="nav navbar-nav" >
@@ -57,46 +60,64 @@
 					<li role="presentation" class="<%= 'active' if current_page?(presentation_estatuto_path) %>">
 						<%= link_to 'Estatuto', presentation_estatuto_path %>
 					</li>
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+							Actividades AS <i class="glyphicon glyphicon-circle-arrow-down"></i>
+						</a>
+						<ul class="dropdown-menu">
+							<li role="presentation" class="<%= 'active' if current_page?(requests_path) %>">
+								<%= link_to 'Solicitudes de Servicio', requests_path %>
+							</li>
 
-					<li role="presentation" class="<%= 'active' if current_page?(requests_path) %>">
-						<%= link_to 'Solicitudes', requests_path %>
+							<li role="presentation" class="<%= 'active' if current_page?(offerings_path) %>">
+								<%= link_to 'Ofertas de Servicios', offerings_path %>
+							</li>
+
+							<li role="presentation" class="<%= 'active' if current_page?(services_index_activos_path) %>">
+								<%= link_to 'Servicios Activos', services_index_activos_path %>
+							</li>
+
+							<li role="presentation" class="<%= 'active' if current_page?(experiences_path) %>">
+								<%= link_to 'Experiencias Registradas', experiences_path %>
+							</li>
+						</ul>
+					</li>
+					<li role="presentation" class="<%= 'active' if current_page?(resources_muestra_path) %>">
+						<%= link_to "Recursos", resources_muestra_path%>
 					</li>
 
-					<li role="presentation" class="<%= 'active' if current_page?(offerings_path) %>">
-						<%= link_to 'Ofertas', offerings_path %>
+					<li role="presentation" class="<%= 'active' if current_page?(institutions_path) %>">
+						<%= link_to "Instituciones", institutions_path %>
 					</li>
-
-					<li role="presentation" class="<%= 'active' if current_page?(services_index_activos_path) %>">
-						<%= link_to 'Servicios', services_index_activos_path %>
-					</li>
-
-					<li role="presentation" class="<%= 'active' if current_page?(experiences_path) %>">
-						<%= link_to 'Experiencias', experiences_path %>
-					</li>
+					
 
 					<li role="presentation" class="<%= 'active' if current_page?(events_path) %>">
+
 						<%= link_to 'Eventos', events_path %>
 					</li>
 
-					<li role="presentation" class="navCenter">
-						<%= form_tag(presentation_searchPage_path, :method => "post",:class=>"form-inline") do %>
-							<div class="input-group">
-								<%= text_field_tag :search, params[:search], placeholder: "Buscar",:class => 'form-control btnSearch',:required => true %>
-								<span class="input-group-btn">
-									<%= button_tag(type: "submit", class: "btn btn-default btnSearch") do %>
-										<i class="glyphicon glyphicon-search"></i>
-									<% end %>
-								</span>
-							</div>
-						<%end%>
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+							Enlaces de Interés <i class="glyphicon glyphicon-circle-arrow-down"></i>
+						</a>
+						<ul class="dropdown-menu">
+							<%= render "partials/interest_links"%>
+						</ul>
 					</li>
-				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<%if current_user.category == 1%>
-						<li>
-							<%= link_to '<i class="glyphicon glyphicon-cog"></i>'.html_safe, sections_path,:class=>"rightNav"%>
+					<%if current_user.is_admin?%>
+						<li role="presentation" class="<%= 'active' if current_page?(sections_path) %>">
+							<%= link_to "Administración", sections_path%>
 						</li>
 					<%end%>	
+				</ul>
+
+				<ul class="nav navbar-nav navbar-right">
+					<li>
+						<%= link_to '<i class="glyphicon glyphicon-user"></i>'.html_safe, users_path,:class=>"rightNav"%>
+					</li>
+					<li>
+					<%= link_to '<i class="glyphicon glyphicon-calendar"></i>'.html_safe, '#', {:class=>"rightNav", 'data-toggle' => 'modal', 'data-container' => 'body', 'data-target'=>"#modal_calendar" } %>
+					</li>
 					<li>
 						<%= link_to '<i class="glyphicon glyphicon-question-sign"></i>'.html_safe, presentation_about_path,:class=>"rightNav"%>
 					</li>
@@ -108,3 +129,53 @@
 		</div><!-- /.navbar-collapse -->
 	</div><!-- /.container-fluid -->
 </nav>
+
+<div class="modal fade" id="modal_calendar" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h2>Eventos de REASE</h2>
+			</div>
+			<div class="modal-body">
+				<div  id = "calendar_inside"></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+<script type="text/javascript">
+	
+	$(document).ready(function() {
+		$('#calendar_inside').fullCalendar({
+			buttonText: {
+				today: 'Hoy',
+				day: 'Día',
+				week:'Semana',
+				month:'Mes'
+			},
+			events: '/events.json',
+			monthNames: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+			dayNamesShort: ['Dom','Lun','Mar', 'Mie', 'Jue', 'Vie', 'Sab']
+		})
+	});
+
+	$('#modal_calendar').on('shown.bs.modal', function () {
+	   $("#calendar_inside").fullCalendar('render');
+	});
+
+	$(document).ready(function(){
+		$(window).scroll(function(){
+			if ($(window).scrollTop() >= 120){
+				$('.navbar').css('position','fixed');
+			}
+			else{
+				$('.navbar').css('position','relative');
+			}
+		});
+	});
+
+</script>

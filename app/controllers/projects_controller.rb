@@ -1,3 +1,6 @@
+=begin rdoc
+  _**Project:** controlador de las experiencias documentadas (Ver Project)_
+=end
 class ProjectsController < ApplicationController
   before_action :authenticate_user!
   before_action :validate_category, except: [:show, :index]
@@ -7,14 +10,16 @@ class ProjectsController < ApplicationController
   add_breadcrumb "Experiencias", :experiences_path
   add_breadcrumb "Experiencias reportadas", :projects_path
 
-  # GET /projects
-  # GET /projects.json
+  #Vista principal
+  #
+  #Genera la consulta de las experiencias documentadas paginadas de a 30 elementos.
   def index
-    @projects = Project.paginate(page: params[:page],per_page: 5).all.order("created_at DESC")
+    @projects = Project.paginate(page: params[:page],per_page: 30).all.order("created_at DESC")
   end
 
-  # GET /projects/1
-  # GET /projects/1.json
+  #Vista específica
+  #
+  #Permite la visualización de la experiencia documentada, además de la formación de su pdf ( ProjectPdf )
   def show
     add_breadcrumb "Mostrar"
     respond_to do |format|
@@ -29,19 +34,22 @@ class ProjectsController < ApplicationController
     end
   end
 
-  # GET /projects/new
-  def new
+  #Vista de nueva experiencia documentada.
+  #Generada automáticamente con scaffold.
+  def new # :nodoc:
     add_breadcrumb "Nueva experiencia reportada"
     @project = Project.new
   end
 
-  # GET /projects/1/edit
-  def edit
+  #Vista de editar experiencia documentada.
+  #Generada automáticamente con scaffold.
+  def edit # :nodoc:
     add_breadcrumb "Editar"
   end
 
-  # POST /projects
-  # POST /projects.json
+  #Vista de crear experiencia documentada.
+  #
+  #La experiencia documentada quedará bajo el nombre del profesor que la creó.
   def create
     @project = current_user.projects.new(project_params)
     @project.professor_name = current_user.name
@@ -57,9 +65,9 @@ class ProjectsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /projects/1
-  # PATCH/PUT /projects/1.json
-  def update
+  #Vista de actualizar experiencia documentada.
+  #Generada automáticamente con scaffold.
+  def update # :nodoc:
     respond_to do |format|
       if @project.update(project_params)
         format.html { redirect_to @project, notice: 'La experiencia se ha modificado exitosamente.' }
@@ -71,9 +79,9 @@ class ProjectsController < ApplicationController
     end
   end
 
-  # DELETE /projects/1
-  # DELETE /projects/1.json
-  def destroy
+  #Vista de eliminar experiencia documentada.
+  #Generada automáticamente con scaffold.
+  def destroy # :nodoc:
     @project.destroy
     respond_to do |format|
       format.html { redirect_to projects_url, notice: 'La experiencia se ha eliminado.' }
@@ -82,19 +90,18 @@ class ProjectsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_project
       @project = Project.find(params[:id])
     end
 
-    def validate_category
+    #Valida que solo un profesor sea capaz de generar, crear y editar experiencias documentadas.
+    def validate_category # :doc:
       if current_user.category != 2
         redirect_to root_path, alert: "Sólo un profesor puede trabajar las experiencias."
       end   
     end
 
-
-    # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
       params.require(:project).permit(
         :title, 
@@ -104,9 +111,7 @@ class ProjectsController < ApplicationController
         :course_name, 
         :course_type, 
         :course_type_other, 
-        :professor_name, 
-        :professor_phone, 
-        :professor_email, 
+        :professor_phone,
         :learning_objectives, 
         :service_objectives, 
         :frequency, 
@@ -114,13 +119,12 @@ class ProjectsController < ApplicationController
         :students_level, 
         :community_partner, 
         :organization_type, 
-        :benefit, :results, 
+        :benefited, :results, 
         :tools, 
         :reflection_moments, 
         :period, 
         :professor_degree, 
-        :participants, 
-        :institutional_support, 
+        :participants,  
         :area_id, 
         :user_id, 
         :institution_id, 

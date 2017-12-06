@@ -12,6 +12,9 @@
  *
  *= require fullcalendar
  *= require_tree .
+ *= stub Institutions/usach
+ *= stub Institutions/utem
+ *= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
  *= require_self
  *= require froala_editor.min.css
  *= require froala_style.min.css
@@ -26,6 +29,7 @@
  *= require plugins/line_breaker.min.css
  *= require plugins/table.min.css
  *= require plugins/video.min.css
+ *= require bootstrap-datepicker3 
  */
 
 .form-signin
@@ -103,3 +107,13 @@
     display: block;
     margin-top: 10px;
 }
+
+.form-inline {
+    display: inline;
+}
+.div-justify
+{
+    text-align: justify;
+}
+.mainLayout{float:left;width:50%}
+.clearFlt{clear:both}

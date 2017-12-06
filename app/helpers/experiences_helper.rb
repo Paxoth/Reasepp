@@ -1,2 +1,2 @@
-module ExperiencesHelper
+module ExperiencesHelper # :nodoc:
 end

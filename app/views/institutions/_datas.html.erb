@@ -1,0 +1,154 @@
+<ul class="nav nav-tabs tabRease nav-justified">
+	<li id="info2" onclick="info2()"><a>Información</a></li>
+	<%if user_signed_in?%>
+		<li id="info3" onclick="info3()"><a>Ofertas de Servicios (<%=@offerings.count%>)</a></li>
+		<li id="info4" onclick="info4()"><a>Solicitudes de Servicios (<%=@requests.count%>)</a></li>
+	<%end%>
+
+</ul>
+<div class="borderTab">
+	<div id="DatosPrincipales">
+		<h2>Datos importantes</h2>
+		<br><%= image_tag @institution.logo.url(:mini) %>
+		<p><strong>Sitio web:</strong> <%= link_to @institution.name, @institution.web%></p>
+		<p>
+			<strong>AS para <%=@institution.name%>: </strong>
+			<%if @institution.description.present?%>
+				<i>"<%=@institution.description%>"</i>
+			<%else%>
+				El encargado aún no ha escrito sobre su institución.
+			<%end%>
+			<hr>
+			<%if @institution.facebook.present?%>		
+				<%= link_to '<i class="fa fa-facebook"></i>'.html_safe,@institution.facebook, :class=>'btn btn-social', :target=>"_blank"%>
+			<%end%>
+			<%if @institution.instagram.present?%>
+				<%= link_to '<i class="fa fa-instagram"></i>'.html_safe,@institution.instagram, :class=>'btn btn-social', :target=>"_blank"%>
+			<%end%>
+			<%if @institution.linkedin.present?%>
+				<%= link_to '<i class="fa fa-linkedin"></i>'.html_safe,@institution.linkedin, :class=>'btn btn-social', :target=>"_blank"%>
+			<%end%>
+			<%if @institution.twitter.present?%>
+				<%= link_to '<i class="fa fa-twitter"></i>'.html_safe,@institution.twitter, :class=>'btn btn-social', :target=>"_blank"%>
+			<%end%>	
+			<%if @institution.youtube.present?%>
+				<%= link_to '<i class="fa fa-youtube"></i>'.html_safe,@institution.youtube, :class=>'btn btn-social', :target=>"_blank"%>
+			<%end%>
+				<p><%=@institution.name%> es parte del sitio REASE desde el <%=l @institution.created_at%></p>
+			</p>
+	</div>
+
+	<div id="ofertas" class="padding15">
+		<%if @offerings.present? %>
+			<table class="table table-striped display">
+				<thead>
+					<tr>
+						<th>Nombre</th>
+						<th>Responsable</th>
+						<th>Fecha inicio</th>
+						<th>Fecha término</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @offerings.each do |offering| %>
+						<tr>
+							<td><%= link_to offering.title, offering%></td>
+							<td>
+								<%if offering.user.category == 3%>
+									Sin profesor responsable
+								<%else%>
+									<%= link_to offering.user.name, offering.user%>
+								<%end%>
+							</td>
+							<td><%= offering.start_time%></td>
+							<td><%= offering.end_time%></td>
+						</tr>
+					<%end%>
+				</tbody>
+				<tfoot>
+					<tr>
+						<th>Nombre</th>
+						<th>Responsable</th>
+						<th>Fecha inicio</th>
+						<th>Fecha término</th>
+					</tr>
+				</tfoot>
+			</table>
+		<%else%>
+			<p>Actualmente <%@institution.name%> no posee Ofertas de Servicios activas</p>
+		<%end%>
+	</div>
+
+	<div id="solicitudes" class="padding15">
+		<%if @requests.present? %>
+			<table class="table table-striped display">
+				<thead>
+					<tr>
+						<th>Nombre</th>
+						<th>Responsable</th>
+						<th>Fecha inicio</th>
+						<th>Fecha término</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @requests.each do |request| %>
+						<tr>
+							<td><%= link_to request.title, request%></td>
+							<td>
+								<%if request.user.category == 3%>
+									Sin socio responsable
+								<%else%>
+									<%= link_to request.user.name, request.user%>
+								<%end%>
+							</td>
+							<td><%= request.start_time%></td>
+							<td><%= request.end_time%></td>
+						</tr>
+					<%end%>
+				</tbody>
+				<tfoot>
+					<tr>
+						<th>Nombre</th>
+						<th>Responsable</th>
+						<th>Fecha inicio</th>
+						<th>Fecha término</th>
+					</tr>
+				</tfoot>
+			</table>
+		<%else%>
+			<p>Actualmente <%@institution.name%> no posee Solicitudes de Servicios activas</p>
+		<%end%>
+	</div>
+</div>
+	<script type="text/javascript">
+
+	document.getElementById("info2").className = "active";	
+	document.getElementById('DatosPrincipales').style.display='block';
+	document.getElementById('ofertas').style.display='none';
+	document.getElementById('solicitudes').style.display='none';
+
+	function info2(){		
+	document.getElementById('DatosPrincipales').style.display='block';
+	document.getElementById('ofertas').style.display='none';
+	document.getElementById('solicitudes').style.display='none';
+	document.getElementById("info2").className = "active";
+	document.getElementById("info3").className = "";
+	document.getElementById("info4").className = "";
+	}
+	function info3(){
+	document.getElementById('DatosPrincipales').style.display='none';
+	document.getElementById('ofertas').style.display='block';
+	document.getElementById('solicitudes').style.display='none';
+	document.getElementById("info2").className = "";
+	document.getElementById("info3").className = "active";
+	document.getElementById("info4").className = "";
+	}
+	function info4(){		
+	document.getElementById('DatosPrincipales').style.display='none';
+	document.getElementById('ofertas').style.display='none';
+	document.getElementById('solicitudes').style.display='block';
+	document.getElementById("info2").className = "";
+	document.getElementById("info3").className = "";
+	document.getElementById("info4").className = "active";
+	}
+</script>

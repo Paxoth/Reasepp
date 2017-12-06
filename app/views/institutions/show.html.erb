@@ -1,16 +1,37 @@
-<h1>Institución</h1>
-<div class="panel panel-default panelRease" >
-	<div class="panel-heading">
-		<%= @institution.name %>
-	</div>
-	<div class="panel-body">
-		<h2>Página Web:</h2>
-		<%= @institution.web %>
-		<h2>Logo institucional</h2>
-		<%= image_tag @institution.logo.url(:mini) %>
-	</div>
-</div>
-<%if user_signed_in? %>
-<%= link_to 'Editar', edit_institution_path(@institution), :class =>"btn btn-lg" %>
-<%= link_to 'Volver', institutions_path, :class =>"btn btn-lg" %>
+<h1><%= @institution.name %></h1>
+
+<%if user_signed_in?%>
+    <%if (current_user.is_admin? and !@manager.present?) or current_user==@manager%>
+        <%= link_to 'Editar', edit_institution_path(@institution), :class =>"btn btn-lg btnCRUD" %>
+        <%=link_to "Información de gestión", managment_path(@institution), :class=>'btn btn-lg btnCRUD'%>
+    <%end%>
 <%end%>
+<%= link_to 'Volver', :back, :class =>"btn btn-lg btnCRUD" %>
+
+<div class="ReaseDiv">
+    
+    <%= render 'datas'%>
+    <%= render 'results'%>
+    <%= render 'members'%>
+</div>  
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('table.display').DataTable({
+			"language": {
+				"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+			},
+		});
+	} );
+
+	$(document).ready(function() {
+		$('table.member').DataTable({
+			"language": {
+				"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+			},
+			"bInfo" : false,
+		});
+		
+	} );
+</script>
+
