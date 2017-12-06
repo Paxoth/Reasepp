@@ -62,6 +62,15 @@
 				}
 			<%end%>
 		</script>
+	<%else%>
+		<div class="panel panel-default panelRease">
+			<div class="panel-heading">
+				Ofertas de servicios de <%=@user.nickname%>
+			</div>
+			<div class="panel-body">
+				<p>Actualmente este usuario no tiene ofertas de servicios disponibles</p>
+			</div>
+		</div>
 	<%end%>
 <%end%>
 
@@ -128,5 +137,14 @@
 				}
 			<%end%>
 		</script>
+	<%else%>
+		<div class="panel panel-default panelRease">
+			<div class="panel-heading">
+				Solicitudes de servicios de <%=@user.nickname%>
+			</div>
+			<div class="panel-body">
+				<p>Actualmente este usuario no tiene solicitudes de servicios disponibles</p>
+			</div>
+		</div>
 	<%end%>
 <%end%>
