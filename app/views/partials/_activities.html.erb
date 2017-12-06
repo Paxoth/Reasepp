@@ -1,5 +1,6 @@
 <%if @user.category != 4%>
 	<%if @offerings.present?%>
+	<div class="ReaseDiv">
 		<h1>Ofertas de Servicio activas de <%=@user.nickname%></h1>
 
 		<ul class="nav nav-tabs tabRease nav-justified">
@@ -39,29 +40,7 @@
 				</div>
 			<%end%>
 		</div>
-		<script type="text/javascript">
-			<% @offerings.each do |offering| %>
-				<%if offering == @offerings.first%>
-					document.getElementById("offering<%= offering.id -%>").className = "active";	
-					document.getElementById('oferta<%= offering.id -%>').style.display='block';	
-				<%else%>
-					document.getElementById('oferta<%= offering.id -%>').style.display='none';	
-				<%end%>
-			<%end%>
-			<% @offerings.each do |offering| %>
-				function offering<%= offering.id -%>(){
-					<% @offerings.each do |offeringIn| %>
-						<%if offering == offeringIn%>
-							document.getElementById("offering<%= offeringIn.id -%>").className = "active";	
-							document.getElementById('oferta<%= offeringIn.id -%>').style.display='block';	
-						<%else%>
-							document.getElementById("offering<%= offeringIn.id -%>").className = "";	
-							document.getElementById('oferta<%= offeringIn.id -%>').style.display='none';
-						<%end%>
-					<%end%>
-				}
-			<%end%>
-		</script>
+	</div>
 	<%else%>
 		<div class="panel panel-default panelRease">
 			<div class="panel-heading">
@@ -76,6 +55,7 @@
 
 <%if @user.category != 2%>
 	<%if @requests.present?%>
+	<div class="ReaseDiv">
 		<h1>Solicitudes de Servicio activas de <%=@user.nickname%></h1>
 		<ul class="nav nav-tabs tabRease nav-justified">
 			<%count = 0%>
@@ -114,29 +94,7 @@
 				</div>
 			<%end%>
 		</div>
-		<script type="text/javascript">
-			<% @requests.each do |request| %>
-				<%if request == @requests.first%>
-					document.getElementById("request<%= request.id -%>").className = "active";	
-					document.getElementById('solicitud<%= request.id -%>').style.display='block';	
-				<%else%>
-					document.getElementById('solicitud<%= request.id -%>').style.display='none';	
-				<%end%>
-			<%end%>
-			<% @requests.each do |request| %>
-				function request<%= request.id -%>(){
-					<% @requests.each do |requestIn| %>
-						<%if request == requestIn%>
-							document.getElementById("request<%= requestIn.id -%>").className = "active";	
-							document.getElementById('solicitud<%= requestIn.id -%>').style.display='block';	
-						<%else%>
-							document.getElementById("request<%= requestIn.id -%>").className = "";	
-							document.getElementById('solicitud<%= requestIn.id -%>').style.display='none';
-						<%end%>
-					<%end%>
-				}
-			<%end%>
-		</script>
+	</div>
 	<%else%>
 		<div class="panel panel-default panelRease">
 			<div class="panel-heading">
@@ -148,3 +106,52 @@
 		</div>
 	<%end%>
 <%end%>
+
+<script type="text/javascript">
+	<%if @offerings.present?%>
+		<% @offerings.each do |offering| %>
+			<%if offering == @offerings.first%>
+				document.getElementById("offering<%= offering.id -%>").className = "active";	
+				document.getElementById('oferta<%= offering.id -%>').style.display='block';	
+			<%else%>
+				document.getElementById('oferta<%= offering.id -%>').style.display='none';	
+			<%end%>
+		<%end%>
+		<% @offerings.each do |offering| %>
+			function offering<%= offering.id -%>(){
+				<% @offerings.each do |offeringIn| %>
+					<%if offering == offeringIn%>
+						document.getElementById("offering<%= offeringIn.id -%>").className = "active";	
+						document.getElementById('oferta<%= offeringIn.id -%>').style.display='block';	
+					<%else%>
+						document.getElementById("offering<%= offeringIn.id -%>").className = "";	
+						document.getElementById('oferta<%= offeringIn.id -%>').style.display='none';
+					<%end%>
+				<%end%>
+			}
+		<%end%>
+	<%end%>
+	<%if @requests.present?%>
+		<% @requests.each do |request| %>
+			<%if request == @requests.first%>
+				document.getElementById("request<%= request.id -%>").className = "active";	
+				document.getElementById('solicitud<%= request.id -%>').style.display='block';	
+			<%else%>
+				document.getElementById('solicitud<%= request.id -%>').style.display='none';	
+			<%end%>
+		<%end%>
+		<% @requests.each do |request| %>
+			function request<%= request.id -%>(){
+				<% @requests.each do |requestIn| %>
+					<%if request == requestIn%>
+						document.getElementById("request<%= requestIn.id -%>").className = "active";	
+						document.getElementById('solicitud<%= requestIn.id -%>').style.display='block';	
+					<%else%>
+						document.getElementById("request<%= requestIn.id -%>").className = "";	
+						document.getElementById('solicitud<%= requestIn.id -%>').style.display='none';
+					<%end%>
+				<%end%>
+			}
+		<%end%>
+		<%end%>
+</script>
