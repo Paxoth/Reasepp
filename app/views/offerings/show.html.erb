@@ -13,14 +13,14 @@
 <!-- Botones de editar  eliminar solamente para el usuario responsable -->
 	<% if @offering.user.id == current_user.id %>
 		<%if @offering.status != 4%>
-			<%= link_to 'Editar ', edit_offering_path(@offering), :class => "btn btn-lg btnCRUD" %>
-			<%= link_to 'Eliminar', @offering, method: :delete, data: { confirm: '¿Está seguro de eliminar la oferta?' }, :class => "btn btn-lg btnCRUD" %>
+			<%= link_to 'Editar ', edit_offering_path(@offering), :class => "btn btn-lg btn-crud" %>
+			<%= link_to 'Eliminar', @offering, method: :delete, data: { confirm: '¿Está seguro de eliminar la oferta?' }, :class => "btn btn-lg btn-crud" %>
 		<%end%>
 	<% end %>
 <% end %>
 
-<%= link_to 'Volver', offerings_path, :class => "btn btn-lg btnCRUD" %>
-<div class="panel panel-default panelRease" >
+<%= link_to 'Volver', offerings_path, :class => "btn btn-lg btn-crud" %>
+<div class="panel panel-default panel-rease" >
 	
 	<div class="panel-heading">
 		<%= @offering.title %>
@@ -53,8 +53,10 @@
 			<p><strong>Área de trabajo: </strong> <%= @offering.area.name%></p>
 		<%end%>
 
-		<%if @offering.institution_id.present?%>
+		<%if @offering.user.category ==  2 %>
 			<p><strong>Institución: </strong> <%= link_to @offering.institution.name, @offering.institution%></p>
+		<%else%>
+			<p><strong>Institución:</strong> sin institución adherida</p>
 		<%end%>
 
 		<%if @offering.location.present?%>
@@ -68,7 +70,7 @@
 				<strong>Creado por:</strong>
 				<%= link_to @broker.nickname, user_path(@broker) %>
 				<%if !@broker.photo.blank?%>
-					<%= image_tag @broker.photo.url(:mini), :class =>"RoundPicture" %>
+					<%= image_tag @broker.photo.url(:mini), :class =>"round-picture" %>
 				<%end %>
 			</p>
 		<%end%>
@@ -78,13 +80,13 @@
 			<% if !@offering.broker_id.present?%>
 				<%= link_to @offering.user.nickname, user_path(@offering.user.id) %>
 				<%if !@offering.user.photo.blank?%>
-					<%= image_tag @offering.user.photo.url(:mini), :class =>"RoundPicture" %>
+					<%= image_tag @offering.user.photo.url(:mini), :class =>"round-picture" %>
 				<%end %>
 			<%else%>
 				<%if @offering.user.category == 2%>
 					<%= link_to @offering.user.nickname, user_path(@offering.user.id) %>
 					<%if !@offering.user.photo.blank?%>
-						<%= image_tag @offering.user.photo.url(:mini), :class =>"RoundPicture" %>
+						<%= image_tag @offering.user.photo.url(:mini), :class =>"round-picture" %>
 					<%end %>
 				<%else%>
 					Aún no se ha asignado un profesor responsable.
@@ -101,16 +103,16 @@
 					<p>Aún no se han manifestado para participar en este proyecto</p>
 				<%elsif @offering.services.count == 1%>
 					<p>Se ha manifestado <strong>1</strong> persona para este proyecto</p>
-					<%= link_to "Ver peticiones", offering_services_path(@offering), :class=>'btn btnCRUD'%>
+					<%= link_to "Ver peticiones", offering_services_path(@offering), :class=>'btn btn-crud'%>
 				<%else%>
 					<p>Se han manifestado <strong><%=@offering.services.count%></strong> personas para este proyecto</p>
-					<%= link_to "Ver peticiones", offering_services_path(@offering), :class=>'btn btnCRUD'%>
+					<%= link_to "Ver peticiones", offering_services_path(@offering), :class=>'btn btn-crud'%>
 				<%end%>
 			<%end%>
 
 			<%if @offering.user != current_user and current_user.category == 4%>
 				<%if @petition.blank?%>
-					<%= link_to "Manifestar interés de trabajo", new_offering_service_path(@offering), :class=>'btn btnCRUD'%>
+					<%= link_to "Manifestar interés de trabajo", new_offering_service_path(@offering), :class=>'btn btn-crud'%>
 				<%end%>
 			<%else%>
 				<% @aceptados.each do |aceptado|%>
@@ -140,7 +142,7 @@
 			<% @offering.comments.order('created_at DESC').each do |comment|%><hr>			
 				<div class="div-justify">
 					<%if comment.user.photo.present?%>
-						<%= image_tag comment.user.photo.url(:mini), :class =>"RoundPicture" %> 
+						<%= image_tag comment.user.photo.url(:mini), :class =>"round-picture" %> 
 					<%else%>
 						<%= image_tag ("mini/missingPhoto.png") %> 
 					<%end %>
@@ -153,9 +155,10 @@
 						<%end%>
 
 						<!-- Formulario escondido, que permite al vinculador creador nombrar a un profesor como responsable de la oferta -->
-						<%if current_user.id == @offering.broker_id && comment.user.category == 2 && @offering.user.category != 2%>
+						<%if current_user.id == @offering.broker_id && comment.user.category == 2 && @offering.user.category != 2 && comment.user.institution.present?%>
 							<%= form_for @offering, :html => { :class => "form-inline", :id=>'name_professor' } do |f| %>
 								<%= f.hidden_field :user_id, :value=> comment.user.id%>
+								<%= f.hidden_field :institution_id, :value=> comment.user.institution.id%>
 								<%confirm = '¿Está seguro que desea nombrar a '+comment.user.nickname+' como profesor responsable de esta oferta de servicio?' %>
 								- <%= link_to 'Nombrar Profesor Responsable', "#", :onclick => "$('#name_professor').submit()", :data => {confirm: confirm}%>
 							<%end%>

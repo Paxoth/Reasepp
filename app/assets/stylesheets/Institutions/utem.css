@@ -28,19 +28,19 @@ p.note{
 	color: #3399CC;
 }
 /*REASE STYLES*/
-.tabRease>li>a
+.tab-rease>li>a
 {
 	color: #4d4d4d;
 }
-.tabRease>li>a:hover {
+.tab-rease>li>a:hover {
 	background: #3399CC;
 	color: white;
 }
-.borderTab
+.border-tab
 {	
 	border-color: #3399CC;
 }
-.ReaseDiv
+.div-rease
 {
 	margin: 2%;
 }
@@ -62,7 +62,7 @@ p.note{
 }
 
 /*****BARRA NAVEGADORA ***/
-.BarraNavegadora{
+.navbar-rease{
 	background: #021C36;
 	font-weight: bold;
 	border-color: #235485;
@@ -83,7 +83,7 @@ p.note{
 	padding-right: 35px;
 	background: #021C36;
 }
-.navbar-default .navbar-nav>li>.rightNav {
+.navbar-default .navbar-nav>li>.nav-text-right {
     min-width: 30px;
     font-size: 15px;
     padding-left: 0;
@@ -162,7 +162,7 @@ p.navbar-text.navbar-right
 .panel a{
 	color: #3399CC;
 }
-.panelClick .panel-heading
+.panel-click .panel-heading
 {
 	background: #021C36;
 	text-align: center;
@@ -170,11 +170,11 @@ p.navbar-text.navbar-right
 	border-radius: 0;
 }
 
-.panelClick .panel-heading:hover{
+.panel-click .panel-heading:hover{
 	background: #3399CC;
 }
 
-.panelRease .panel-heading, #pies
+.panel-rease .panel-heading, #pies
 {
 	background: #021C36;
 	text-align: center;
@@ -212,12 +212,12 @@ p.navbar-text.navbar-right
 }
 
 /*BOTONES*/
-.btnSomos, .btnHacemos, .btnAdmin, .btnCRUD, .btn-nav, .btn-lg, .btn-social, .btn-manage{
+.btn-somos, .btn-hacemos, .btn-admin, .btn-crud, .btn-nav, .btn-lg, .btn-social, .btn-manage{
 	background: #021C36;
 	color: white;
 	border-radius: 0;
 }
-.btnSomos:hover, .btnHacemos:hover, .btnAdmin:hover, .btnCRUD:hover, .btn-nav:hover, .btn-lg:hover, .btn-social:hover, .btn-manage:hover{
+.btn-somos:hover, .btn-hacemos:hover, .btn-admin:hover, .btn-crud:hover, .btn-nav:hover, .btn-lg:hover, .btn-social:hover, .btn-manage:hover{
 	background: #3399CC;
 }
 
@@ -254,20 +254,20 @@ table a{
 {
 	background: #3399CC;
 }
-.fc-button, #calendar_inside .fc-event,  #calendar .fc-button-today
+.fc-button, #calendar-aside .fc-event,  #calendar .fc-button-today
 {
 	background: #3399CC;
 }
-.fc-button:hover, #calendar_inside .fc-event:hover, #calendar .fc-button-today:hover
+.fc-button:hover, #calendar-aside .fc-event:hover, #calendar .fc-button-today:hover
 {
 	background: #3399CC;
 }
 
-#calendar th, #calendar_inside th
+#calendar th, #calendar-aside th
 {
 	background: #3399CC;
 }
-#calendar_inside .fc-event
+#calendar-aside .fc-event
 {
 	background: #3399CC;
 }

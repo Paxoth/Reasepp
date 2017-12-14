@@ -73,7 +73,7 @@ ActiveRecord::Schema.define(version: 20171203234759) do
     t.text     "course_type_other",   limit: 65535
     t.integer  "period",              limit: 4
     t.text     "professor_phone",     limit: 65535
-    t.integer  "professor_degree",    limit: 4
+    t.text     "professor_degree",    limit: 65535
     t.text     "learning_objectives", limit: 65535
     t.text     "service_objectives",  limit: 65535
     t.text     "frequency",           limit: 65535
@@ -233,6 +233,7 @@ ActiveRecord::Schema.define(version: 20171203234759) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "priority",   limit: 4,     default: 1
+    t.integer  "user_id",    limit: 4,     default: 1
   end
 
   create_table "services", force: :cascade do |t|

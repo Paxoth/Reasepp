@@ -1,4 +1,4 @@
-<ul class="nav nav-tabs tabRease nav-justified">
+<ul class="nav nav-tabs tab-rease nav-justified">
 	<li id="info2" onclick="info2()"><a>Información</a></li>
 	<%if user_signed_in?%>
 		<li id="info3" onclick="info3()"><a>Ofertas de Servicios (<%=@offerings.count%>)</a></li>
@@ -6,7 +6,7 @@
 	<%end%>
 
 </ul>
-<div class="borderTab">
+<div class="border-tab">
 	<div id="DatosPrincipales">
 		<h2>Datos importantes</h2>
 		<br><%= image_tag @institution.logo.url(:mini) %>
@@ -34,8 +34,7 @@
 			<%if @institution.youtube.present?%>
 				<%= link_to '<i class="fa fa-youtube"></i>'.html_safe,@institution.youtube, :class=>'btn btn-social', :target=>"_blank"%>
 			<%end%>
-				<p><%=@institution.name%> es parte del sitio REASE desde el <%=l @institution.created_at%></p>
-			</p>
+		</p>
 	</div>
 
 	<div id="ofertas" class="padding15">
@@ -60,8 +59,8 @@
 									<%= link_to offering.user.name, offering.user%>
 								<%end%>
 							</td>
-							<td><%= offering.start_time%></td>
-							<td><%= offering.end_time%></td>
+							<td><%= offering.start_time.strftime("%d/%m/%Y")%></td>
+							<td><%= offering.end_time.strftime("%d/%m/%Y")%></td>
 						</tr>
 					<%end%>
 				</tbody>
@@ -101,8 +100,8 @@
 									<%= link_to request.user.name, request.user%>
 								<%end%>
 							</td>
-							<td><%= request.start_time%></td>
-							<td><%= request.end_time%></td>
+							<td><%= request.start_time.strftime("%d/%m/%Y")%></td>
+							<td><%= request.end_time.strftime("%d/%m/%Y")%></td>
 						</tr>
 					<%end%>
 				</tbody>

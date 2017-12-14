@@ -14,7 +14,7 @@
 </div>
 
 <% if @services.present? %>
-	<div class="panel panel-default panelRease">
+	<div class="panel panel-default panel-rease">
 		<div class="panel-heading">
 			Resultados de la búsqueda: <%= params[:search] %>
 		</div>
@@ -31,7 +31,7 @@
 		</div>
 	</div>
 <%else%>
-<div class="panel panel-default panelRease">
+<div class="panel panel-default panel-rease">
 	<div class="panel-heading">
 		Servicios activos: <%= params[:search] %>
 	</div>
@@ -41,4 +41,4 @@
 </div>
 <% end %>
 
-<%=link_to "Volver", services_path, :class=>'btn btn-lg btnCRUD'%>
+<%=link_to "Volver", services_path, :class=>'btn btn-lg btn-crud'%>

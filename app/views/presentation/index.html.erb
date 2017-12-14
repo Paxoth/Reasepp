@@ -8,14 +8,14 @@
 			<%if @users.present?%>
 				<p><% @users.each  do |user|%>
 					<%if user.photo.present?%>
-						<%=link_to image_tag(user.photo.url(:mini),:class=>'RoundPicture'),user%>
+						<%=link_to image_tag(user.photo.url(:mini),:class=>'round-picture'),user%>
 					<%else%>
-						<%=link_to image_tag("mini/miniphoto.png",:class=>'RoundPicture'),user%>
+						<%=link_to image_tag("mini/miniphoto.png",:class=>'round-picture'),user%>
 					<%end%>
 				<%end%></p>
 			<%else%>
 				<%if User.last.photo.present? %>
-					<%=link_to image_tag(User.last.photo.url(:mini),:class=>'RoundPicture'),User.last%>
+					<%=link_to image_tag(User.last.photo.url(:mini),:class=>'round-picture'),User.last%>
 				<%else%>
 					<p>Las últimas semanas no se han registrado usuarios</p>
 				<%end%>
@@ -36,7 +36,7 @@
 		</div>
 	</div>
 	<%if @bulletin.present? && @bulletin.created_at >= Time.now - 1.days %>
-		<div  class="panel panel-default panelClick">
+		<div  class="panel panel-default panel-click">
 			<div class="panel-heading" data-toggle="collapse" data-target="#boletin">
 				<i class="glyphicon glyphicon-circle-arrow-down"></i> Último boletín:  <%= @bulletin.title %> 
 			</div>
@@ -52,7 +52,7 @@
 <%end%>
 <% @sections.each do |seccion| %>
 	<% div_id = seccion.id -%>
-	<div  class="panel panel-default panelClick">
+	<div  class="panel panel-default panel-click">
 		<div class="panel-heading" data-toggle="collapse" data-target="#Novedad<%= div_id -%>">
 			<i class="glyphicon glyphicon-circle-arrow-down"></i> <%= seccion.title %> 
 		</div>

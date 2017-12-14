@@ -10,7 +10,7 @@
 				</ul>
 			</div>
 		<% end %>
-	<div class="panel panel-default panelRease" >
+	<div class="panel panel-default panel-rease" >
 		<div class="panel-heading"><%=accion%> <%= @service.title%></div>
 		<div class="panel-body">
 			<%if accion == "Aceptar" || accion == "Actualizar" %>
@@ -79,7 +79,7 @@
 				</p></div>
 			<%end%>
 			<div class="actions">
-				<%= f.submit accion, :class => 'btn btn-lg btnCRUD' %>
+				<%= f.submit accion, :class => 'btn btn-lg btn-crud' %>
 			</div>
 		</div>
 	</div>

@@ -7,12 +7,12 @@
 		<% end %>
 	</div>
 	<% end %>
-	<div class="panel panel-default panelRease" >
+	<div class="panel panel-default panel-rease" >
 			<div class="panel-heading">Consentimiento para ser evaluado</div>
 			<div class="panel-body">
 				<div>
 					<p>Antes de registrarse es necesario que sepa los términos y condiciones que existen para pertenecer y mantenerse dentro de ésta red.
-					<a id ="linkEstatuto" data-toggle="modal" data-target = "#encuentro" >
+					<a id ="link-estatuto" data-toggle="modal" data-target = "#encuentro" >
 					>> Leer estatuto</a></p> 
 					<div class="modal fade" id="encuentro" tabindex="-1" role="dialog" aria-labelledby="mymodallabel" aria-hidden="true">
 						<div class="modal-dialog modal-lg modal-estatuto">
@@ -33,7 +33,7 @@
 				</div>
 			</div>
 	</div>
-	<div class="panel panel-default panelRease" >
+	<div class="panel panel-default panel-rease" >
     	<div class="panel-heading">Registrarse con redes sociales</div>
     	<div class="panel-body">
 			<div class="field">
@@ -57,21 +57,21 @@
 			</div>
 		</div>
 	</div>
-	<div class="panel panel-default panelRease">
+	<div class="panel panel-default panel-rease">
 		<div class="panel-heading">
 			Identificación dentro de la red
 		</div>
 		<div class="panel-body">
 			<div class="field">
 				<p><%= f.label :category, "Rol de usuario" %>
-				<button type="button" class="btn btn-default btnWhite" id:"btnTipoUsuario"  data-trigger="focus" data-container="body" data-toggle="btnRolUsuario"> ? </button></p>
+				<button type="button" class="btn btn-default btn-white" id:"btnTipoUsuario"  data-trigger="focus" data-container="body" data-toggle="btnRolUsuario"> ? </button></p>
 
 				<%= f.select(:category, [['Profesor', 2],['Vinculador Social', 3],['Socio comunitario', 4]], {:include_blank => '-- Seleccione una Opción --' }, { :class => 'form-control', :required => true }) %>
 			</div>
 
 			<div class="field">
 				<p><%= f.label :autorization_level, "Tipo de usuario"%>
-					<button type="button" class="btn btn-default btnWhite" id:"btnTipoUsuario"  data-trigger="focus" data-container="body" data-toggle="btnTipoUsuario"> ? </button>
+					<button type="button" class="btn btn-default btn-white" id:"btnTipoUsuario"  data-trigger="focus" data-container="body" data-toggle="btnTipoUsuario"> ? </button>
 				</p>
 
 				<%= f.select(:autorization_level,[['Activo', 1], ['Adherente', 2]], {:include_blank => '-- Seleccione una Opción --' }, { :class => 'form-control', :required => true }) %>
@@ -79,7 +79,7 @@
 		</div>
 	</div>
 
-	<%= f.submit "Aceptar", :class => 'btn btn-lg btnCRUD', data: { confirm: 'Por favor, ingrese a su mail y confirme su cuenta. Esto podría tardar unos minutos.' } %>
+	<%= f.submit "Aceptar", :class => 'btn btn-lg btn-crud', data: { confirm: 'Por favor, ingrese a su mail y confirme su cuenta. Esto podría tardar unos minutos.' } %>
 
 <% end %>
 

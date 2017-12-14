@@ -4,7 +4,7 @@
 			<%flash[:alert] = message %>
 		<% end %>
 	<% end %>
-	<div class="panel panel-default panelRease">
+	<div class="panel panel-default panel-rease">
 		<div class="panel-heading">
 			Boletín para los usuarios
 		</div>
@@ -32,8 +32,8 @@
 		</div>
 	</div>
 	<div class="actions">
-		<%= f.submit "Enviar Correo",:class=>'btn btn-lg btnCRUD' %>
-		<%= link_to 'Volver', bulletins_path,:class=>'btn btn-lg btnCRUD' %>
+		<%= f.submit "Enviar Correo",:class=>'btn btn-lg btn-crud' %>
+		<%= link_to 'Volver', bulletins_path,:class=>'btn btn-lg btn-crud' %>
 
 	</div>	
 <% end %>

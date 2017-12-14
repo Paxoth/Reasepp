@@ -25,19 +25,19 @@ p.note{
 	color: #EA7600;
 }
 /*REASE STYLES*/
-.tabRease>li>a
+.tab-rease>li>a
 {
 	color: #4d4d4d;
 }
-.tabRease>li>a:hover {
+.tab-rease>li>a:hover {
 	background: #1D58A8;
 	color: white;
 }
-.borderTab
+.border-tab
 {	
 	border-color: #1D58A8;
 }
-.ReaseDiv
+.div-rease
 {
 	margin: 2%;
 }
@@ -76,7 +76,7 @@ p.note{
 	padding-left: 35px;
 	padding-right: 35px;
 }
-.navbar-default .navbar-nav>li>.rightNav {
+.navbar-default .navbar-nav>li>.nav-text-right {
     min-width: 30px;
     font-size: 15px;
     padding-left: 0;
@@ -135,10 +135,10 @@ p.navbar-text.navbar-right
 	background: #EA7600;
 }
 
-.BarraNavegadora{
+.navbar-rease{
 	background: #002F6C;
 }
-.BarraNavegadora 
+.navbar-rease 
 {
 	font-weight: bold;
 	border-color: #002F6C;
@@ -153,7 +153,7 @@ p.navbar-text.navbar-right
 .panel a{
 	color: #EA7600;
 }
-.panelClick .panel-heading
+.panel-click .panel-heading
 {
 	background: #1D58A8;
 	text-align: center;
@@ -162,11 +162,11 @@ p.navbar-text.navbar-right
 	border-radius: 0;
 }
 
-.panelClick .panel-heading:hover{
+.panel-click .panel-heading:hover{
 	background: #EA7600;
 }
 
-.panelRease .panel-heading, #pies
+.panel-rease .panel-heading, #pies
 {
 	background: #1D58A8;
 	text-align: center;
@@ -205,12 +205,12 @@ p.navbar-text.navbar-right
 }
 
 /*BOTONES*/
-.btnSomos, .btnHacemos, .btnAdmin, .btnCRUD, .btn-nav, .btn-lg, .btn-social, .btn-manage{
+.btn-somos, .btn-hacemos, .btn-admin, .btn-crud, .btn-nav, .btn-lg, .btn-social, .btn-manage{
 	background: #EA7600;
 	color: white;
 	border-radius: 0;
 }
-.btnSomos:hover, .btnHacemos:hover, .btnAdmin:hover, .btnCRUD:hover, .btn-nav:hover, .btn-lg:hover, .btn-social:hover, .btn-manage:hover{
+.btn-somos:hover, .btn-hacemos:hover, .btn-admin:hover, .btn-crud:hover, .btn-nav:hover, .btn-lg:hover, .btn-social:hover, .btn-manage:hover{
 	background: #EA7600;
 }
 
@@ -265,20 +265,20 @@ table a{
 {
 	background: #EA7600;
 }
-.fc-button, #calendar_inside .fc-event,  #calendar .fc-button-today
+.fc-button, #calendar-aside .fc-event,  #calendar .fc-button-today
 {
 	background: #1D58A8;
 }
-.fc-button:hover, #calendar_inside .fc-event:hover, #calendar .fc-button-today:hover
+.fc-button:hover, #calendar-aside .fc-event:hover, #calendar .fc-button-today:hover
 {
 	background: #EA7600;
 }
 
-#calendar th, #calendar_inside th
+#calendar th, #calendar-aside th
 {
 	background: #1D58A8;
 }
-#calendar_inside .fc-event
+#calendar-aside .fc-event
 {
 	background: #1D58A8;
 }

@@ -1,7 +1,7 @@
-<%= link_to users_path, :class=>'btn btnAside', :id=>'btnPerdfil' do %>
+<%= link_to users_path, :class=>'btn btn-aside', :id=>'btn-perfil' do %>
 	¡Hola <%=current_user.nickname%>!
 	<%if current_user.photo.present?%>
-		<%= image_tag(current_user.photo, :class=>'SquarePicture') %>
+		<%= image_tag(current_user.photo, :class=>'square-picture') %>
 	<%else%>
 		<i class="glyphicon glyphicon-user"></i>
 	<%end%>

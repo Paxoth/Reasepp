@@ -1,16 +1,16 @@
-<h1>Solicitudes de servicio <button type="button" class="btn btn-default btnWhite" id:"btnSolicitud" data-trigger="focus" data-container="body" data-toggle="btnSolicitud"> ? </button></h1>
+<h1>Solicitudes de servicio <button type="button" class="btn btn-default btn-white" id:"btnSolicitud" data-trigger="focus" data-container="body" data-toggle="btnSolicitud"> ? </button></h1>
 
 <% if current_user.category == 4 or current_user.category == 3 %>
 	<%= link_to "Nueva solicitud de servicio", new_request_path, :class => 'btn btn-lg' %>
 <%end%>
 	
-<div class="ReaseDiv">
-	<ul class="nav nav-tabs tabRease nav-justified">
+<div class="div-rease">
+	<ul class="nav nav-tabs tab-rease nav-justified">
 		<li id="req1" onclick="req1()"><a>Disponibles</a></li>
 		<li id="req2" onclick="req2()"><a>Canceladas</a></li>
 		<li id="req3" onclick="req3()"><a>Caducadas</a></li>
 	</ul>
-	<div class="borderTab">
+	<div class="border-tab">
 
 		<div id="Disponible" class="padding15">
 			<%if @disponible.present?%>
@@ -36,12 +36,12 @@
 								</td>
 								
 								<%if request.user.category == 3%>
-									<td>Sin profesor responsable</td>
+									<td>Sin socio comunitario responsable</td>
 								<%else%>
-									<td><%=link_to request.user.name, request.user%></td>
+									<td><%=link_to request.user.nickname, request.user%></td>
 								<%end%>
-								<td><%= request.start_time%></td>
-								<td><%= request.end_time%></td>
+								<td><%= request.start_time.strftime("%d/%m/%Y")%></td>
+								<td><%= request.end_time.strftime("%d/%m/%Y")%></td>
 							</tr>
 						<%end%>
 					</tbody>
@@ -55,7 +55,7 @@
 					</tfoot>
 				</table>
 			<%else%>
-				<div class="panel panel-default panelRease">
+				<div class="panel panel-default panel-rease">
 					<div class="panel-heading">
 						Solicitudes de servicios disponibles
 					</div>
@@ -89,12 +89,12 @@
 								</td>
 								
 								<%if request.user.category == 3%>
-									<td>Sin profesor responsable</td>
+									<td>Sin socio comunitario responsable</td>
 								<%else%>
-									<td><%=link_to request.user.name, request.user%></td>
+									<td><%=link_to request.user.nickname, request.user%></td>
 								<%end%>
-								<td><%= request.start_time%></td>
-								<td><%= request.end_time%></td>
+								<td><%= request.start_time.strftime("%d/%m/%Y")%></td>
+								<td><%= request.end_time.strftime("%d/%m/%Y")%></td>
 							</tr>
 						<%end%>
 					</tbody>
@@ -108,7 +108,7 @@
 					</tfoot>
 				</table>
 			<%else%>
-				<div class="panel panel-default panelRease">
+				<div class="panel panel-default panel-rease">
 					<div class="panel-heading">
 						Solicitudes de servicios canceladas
 					</div>
@@ -125,8 +125,8 @@
 						<tr>
 							<th><strong>Nombre</strong></th>
 							<th><strong>Responsable</strong></th>
-							<th><strong>Fecha Inicio</strong></th>
-							<th><strong>Fecha Término</strong></th>					
+							<th><strong>Fecha Inicio.strftime("%d/%m/%Y")</strong></th>
+							<th><strong>Fecha Término.strftime("%d/%m/%Y")</strong></th>					
 						</tr>
 					</thead>
 					<tbody>
@@ -142,12 +142,12 @@
 								</td>
 								
 								<%if request.user.category == 3%>
-									<td>Sin profesor responsable</td>
+									<td>Sin socio comunitario responsable</td>
 								<%else%>
-									<td><%=link_to request.user.name, request.user%></td>
+									<td><%=link_to request.user.nickname, request.user%></td>
 								<%end%>
-								<td><%= request.start_time%></td>
-								<td><%= request.end_time%></td>
+								<td><%= request.start_time.strftime("%d/%m/%Y")%></td>
+								<td><%= request.end_time.strftime("%d/%m/%Y")%></td>
 							</tr>
 						<%end%>
 					</tbody>
@@ -161,7 +161,7 @@
 					</tfoot>
 				</table>
 			<%else%>
-				<div class="panel panel-default panelRease">
+				<div class="panel panel-default panel-rease">
 					<div class="panel-heading">
 						Solicitudes de servicios caducadas
 					</div>
@@ -203,7 +203,7 @@
 		document.getElementById("req2").className = "";
 		document.getElementById("req3").className = "active";
 	}
-	var content = '<p>Una <strong>solicitud de servicio</strong> es el proceso previo para concretar un proyecto AS, esta es publicada por un socio comunitario y pretenden encontrar un profesor con quien realizar dicho proyecto.</p><p>A continuación se presenta el proceso completo de un proyecto AS</p></p><div id = \"image"> <%= image_tag("Services.png",:class=>"popoverImage") %></div><p><i class="glyphicon glyphicon-tags"></i> : Solicitud de servicio que usted publicó.</p>';
+	var content = '<p>Una <strong>solicitud de servicio</strong> es el proceso previo para concretar un proyecto AS, esta es publicada por un socio comunitario y pretenden encontrar un profesor con quien realizar dicho proyecto.</p><p>A continuación se presenta el proceso completo de un proyecto AS</p></p><div id = \"image"> <%= image_tag("Services.png",:class=>"popover-image") %></div><p><i class="glyphicon glyphicon-tags"></i> : Solicitud de servicio que usted publicó.</p>';
 	$(function () {
 		$('[data-toggle="btnSolicitud"]').popover(
 			{

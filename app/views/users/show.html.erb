@@ -3,5 +3,5 @@
 <%= render 'partials/profile' %>
 
 <%if current_user.is_admin?%>
-	<%= link_to "Cambiar Tipo de Usuario", edit_user_path(@user), :class=>'btn btn-lg btnCRUD'%>
+	<%= link_to "Cambiar Tipo de Usuario", edit_user_path(@user), :class=>'btn btn-lg btn-crud'%>
 <%end%>

@@ -1,6 +1,6 @@
 <h1>Detalles del recurso <%=@resource.name%></h1>
 
-<div class="panel panel-default panelRease" >
+<div class="panel panel-default panel-rease" >
 	<div class="panel-heading">
 		<strong>
 		<% if resource.category == 1%>
@@ -21,12 +21,12 @@
 </div>
 
 <%if user_signed_in? %>
-<%= link_to 'Ver recurso <i class="glyphicon glyphicon-circle-arrow-down"></i>'.html_safe, @resource.archive.url, :class =>"btn btn-lg btnCRUD",:target => "_blank" %>
+<%= link_to 'Ver recurso <i class="glyphicon glyphicon-circle-arrow-down"></i>'.html_safe, @resource.archive.url, :class =>"btn btn-lg btn-crud",:target => "_blank" %>
 	<%if current_user.is_admin? %>
-		<%= link_to 'Editar', edit_resource_path(@resource), :class =>"btn btn-lg btnCRUD" %>
-		<%= link_to 'Volver', resources_path, :class =>"btn btn-lg btnCRUD" %>
+		<%= link_to 'Editar', edit_resource_path(@resource), :class =>"btn btn-lg btn-crud" %>
+		<%= link_to 'Volver', resources_path, :class =>"btn btn-lg btn-crud" %>
 	<%else%>
-		<%= link_to 'Volver', resources_muestra_path, :class =>"btn btn-lg btnCRUD" %>
+		<%= link_to 'Volver', resources_muestra_path, :class =>"btn btn-lg btn-crud" %>
 	<%end%>
 <%end%>
 

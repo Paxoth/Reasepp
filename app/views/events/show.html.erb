@@ -2,14 +2,14 @@
 
 <% if user_signed_in? && current_user.is_admin?  %>
 	<% if @event.user.id == current_user.id %>
-		<%= link_to 'Editar evento', edit_event_path(@event), :class => "btn btn-lg btnCRUD" %>
-		<%= link_to 'Eliminar evento', @event, method: :delete, data: { confirm: '¿Está seguro de eliminar el evento?' }, :class => "btn btn-lg btnCRUD" %>
+		<%= link_to 'Editar evento', edit_event_path(@event), :class => "btn btn-lg btn-crud" %>
+		<%= link_to 'Eliminar evento', @event, method: :delete, data: { confirm: '¿Está seguro de eliminar el evento?' }, :class => "btn btn-lg btn-crud" %>
 	<% end %>
 <% end %>
 	
-<%= link_to 'Volver', events_path, :class => "btn btn-lg btnCRUD" %>
+<%= link_to 'Volver', events_path, :class => "btn btn-lg btn-crud" %>
 
-<div class="panel panel-default panelRease" >
+<div class="panel panel-default panel-rease" >
 	<div class="panel-heading">
 		<%= @event.title %>
 	</div>
@@ -42,7 +42,7 @@
 		<p><strong>Creado por:</strong>
 		<%= link_to @event.user.nickname, user_path(@event.user.id) %>
 	  	<%if !@event.user.photo.blank?%>
-	  		<%= image_tag @event.user.photo.url(:mini), :class =>"RoundPicture" %>
+	  		<%= image_tag @event.user.photo.url(:mini), :class =>"round-picture" %>
 	  	<%end %></p>
 	</div>
 	<div class="panel-footer">
@@ -62,7 +62,7 @@
 				<hr>
 				<p>	
 					<%if comment.user.photo.present?%>
-						<%= image_tag comment.user.photo.url(:mini), :class =>"RoundPicture" %> 
+						<%= image_tag comment.user.photo.url(:mini), :class =>"round-picture" %> 
 					<%else%>
 						<%= image_tag ("mini/missingPhoto.png") %> 
 					<%end %>

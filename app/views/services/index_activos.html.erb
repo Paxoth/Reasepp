@@ -1,8 +1,8 @@
-<h1>Servicios Activos: <button type="button" class="btn btn-default btnWhite" id:"btnService" data-trigger="focus" data-container="body" data-toggle="btnService"> ? </button></h1>
+<h1>Servicios Activos: <button type="button" class="btn btn-default btn-white" id:"btnService" data-trigger="focus" data-container="body" data-toggle="btnService"> ? </button></h1>
 
-<div class="panel panel-default panelRease">
+<div class="panel panel-default panel-rease">
 	<div class="panel-heading">
-		Ofertas de servicios disponibles
+		Listdo de servicios activos
 	</div>
 	<div class="panel-body">
 		<%if @activos.present?%>
@@ -24,14 +24,14 @@
 							<td> <%=link_to truncate(service.title, length: 60), service%>
 							</td>
 							<%if service.publication_type == "Request"%>
-								<td><%= link_to creator.name, creator%></td>
-								<td><%= link_to acceptor.name, acceptor%></td>
+								<td><%= link_to creator.nickname, creator%></td>
+								<td><%= link_to acceptor.nickname, acceptor%></td>
 							<%else%>
-								<td><%= link_to acceptor.name, acceptor%></td>
-								<td><%= link_to creator.name, creator%></td>								
+								<td><%= link_to acceptor.nickname, acceptor%></td>
+								<td><%= link_to creator.nickname, creator%></td>								
 							<%end%>
-							<td><%= service.start_time%></td>
-							<td><%= service.end_time%></td>
+							<td><%= service.start_time.strftime("%d/%m/%Y")%></td>
+							<td><%= service.end_time.strftime("%d/%m/%Y")%></td>
 						</tr>
 					<%end%>
 				</tbody>

@@ -3,12 +3,12 @@
 <!--h1 class="text-center login-title">Ingrese sus datos para conectarse a REASE</h1-->
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name),  html: {class: 'form'}) do |f| %>
 
-	<div class="panel panel-default panelRease" >
+	<div class="panel panel-default panel-rease" >
 		<div class="panel-heading">Consentimiento para ser evaluado</div>
 		<div class="panel-body">
 			<div>
 				<p>Antes de registrarse es necesario que sepa los términos y condiciones que existen para pertenecer y mantenerse dentro de ésta red.
-				<a id ="linkEstatuto" data-toggle="modal" data-target = "#encuentro" >
+				<a id ="link-estatuto" data-toggle="modal" data-target = "#encuentro" >
 				>> Leer estatuto</a></p> 
 				<div class="modal fade" id="encuentro" tabindex="-1" role="dialog" aria-labelledby="mymodallabel" aria-hidden="true">
 					<div class="modal-dialog modal-lg modal-estatuto">
@@ -30,7 +30,7 @@
 		</div>
 	</div>
 
-	<div class="panel panel-default panelRease" >
+	<div class="panel panel-default panel-rease" >
 		<div class="panel-heading">Datos personales</div>
 		<div class="panel-body">
 
@@ -68,13 +68,13 @@
 		</div>
 	</div>
 
-	<div class="panel panel-default panelRease" >
+	<div class="panel panel-default panel-rease" >
 		<div class="panel-heading">Identificación dentro de la red </div>
 		<div class="panel-body">
 
 			<div class="field">
 				<p><%= f.label :category, "Rol de usuario" %>
-				<button type="button" class="btn btn-default btnWhite" id:"btnTipoUsuario"  data-trigger="focus" data-container="body" data-toggle="btnRolUsuario"> ? </button></p>
+				<button type="button" class="btn btn-default btn-white" id:"btnTipoUsuario"  data-trigger="focus" data-container="body" data-toggle="btnRolUsuario"> ? </button></p>
 
 				<%= f.select(:category, [['Profesor', 2],['Vinculador Social', 3],['Socio comunitario', 4]], {:include_blank => '-- Seleccione una Opción --' }, { :class => 'form-control', :required => true }) %>
 			</div>
@@ -83,7 +83,7 @@
 			<div class="field">
 				<p><%= f.label :autorization_level, "Adhesión a la Red"%>
 
-				<button type="button" class="btn btn-default btnWhite" id:"btnTipoUsuario"  data-trigger="focus" data-container="body" data-toggle="btnTipoUsuario"> ? </button>
+				<button type="button" class="btn btn-default btn-white" id:"btnTipoUsuario"  data-trigger="focus" data-container="body" data-toggle="btnTipoUsuario"> ? </button>
 
 				</p>
 
@@ -91,8 +91,8 @@
 			</div>
 		
 			<div class="actions">
-				<%= f.submit "Aceptar y Enviar Fomulario", :class => 'btn btn-lg btnCRUD'%>
-				<%= link_to "Cancelar", root_path, :class => 'btn btn-lg btnCRUD' %>
+				<%= f.submit "Aceptar y Enviar Fomulario", :class => 'btn btn-lg btn-crud'%>
+				<%= link_to "Cancelar", root_path, :class => 'btn btn-lg btn-crud' %>
 			</div>
 
 		</div>

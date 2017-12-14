@@ -1,6 +1,11 @@
-<h1> Ingreso intranet </h1>
-<p>Ingrese sus datos para poder conectarse a la intranet.</p>
 <div class="sesion">
-  <%= image_tag("Conect.png") %>
-  <%= render "devise/sessions/inicio_sesion" %>
+	<%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: 'form-signin'}) do |f| %>
+		<h1> Ingreso intranet </h1>
+		<p>Ingrese sus datos para poder conectarse a la intranet.</p>
+		<%= f.email_field :email, :class => 'form-control', :placeholder => 'Correo electrónico' %>
+		<%= f.password_field :password, autocomplete: "off", :class => 'form-control', :placeholder => 'Contraseña'%>
+		<%= f.submit "Ingresar", :class => 'btn btn-lg btn-block' %>
+		<p id="style-session"> <%= f.check_box :remember_me %> Recordarme </p>
+		<%= render "devise/shared/links" %>
+	<% end %>
 </div>

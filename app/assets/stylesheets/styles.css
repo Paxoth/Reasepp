@@ -73,7 +73,7 @@ section#contenedor
 	padding: 0;
 	text-align: center;
 }
-section#principal_intranet, section#principal_portal, aside
+section#principal-intranet, section#principal-portal, aside
 {
 	display: inline-block;
 	min-width: 300px;
@@ -81,7 +81,7 @@ section#principal_intranet, section#principal_portal, aside
 	width: 65%;
     min-height: 100%;
 }
-section#principal_intranet{
+section#principal-intranet{
 	width: 100%;
 }
 article
@@ -180,7 +180,7 @@ p
 	padding-left: 30px;
 	padding-bottom: 20px;
 }
-.inicioSesion
+.inicio-sesion
 {
 	padding-bottom: 20px;
     display: block;
@@ -188,7 +188,7 @@ p
     margin-right: auto;
 }
 
-.navCenter
+.nav-center
 {
 	margin: 8px;
 	margin-left: 8px;
@@ -210,7 +210,7 @@ p
 	margin-top: 0;
 	margin-bottom: 0;
 }
-.omniauthLogo
+.omniauth-logo
 {
 	max-height: 30px;
 	max-width: 30px;
@@ -219,7 +219,7 @@ p
 .padding15{
 	padding: 15px;
 }
-.popoverImage
+.popover-image
 {
 	width: 650px;
 }
@@ -229,11 +229,11 @@ p
 	margin-left: 200px;
 	text-align: left;
 }
-.RoundPicture
+.round-picture
 {
 	border-radius: 50%;
 }
-.SquarePicture
+.square-picture
 {
 	border-radius: 1px;
 	height: 20px;
@@ -251,17 +251,17 @@ p
 	background: #30bbbb;
 	color: white;
 }
-.to_left{
+.to-left{
 	text-align: left;
 }
-.to_right{
+.to-right{
 	text-align: right;
 }
-.no_breakline_right{
+.no-breakline-right{
 	display: inline-block;
 	float: right;
 }
-.no_breakline_left{
+.no-breakline-left{
 	display: inline-block;
 	float: left;
 }
@@ -272,16 +272,11 @@ p
 	text-align: center;
 	margin-top: 18px;
 }
-
-
-#linkEstatuto
+#link-estatuto
 {
 	text-align: right;
 	display: block;
 }
-
-
-
 #logo /*Estilo del logotipo de REASE*/
 {
 	margin-left: 25%;
@@ -291,18 +286,18 @@ p
 	display: block;
 }
 
-#logoInstituciones /* los logos de las intituciones tengan tamaño similar*/
+#logo-institution /* los logos de las intituciones tengan tamaño similar*/
 {
 	margin: 20px;
 	display: inline-block;
 }
-#logoNav /*estilos para el logo de la navbar*/
+#nav-logo /*estilos para el logo de la navbar*/
 {
 	margin-top:8px;
 	margin-right: 5px;
 	max-height: 40px;
 }
-#logoFooter{
+#logo-footer{
 	margin-top:8px;
 	margin-right: 5px;
 	max-height: 100px;
@@ -318,9 +313,7 @@ p
 }
 
 /*textos de cantidad de usuario y nombre de usuario en la barra*/
-
-
-#styleSession
+#style-session
 {
 	text-align: center;
 	margin:0;

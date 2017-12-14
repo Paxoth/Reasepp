@@ -1,10 +1,10 @@
 <h2>Resultados por Experiencias</h2>
-<ul class="nav nav-tabs tabRease nav-justified">
+<ul class="nav nav-tabs tab-rease nav-justified">
 	<li id="impact1" onclick="impact1()"><a>Resultados</a></li>
 	<li id="impact2" onclick="impact2()"><a>Experiencias</a></li>
 </ul>
 
-<div class="borderTab ">
+<div class="border-tab ">
 	<div id="Global" style="text-align: left;" class="padding15">
 		<div class="padding15">
 		<li><strong>Experiencias totales</strong>: <%=@institution.experiences.count%><br></li>
@@ -28,7 +28,7 @@
 					<%@profesor = User.where(id: experience.professor_id).first%>
 					<td><%=link_to truncate(experience.title, length: 60), experience%></td>
 					<td><%=link_to @profesor.nickname, user_path(@profesor)%></td>
-					<td><%=experience.created_at.strftime("%d / %m / %Y")%> <%=link_to image_tag("Extensiones/pdf.gif"), experience_path(experience, format: "pdf"), :target=>'_blank'%></td>
+					<td><%=experience.created_at.strftime("%d/%m/%Y")%> <%=link_to image_tag("Extensiones/pdf.gif"), experience_path(experience, format: "pdf"), :target=>'_blank'%></td>
 				</tr>
 			<%end%>
 			</tbody>

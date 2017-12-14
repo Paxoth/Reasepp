@@ -1,6 +1,6 @@
 <%if @service.status==1 or @service.status==3%>
 	<h1><%= @service.title%></h1>
-	<div class="panel panel-default panelRease">
+	<div class="panel panel-default panel-rease">
 		<div class="panel-heading">
 			Manifestación de trabajo de <%= @service.creator.nickname%>
 		</div>
@@ -33,12 +33,12 @@
 				<%if @aceptados.blank?%>
 					<p class="note">IMPORTANTE: Recuerde que solo se puede aceptar una de las manifestaciones de interés de trabajo.</p>
 					<%if @service.publication_type == "Offering"%>
-						<%= link_to "Aceptar", edit_offering_service_path(@service.publication, @service), :class=>'btn btn-lg btnCRUD', data: { confirm: confirm }%>
+						<%= link_to "Aceptar", edit_offering_service_path(@service.publication, @service), :class=>'btn btn-lg btn-crud', data: { confirm: confirm }%>
 					<%else%>
 						<%=form_for([@service.publication, @service],:html => { :style => 'display: inline;' }) do |t| %>
 							<%= t.hidden_field :status, :value=>2%>
 							<%= t.hidden_field :acceptor_id, :value => current_user.id%>
-						<%= t.submit "Aceptar",:class=>'btn btn-lg btnCRUD',data: { confirm: confirm }%>
+						<%= t.submit "Aceptar",:class=>'btn btn-lg btn-crud',data: { confirm: confirm }%>
 					<% end %>
 
 					<%end%>
@@ -46,7 +46,7 @@
 				<%if @service.status == 1%>
 					<%=form_for([@service.publication, @service],:html => { :style => 'display: inline;' }) do |t| %>
 						<%= t.hidden_field :status, :value=>3%>
-						<%= t.submit "Desistir",:class=>'btn btn-lg btnCRUD'%>
+						<%= t.submit "Desistir",:class=>'btn btn-lg btn-crud'%>
 					<% end %>
 				<% end %>
 			<%end%>
@@ -70,7 +70,7 @@
 				<hr>
 				<p>	
 					<%if comment.user.photo.present?%>
-						<%= image_tag comment.user.photo.url(:mini), :class =>"RoundPicture" %> 
+						<%= image_tag comment.user.photo.url(:mini), :class =>"round-picture" %> 
 					<%else%>
 						<%= image_tag ("mini/missingPhoto.png") %> 
 					<%end %>
@@ -86,7 +86,7 @@
 		</div>
 	</div>
 
-	<%=link_to "Volver", @service.publication, :class => 'btn btn-lg btnCRUD'%>
+	<%=link_to "Volver", @service.publication, :class => 'btn btn-lg btn-crud'%>
 <%else%>
 
 	<h1>Servicio activo</h1>
@@ -94,29 +94,29 @@
 	<%if @experience.blank? and  @service.learning_objectives.present?%>
 		<%if @service.publication_type == "Offering"%>
 			<% if current_user == @service.acceptor%>
-				<%=link_to "Generar Experiencia", new_service_experience_path(@service), :class => 'btn btn-lg btnCRUD'%>
+				<%=link_to "Generar Experiencia", new_service_experience_path(@service), :class => 'btn btn-lg btn-crud'%>
 			<% end %>
 		<%else%>
 			<% if current_user == @service.creator%>
-				<%=link_to "Generar Experiencia", new_service_experience_path(@service), :class => 'btn btn-lg btnCRUD'%>
+				<%=link_to "Generar Experiencia", new_service_experience_path(@service), :class => 'btn btn-lg btn-crud'%>
 			<% end %>
 		<%end%>
 	<%end%>
 	<%if @service.status != 5%>
 		<%if @service.publication_type == "Offering"%>
 			<% if @service.acceptor == current_user %>
-				<%= link_to "Editar", edit_offering_service_path(@service.publication, @service), :class=>'btn btn-lg btnCRUD'%>
+				<%= link_to "Editar", edit_offering_service_path(@service.publication, @service), :class=>'btn btn-lg btn-crud'%>
 			<%end%>
 		<%else%>
 			<% if @service.creator == current_user %>
-				<%= link_to "Editar", edit_request_service_path(@service.publication, @service), :class=>'btn btn-lg btnCRUD'%>
+				<%= link_to "Editar", edit_request_service_path(@service.publication, @service), :class=>'btn btn-lg btn-crud'%>
 			<%end%>
 		<% end %>
 	<%end%>
 
-	<%=link_to "Volver", services_index_activos_path, :class => 'btn btn-lg btnCRUD'%>
+	<%=link_to "Volver", services_index_activos_path, :class => 'btn btn-lg btn-crud'%>
 
-	<div class="panel panel-default panelRease">
+	<div class="panel panel-default panel-rease">
 		<div class="panel-heading">
 			<%= @service.title%>			
 		</div>
@@ -178,7 +178,7 @@
 				<hr>
 				<p>	
 					<%if comment.user.photo.present?%>
-						<%= image_tag comment.user.photo.url(:mini), :class =>"RoundPicture" %> 
+						<%= image_tag comment.user.photo.url(:mini), :class =>"round-picture" %> 
 					<%else%>
 						<%= image_tag ("mini/missingPhoto.png") %> 
 					<%end %>

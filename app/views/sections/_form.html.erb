@@ -3,7 +3,7 @@
 <% @section.errors.full_messages.each do |mensaje|%>
 		<%flash[:alert] = mensaje %>
 <%end%>
-<div class="panel panel-default panelRease">
+<div class="panel panel-default panel-rease">
 	<div class="panel-heading">
 		<%=accion%> <%=orden%>
 	</div>
@@ -16,10 +16,6 @@
 					<%= f.text_field :title, :class => 'form-control', :placeholder => 'Titulo',:required=>true %>
 				</p></div>
 				<p class="note">La sección corresponden al módulo de las páginas de inicio el cual usted desea agregar un nuevo artículo.</p>
-				<div class="field"><p>
-					<%= f.label :module, "Sección: "%>
-					<%= f.select(:module, [['Novedad','Novedad'],['Aprendizaje Servicio', 'Aprendizaje Servicio'],['Hacemos', 'Hacemos'],['Somos', 'Somos'],['Estatuto', 'Estatuto']],  {:include_blank => '— Seleccione una sección —',:selected => orden }, { :class => 'form-control', :required => true }) %>
-				</p></div>
 				
 				<div class="field"><p>
 					<%= f.label :prority, "Prioridad: "%>
@@ -33,8 +29,8 @@
 				
 
 				<div class="field"> 
-					<%= f.submit accion, :class => 'btn btn-lg btnCRUD' %>
-					<%= link_to "Cancelar", sections_path, :class => 'btn btn-lg btnCRUD' %>
+					<%= f.submit accion, :class => 'btn btn-lg btn-crud' %>
+					<%= link_to "Cancelar", sections_path, :class => 'btn btn-lg btn-crud' %>
 				</div>
 			<%end%>
 		</center>

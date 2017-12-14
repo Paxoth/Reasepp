@@ -1,23 +1,48 @@
 <% orden %>
 <% eliminar %>
 
-<div class="panel panel-default panelRease">
+<div class="panel panel-default panel-rease">
 	<div class="panel-heading">
 		Listado de <%=orden%>
 	</div>
 	<div class="panel-body">
-		<% @sections.each do |seccion| %>
-			<%if seccion.module == orden%>
-				<p>
-				<%=	seccion.title %>  - 
-				<%=	link_to "Ver", seccion %>  -				
-				<%= link_to "Editar", edit_section_path(seccion)%> - 
-				<% if eliminar == "Si" %>
-					<%= link_to 'Eliminar', seccion, method: :delete, data: { confirm: '¿Está seguro de eliminar esta sección?' } %>
+		<table class="table table-striped display" id="actas_dt">
+			<thead>
+				<tr>
+					<th>Título</th>
+					<th>Creador</th>
+					<th>Fecha</th>
+					<th>Eliminar</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @sections.each do |noticia| %>
+					<%if noticia.module == orden%>
+					<tr>
+						<td><%=link_to noticia.title, noticia%></td>
+						<td><%=link_to noticia.user.nickname, noticia.user%></td>
+						<td><%=l noticia.created_at%></td>
+						<td>
+						<% if eliminar == "Si" %>
+							<%= link_to 'Eliminar', noticia, method: :delete, data: { confirm: '¿Está seguro de eliminar esta sección?' } %>
+						<%end%>
+							
+						</td>
+					</tr>
+					<%end%>
 				<%end%>
-				</p>
-			<%end%>
-		<%end%>
+			</tbody>
+		</table>
 	</div>
 </div>
-<%= link_to "Volver", sections_path, :class => "btn btn-lg btnCRUD"%>
+<%= link_to "Volver", sections_path, :class => "btn btn-lg btn-crud"%>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('table.display').DataTable({
+			"language": {
+				"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+			},
+		});
+	} );
+</script>
