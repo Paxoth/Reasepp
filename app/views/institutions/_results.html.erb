@@ -1,18 +1,14 @@
-<h2>Resultados por Experiencias</h2>
-<ul class="nav nav-tabs tab-rease nav-justified">
-	<li id="impact1" onclick="impact1()"><a>Resultados</a></li>
-	<li id="impact2" onclick="impact2()"><a>Experiencias</a></li>
-</ul>
-
-<div class="border-tab ">
-	<div id="Global" style="text-align: left;" class="padding15">
-		<div class="padding15">
-		<li><strong>Experiencias totales</strong>: <%=@institution.experiences.count%><br></li>
-		<li><strong>Estudiantes beneficiados </strong>: <%=@institution.experiences.sum("participants")%></li>
-		<li><strong>Miembros de comunidades beneficiados </strong>: <%=@institution.experiences.sum("benefited")%></li>
-		</div>
+<div class="panel panel-default panel-rease no-margin-side">
+	<div class="panel-heading">
+		Experiencias y sus resultados
 	</div>
-	<div id="Experiencias" class="padding15">
+	<div class="panel-body">
+		<div class="padding15 to-left">
+			<li><strong>Experiencias totales</strong>: <%=@institution.experiences.count%><br></li>
+			<li><strong>Estudiantes participantes totales </strong>: <%=@institution.experiences.sum("participants")%></li>
+			<li><strong>Miembros de comunidades beneficiados </strong>: <%=@institution.experiences.sum("benefited")%></li>
+		</div>
+		<hr>
 		<table class="table table-striped display">
 			<thead>
 				<tr>
@@ -35,22 +31,3 @@
 		</table>	
 	</div>
 </div>
-
-<script type="text/javascript">
-	document.getElementById("impact1").className = "active";	
-	document.getElementById('Global').style.display='block';
-	document.getElementById('Experiencias').style.display='none';
-
-	function impact1(){		
-	document.getElementById('Global').style.display='block';
-	document.getElementById('Experiencias').style.display='none';
-	document.getElementById("impact1").className = "active";
-	document.getElementById("impact2").className = "";
-	}
-	function impact2(){
-	document.getElementById('Global').style.display='none';
-	document.getElementById('Experiencias').style.display='block';
-	document.getElementById("impact1").className = "";
-	document.getElementById("impact2").className = "active";
-	}
-</script>

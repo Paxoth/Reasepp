@@ -1,4 +1,4 @@
-Mon, 11 Dec 2017 17:16:18 -0300
+Thu, 14 Dec 2017 20:02:51 -0300
 README.rdoc	Wed, 06 Dec 2017 15:25:55 -0300
 app/controllers/application_controller.rb	Wed, 06 Dec 2017 15:25:55 -0300
 app/controllers/areas_controller.rb	Wed, 06 Dec 2017 15:25:55 -0300
@@ -10,13 +10,13 @@ app/controllers/events_controller.rb	Wed, 06 Dec 2017 15:25:55 -0300
 app/controllers/experiences_controller.rb	Wed, 06 Dec 2017 15:25:55 -0300
 app/controllers/institutions_controller.rb	Wed, 06 Dec 2017 15:25:55 -0300
 app/controllers/interest_links_controller.rb	Wed, 06 Dec 2017 15:25:55 -0300
-app/controllers/offerings_controller.rb	Mon, 11 Dec 2017 17:15:35 -0300
+app/controllers/offerings_controller.rb	Thu, 14 Dec 2017 13:50:25 -0300
 app/controllers/presentation_controller.rb	Wed, 06 Dec 2017 15:25:55 -0300
 app/controllers/projects_controller.rb	Wed, 06 Dec 2017 15:25:55 -0300
 app/controllers/questions_controller.rb	Wed, 06 Dec 2017 15:25:55 -0300
-app/controllers/requests_controller.rb	Mon, 11 Dec 2017 17:15:34 -0300
+app/controllers/requests_controller.rb	Thu, 14 Dec 2017 13:50:25 -0300
 app/controllers/resources_controller.rb	Wed, 06 Dec 2017 15:25:55 -0300
-app/controllers/sections_controller.rb	Wed, 06 Dec 2017 15:25:55 -0300
+app/controllers/sections_controller.rb	Thu, 14 Dec 2017 13:50:25 -0300
 app/controllers/services_controller.rb	Wed, 06 Dec 2017 15:25:55 -0300
 app/controllers/users/confirmations_controller.rb	Wed, 06 Dec 2017 15:25:55 -0300
 app/controllers/users/omniauth_callbacks_controller.rb	Wed, 06 Dec 2017 15:25:55 -0300
@@ -51,13 +51,13 @@ app/models/event.rb	Wed, 06 Dec 2017 15:25:55 -0300
 app/models/experience.rb	Wed, 06 Dec 2017 15:25:55 -0300
 app/models/identity.rb	Wed, 06 Dec 2017 15:25:55 -0300
 app/models/institution.rb	Wed, 06 Dec 2017 15:25:55 -0300
-app/models/interest_link.rb	Wed, 06 Dec 2017 15:25:55 -0300
+app/models/interest_link.rb	Thu, 14 Dec 2017 20:02:15 -0300
 app/models/offering.rb	Wed, 06 Dec 2017 15:25:55 -0300
 app/models/project.rb	Wed, 06 Dec 2017 15:25:55 -0300
 app/models/question.rb	Wed, 06 Dec 2017 15:25:55 -0300
 app/models/request.rb	Wed, 06 Dec 2017 15:25:55 -0300
 app/models/resource.rb	Wed, 06 Dec 2017 15:25:55 -0300
-app/models/section.rb	Wed, 06 Dec 2017 15:25:55 -0300
+app/models/section.rb	Thu, 14 Dec 2017 20:01:29 -0300
 app/models/service.rb	Wed, 06 Dec 2017 15:25:55 -0300
 app/models/user.rb	Wed, 06 Dec 2017 15:25:55 -0300
 app/pdfs/experience_pdf.rb	Wed, 06 Dec 2017 15:25:55 -0300

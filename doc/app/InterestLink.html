@@ -89,6 +89,9 @@
 de interés que se despliegan a lo largo de la intranet, que contienen
 información relacionada al Aprendizaje Servicio.</em></p>
 
+<p>_Los enlaces de interés fueron eliminados de las vistas, pero no así su
+código fuente, pues se espera que vuelvan a ser utilizados en un futuro. _</p>
+
 <p><strong>ATRIBUTOS</strong></p>
 <ul><li>
 <p><strong>name</strong>: Nombre del sitio al cual redirecciona.</p>
@@ -145,7 +148,7 @@ match de palabras en sus atributos.</p>
 
           
           <div class="method-source-code" id="search-source">
-            <pre><span class="ruby-comment"># File app/models/interest_link.rb, line 25</span>
+            <pre><span class="ruby-comment"># File app/models/interest_link.rb, line 27</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">search</span>(<span class="ruby-identifier">search</span>)
         <span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;name LIKE ? or description LIKE ?&quot;</span>, <span class="ruby-node">&quot;%#{search}%&quot;</span>,<span class="ruby-node">&quot;%#{search}%&quot;</span>) 
 <span class="ruby-keyword">end</span></pre>

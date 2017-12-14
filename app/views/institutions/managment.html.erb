@@ -4,10 +4,12 @@
 	<div class="panel-heading">
 		Información Global
 	</div>
-	<div class="panel-body to-left">
-		<li><strong>Experiencias totales</strong>: <%=@institution.experiences.count%><br></li>
-		<li><strong>Estudiantes impactados </strong>: <%=@institution.experiences.sum("participants")%></lu>
-		<li><strong>Miembros de comunidades impactados </strong>: <%=@institution.experiences.sum("benefited")%></li>
+	<div class="panel-body paddint15 to-left">
+		<div class="padding15 to-left">
+			<li><strong>Experiencias totales</strong>: <%=@institution.experiences.count%><br></li>
+			<li><strong>Estudiantes participantes totales </strong>: <%=@institution.experiences.sum("participants")%></li>
+			<li><strong>Miembros de comunidades beneficiados </strong>: <%=@institution.experiences.sum("benefited")%></li>
+		</div>
 	</div>
 </div>
 
@@ -63,10 +65,10 @@
 
 			<div class="to-left">
 				<hr>
-				<h2>Resultados las experiencias</h2>
+				<h2>Resultados las experiencias encontradas</h2>
 				<li><strong>Experiencias totales</strong>: <%=@experiences.count%><br></li>
-				<li><strong>Estudiantes impactados </strong>: <%=@experiences.sum("participants")%></lu>
-				<li><strong>Miembros de comunidades impactados </strong>: <%=@experiences.sum("benefited")%></li>
+				<li><strong>Estudiantes participantes totales </strong>: <%=@experiences.sum("participants")%></lu>
+				<li><strong>Miembros de comunidades beneficiados </strong>: <%=@experiences.sum("benefited")%></li>
 				<hr>
 			</div>
 			<h2>Áreas de conocimiento</h2>

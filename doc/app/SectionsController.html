@@ -163,12 +163,14 @@ poder crear y editar datos del portal Web._</p>
 
 <p>Se genera la consulta de todas las secciones que pertenezcan al módulo
 “Aprendizaje Servicio”.</p>
+
+<p>Sección eliminada, nuevo objetivo de la plataforma la hace innecesaria</p>
           
           
 
           
           <div class="method-source-code" id="aprendizaje-source">
-            <pre><span class="ruby-comment"># File app/controllers/sections_controller.rb, line 54</span>
+            <pre><span class="ruby-comment"># File app/controllers/sections_controller.rb, line 62</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">aprendizaje</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Aprendizaje Servicio&quot;</span>, <span class="ruby-value">:sections_aprendizaje_path</span>
         <span class="ruby-ivar">@sections</span> = <span class="ruby-constant">Section</span>.<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;priority ASC&quot;</span>).<span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;module = ?&quot;</span>,<span class="ruby-string">&quot;Aprendizaje Servicio&quot;</span>)
@@ -204,12 +206,13 @@ poder crear y editar datos del portal Web._</p>
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/sections_controller.rb, line 117</span>
+            <pre><span class="ruby-comment"># File app/controllers/sections_controller.rb, line 133</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
-        <span class="ruby-ivar">@section</span> = <span class="ruby-constant">Section</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">section_params</span>)
+        <span class="ruby-ivar">@section</span> = <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">sections</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">section_params</span>)
+        <span class="ruby-ivar">@section</span>.<span class="ruby-identifier">module</span> = <span class="ruby-string">&quot;Novedad&quot;</span>
         <span class="ruby-keyword">if</span> <span class="ruby-ivar">@section</span>.<span class="ruby-identifier">save</span>
                 <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">sections_path</span>
-                <span class="ruby-identifier">flash</span>[<span class="ruby-value">:notice</span>] = <span class="ruby-string">&quot;La sección ha sido creada correctamente&quot;</span>
+                <span class="ruby-identifier">flash</span>[<span class="ruby-value">:notice</span>] = <span class="ruby-string">&quot;La noticia ha sido creada correctamente&quot;</span>
         <span class="ruby-keyword">else</span>
                 <span class="ruby-identifier">render</span> <span class="ruby-value">:new</span> <span class="ruby-comment">#en caso de que no guarde redirecciona a la misma pagina</span>
         <span class="ruby-keyword">end</span>
@@ -245,7 +248,7 @@ poder crear y editar datos del portal Web._</p>
 
           
           <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/sections_controller.rb, line 130</span>
+            <pre><span class="ruby-comment"># File app/controllers/sections_controller.rb, line 147</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
         <span class="ruby-ivar">@section</span> = <span class="ruby-constant">Section</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
         <span class="ruby-ivar">@section</span>.<span class="ruby-identifier">destroy</span>
@@ -283,7 +286,7 @@ poder crear y editar datos del portal Web._</p>
 
           
           <div class="method-source-code" id="edit-source">
-            <pre><span class="ruby-comment"># File app/controllers/sections_controller.rb, line 140</span>
+            <pre><span class="ruby-comment"># File app/controllers/sections_controller.rb, line 157</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">edit</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Editar sección&quot;</span>, <span class="ruby-value">:edit_section_path</span>
         <span class="ruby-ivar">@section</span> = <span class="ruby-constant">Section</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
@@ -315,12 +318,14 @@ poder crear y editar datos del portal Web._</p>
 
 <p>Se genera la consulta de todas las secciones que pertenezcan al módulo
 “Estatuto”.</p>
+
+<p>Sección eliminada, nuevo objetivo de la plataforma la hace innecesaria</p>
           
           
 
           
           <div class="method-source-code" id="estatuto-source">
-            <pre><span class="ruby-comment"># File app/controllers/sections_controller.rb, line 46</span>
+            <pre><span class="ruby-comment"># File app/controllers/sections_controller.rb, line 52</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">estatuto</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Estatuto&quot;</span>, <span class="ruby-value">:sections_estatuto_path</span>
         <span class="ruby-ivar">@sections</span> = <span class="ruby-constant">Section</span>.<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;created_at ASC&quot;</span>).<span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;module = ?&quot;</span>,<span class="ruby-string">&quot;Estatuto&quot;</span>)
@@ -352,12 +357,14 @@ poder crear y editar datos del portal Web._</p>
 
 <p>Se genera la consulta de todas las secciones que pertenezcan al módulo
 “Hacemos”.</p>
+
+<p>Sección eliminada, nuevo objetivo de la plataforma la hace innecesaria</p>
           
           
 
           
           <div class="method-source-code" id="hacemos-source">
-            <pre><span class="ruby-comment"># File app/controllers/sections_controller.rb, line 38</span>
+            <pre><span class="ruby-comment"># File app/controllers/sections_controller.rb, line 42</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">hacemos</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;¿Qué hacemos?&quot;</span>, <span class="ruby-value">:sections_hacemos_path</span>
         <span class="ruby-ivar">@sections</span> = <span class="ruby-constant">Section</span>.<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;priority ASC&quot;</span>).<span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;module = ?&quot;</span>,<span class="ruby-string">&quot;Hacemos&quot;</span>)
@@ -428,7 +435,7 @@ mejorarse.</p>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/controllers/sections_controller.rb, line 102</span>
+            <pre><span class="ruby-comment"># File app/controllers/sections_controller.rb, line 118</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Nueva sección&quot;</span>, <span class="ruby-value">:new_section_path</span>
         <span class="ruby-ivar">@section</span> = <span class="ruby-constant">Section</span>.<span class="ruby-identifier">new</span>
@@ -461,12 +468,14 @@ mejorarse.</p>
 <p>Se crea una vista específica con el objetivo de que la sección
 automáticamente perteneciera al respectivo módulo. Se cree que estas vistas
 son optimizables.</p>
+
+<p>Sección eliminada, nuevo objetivo de la plataforma la hace innecesaria</p>
           
           
 
           
           <div class="method-source-code" id="newAprendizaje-source">
-            <pre><span class="ruby-comment"># File app/controllers/sections_controller.rb, line 94</span>
+            <pre><span class="ruby-comment"># File app/controllers/sections_controller.rb, line 110</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">newAprendizaje</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Aprendizaje Servicio&quot;</span>, <span class="ruby-value">:sections_aprendizaje_path</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Nuevo&quot;</span>
@@ -499,12 +508,14 @@ son optimizables.</p>
 <p>Se crea una vista específica con el objetivo de que la sección
 automáticamente perteneciera al respectivo módulo. Se cree que estas vistas
 son optimizables.</p>
+
+<p>Sección eliminada, nuevo objetivo de la plataforma la hace innecesaria</p>
           
           
 
           
           <div class="method-source-code" id="newEstatuto-source">
-            <pre><span class="ruby-comment"># File app/controllers/sections_controller.rb, line 86</span>
+            <pre><span class="ruby-comment"># File app/controllers/sections_controller.rb, line 100</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">newEstatuto</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Estatuto&quot;</span>, <span class="ruby-value">:sections_estatuto_path</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Nuevo&quot;</span>
@@ -537,12 +548,14 @@ son optimizables.</p>
 <p>Se crea una vista específica con el objetivo de que la sección
 automáticamente perteneciera al respectivo módulo. Se cree que estas vistas
 son optimizables.</p>
+
+<p>Sección eliminada, nuevo objetivo de la plataforma la hace innecesaria</p>
           
           
 
           
           <div class="method-source-code" id="newHacemos-source">
-            <pre><span class="ruby-comment"># File app/controllers/sections_controller.rb, line 78</span>
+            <pre><span class="ruby-comment"># File app/controllers/sections_controller.rb, line 90</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">newHacemos</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;¿Qué hacemos?&quot;</span>, <span class="ruby-value">:sections_hacemos_path</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Nuevo&quot;</span>
@@ -580,7 +593,7 @@ son optimizables.</p>
 
           
           <div class="method-source-code" id="newNovedades-source">
-            <pre><span class="ruby-comment"># File app/controllers/sections_controller.rb, line 62</span>
+            <pre><span class="ruby-comment"># File app/controllers/sections_controller.rb, line 70</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">newNovedades</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Novedades&quot;</span>, <span class="ruby-value">:sections_novedades_path</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Nuevo&quot;</span>
@@ -613,12 +626,14 @@ son optimizables.</p>
 <p>Se crea una vista específica con el objetivo de que la sección
 automáticamente perteneciera al respectivo módulo. Se cree que estas vistas
 son optimizables.</p>
+
+<p>Sección eliminada, nuevo objetivo de la plataforma la hace innecesaria</p>
           
           
 
           
           <div class="method-source-code" id="newSomos-source">
-            <pre><span class="ruby-comment"># File app/controllers/sections_controller.rb, line 70</span>
+            <pre><span class="ruby-comment"># File app/controllers/sections_controller.rb, line 80</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">newSomos</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;¿Quienes Somos?&quot;</span>, <span class="ruby-value">:sections_somos_path</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Nuevo&quot;</span>
@@ -691,7 +706,7 @@ son optimizables.</p>
 
           
           <div class="method-source-code" id="show-source">
-            <pre><span class="ruby-comment"># File app/controllers/sections_controller.rb, line 110</span>
+            <pre><span class="ruby-comment"># File app/controllers/sections_controller.rb, line 126</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
         <span class="ruby-ivar">@section</span> = <span class="ruby-constant">Section</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
 <span class="ruby-keyword">end</span></pre>
@@ -722,12 +737,14 @@ son optimizables.</p>
 
 <p>Se genera la consulta de todas las secciones que pertenezcan al módulo
 “Somos”.</p>
+
+<p>Sección eliminada, nuevo objetivo de la plataforma la hace innecesaria</p>
           
           
 
           
           <div class="method-source-code" id="somos-source">
-            <pre><span class="ruby-comment"># File app/controllers/sections_controller.rb, line 30</span>
+            <pre><span class="ruby-comment"># File app/controllers/sections_controller.rb, line 32</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">somos</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;¿Quienes Somos?&quot;</span>, <span class="ruby-value">:sections_somos_path</span>
         <span class="ruby-ivar">@sections</span> = <span class="ruby-constant">Section</span>.<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;priority ASC&quot;</span>).<span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;module = ?&quot;</span>,<span class="ruby-string">&quot;Somos&quot;</span>)
@@ -763,7 +780,7 @@ son optimizables.</p>
 
           
           <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File app/controllers/sections_controller.rb, line 148</span>
+            <pre><span class="ruby-comment"># File app/controllers/sections_controller.rb, line 165</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
         <span class="ruby-ivar">@section</span> = <span class="ruby-constant">Section</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
         <span class="ruby-keyword">if</span> <span class="ruby-ivar">@section</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">section_params</span>)
@@ -812,7 +829,7 @@ administrativas.</p>
 
           
           <div class="method-source-code" id="validate_category-source">
-            <pre><span class="ruby-comment"># File app/controllers/sections_controller.rb, line 162</span>
+            <pre><span class="ruby-comment"># File app/controllers/sections_controller.rb, line 179</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">validate_category</span> <span class="ruby-comment"># :doc:</span>
         <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">is_admin?</span>
                 <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">root_path</span>, <span class="ruby-identifier">alert</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;Sólo un administrador puede trabajar la página de inicio.&quot;</span>

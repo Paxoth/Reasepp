@@ -1,6 +1,10 @@
 =begin rdoc
 _**Section** es la entidad principal del portal web REASE. Fue creada para la clasificación de los diferentes publicaciones que pueden realizar los administradores del sitio, las cuales se desplegarán de manera ordenada en el sitio web._
 
+_La entidad Sections, perdió gran valor con la reformulación del siio, ahora solo se utiliza para crear noticias, ya que esta plataforma no se encargará más de hacer visible REASE para el mundo._
+
+_No se eliminaron los demás módulos, pues se espera que algún día vuelvan a ser utilizados._
+
 **ATRIBUTOS**
 
 *	__title__: Título de la publicación.
