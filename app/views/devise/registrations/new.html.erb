@@ -4,33 +4,6 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name),  html: {class: 'form'}) do |f| %>
 
 	<div class="panel panel-default panel-rease" >
-		<div class="panel-heading">Consentimiento para ser evaluado</div>
-		<div class="panel-body">
-			<div>
-				<p>Antes de registrarse es necesario que sepa los términos y condiciones que existen para pertenecer y mantenerse dentro de ésta red.
-				<a id ="link-estatuto" data-toggle="modal" data-target = "#encuentro" >
-				>> Leer estatuto</a></p> 
-				<div class="modal fade" id="encuentro" tabindex="-1" role="dialog" aria-labelledby="mymodallabel" aria-hidden="true">
-					<div class="modal-dialog modal-lg modal-estatuto">
-						<div class="modal-content">
-							<div class="modalbody">
-								<button type="button" class="close btnClose" data-dismiss="modal" aria-hidden = "true">
-								&times;
-								</button>
-								<%= render "partials/estatuto" %>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<p>Nuestro enfoque es el servicio, por lo que es necesario mantener un estándar dentro de la Red para que sus participantes cumplan con el objetivo. </p>
-				<p>Es por esto que se le pide a cada nuevo miembro de la red, dé su concentimiento para que pueda ser evaluado en las actividades que realice a nombre de REASE. </p>
-				<p class="note">*Todos los campos son obligatorios.</p>
-			</div>
-		</div>
-	</div>
-
-	<div class="panel panel-default panel-rease" >
 		<div class="panel-heading">Datos personales</div>
 		<div class="panel-body">
 
