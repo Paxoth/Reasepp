@@ -1,10 +1,10 @@
 <h1>Recursos</h1>
 <%if current_user.is_admin?%>
-	<%= link_to 'Agregar nuevo recurso', new_resource_path, :class=>"btn btn-lg btnAdmin" %>
+	<%= link_to 'Agregar nuevo recurso', new_resource_path, :class=>"btn btn-lg btn-admin" %>
 <%end%>
 
-<div class="ReaseDiv">
-	<ul class="nav nav-tabs tabRease nav-justified">
+<div class="div-rease">
+	<ul class="nav nav-tabs tab-rease nav-justified">
 		<li id="res1" onclick="res1()"><a>Actas reuniones</a></li>
 		<li id="res2" onclick="res2()"><a>Plantillas</a></li>
 		<li id="res3" onclick="res3()"><a>Formación AS</a></li>
@@ -12,7 +12,7 @@
 		<li id="res5" onclick="res5()"><a>Otros</a></li>
 	</ul>
 
-	<div class="borderTab">
+	<div class="border-tab">
 		<div id="Actas" class="padding15">
 			<%if @actas.present?%>
 				<table class="table table-striped display" id="actas_dt">
@@ -29,7 +29,7 @@
 							<tr>
 								<td><%=resource.name%></td>
 								<td><%=link_to resource.user.nickname, resource.user%></td>
-								<td><%=resource.date%></td>
+								<td><%=l resource.date%></td>
 								<td><%= render 'extensiones', :resource => resource %></td>
 							</tr>
 						<%end%>
@@ -55,7 +55,7 @@
 							<tr>
 								<td><%=resource.name%></td>
 								<td><%=resource.id%></td>
-								<td><%=resource.date%></td>
+								<td><%=l resource.date%></td>
 								<td><%= render 'extensiones', :resource => resource %></td>
 							</tr>
 						<%end%>
@@ -81,7 +81,7 @@
 							<tr>
 								<td><%=resource.name%></td>
 								<td><%=resource.id%></td>
-								<td><%=resource.date%></td>
+								<td><%=l resource.date%></td>
 								<td><%= render 'extensiones', :resource => resource %></td>
 							</tr>
 						<%end%>
@@ -107,7 +107,7 @@
 							<tr>
 								<td><%=resource.name%></td>
 								<td><%=resource.id%></td>
-								<td><%=resource.date%></td>
+								<td><%=l resource.date%></td>
 								<td><%= render 'extensiones', :resource => resource %></td>
 							</tr>
 						<%end%>
@@ -133,7 +133,7 @@
 							<tr>
 								<td><%=resource.name%></td>
 								<td><%=resource.id%></td>
-								<td><%=resource.date%></td>
+								<td><%=l resource.date%></td>
 								<td><%= render 'extensiones', :resource => resource %></td>
 							</tr>
 						<%end%>

@@ -1,13 +1,13 @@
 <%if current_user.is_admin?%>
 	<h1>Administrar Institución </h1>
-	<%= link_to 'Agregar institución', new_institution_path, :class=>"btn btn-lg btnAdmin" %><br>
+	<%= link_to 'Agregar institución', new_institution_path, :class=>"btn btn-lg btn-admin" %><br>
 <%end%>
 <h1>Organizaciones adheridas</h1>
 <p> Las organizaciones que actualmente están activas dentro de REASE o alguno de los miembros activos pertenecen a ellas, son: </p>
 
 <%if @institutions.present?%>
 	<% @institutions.each do |institution| %>
-		<%= link_to(image_tag(institution.logo.url(:mini)), institution, :id=>"logoInstituciones") %>
+		<%= link_to(image_tag(institution.logo.url(:mini)), institution, :id=>"logo-institution") %>
 	<%end%>
 <%else%>
 	Aún no se han agregado insituciones.

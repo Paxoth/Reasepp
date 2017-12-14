@@ -1,5 +1,5 @@
 <h1>Experiencia Folio N° <%=@experience.id%>  </h1>
-<div class="panel panel-default panelRease">
+<div class="panel panel-default panel-rease">
 	<div class="panel-heading">
 		Formato sistematización actividades Aprendizaje Servicio
 	</div>
@@ -84,12 +84,12 @@
 			<p><strong>Instancias de reflexión: </strong></p>
 				<p><%=@experience.reflection_moments%></p>
 		</div>
-<%= link_to 'Servicio relacionado', @experience.service, :class => "btn btn-lg btnCRUD" %>
+<%= link_to 'Servicio relacionado', @experience.service, :class => "btn btn-lg btn-crud" %>
 <%if @experience.professor == current_user%>
-	<%= link_to 'Editar', edit_service_experience_path(@experience.service,@experience), :class => "btn btn-lg btnCRUD" %>
+	<%= link_to 'Editar', edit_service_experience_path(@experience.service,@experience), :class => "btn btn-lg btn-crud" %>
 <%end%>
-<%= link_to "Descargar como PDF", experience_path(@experience, format: "pdf"), :class=> "btn btn-lg btnCRUD", :target=>'_blank'%>
-<%= link_to 'Volver', experiences_path, :class => "btn btn-lg btnCRUD" %>
+<%= link_to "Descargar como PDF", experience_path(@experience, format: "pdf"), :class=> "btn btn-lg btn-crud", :target=>'_blank'%>
+<%= link_to 'Volver', experiences_path, :class => "btn btn-lg btn-crud" %>
 	</div>
 </div>
 

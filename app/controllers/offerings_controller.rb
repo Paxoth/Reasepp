@@ -60,6 +60,9 @@ class OfferingsController < ApplicationController
 	#Método que permite crear la Oferta de servicio.
 	#
 	#Creado desde un usuario, impidiendole crearlo si no es un profesor o un vinculador social.
+	#
+	#La oferta solo poseera inicialmente la insitución del usuario que la genere, pero si originalmente es un vinculador y luego pasa a ser de un profesor, se cambiará la insitución de esta.
+	#
 	#Además se validan las fechas que estén dentro de valores válidos.
 	def create
 		@offering = current_user.offerings.new(offering_params)
@@ -68,6 +71,7 @@ class OfferingsController < ApplicationController
 			@offering.broker_id = current_user.id
 			flash[:alert] = "Para que esta oferta de servicio se concrete, un profesor debe aceptarla inicialmente."
 		end
+		@offering.institution_id = current_user.institution_id
 		@offering.status = 1
 		@offering.start_time = Time.now
 		respond_to do |format|

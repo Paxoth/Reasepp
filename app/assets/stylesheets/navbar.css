@@ -20,7 +20,7 @@
 	min-width: 115px;
 
 }
-.navbar-default .navbar-nav>li>.rightNav
+.navbar-default .navbar-nav>li>.nav-text-right
 {
 	min-width: 30px;
 	font-size: 15px;
@@ -52,7 +52,7 @@ p.navbar-text.navbar-right
 
 /*colores para barras y paneles*/
 
-.BarraNavegadora, .panelClick .panel-heading, .btnAside
+.navbar-rease, .panel-click .panel-heading, .btn-aside
 {
 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
 	background: #30bbbb;
@@ -62,14 +62,14 @@ p.navbar-text.navbar-right
 	background-image: -o-linear-gradient(top, #30bbbb, #30cccc);
 	background-image: linear-gradient(to bottom, #30bbbb, #30cccc);
 }
-.BarraNavegadora 
+.navbar-rease 
 {
 	-webkit-box-shadow: 3px 2px 5px #666666;
 	-moz-box-shadow: 3px 2px 5px #666666;
 	font-weight: bold;
 	border-color: #30cccc;
 }
-.panelClick .panel-heading:hover, .btn-nav:hover, .btnAside:hover
+.panel-click .panel-heading:hover, .btn-nav:hover, .btn-aside:hover
 {
 	background: #30cccc;
 	background-image: -webkit-linear-gradient(top, #30cccc, #30dddd);
@@ -81,7 +81,7 @@ p.navbar-text.navbar-right
 	
 }
 /*colores para barras y paneles*/
-.panelRease .panel-heading, #pies, .panel-half .panel-heading
+.panel-rease .panel-heading, #pies, .panel-half .panel-heading
 {
 	font-size:  12px;
 	background: #30aaaa;
@@ -102,41 +102,41 @@ p.navbar-text.navbar-right
 }
 
 /*Todos los estilos de los paneles que se muestran en toda la página*/
-.panelRease, .panelClick
+.panel-rease, .panel-click
 {
 	margin: 2%;
 	text-align: center;
 }
 
-.panelRease .panel-heading, #panelInstitution .panel-heading, .panelClick .panel-heading, .panel-half .panel-heading /*Cabecera del panel*/
+.panel-rease .panel-heading, .panel-click .panel-heading, .panel-half .panel-heading /*Cabecera del panel*/
 {
 	color: white;
 	font-weight: bold;
 	font-size: 14px;
 	text-align: left;
 }
-.panelRease .panel-footer, #panelInstitution .panel-footer, .panelClick .panel-footer /*Cabecera del footer*/
+.panel-rease .panel-footer, .panel-click .panel-footer /*Cabecera del footer*/
 {
 	background: white;
 }
-.rightNav
+.nav-text-right
 {
 	max-width: 100px;
 	text-align: left;
 
 }
-.tabRease
+.tab-rease
 {
 	margin: 0;
 	width: 100%;
 }
 
-.tabRease>li>a
+.tab-rease>li>a
 {
 	color: #30aaaa;
 	margin: 0;
 }
-.tabRease>li>a:hover
+.tab-rease>li>a:hover
 {
 	font-weight: bold;
 	background: #30cccc;
@@ -155,14 +155,14 @@ p.navbar-text.navbar-right
 .nav-tabs.nav-justified > .active > a:focus {
 	border-bottom-color: #30aaaa;
 }
-.borderTab
+.border-tab
 {	
 	margin: 0;
 	border: solid 1px;
 	border-color: #30aaaa;
 	background: white;
 }
-.ReaseDiv
+.div-rease
 {
 	margin: 2%;
 }

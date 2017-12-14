@@ -6,7 +6,7 @@ La Red Nacional de Aprendizaje Servicio Chile a definido su rol a desempeñar a 
 	<% @sections.each do |seccion| %>
 		<%if seccion.module == 'Hacemos'%>
 		<% div_id = seccion.id -%>
-		<button class = "btn btn-lg btnHacemos" onclick="funcion<%= div_id -%>()"><%= seccion.title%></button> 
+		<button class = "btn btn-lg btn-hacemos" onclick="funcion<%= div_id -%>()"><%= seccion.title%></button> 
 		<%end%>
 	<%end%>
 </center>
@@ -17,7 +17,7 @@ La Red Nacional de Aprendizaje Servicio Chile a definido su rol a desempeñar a 
 	<%if seccion.module == 'Hacemos'%>
 	<% titulo_id = seccion.id -%>
 	<div id="titulo<%= titulo_id -%>" >
-		<div  class="panel panel-default panelRease">
+		<div  class="panel panel-default panel-rease">
 			<div class="panel-heading">
 				<%=	seccion.title %> 
 			</div>
@@ -31,7 +31,7 @@ La Red Nacional de Aprendizaje Servicio Chile a definido su rol a desempeñar a 
 
 <br>
 <h1>Últimas de reuniones de REASE:</h1>
-<div class="panel panel-default panelRease">
+<div class="panel panel-default panel-rease">
 	<div class="panel-heading">
 		Listado de actas
 	</div>

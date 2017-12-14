@@ -8,7 +8,7 @@
 		<div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
 	<% end %>
 
-	<div class="panel panel-default panelRease">
+	<div class="panel panel-default panel-rease">
 		<div class="panel-heading">
 			Datos de <%=@user.name%>
 		</div>
@@ -36,7 +36,7 @@
 				<p class="note">* Si no se encuentra su institución comuníquese con un administrador</p>
 			</p></div>
 			
-			<p><%= f.check_box :institution_custom? %> <%= f.label :institution_custom, "Usar colores institucionales"%> <button type="button" class="btn btn-default btnWhite" id:"btnCustom"  data-trigger="focus" data-container="body" data-toggle="btnCustom"> ? </button></p>
+			<p><%= f.check_box :institution_custom? %> <%= f.label :institution_custom, "Usar colores institucionales"%> <button type="button" class="btn btn-default btn-white" id:"btnCustom"  data-trigger="focus" data-container="body" data-toggle="btnCustom"> ? </button></p>
 
 			<h2>Foto de perfil (**)</h2>	
 				<%= f.file_field :photo %>
@@ -90,8 +90,8 @@
 				<%= f.label :current_password, "Constraseña actual: "%>
 				<%= f.password_field :current_password, autocomplete: "off", :class => 'form-control', :placeholder => 'Ingrese su contraseña actual para confirmar los cambios' %>
 			</div>
-			<%= f.submit "Actualizar Perfil", :class=>"btn btn-lg btnCRUD" %>
-			<%= link_to 'Cancelar cambios', :back, :class =>"btn btn-lg btnCRUD" %>
+			<%= f.submit "Actualizar Perfil", :class=>"btn btn-lg btn-crud" %>
+			<%= link_to 'Cancelar cambios', :back, :class =>"btn btn-lg btn-crud" %>
 
 		</div>
 	</div>
@@ -103,7 +103,7 @@ $(function () {
 	{
 		title: 'Sitio web personalizado',
 		html: 'true', 
-		content: '<p><strong>Colores institucionales: </strong>Algunas de las instituciones del adheridas a REASE presentan sus colores insitucionales dentro del sitio. Si marcas esta opción y tu insitución posee los colores, se desplegará el sitio con aquellos estilos.</p>'
+		content: '<p><strong>Colores institucionales: </strong>Algunas instituciones adheridas a REASE presentan sus colores insitucionales dentro del sitio. Si se marca esta opción y la insitución posee los colores, se desplegará el sitio con aquellos estilos.</p>'
 		}
 	)
 })

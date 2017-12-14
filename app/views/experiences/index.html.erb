@@ -1,6 +1,6 @@
-<h1>Experiencias <button type="button" class="btn btn-default btnWhite" id:"btnExperiencia" data-trigger="focus" data-container="body" data-toggle="btnExperiencia"> ? </button></h1>
+<h1>Experiencias <button type="button" class="btn btn-default btn-white" id:"btnExperiencia" data-trigger="focus" data-container="body" data-toggle="btnExperiencia"> ? </button></h1>
 
-<div class="panel panel-default panelRease">
+<div class="panel panel-default panel-rease">
 	<div class="panel-heading">
 		Experiencias de servicios realizadas
 	</div>
@@ -22,7 +22,7 @@
 								<td><%=link_to truncate(experience.title, length: 60), experience%></td>
 								<td><%=link_to @profesor.nickname, user_path(@profesor)%></td>
 								<td><%=link_to @profesor.institution.name, institution_path(@profesor.institution)%></td>
-								<td><%=experience.created_at.strftime("%d / %m / %Y")%> <%=link_to image_tag("Extensiones/pdf.gif"), experience_path(experience, format: "pdf"), :target=>'_blank'%></td>
+								<td><%=experience.created_at.strftime("%d/%m/%Y")%> <%=link_to image_tag("Extensiones/pdf.gif"), experience_path(experience, format: "pdf"), :target=>'_blank'%></td>
 							</tr>
 						<%end%>
 					</tbody>

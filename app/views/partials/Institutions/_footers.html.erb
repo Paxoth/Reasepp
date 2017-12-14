@@ -3,7 +3,7 @@
 	
 	<%if @institution.name=="Universidad de Santiago de Chile"%>
 		<div class="footer-usach"">
-			<div class="no_breakline_left">
+			<div class="no-breakline-left">
 					<%= image_tag("Institutions/usach/footerorangeblue.jpg") %>
 			</div>
 			<div >
@@ -48,7 +48,7 @@
 						<%=link_to image_tag("Institutions/utem/linkedin.png"), @institution.linkedin, :target=>'_blank', :class=>"social-utem"%>
 					<%end%>
 				
-					<div class="no_breakline_right">
+					<div class="no-breakline-right">
 						<%=image_tag "Institutions/utem/acreditacion.png"%>
 					</div>
 					
@@ -105,7 +105,7 @@
 			<br>
 			Contacto: redrease@gmail.com
 			<br>
-			<%= link_to(image_tag("logoblanco.png", id: "logoFooter"),root_path) %>
+			<%= link_to(image_tag("logoblanco.png", id: "logo-footer"),root_path) %>
 		</div>
 	</div>		
 <%end%>

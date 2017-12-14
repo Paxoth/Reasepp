@@ -143,14 +143,19 @@
           <p>Método que permite crear la Oferta de servicio.</p>
 
 <p>Creado desde un usuario, impidiendole crearlo si no es un profesor o un
-vinculador social. Además se validan las fechas que estén dentro de valores
-válidos.</p>
+vinculador social.</p>
+
+<p>La oferta solo poseera inicialmente la insitución del usuario que la
+genere, pero si originalmente es un vinculador y luego pasa a ser de un
+profesor, se cambiará la insitución de esta.</p>
+
+<p>Además se validan las fechas que estén dentro de valores válidos.</p>
           
           
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/offerings_controller.rb, line 63</span>
+            <pre><span class="ruby-comment"># File app/controllers/offerings_controller.rb, line 67</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
         <span class="ruby-ivar">@offering</span> = <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">offerings</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">offering_params</span>)
         
@@ -158,6 +163,7 @@ válidos.</p>
                 <span class="ruby-ivar">@offering</span>.<span class="ruby-identifier">broker_id</span> = <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">id</span>
                 <span class="ruby-identifier">flash</span>[<span class="ruby-value">:alert</span>] = <span class="ruby-string">&quot;Para que esta oferta de servicio se concrete, un profesor debe aceptarla inicialmente.&quot;</span>
         <span class="ruby-keyword">end</span>
+        <span class="ruby-ivar">@offering</span>.<span class="ruby-identifier">institution_id</span> = <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">institution_id</span>
         <span class="ruby-ivar">@offering</span>.<span class="ruby-identifier">status</span> = <span class="ruby-value">1</span>
         <span class="ruby-ivar">@offering</span>.<span class="ruby-identifier">start_time</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>
         <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
@@ -207,7 +213,7 @@ creador de la oferta.</p>
 
           
           <div class="method-source-code" id="edit-source">
-            <pre><span class="ruby-comment"># File app/controllers/offerings_controller.rb, line 52</span>
+            <pre><span class="ruby-comment"># File app/controllers/offerings_controller.rb, line 53</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">edit</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Editar&quot;</span>
         <span class="ruby-keyword">if</span> <span class="ruby-ivar">@offering</span>.<span class="ruby-identifier">user_id</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">id</span> 
@@ -245,9 +251,9 @@ creador de la oferta.</p>
 
           
           <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File app/controllers/offerings_controller.rb, line 19</span>
+            <pre><span class="ruby-comment"># File app/controllers/offerings_controller.rb, line 20</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
-        <span class="ruby-ivar">@disponible</span> = <span class="ruby-constant">Offering</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">1</span>).<span class="ruby-identifier">paginate</span>(<span class="ruby-identifier">page</span><span class="ruby-operator">:</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:page</span>],<span class="ruby-identifier">per_page</span><span class="ruby-operator">:</span> <span class="ruby-value">5</span>).<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;created_at DESC&quot;</span>)
+        <span class="ruby-ivar">@disponible</span> = <span class="ruby-constant">Offering</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">1</span>).<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;created_at DESC&quot;</span>)
         <span class="ruby-ivar">@cancelada</span> = <span class="ruby-constant">Offering</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">2</span>).<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;created_at DESC&quot;</span>)
         <span class="ruby-ivar">@caducada</span> = <span class="ruby-constant">Offering</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">3</span>).<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;created_at DESC&quot;</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -282,7 +288,7 @@ creador de la oferta.</p>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/controllers/offerings_controller.rb, line 44</span>
+            <pre><span class="ruby-comment"># File app/controllers/offerings_controller.rb, line 45</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Nueva oferta&quot;</span>
         <span class="ruby-ivar">@offering</span> = <span class="ruby-constant">Offering</span>.<span class="ruby-identifier">new</span>
@@ -317,7 +323,7 @@ href="Offering.html">Offering</a> utilizando los parámetros de un input.</p>
 
           
           <div class="method-source-code" id="searchOffering-source">
-            <pre><span class="ruby-comment"># File app/controllers/offerings_controller.rb, line 124</span>
+            <pre><span class="ruby-comment"># File app/controllers/offerings_controller.rb, line 129</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">searchOffering</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Búsqueda&quot;</span>
         <span class="ruby-ivar">@offerings</span> = <span class="ruby-constant">Offering</span>.<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;created_at DESC&quot;</span>).<span class="ruby-identifier">all</span>
@@ -364,7 +370,7 @@ responsable)</p>
 
           
           <div class="method-source-code" id="show-source">
-            <pre><span class="ruby-comment"># File app/controllers/offerings_controller.rb, line 31</span>
+            <pre><span class="ruby-comment"># File app/controllers/offerings_controller.rb, line 32</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Mostrar&quot;</span>
         <span class="ruby-ivar">@comment</span> = <span class="ruby-constant">Comment</span>.<span class="ruby-identifier">new</span>
@@ -406,7 +412,7 @@ establecidos. Además se preocupa de validar las fechas de manera correcta.</p>
 
           
           <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File app/controllers/offerings_controller.rb, line 92</span>
+            <pre><span class="ruby-comment"># File app/controllers/offerings_controller.rb, line 97</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
         <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
                 <span class="ruby-keyword">if</span> <span class="ruby-ivar">@offering</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">offering_params</span>)
@@ -465,7 +471,7 @@ ofertas ( <a href="Area.html">Area</a>)</p>
 
           
           <div class="method-source-code" id="set_area-source">
-            <pre><span class="ruby-comment"># File app/controllers/offerings_controller.rb, line 148</span>
+            <pre><span class="ruby-comment"># File app/controllers/offerings_controller.rb, line 153</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">set_area</span> <span class="ruby-comment"># :doc:</span>
         <span class="ruby-ivar">@areas</span> = <span class="ruby-constant">Area</span>.<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;discipline ASC&quot;</span>).<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;name ASC&quot;</span>).<span class="ruby-identifier">all</span>     
 <span class="ruby-keyword">end</span></pre>
@@ -499,7 +505,7 @@ de la Oferta de servicio.</p>
 
           
           <div class="method-source-code" id="set_broker-source">
-            <pre><span class="ruby-comment"># File app/controllers/offerings_controller.rb, line 158</span>
+            <pre><span class="ruby-comment"># File app/controllers/offerings_controller.rb, line 163</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">set_broker</span> <span class="ruby-comment"># :doc:</span>
         <span class="ruby-keyword">if</span> <span class="ruby-ivar">@offering</span>.<span class="ruby-identifier">broker_id</span>.<span class="ruby-identifier">present?</span>
                 <span class="ruby-ivar">@broker</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">id</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@offering</span>.<span class="ruby-identifier">broker_id</span>).<span class="ruby-identifier">first</span>
@@ -534,7 +540,7 @@ de la Oferta de servicio.</p>
 
           
           <div class="method-source-code" id="unique_petition-source">
-            <pre><span class="ruby-comment"># File app/controllers/offerings_controller.rb, line 153</span>
+            <pre><span class="ruby-comment"># File app/controllers/offerings_controller.rb, line 158</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">unique_petition</span> <span class="ruby-comment"># :doc:</span>
         <span class="ruby-ivar">@petition</span> = <span class="ruby-ivar">@offering</span>.<span class="ruby-identifier">services</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:creator_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">id</span>)
 <span class="ruby-keyword">end</span></pre>

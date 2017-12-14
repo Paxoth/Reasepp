@@ -1,5 +1,5 @@
 <h1>Experiencia Reportada Folio N° <%=@project.id%>  </h1>
-<div class="panel panel-default panelRease">
+<div class="panel panel-default panel-rease">
   <div class="panel-heading">
     Formato sistematización actividades Aprendizaje Servicio
   </div>
@@ -77,10 +77,10 @@
         <p><%=@project.reflection_moments%></p>
     </div>
 <%if @project.user == current_user%>
-  <%= link_to 'Editar', edit_project_path(@project), :class => "btn btn-lg btnCRUD" %>
+  <%= link_to 'Editar', edit_project_path(@project), :class => "btn btn-lg btn-crud" %>
 <%end%>
-<%= link_to "Descargar como PDF", project_path(@project, format: "pdf"), :class=> "btn btn-lg btnCRUD", :target=>'_blank'%>
-<%= link_to 'Volver', projects_path, :class => "btn btn-lg btnCRUD" %>
+<%= link_to "Descargar como PDF", project_path(@project, format: "pdf"), :class=> "btn btn-lg btn-crud", :target=>'_blank'%>
+<%= link_to 'Volver', projects_path, :class => "btn btn-lg btn-crud" %>
   </div>
 </div>
 

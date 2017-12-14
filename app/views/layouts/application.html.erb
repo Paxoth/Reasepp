@@ -24,24 +24,12 @@
 					<%= render_breadcrumbs :tag => :li, :separator => "" %>
 				</ol>
 				<section id="contenedor">
-					<% if !user_signed_in? %>
-						<section id="principal_portal">
-							<article>
-								<%= bootstrap_flash %>
-								<%= yield %>     
-							</article>
-						</section>
-						<aside>
-							<%= render "partials/intranet"%>				
-						</aside>
-					<%else%>
-						<section id="principal_intranet">
-							<article>
-								<%= bootstrap_flash %>
-								<%= yield %>
-							</article>
-						</section>
-					<%end%>		
+					<section id="principal-intranet">
+						<article>
+							<%= bootstrap_flash %>
+							<%= yield %>
+						</article>
+					</section>
 				</section>
 			</div>
 		</div>
@@ -55,7 +43,7 @@
 					<br>
 					Contacto: redrease@gmail.com
 					<br>
-					<%= link_to(image_tag("logoblanco.png", id: "logoFooter"),root_path) %>
+					<%= link_to(image_tag("logoblanco.png", id: "logo-footer"),root_path) %>
 				</div>
 			</div>		
 		<%end%>

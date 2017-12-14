@@ -1,6 +1,6 @@
 <h1>Administrar tipo de usuario de <%=@user.nickname%></h1>
 <%if @user.is_admin?%>
-	<div class="panel panel-default panelRease">
+	<div class="panel panel-default panel-rease">
 		<div class="panel-heading">
 			¡USUARIO ADMINISTRADOR!
 		</div>
@@ -13,23 +13,23 @@
 <%end%>
 <%= form_for @user do |f| %>
 
-	<div class="panel panel-default panelRease" >
+	<div class="panel panel-default panel-rease" >
     	<div class="panel-heading">Cambiar tipo de usuario de <%=@user.nickname%></div>
     	<div class="panel-body">
 
 			<div class="field">
 				<p><%= f.label :category, "Rol de usuario" %>
-				<button type="button" class="btn btn-default btnWhite" id:"btnTipoUsuario"  data-trigger="focus" data-container="body" data-toggle="btnRolUsuario"> ? </button></p>
+				<button type="button" class="btn btn-default btn-white" id:"btnTipoUsuario"  data-trigger="focus" data-container="body" data-toggle="btnRolUsuario"> ? </button></p>
 
 				<%= f.select(:category, [['Profesor', 2],['Vinculador Social', 3],['Socio comunitario', 4]], {:include_blank => '-- Seleccione una Opción --' }, { :class => 'form-control', :required => true }) %>
 
-				<p><%= f.check_box :is_admin? %> <%= f.label :is_admin, "Usuario administrador"%> <button type="button" class="btn btn-default btnWhite" id:"btnAdmin"  data-trigger="focus" data-container="body" data-toggle="btnAdmin"> ? </button></p>
+				<p><%= f.check_box :is_admin? %> <%= f.label :is_admin, "Usuario administrador"%> <button type="button" class="btn btn-default btn-white" id:"btn-admin"  data-trigger="focus" data-container="body" data-toggle="btn-admin"> ? </button></p>
 			</div>
 
 			<div class="field">
 				<p><%= f.label :autorization_level, "Adhesión a la red"%>
 
-				<button type="button" class="btn btn-default btnWhite" id:"btnTipoUsuario"  data-trigger="focus" data-container="body" data-toggle="btnTipoUsuario"> ? </button>
+				<button type="button" class="btn btn-default btn-white" id:"btnTipoUsuario"  data-trigger="focus" data-container="body" data-toggle="btnTipoUsuario"> ? </button>
 
 				</p>
 
@@ -38,9 +38,9 @@
 		</div>
 	</div>
 
-	<%= f.submit "Aceptar Cambios", :class => 'btn btn-lg btnCRUD', data: { confirm: '¿Está seguro que desea realizar estos cambios? Estos cambios afectarán directamente en los niveles de autorización del usuario.' } %>
-	<%= link_to 'Cancelar cambios', @user, :class =>"btn btn-lg btnCRUD" %>
-	<%= link_to "Eliminar Usuario", @user, method: :delete, data: { confirm: "¿Está seguro que desea eliminar este usuario?" },:class=>'btn btn-lg btnCRUD' %>
+	<%= f.submit "Aceptar Cambios", :class => 'btn btn-lg btn-crud', data: { confirm: '¿Está seguro que desea realizar estos cambios? Estos cambios afectarán directamente en los niveles de autorización del usuario.' } %>
+	<%= link_to 'Cancelar cambios', @user, :class =>"btn btn-lg btn-crud" %>
+	<%= link_to "Eliminar Usuario", @user, method: :delete, data: { confirm: "¿Está seguro que desea eliminar este usuario?" },:class=>'btn btn-lg btn-crud' %>
 
 <% end %>
 
@@ -57,7 +57,7 @@ $(function () {
 })
 
 $(function () {
-  $('[data-toggle="btnAdmin"]').popover(
+  $('[data-toggle="btn-admin"]').popover(
   {
   	title: 'El usuario Adminsistrador',
   	html: 'true', 

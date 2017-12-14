@@ -13,14 +13,14 @@
 <!-- Botones de editar  eliminar solamente para el usuario responsable -->
 	<% if @request.user.id == current_user.id %>
 		<%if @request.status != 4%>
-			<%= link_to 'Editar ', edit_request_path(@request), :class => "btn btn-lg btnCRUD" %>
-			<%= link_to 'Eliminar', @request, method: :delete, data: { confirm: '¿Está seguro de eliminar la solicitud?' }, :class => "btn btn-lg btnCRUD" %>
+			<%= link_to 'Editar ', edit_request_path(@request), :class => "btn btn-lg btn-crud" %>
+			<%= link_to 'Eliminar', @request, method: :delete, data: { confirm: '¿Está seguro de eliminar la solicitud?' }, :class => "btn btn-lg btn-crud" %>
 		<%end%>
 	<% end %>
 <% end %>
 
-<%= link_to 'Volver', requests_path, :class => "btn btn-lg btnCRUD" %>
-<div class="panel panel-default panelRease" >
+<%= link_to 'Volver', requests_path, :class => "btn btn-lg btn-crud" %>
+<div class="panel panel-default panel-rease" >
 	<div class="panel-heading">
 		<%= @request.title %>
 	</div>
@@ -52,9 +52,6 @@
 			<p><strong>Área de trabajo: </strong> <%= @request.area.name%></p>
 		<%end%>
 
-		<%if @request.institution_id.present?%>
-			<p><strong>Institución: </strong> <%= link_to @request.institution.name, @request.institution%></p>
-		<%end%>
 		<%if @request.location.present?%>
 			<p><strong>Ubicación de desarrollo: </strong> <%= @request.location%></p>
 		<%end%>
@@ -64,12 +61,12 @@
 			<% if @request.broker_id.present?%>
 				<%= link_to @broker.nickname, user_path(@broker) %>
 				<%if !@broker.photo.blank?%>
-					<%= image_tag @broker.photo.url(:mini), :class =>"RoundPicture" %>
+					<%= image_tag @broker.photo.url(:mini), :class =>"round-picture" %>
 				<%end %>
 			<%else%>
 				<%= link_to @request.user.nickname, user_path(@request.user.id) %>
 				<%if !@request.user.photo.blank?%>
-					<%= image_tag @request.user.photo.url(:mini), :class =>"RoundPicture" %>
+					<%= image_tag @request.user.photo.url(:mini), :class =>"round-picture" %>
 				<%end %>
 			<%end%>
 		</p>
@@ -78,13 +75,13 @@
 			<% if !@request.broker_id.present?%>
 				<%= link_to @request.user.nickname, user_path(@request.user.id) %>
 				<%if !@request.user.photo.blank?%>
-					<%= image_tag @request.user.photo.url(:mini), :class =>"RoundPicture" %>
+					<%= image_tag @request.user.photo.url(:mini), :class =>"round-picture" %>
 				<%end %>
 			<%else%>
 				<%if @request.user.category == 4%>
 					<%= link_to @request.user.nickname, user_path(@request.user.id) %>
 					<%if !@request.user.photo.blank?%>
-						<%= image_tag @request.user.photo.url(:mini), :class =>"RoundPicture" %>
+						<%= image_tag @request.user.photo.url(:mini), :class =>"round-picture" %>
 					<%end %>
 				<%else%>
 					Aún no se ha asignado un socio comunitario responsable.
@@ -101,15 +98,15 @@
 					<p>Aún no se han manifestado para participar en este servicio</p>
 				<%elsif @request.services.count == 1%>
 					<p>Se ha manifestado <strong>1</strong> persona para este proyecto</p>
-					<%= link_to "Ver peticiones", request_services_path(@request), :class=>'btn btnCRUD'%>
+					<%= link_to "Ver peticiones", request_services_path(@request), :class=>'btn btn-crud'%>
 				<%else%>
 					<p>Se han manifestado <strong><%=@request.services.count%></strong> personas para este proyecto</p>
-					<%= link_to "Ver peticiones", request_services_path(@request), :class=>'btn btnCRUD'%>
+					<%= link_to "Ver peticiones", request_services_path(@request), :class=>'btn btn-crud'%>
 				<%end%>
 
 				<% if @request.user != current_user and current_user.category == 2%>
 					<%if @petition.blank?%>
-						<%= link_to "Manifestar interés de trabajo", new_request_service_path(@request), :class=>'btn btnCRUD'%>
+						<%= link_to "Manifestar interés de trabajo", new_request_service_path(@request), :class=>'btn btn-crud'%>
 					<%end%>
 				<%end%>
 				
@@ -136,7 +133,7 @@
 			<% @request.comments.order('created_at DESC').each do |comment|%><hr>
 				<div class="div-justify">
 					<%if comment.user.photo.present?%>
-						<%= image_tag comment.user.photo.url(:mini), :class =>"RoundPicture" %> 
+						<%= image_tag comment.user.photo.url(:mini), :class =>"round-picture" %> 
 					<%else%>
 						<%= image_tag ("mini/missingPhoto.png") %> 
 					<%end %>

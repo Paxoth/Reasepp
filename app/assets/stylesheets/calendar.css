@@ -6,7 +6,7 @@
 {
 	color:white;
 }
-.fc-button, #calendar_inside .fc-event,  #calendar .fc-button-today
+.fc-button, #calendar-aside .fc-event,  #calendar .fc-button-today
 {
 	background: #30aaaa;
 	color:white;
@@ -24,7 +24,7 @@
 	-moz-box-shadow: 3px 2px 5px #666666;
 	box-shadow: 3px 2px 5px #666666;
 }
-.fc-button:hover, #calendar_inside .fc-event:hover, #calendar .fc-button-today:hover
+.fc-button:hover, #calendar-aside .fc-event:hover, #calendar .fc-button-today:hover
 {
 	background: #30bbbb;
 	background-image: -webkit-linear-gradient(top, #30bbbb, #30cccc);
@@ -34,21 +34,17 @@
 	background-image: linear-gradient(to bottom, #30bbbb, #30cccc);
 }
 
-#calendar th, #calendar_inside th
+#calendar th, #calendar-aside th
 {
 	background: #30aaaa;
 	color: white;
 }
-#calendar_inside .fc-event
+#calendar-aside .fc-event
 {
 	background: #30bbbb;
 	height: 10px;
 }
-#calendar_inside .fc-event-title, #calendar_inside .fc-event-time
+#calendar-aside .fc-event-title, #calendar-aside .fc-event-time
 {
 	color:transparent;
-}
-#calendarPanelTitle, #calendarPanelTitle:hover, #calendarPanelTitle:visited
-{
-	color:white;
 }
