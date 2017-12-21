@@ -1,6 +1,6 @@
 <h1> Todos los usuarios registrados </h1>
 
- <div class="panel panel-default panelRease">
+ <div class="panel panel-default panel-rease">
     <div class="panel-heading">
       Usuarios registrados
     </div>
@@ -9,7 +9,7 @@
 			<p>		
 			<%= link_to user.nickname, user_path(user.id) %>
 			<%if !user.photo.blank?%>
-			<%= image_tag user.photo.url(:mini), :class =>"RoundPicture" %>
+			<%= image_tag user.photo.url(:mini), :class =>"round-picture" %>
 			<%end %> 
 			<%if current_user.is_admin?%> -
 				<%if user.is_admin?%> [Administrador] <%end%>

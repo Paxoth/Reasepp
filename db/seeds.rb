@@ -436,8 +436,9 @@ print("\n\tSeed:\tCreando Experiencias basados en los servicios: ")
 		service_aux = Service.where(id:service_aux_id).first
 	end
 	print service_aux_id.to_s+" "
-	if service_aux.publication_type = "Request"
-		professor_aux = User.where(id:service_aux.creator_id).first
+	
+	professor_aux = User.where(id:service_aux.creator_id).first
+	if professor_aux.category == 2
 		partner_aux = User.where(id: service_aux.acceptor_id).first
 	else
 		partner_aux = User.where(id:service_aux.creator_id).first

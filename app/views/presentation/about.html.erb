@@ -16,7 +16,7 @@
 <% @questions.each do |pregunta| %>
 	<% if user_signed_in? %>
 		<% div_id = pregunta.id -%>
-			<div  class="panel panel-default panelClick">
+			<div  class="panel panel-default panel-click">
 				<div class="panel-heading" data-toggle="collapse" data-target="#Novedad<%= div_id -%>">
 					<i class="glyphicon glyphicon-circle-arrow-down"></i> <%= pregunta.title %> 
 				</div>
@@ -28,7 +28,7 @@
 			</div>
 	<%elsif pregunta.reader == 2%>
 		<% div_id = pregunta.id -%>
-		<div  class="panel panel-default panelClick">
+		<div  class="panel panel-default panel-click">
 			<div class="panel-heading" data-toggle="collapse" data-target="#Novedad<%= div_id -%>">
 				<i class="glyphicon glyphicon-circle-arrow-down"></i> <%= pregunta.title %> 
 			</div>
@@ -42,7 +42,7 @@
 <%end%>
 
 <h2>Créditos</h2>
-<div class="panel panel-default panelRease">
+<div class="panel panel-default panel-rease">
 	<div class="panel-heading">
 		Sobre la aplicación
 	</div>
@@ -51,4 +51,4 @@
 	</div>
 </div>
 
-<%= link_to "Volver al inicio", root_path, :class => "btn btn-lg btnCRUD"%>
+<%= link_to "Volver al inicio", root_path, :class => "btn btn-lg btn-crud"%>

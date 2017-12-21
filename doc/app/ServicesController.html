@@ -170,7 +170,7 @@ previa para rellenar los campos iniciales.</p>
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/services_controller.rb, line 104</span>
+            <pre><span class="ruby-comment"># File app/controllers/services_controller.rb, line 105</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
         <span class="ruby-ivar">@publication</span> = <span class="ruby-identifier">publication</span>
         <span class="ruby-ivar">@service</span> = <span class="ruby-ivar">@publication</span>.<span class="ruby-identifier">services</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">service_params</span>)
@@ -234,7 +234,7 @@ profesores.</p>
 
           
           <div class="method-source-code" id="edit-source">
-            <pre><span class="ruby-comment"># File app/controllers/services_controller.rb, line 72</span>
+            <pre><span class="ruby-comment"># File app/controllers/services_controller.rb, line 73</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">edit</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Editar servicio&quot;</span>
         <span class="ruby-ivar">@publication</span> = <span class="ruby-identifier">publication</span>
@@ -293,7 +293,7 @@ manifestaciones de interés por parte de los usuarios por trabajar juntos.</p>
 
           
           <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File app/controllers/services_controller.rb, line 26</span>
+            <pre><span class="ruby-comment"># File app/controllers/services_controller.rb, line 27</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -328,9 +328,9 @@ ambos usuarios ( <a href="User.html">User</a> )</p>
 
           
           <div class="method-source-code" id="index_activos-source">
-            <pre><span class="ruby-comment"># File app/controllers/services_controller.rb, line 32</span>
+            <pre><span class="ruby-comment"># File app/controllers/services_controller.rb, line 33</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index_activos</span>
-        <span class="ruby-ivar">@activos</span> = <span class="ruby-constant">Service</span>.<span class="ruby-identifier">paginate</span>(<span class="ruby-identifier">page</span><span class="ruby-operator">:</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:page</span>],<span class="ruby-identifier">per_page</span><span class="ruby-operator">:</span> <span class="ruby-value">5</span>).<span class="ruby-identifier">where</span>(<span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">4</span>).<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;updated_at DESC&quot;</span>)
+        <span class="ruby-ivar">@activos</span> = <span class="ruby-constant">Service</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">4</span>).<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;updated_at DESC&quot;</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -367,7 +367,7 @@ pertenece a la publicación previa.</p>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/controllers/services_controller.rb, line 55</span>
+            <pre><span class="ruby-comment"># File app/controllers/services_controller.rb, line 56</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
         <span class="ruby-ivar">@publication</span> = <span class="ruby-identifier">publication</span>
         <span class="ruby-ivar">@service</span> = <span class="ruby-ivar">@publication</span>.<span class="ruby-identifier">services</span>.<span class="ruby-identifier">new</span>
@@ -407,7 +407,7 @@ search ( <a href="Service.html">Service</a> ).</p>
 
           
           <div class="method-source-code" id="searchService-source">
-            <pre><span class="ruby-comment"># File app/controllers/services_controller.rb, line 169</span>
+            <pre><span class="ruby-comment"># File app/controllers/services_controller.rb, line 170</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">searchService</span>
         <span class="ruby-identifier">add_breadcrumb</span> <span class="ruby-string">&quot;Búsqueda&quot;</span>
         <span class="ruby-ivar">@service</span> = <span class="ruby-constant">Service</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">2</span>).<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;created DESC&quot;</span>)
@@ -450,7 +450,7 @@ existir.</p>
 
           
           <div class="method-source-code" id="show-source">
-            <pre><span class="ruby-comment"># File app/controllers/services_controller.rb, line 40</span>
+            <pre><span class="ruby-comment"># File app/controllers/services_controller.rb, line 41</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
         <span class="ruby-ivar">@comment</span> = <span class="ruby-constant">Comment</span>.<span class="ruby-identifier">new</span>
         <span class="ruby-ivar">@service</span> = <span class="ruby-constant">Service</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
@@ -494,7 +494,7 @@ publicaciones previas a “servicio”.</p>
 
           
           <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File app/controllers/services_controller.rb, line 134</span>
+            <pre><span class="ruby-comment"># File app/controllers/services_controller.rb, line 135</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
         <span class="ruby-ivar">@publication</span> = <span class="ruby-identifier">publication</span>
         <span class="ruby-ivar">@service</span> = <span class="ruby-ivar">@publication</span>.<span class="ruby-identifier">services</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
@@ -560,12 +560,12 @@ href="Request.html">Request</a> )</p>
 
           
           <div class="method-source-code" id="publication-source">
-            <pre><span class="ruby-comment"># File app/controllers/services_controller.rb, line 182</span>
+            <pre><span class="ruby-comment"># File app/controllers/services_controller.rb, line 183</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">publication</span> <span class="ruby-comment"># :doc:</span>
         <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:request_id</span>]
                 <span class="ruby-identifier">id</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:request_id</span>]
                 <span class="ruby-constant">Request</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:request_id</span>])     
-        <span class="ruby-keyword">else</span>
+        <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:offering_id</span>]
                 <span class="ruby-identifier">id</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:offering_id</span>]
                 <span class="ruby-constant">Offering</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:offering_id</span>])
         <span class="ruby-keyword">end</span>
@@ -599,7 +599,7 @@ href="Request.html">Request</a> )</p>
 
           
           <div class="method-source-code" id="publication_url-source">
-            <pre><span class="ruby-comment"># File app/controllers/services_controller.rb, line 193</span>
+            <pre><span class="ruby-comment"># File app/controllers/services_controller.rb, line 194</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">publication_url</span>(<span class="ruby-identifier">publication</span>) <span class="ruby-comment"># :doc:</span>
         <span class="ruby-keyword">if</span> <span class="ruby-constant">Request</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">publication</span>
                 <span class="ruby-identifier">request_path</span>(<span class="ruby-identifier">publication</span>)      
@@ -639,13 +639,17 @@ publicación rechaza oferta de trabajar.</p>
 
           
           <div class="method-source-code" id="set_status-source">
-            <pre><span class="ruby-comment"># File app/controllers/services_controller.rb, line 236</span>
+            <pre><span class="ruby-comment"># File app/controllers/services_controller.rb, line 237</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">set_status</span> <span class="ruby-comment"># :doc:</span>
-        <span class="ruby-ivar">@publication</span> = <span class="ruby-identifier">publication</span>
-        <span class="ruby-ivar">@services</span> = <span class="ruby-identifier">publication</span>.<span class="ruby-identifier">services</span>.<span class="ruby-identifier">all</span>
-        <span class="ruby-ivar">@pendientes</span> = <span class="ruby-ivar">@services</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">1</span>).<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;updated_at DESC&quot;</span>)
-        <span class="ruby-ivar">@aceptados</span> = <span class="ruby-ivar">@services</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">2</span>).<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;updated_at DESC&quot;</span>)
-        <span class="ruby-ivar">@rechazados</span> = <span class="ruby-ivar">@services</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">3</span>).<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;updated_at DESC&quot;</span>)
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">publication</span>.<span class="ruby-identifier">present?</span>
+                <span class="ruby-ivar">@publication</span> = <span class="ruby-identifier">publication</span>
+                <span class="ruby-ivar">@services</span> = <span class="ruby-identifier">publication</span>.<span class="ruby-identifier">services</span>.<span class="ruby-identifier">all</span>
+                <span class="ruby-ivar">@pendientes</span> = <span class="ruby-ivar">@services</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">1</span>).<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;updated_at DESC&quot;</span>)
+                <span class="ruby-ivar">@aceptados</span> = <span class="ruby-ivar">@services</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">2</span>).<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;updated_at DESC&quot;</span>)
+                <span class="ruby-ivar">@rechazados</span> = <span class="ruby-ivar">@services</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">3</span>).<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;updated_at DESC&quot;</span>)
+        <span class="ruby-keyword">else</span>
+                <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">root_path</span>,<span class="ruby-identifier">alert</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;No puedes acceder a este sitio&quot;</span>
+        <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -682,7 +686,7 @@ href="Offering.html">Offering</a>)</p>
 
           
           <div class="method-source-code" id="validate_category_new-source">
-            <pre><span class="ruby-comment"># File app/controllers/services_controller.rb, line 206</span>
+            <pre><span class="ruby-comment"># File app/controllers/services_controller.rb, line 207</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">validate_category_new</span> <span class="ruby-comment"># :doc:</span>
         <span class="ruby-keyword">if</span> <span class="ruby-constant">Request</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">publication</span>
                 <span class="ruby-keyword">if</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">category</span> <span class="ruby-operator">!=</span> <span class="ruby-value">2</span>
@@ -724,7 +728,7 @@ ciertas vitas.</p>
 
           
           <div class="method-source-code" id="validate_owner-source">
-            <pre><span class="ruby-comment"># File app/controllers/services_controller.rb, line 226</span>
+            <pre><span class="ruby-comment"># File app/controllers/services_controller.rb, line 227</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">validate_owner</span> <span class="ruby-comment"># :doc:</span>
         <span class="ruby-keyword">if</span> <span class="ruby-identifier">current_user</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">publication</span>.<span class="ruby-identifier">user</span>
                 <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">root_path</span>, <span class="ruby-identifier">alert</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;No puede generar una petición para su propia publicación&quot;</span>
@@ -759,7 +763,7 @@ ciertas vitas.</p>
 
           
           <div class="method-source-code" id="validate_professor-source">
-            <pre><span class="ruby-comment"># File app/controllers/services_controller.rb, line 219</span>
+            <pre><span class="ruby-comment"># File app/controllers/services_controller.rb, line 220</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">validate_professor</span> <span class="ruby-comment"># :doc:</span>
         <span class="ruby-keyword">if</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">category</span> <span class="ruby-operator">!=</span> <span class="ruby-value">2</span>
                 <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">root_path</span>, <span class="ruby-identifier">alert</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;Solo un profesor puede editar este servicio&quot;</span>

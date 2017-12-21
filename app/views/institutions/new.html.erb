@@ -1,3 +1,26 @@
 <h1> Nueva institución </h1>
-<%= render 'form', {orden: "Agregar"} %>
 
+<%= form_for(@institution) do |f| %>
+	<% if @institution.errors.any? %>
+		<% @institution.errors.full_messages.each do |message| %>
+			<%flash[:alert] = message %>
+		<% end %>
+	<% end %>
+
+	<div class="panel panel-default panel-rease" >
+		<div class="panel-heading">
+			Agregar nueva institución
+		</div>
+		<div class="panel-body">
+
+			<div class="field"><p>
+				<%= f.label :name, "Nombre: "%>
+				<%= f.text_field :name, :class => 'form-control', :placeholder => 'Nombre',:required=>true %>
+			</p></div>
+				<p class="note">Para agregar una nueva institución solo requieres el nombre.Recuerda luego nombrar a un encargado AS</p>
+
+		</div>	
+	</div>
+	<%= f.submit "Agregar nueva institución", :class=>"btn btn-lg btn-crud" %>
+	<%= link_to 'Volver', institutions_path, :class =>"btn btn-lg btn-crud" %>
+<% end %>

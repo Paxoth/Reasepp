@@ -1,19 +1,19 @@
 <%if user_signed_in?%>
 	<h2>Miembros Actuales de <%=@institution.name%></h2>
 
-	<ul class="nav nav-tabs tabRease nav-justified">
+	<ul class="nav nav-tabs tab-rease nav-justified">
 		<li id="user1" onclick="user1()"><a>Encargado AS</a></li>
 		<li id="user2" onclick="user2()"><a>Profesores</a></li>
 		<li id="user3" onclick="user3()"><a>Socios Comunitarios</a></li>
 		<li id="user4" onclick="user4()"><a>Vinculadores Sociales</a></li>
 	</ul>
-	<div class="borderTab">
+	<div class="border-tab">
 		<div id="Encargado" class="padding15">
 			<h2>Datos del encargado AS de <%= @institution.name%></h2>
 			
 			<%if @manager.present?%>
 				<%if !@manager.photo.blank?%>
-					<%= image_tag @user.photo.url(:medium),:class=>'RoundPicture' %>
+					<%= image_tag @user.photo.url(:medium),:class=>'round-picture' %>
 				<%end%>
 				<p><strong>Nombre completo: </strong> <%= link_to @manager.name, @manager %> </p>
 				<p><strong>Categoría:</strong> 
@@ -32,7 +32,7 @@
 				<%if current_user.is_admin?%>
 					<%= form_for(@institution) do |f| %>
 						<%= f.select :manager_id, @professors.collect {|prof| [prof.name, prof.id]},{:include_blank => "Seleccione un usuario como encargado AS"},{ :class => 'form-control'}%>
-						<%= f.submit @action, :class=>"btn btn-lg btnCRUD",  data: { confirm: '¿Estás seguro que desea nombrar a este profesor como encargado AS de'+@institution.name }  %>
+						<%= f.submit @action, :class=>"btn btn-lg btn-crud",  data: { confirm: '¿Estás seguro que desea nombrar a este profesor como encargado AS de'+@institution.name }  %>
 					<%end%>
 				<%end%>
 			<%end%>

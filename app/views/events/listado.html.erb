@@ -2,7 +2,7 @@
 <% if user_signed_in? && current_user.is_admin?  %>
 	<%= link_to 'Nuevo evento', new_event_path, :class => "btn btn-lg " %>
 <% end %>
-<%= link_to "Volver al calendario", events_path , :class => "btn btn-lg btnCRUD" %>
+<%= link_to "Volver al calendario", events_path , :class => "btn btn-lg btn-crud" %>
 <div class="buscador">
 	<%= form_tag(events_searchEvent_path, :method => "post",:class=>"form-inline") do %>
 	<div class="input-group">
@@ -16,17 +16,17 @@
 	<%end%>
 </div>
 
-<ul class="nav nav-tabs tabRease nav-justified">
+<ul class="nav nav-tabs tab-rease nav-justified">
 <li id="event1" onclick="event1()"><a>Disponible</a></li>
 <li id="event2" onclick="event2()"><a>Realizado</a></li>
 <li id="event3" onclick="event3()"><a>Cancelado</a></li>
 <li id="event4" onclick="event4()"><a>Caducado</a></li>
 </ul>
-<div class="borderTab">
+<div class="border-tab">
 	<div id ="Disponible">
 		<%if @disponibles.present?%>
 			<% @disponibles.each do |event| %>
-				<div class="panel  panel-default panelRease">
+				<div class="panel  panel-default panel-rease">
 					<div class="panel-heading">
 						<%=event.title%>
 					</div>
@@ -41,7 +41,7 @@
 			<%end%>
 			<%= will_paginate @disponibles, :param_name => 'disponibles' %>
 		<%else%>
-			<div class="panel  panel-default panelRease">
+			<div class="panel  panel-default panel-rease">
 				<div class="panel-heading">
 					Eventos disponibles
 				</div>
@@ -54,7 +54,7 @@
 	<div id ="Realizado">
 		<%if @realizados.present?%>
 			<% @realizados.each do |event| %>
-				<div class="panel  panel-default panelRease">
+				<div class="panel  panel-default panel-rease">
 					<div class="panel-heading">
 						<%=event.title%>
 					</div>
@@ -68,7 +68,7 @@
 				</div>
 			<%end%>
 		<%else%>
-			<div class="panel  panel-default panelRease">
+			<div class="panel  panel-default panel-rease">
 				<div class="panel-heading">
 					Eventos realizados
 				</div>
@@ -81,7 +81,7 @@
 	<div id ="Cancelado">
 		<%if @cancelados.present?%>
 			<% @cancelados.each do |event| %>
-				<div class="panel  panel-default panelRease">
+				<div class="panel  panel-default panel-rease">
 					<div class="panel-heading">
 						<%=event.title%>
 					</div>
@@ -95,7 +95,7 @@
 				</div>
 			<%end%>
 		<%else%>
-			<div class="panel  panel-default panelRease">
+			<div class="panel  panel-default panel-rease">
 				<div class="panel-heading">
 					Eventos cancelados
 				</div>
@@ -108,7 +108,7 @@
 	<div id ="Caducado">
 		<%if @caducados.present?%>
 			<% @caducados.each do |event| %>
-				<div class="panel  panel-default panelRease">
+				<div class="panel  panel-default panel-rease">
 					<div class="panel-heading">
 						<%=event.title%>
 					</div>
@@ -122,7 +122,7 @@
 				</div>
 			<%end%>
 		<%else%>
-			<div class="panel panel-default panelRease">
+			<div class="panel panel-default panel-rease">
 				<div class="panel-heading">
 					Eventos caducados
 				</div>

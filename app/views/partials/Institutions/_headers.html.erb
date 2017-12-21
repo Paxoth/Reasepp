@@ -5,7 +5,7 @@
 		<div class="header_usach">
 			<div class="header_center">
 				<%=link_to 'Universidad de Santiago de Chile', @institution%>
-				<div class="to_right no_breakline_right">
+				<div class="to-right no-breakline-right">
 				<%if @institution.twitter.present?%>
 					<%=link_to image_tag("Institutions/usach/twitter.png"), @institution.twitter, :target=>'_blank'%>
 				<%end%>
@@ -33,5 +33,5 @@
 		<%=image_tag("rease-header.png", :class=>"banner-rease")%>
 	<%end%>
 <%else%>
-	<%=image_tag("rease-header.png", :class=>"banner-rease")%>
+	<%=link_to (image_tag("rease-header.png", :class=>"banner-rease")), root_path%>
 <%end%>

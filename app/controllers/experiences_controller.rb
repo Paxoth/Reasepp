@@ -24,7 +24,7 @@ class ExperiencesController < ApplicationController
 	#Vista nueva experiencias
 	#
 	#Permite crear uan experiencia, basada un un servicio anteriormente generado. Las experiencias, siempre provienen de un servicio.
-	#En caso de que no provenga de un servicio se pueden generar experiencias documentadas (Ver Project)
+	#En caso de que no provenga de un servicio se pueden generar experiencias reportada, la cual no utilizará el proceso de licitación.
 	def new
 		@service = servicio
 		if @service.present?
@@ -43,7 +43,11 @@ class ExperiencesController < ApplicationController
 	def edit
 		add_breadcrumb "Editar"
 	    @service = servicio
-	    @experience = servicio.experiences.find(params[:id])
+	    if @service.present?
+	   		@experience = servicio.experiences.find(params[:id])
+	   	else
+	   		@experience = Experience.find(params[:id])
+	   	end
 	    if current_user != @experience.professor
 	    	redirect_to root_path, alert: "Solo el profesor dueño de esta experiencia puede editarla."
 	    end
@@ -99,7 +103,9 @@ class ExperiencesController < ApplicationController
 			if @experience.save
 				if @service.present?
 					@service.update(status: 5)
+					@experience.partner_name = @experience.partner.name;
 				end
+
 				format.html { redirect_to experience_path(@experience), notice: 'La experiencia se ha creado exitosamente.' }
 			else
 				format.html { render :new }
@@ -134,19 +140,15 @@ class ExperiencesController < ApplicationController
 	end
 
 	#Vista que permite buscar experiencias a través de un match de palabras, utilizando la función search.
-	#La busqueda complementa tanto las experiencias como las experiencias documentadas ( Project )
 	#
 	#*NOTA IMPORTANTE:* a pesar de que esta vista funciona de manera correcta, fue quitada por Maximiiano Pérez porque la búsuqeda de DataTables es suficientemente eficiente.
 	def searchExperience
 		add_breadcrumb "Búsqueda"
 		@experiences = Experience.order("created_at DESC").all
-		@projects = Project.order("created_at DESC").all
 		if params[:search]
 			@experiences = Experience.search(params[:search]).order("created_at DESC")
-			@projects = Project.search(params[:search]).order("created_at DESC")
 		else
 			@experiences = Experience.order("created_at DESC").all
-			@projects = Project.order("created_at DESC").all
 		end
 	end
 	
@@ -196,12 +198,15 @@ class ExperiencesController < ApplicationController
       		:service_id,
 			:description,
 			:partner_id,
+			:partner_name,
 			:professor_id,
 			:broker_id,
 			:folio,
 			:institution_id,
 			:faculty,
 			:department,
+			:region,
+			:comuna, 
 			:course_name,
 			:course_type,
 			:course_type_other,

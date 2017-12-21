@@ -1,6 +1,6 @@
 <h1>Link de interés</h1>
 
-<div class="panel panel-default panelRease">
+<div class="panel panel-default panel-rease">
 	<div class="panel-heading">
 		<%= @interest_link.name %>
 	</div>
@@ -17,6 +17,6 @@
 	</div>
 </div>
 <%if user_signed_in? %>
-<%= link_to 'Editar', edit_interest_link_path(@interest_link), :class => 'btn btn-lg btnCRUD' %> 
-<%= link_to 'Volver', interest_links_path , :class => 'btn btn-lg btnCRUD' %>
+<%= link_to 'Editar', edit_interest_link_path(@interest_link), :class => 'btn btn-lg btn-crud' %> 
+<%= link_to 'Volver', interest_links_path , :class => 'btn btn-lg btn-crud' %>
 <%end%>

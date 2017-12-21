@@ -1,15 +1,16 @@
 <%if @user.category != 4%>
 	<%if @offerings.present?%>
+	<div class="div-rease">
 		<h1>Ofertas de Servicio activas de <%=@user.nickname%></h1>
 
-		<ul class="nav nav-tabs tabRease nav-justified">
+		<ul class="nav nav-tabs tab-rease nav-justified">
 			<%count = 0%>
 			<% @offerings.each do |offering| %>
 				<%count+=1%>
 				<li id="offering<%= offering.id -%>" onclick="offering<%= offering.id -%>()"><a>Oferta <%=count%></a></li>
 			<%end%>
 		</ul>
-		<div class="borderTab">
+		<div class="border-tab">
 			<% @offerings.each do |offering| %>
 				<div id="oferta<%=offering.id -%>">
 					<h2>Nombre</h2>
@@ -35,35 +36,13 @@
 						<p><strong>Ubicación de desarrollo: </strong> <%= offering.location%></p>
 					<%end%>
 
-					<%= link_to "Ir a la Oferta", offering, :class=>'btn btnCRUD'%>
+					<%= link_to "Ir a la Oferta", offering, :class=>'btn btn-crud'%>
 				</div>
 			<%end%>
 		</div>
-		<script type="text/javascript">
-			<% @offerings.each do |offering| %>
-				<%if offering == @offerings.first%>
-					document.getElementById("offering<%= offering.id -%>").className = "active";	
-					document.getElementById('oferta<%= offering.id -%>').style.display='block';	
-				<%else%>
-					document.getElementById('oferta<%= offering.id -%>').style.display='none';	
-				<%end%>
-			<%end%>
-			<% @offerings.each do |offering| %>
-				function offering<%= offering.id -%>(){
-					<% @offerings.each do |offeringIn| %>
-						<%if offering == offeringIn%>
-							document.getElementById("offering<%= offeringIn.id -%>").className = "active";	
-							document.getElementById('oferta<%= offeringIn.id -%>').style.display='block';	
-						<%else%>
-							document.getElementById("offering<%= offeringIn.id -%>").className = "";	
-							document.getElementById('oferta<%= offeringIn.id -%>').style.display='none';
-						<%end%>
-					<%end%>
-				}
-			<%end%>
-		</script>
+	</div>
 	<%else%>
-		<div class="panel panel-default panelRease">
+		<div class="panel panel-default panel-rease">
 			<div class="panel-heading">
 				Ofertas de servicios de <%=@user.nickname%>
 			</div>
@@ -76,15 +55,16 @@
 
 <%if @user.category != 2%>
 	<%if @requests.present?%>
+	<div class="div-rease">
 		<h1>Solicitudes de Servicio activas de <%=@user.nickname%></h1>
-		<ul class="nav nav-tabs tabRease nav-justified">
+		<ul class="nav nav-tabs tab-rease nav-justified">
 			<%count = 0%>
 			<% @requests.each do |request| %>
 				<%count+=1%>
 				<li id="request<%= request.id -%>" onclick="request<%= request.id -%>()"><a>Solicitud <%=count%></a></li>
 			<%end%>
 		</ul>
-		<div class="borderTab">
+		<div class="border-tab">
 			<% @requests.each do |request| %>
 				<div id="solicitud<%=request.id -%>">
 					<h2>Nombre</h2>
@@ -110,35 +90,13 @@
 						<p><strong>Ubicación de desarrollo: </strong> <%= request.location%></p>
 					<%end%>
 
-					<%= link_to "Ir a la Solicitud", request, :class=>'btn btnCRUD'%>
+					<%= link_to "Ir a la Solicitud", request, :class=>'btn btn-crud'%>
 				</div>
 			<%end%>
 		</div>
-		<script type="text/javascript">
-			<% @requests.each do |request| %>
-				<%if request == @requests.first%>
-					document.getElementById("request<%= request.id -%>").className = "active";	
-					document.getElementById('solicitud<%= request.id -%>').style.display='block';	
-				<%else%>
-					document.getElementById('solicitud<%= request.id -%>').style.display='none';	
-				<%end%>
-			<%end%>
-			<% @requests.each do |request| %>
-				function request<%= request.id -%>(){
-					<% @requests.each do |requestIn| %>
-						<%if request == requestIn%>
-							document.getElementById("request<%= requestIn.id -%>").className = "active";	
-							document.getElementById('solicitud<%= requestIn.id -%>').style.display='block';	
-						<%else%>
-							document.getElementById("request<%= requestIn.id -%>").className = "";	
-							document.getElementById('solicitud<%= requestIn.id -%>').style.display='none';
-						<%end%>
-					<%end%>
-				}
-			<%end%>
-		</script>
+	</div>
 	<%else%>
-		<div class="panel panel-default panelRease">
+		<div class="panel panel-default panel-rease">
 			<div class="panel-heading">
 				Solicitudes de servicios de <%=@user.nickname%>
 			</div>
@@ -148,3 +106,52 @@
 		</div>
 	<%end%>
 <%end%>
+
+<script type="text/javascript">
+	<%if @offerings.present?%>
+		<% @offerings.each do |offering| %>
+			<%if offering == @offerings.first%>
+				document.getElementById("offering<%= offering.id -%>").className = "active";	
+				document.getElementById('oferta<%= offering.id -%>').style.display='block';	
+			<%else%>
+				document.getElementById('oferta<%= offering.id -%>').style.display='none';	
+			<%end%>
+		<%end%>
+		<% @offerings.each do |offering| %>
+			function offering<%= offering.id -%>(){
+				<% @offerings.each do |offeringIn| %>
+					<%if offering == offeringIn%>
+						document.getElementById("offering<%= offeringIn.id -%>").className = "active";	
+						document.getElementById('oferta<%= offeringIn.id -%>').style.display='block';	
+					<%else%>
+						document.getElementById("offering<%= offeringIn.id -%>").className = "";	
+						document.getElementById('oferta<%= offeringIn.id -%>').style.display='none';
+					<%end%>
+				<%end%>
+			}
+		<%end%>
+	<%end%>
+	<%if @requests.present?%>
+		<% @requests.each do |request| %>
+			<%if request == @requests.first%>
+				document.getElementById("request<%= request.id -%>").className = "active";	
+				document.getElementById('solicitud<%= request.id -%>').style.display='block';	
+			<%else%>
+				document.getElementById('solicitud<%= request.id -%>').style.display='none';	
+			<%end%>
+		<%end%>
+		<% @requests.each do |request| %>
+			function request<%= request.id -%>(){
+				<% @requests.each do |requestIn| %>
+					<%if request == requestIn%>
+						document.getElementById("request<%= requestIn.id -%>").className = "active";	
+						document.getElementById('solicitud<%= requestIn.id -%>').style.display='block';	
+					<%else%>
+						document.getElementById("request<%= requestIn.id -%>").className = "";	
+						document.getElementById('solicitud<%= requestIn.id -%>').style.display='none';
+					<%end%>
+				<%end%>
+			}
+		<%end%>
+		<%end%>
+</script>

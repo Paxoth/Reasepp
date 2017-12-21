@@ -93,6 +93,8 @@ ActiveRecord::Schema.define(version: 20171221165508) do
     t.integer  "weekly_hours",        limit: 4,     default: 0
     t.integer  "benefited",           limit: 4,     default: 0
     t.text     "partner_name",        limit: 65535
+    t.text     "region",              limit: 65535
+    t.text     "comuna",              limit: 65535
     t.integer  "broker_id",           limit: 4
   end
 
@@ -197,6 +199,7 @@ ActiveRecord::Schema.define(version: 20171221165508) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "priority",   limit: 4,     default: 1
+    t.integer  "user_id",    limit: 4,     default: 1
   end
 
   create_table "services", force: :cascade do |t|

@@ -10,7 +10,7 @@
 			</ul>
 		</div>
 	<% end %>
-	<div class="panel panel-default panelRease" >
+	<div class="panel panel-default panel-rease" >
     	<div class="panel-heading">Información de la pregunta</div>
     	<div class="panel-body">	
 		<div class="field"><p>
@@ -31,13 +31,13 @@
 		</p></div>
 		</div>
 	</div>
-	<%= f.submit "Guardar Pregunta", :class => 'btn btn-lg btnCRUD' %>
-	<%= link_to "Volver", questions_path, :class => 'btn btn-lg btnCRUD' %>
+	<%= f.submit "Guardar Pregunta", :class => 'btn btn-lg btn-crud' %>
+	<%= link_to "Volver", questions_path, :class => 'btn btn-lg btn-crud' %>
 <% end %>
 
 
 <script>
-	 $(function() {$('textarea#eg-basic').editable({
+	 $(function() {$('textarea#eg-basic').froalaEditor({
       theme: 'rease',
 		inlineMode: false,
       language: 'es'

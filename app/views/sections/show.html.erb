@@ -1,4 +1,4 @@
-<div  class="panel panel-default panelRease">
+<div  class="panel panel-default panel-rease">
 	<div class="panel-heading">
 		<%=	@section.title %>
 	</div>
@@ -9,7 +9,7 @@
 	<p>Fecha de Creación:  <%=l @section.created_at%></p>			
 </div>
 <%if user_signed_in? %>
-<%= link_to "Editar", edit_section_path( @section), :class => "btn btn-lg btnCRUD"%>
-<%= link_to 'Eliminar',  @section, method: :delete, data: { confirm: '¿Está seguro de eliminar esta sección?' }, :class => "btn btn-lg btnCRUD" %>
-<%= link_to "Volver", sections_path, :class => "btn btn-lg btnCRUD"%>
+<%= link_to "Editar", edit_section_path( @section), :class => "btn btn-lg btn-crud"%>
+<%= link_to 'Eliminar',  @section, method: :delete, data: { confirm: '¿Está seguro de eliminar esta sección?' }, :class => "btn btn-lg btn-crud" %>
+<%= link_to "Volver", sections_path, :class => "btn btn-lg btn-crud"%>
 <%end%>

@@ -13,7 +13,7 @@
 </div>
 
 <% if @resources.present? %>
-	<div class="panel panel-default panelRease">
+	<div class="panel panel-default panel-rease">
 		<div class="panel-heading">
 			Resultados de la búsqueda: <%= params[:search] %>
 		</div>
@@ -30,7 +30,7 @@
 		</div>
 	</div>
 <%else%>
-<div class="panel panel-default panelRease">
+<div class="panel panel-default panel-rease">
 	<div class="panel-heading">
 		Recurso <%= params[:search] %>
 	</div>
@@ -40,4 +40,4 @@
 </div>
 <% end %>
 
-<%=link_to "Volver", resources_muestra_path, :class=>'btn btn-lg btnCRUD'%>
+<%=link_to "Volver", resources_muestra_path, :class=>'btn btn-lg btn-crud'%>

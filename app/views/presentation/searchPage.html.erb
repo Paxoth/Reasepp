@@ -1,7 +1,7 @@
 <h1>Búsqueda: </h1>
 <%if !user_signed_in? %>	
 	<% if @sections.present? || @interest_links.present? || @events.present? || @resources.present? || @institutions.present?%>
-	<div class="panel panel-default panelRease">
+	<div class="panel panel-default panel-rease">
 		<div class="panel-heading">
 			Resultados de la búsqueda: <%= params[:search] %>
 		</div>
@@ -22,7 +22,7 @@
 		</div>
 	</div>
 	<%else%>
-	<div class="panel panel-default panelRease">
+	<div class="panel panel-default panel-rease">
 		<div class="panel-heading">
 			Resultados de la búsqueda: <%= params[:search] %>
 		</div>
@@ -33,7 +33,7 @@
 	<% end %>
 <%else%>
 	<% if @sections.present?  || @events.present? || @resources.present? || @institutions.present? || @requests.present? || @offerings.present? || @users.present? ||@services.present? || @experiences.present?%>
-	<div class="panel panel-default panelRease">
+	<div class="panel panel-default panel-rease">
 		<div class="panel-heading">
 			Resultados de la búsqueda: <%= params[:search] %>
 		</div>
@@ -58,7 +58,7 @@
 		</div>
 	</div>
 	<%else%>
-	<div class="panel panel-default panelRease">
+	<div class="panel panel-default panel-rease">
 		<div class="panel-heading">
 			Resultados de la búsqueda: <%= params[:search] %>
 		</div>

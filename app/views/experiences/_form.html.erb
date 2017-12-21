@@ -7,7 +7,7 @@
   <% end %>
 
 
-<div class="panel panel-default panelRease" >
+<div class="panel panel-default panel-rease" >
     <div class="panel-heading">I. Antecedentes generales</div>
     <div class="panel-body">
 
@@ -39,8 +39,17 @@
 
 		<div class="field"><p>
 			<%= f.label :department, "Departamento/Carrera: "%>
-    		<%= f.text_field :department, :class => 'form-control', :placeholder => 'Departamento/Carrera', required: true%>
-    	</p></div>
+			<%= f.text_field :department, :class => 'form-control', :placeholder => 'Departamento/Carrera', required: true%>
+		</p></div>
+
+		<div class="field"><p>
+			<%= f.label :region, "Región: "%>
+			<%= f.text_field :región, :class => 'form-control', :placeholder => 'Región', required: true%>
+		</p></div>
+		<div class="field"><p>
+			<%= f.label :comuna, "Comuna: "%>
+			<%= f.text_field :Comuna, :class => 'form-control', :placeholder => 'Comuna', required: true%>
+		</p></div>
 
     	<div class="field"><p>
     		<%= f.label :course_name, "Nombre de la asignatura/curso"%>
@@ -61,7 +70,7 @@
 	</div>
 </div>
 
-<div class="panel panel-default panelRease">
+<div class="panel panel-default panel-rease">
 	<div class="panel-heading">
 		II. Datos de los responsables
 	</div>
@@ -105,7 +114,7 @@
 	</div>
 </div>
 
-<div class="panel panel-default panelRease" >
+<div class="panel panel-default panel-rease" >
 	<div class="panel-heading">III. Antecedentes de la actividad de Aprendizaje Servicio </div>
 	<div class="panel-body">
 
@@ -186,8 +195,8 @@
 	</div>
 </div>
 
-    <%= f.submit "Guardar Experiencia", :class => 'btn btn-lg btnCRUD' %>
-    <%= link_to 'Volver', experiences_path, :class => "btn btn-lg btnCRUD"%>
+    <%= f.submit "Guardar Experiencia", :class => 'btn btn-lg btn-crud' %>
+    <%= link_to 'Volver', experiences_path, :class => "btn btn-lg btn-crud"%>
 
 <% end %>
 

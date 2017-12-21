@@ -8,5 +8,7 @@ class ChangeColumnsToExperiences < ActiveRecord::Migration
     remove_column :experiences, :professor_name, :integer
     remove_column :experiences, :professor_email, :integer
     add_column :experiences, :partner_name, :text
+    add_column :experiences, :region, :text
+    add_column :experiences, :comuna, :text
   end
 end

@@ -10,7 +10,7 @@
 		<%flash[:alert] = "Para que esta oferta de servicio se concrete, debe seleccionarse un profesor que desee ser el responsable de esta."%>
 	<% end %>
 
-	<div class="panel panel-default panelRease" >
+	<div class="panel panel-default panel-rease" >
     	<div class="panel-heading">Datos de la oferta</div>
     	<div class="panel-body">
     		<div class="control-group">
@@ -30,14 +30,6 @@
 				<%= f.select(:area_id, Area.order("discipline ASC").order("name ASC").all.collect {|area| [area.discipline+": "+area.name, area.id]},{:include_blank => "Área de trabajo (Opcional)"},{ :class => 'form-control'}) -%>
 			</p></div>
 
-			<div class="field"><p>
-				<%= f.label :institution_id, "Institución adherida: "%>
-				<%if current_user.institution_id.present?%>
-					<%= f.select(:institution_id, Institution.order("name ASC").all.collect {|inst| [inst.name, inst.id]},{:selected => current_user.institution_id, :selected => current_user.institution_id},{ :class => 'form-control'}) -%>
-				<%else%>
-					<%= f.select(:institution_id, Institution.order("name ASC").all.collect {|inst| [inst.name, inst.id]},{:include_blank => "Institución (Opcional)", :selected => current_user.institution_id},{ :class => 'form-control'}) -%>
-				<%end%>
-			</p></div>
 			
 			<div class="field"><p>
 				<%= f.label :location, "Dirección o Ubicación: "%>		
@@ -76,13 +68,13 @@
 		</div>
 	</div>
 
-	<%= f.submit accion, :class => 'btn btn-lg btnCRUD' %>
-	<%= link_to "Volver", offerings_path, :class => 'btn btn-lg btnCRUD' %>
+	<%= f.submit accion, :class => 'btn btn-lg btn-crud' %>
+	<%= link_to "Volver", offerings_path, :class => 'btn btn-lg btn-crud' %>
 
 <% end %>
 
 <script>
-	 $(function() {$('textarea#eg-basic').editable({
+	 $(function() {$('textarea#eg-basic').froalaEditor({
       theme: 'rease',
 		inlineMode: false,
       language: 'es'

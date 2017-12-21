@@ -6,13 +6,12 @@
 		<% end %>
 	<% end %>
 
-	<div class="panel panel-default panelRease" >
+	<div class="panel panel-default panel-rease" >
 		<div class="panel-heading">
 			Datos de la institución
 		</div>
 		<div class="panel-body">
 			<h2>Información</h2>
-			<p class="note">*Todos los campos obligatorios</p>
 			<div class="field"><p>
 				<%= f.label :name, "Nombre: "%>
 				<%= f.text_field :name, :class => 'form-control', :placeholder => 'Nombre',:required=>true %>
@@ -62,6 +61,6 @@
 			<%end%>
 		</div>	
 	</div>
-	<%= f.submit orden, :class=>"btn btn-lg btnCRUD" %>
-	<%= link_to 'Volver', institutions_path, :class =>"btn btn-lg btnCRUD" %>
+	<%= f.submit orden, :class=>"btn btn-lg btn-crud" %>
+	<%= link_to 'Volver', institutions_path, :class =>"btn btn-lg btn-crud" %>
 <% end %>

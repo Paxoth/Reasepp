@@ -1,5 +1,5 @@
 <h1>Área de trabajo</h1>
-<div class="panel panel-default panelRease" >
+<div class="panel panel-default panel-rease" >
 	<div class="panel-heading">
 		<%=@area.discipline%>: <%= @area.name %>
 	</div>
@@ -21,7 +21,7 @@
 						<td><%=link_to truncate(experience.title, length: 60), experience%></td>
 						<td><%=link_to @profesor.nickname, user_path(@profesor)%></td>
 						<td><%=link_to @profesor.institution.name, institution_path(@profesor.institution)%></td>
-						<td><%=experience.created_at.strftime("%d / %m / %Y")%> <%=link_to image_tag("Extensiones/pdf.gif"), experience_path(experience, format: "pdf"), :target=>'_blank'%></td>
+						<td><%=experience.created_at.strftime("%d/%m/%Y")%> <%=link_to image_tag("Extensiones/pdf.gif"), experience_path(experience, format: "pdf"), :target=>'_blank'%></td>
 					</tr>
 					<%end%>
 				</table>

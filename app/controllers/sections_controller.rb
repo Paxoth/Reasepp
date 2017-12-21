@@ -27,6 +27,8 @@ class SectionsController < ApplicationController
 	#Vista de administrar módulo de ¿Quiénes somos?
 	#
 	#Se genera la consulta de todas las secciones que pertenezcan al módulo "Somos".
+	#
+	#Sección eliminada, nuevo objetivo de la plataforma la hace innecesaria
 	def somos
 		add_breadcrumb "¿Quienes Somos?", :sections_somos_path
 		@sections = Section.order("priority ASC").where("module = ?","Somos")
@@ -35,6 +37,8 @@ class SectionsController < ApplicationController
 	#Vista de administrar módulo de ¿Qué hacemos?
 	#
 	#Se genera la consulta de todas las secciones que pertenezcan al módulo "Hacemos".
+	#
+	#Sección eliminada, nuevo objetivo de la plataforma la hace innecesaria
 	def hacemos
 		add_breadcrumb "¿Qué hacemos?", :sections_hacemos_path
 		@sections = Section.order("priority ASC").where("module = ?","Hacemos")
@@ -43,6 +47,8 @@ class SectionsController < ApplicationController
 	#Vista de administrar módulo de Estatuto
 	#
 	#Se genera la consulta de todas las secciones que pertenezcan al módulo "Estatuto".
+	#
+	#Sección eliminada, nuevo objetivo de la plataforma la hace innecesaria
 	def estatuto
 		add_breadcrumb "Estatuto", :sections_estatuto_path
 		@sections = Section.order("created_at ASC").where("module = ?","Estatuto")
@@ -51,6 +57,8 @@ class SectionsController < ApplicationController
 	#Vista de administrar módulo de Aprendizaje Servicio
 	#
 	#Se genera la consulta de todas las secciones que pertenezcan al módulo "Aprendizaje Servicio".
+	#
+	#Sección eliminada, nuevo objetivo de la plataforma la hace innecesaria
 	def aprendizaje
 		add_breadcrumb "Aprendizaje Servicio", :sections_aprendizaje_path
 		@sections = Section.order("priority ASC").where("module = ?","Aprendizaje Servicio")
@@ -67,6 +75,8 @@ class SectionsController < ApplicationController
 	#Vista de crear módulo de ¿Quiénes somos?.
 	#
 	#Se crea una vista específica con el objetivo de que la sección automáticamente perteneciera al respectivo módulo. Se cree que estas vistas son optimizables.
+	#
+	#Sección eliminada, nuevo objetivo de la plataforma la hace innecesaria
 	def newSomos
 		add_breadcrumb "¿Quienes Somos?", :sections_somos_path
 		add_breadcrumb "Nuevo"
@@ -75,6 +85,8 @@ class SectionsController < ApplicationController
 	#Vista de crear módulo de ¿Qué hacemos?.
 	#
 	#Se crea una vista específica con el objetivo de que la sección automáticamente perteneciera al respectivo módulo. Se cree que estas vistas son optimizables.
+	#
+	#Sección eliminada, nuevo objetivo de la plataforma la hace innecesaria
 	def newHacemos
 		add_breadcrumb "¿Qué hacemos?", :sections_hacemos_path
 		add_breadcrumb "Nuevo"
@@ -83,6 +95,8 @@ class SectionsController < ApplicationController
 	#Vista de crear módulo de Estatuto.
 	#
 	#Se crea una vista específica con el objetivo de que la sección automáticamente perteneciera al respectivo módulo. Se cree que estas vistas son optimizables.
+	#
+	#Sección eliminada, nuevo objetivo de la plataforma la hace innecesaria
 	def newEstatuto
 		add_breadcrumb "Estatuto", :sections_estatuto_path
 		add_breadcrumb "Nuevo"
@@ -91,6 +105,8 @@ class SectionsController < ApplicationController
 	#Vista de crear módulo de Aprendizaje Servicio.
 	#
 	#Se crea una vista específica con el objetivo de que la sección automáticamente perteneciera al respectivo módulo. Se cree que estas vistas son optimizables.
+	#
+	#Sección eliminada, nuevo objetivo de la plataforma la hace innecesaria
 	def newAprendizaje
 		add_breadcrumb "Aprendizaje Servicio", :sections_aprendizaje_path
 		add_breadcrumb "Nuevo"
@@ -115,10 +131,11 @@ class SectionsController < ApplicationController
 	#
 	#Método que permite crear una seccion.
 	def create
-		@section = Section.new(section_params)
+		@section = current_user.sections.new(section_params)
+		@section.module = "Novedad"
 		if @section.save
 			redirect_to sections_path
-			flash[:notice] = "La sección ha sido creada correctamente"
+			flash[:notice] = "La noticia ha sido creada correctamente"
 		else
 			render :new #en caso de que no guarde redirecciona a la misma pagina
 		end
@@ -170,6 +187,6 @@ class SectionsController < ApplicationController
 	end
 
 	def section_params
-		params.require(:section).permit(:title,:body,:module,:priority)
+		params.require(:section).permit(:title,:body,:module,:priority, :user_id)
 	end
 end

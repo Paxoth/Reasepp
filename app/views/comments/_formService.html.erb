@@ -15,13 +15,13 @@
 		<%= f.text_area :body, :class => 'form-control',:placeholder=>'Escriba acá su comentario respecto a este servicio...(entre 10 y 150 caracteres)', :id=>"eg-custom-toolbar" %>
 	</div>
 	<div class="actions">
-		<%= f.submit "Enviar comentario", :class => 'btn btn-default btnCRUD' %>
+		<%= f.submit "Enviar comentario", :class => 'btn btn-default btn-crud' %>
 	</div>
 <% end %>
 
 <script>
 	$(function() {
-		$('textarea#eg-custom-toolbar').editable({
+		$('textarea#eg-custom-toolbar').froalaEditor({
 			theme: 'rease',
 			inlineMode: false,
 			language: 'es',

@@ -108,6 +108,10 @@ ser responsable de completar este campo.</p>
 </li><li>
 <p><strong>manager_id</strong>: id del usuario que representa al encargado AS
 ( <a href="User.html">User</a> ).</p>
+</li><li>
+<p><strong>Twitter, Facebook, Instagram, Linkedin y Youtube</strong>:
+Atributos que hacen referencias a las redes sociales que pueda poseer el
+usuario.</p>
 </li></ul>
 
 <p><strong>RELACIONES</strong></p>
@@ -168,7 +172,7 @@ match de palabras en sus atributos.</p>
 
           
           <div class="method-source-code" id="search-source">
-            <pre><span class="ruby-comment"># File app/models/institution.rb, line 40</span>
+            <pre><span class="ruby-comment"># File app/models/institution.rb, line 41</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">search</span>(<span class="ruby-identifier">search</span>)
         <span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;name LIKE ? or web LIKE ?&quot;</span>, <span class="ruby-node">&quot;%#{search}%&quot;</span>,<span class="ruby-node">&quot;%#{search}%&quot;</span>) 
 <span class="ruby-keyword">end</span></pre>

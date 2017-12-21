@@ -1,16 +1,20 @@
-<h1>Ofertas de servicio <button type="button" class="btn btn-default btnWhite" id:"btnOferta" data-placement="bottom" data-trigger="focus" data-container="body" data-toggle="btnOferta"> ? </button></h1>
+<h1>Ofertas de servicio <button type="button" class="btn btn-default btn-white" id:"btnOferta" data-placement="bottom" data-trigger="focus" data-container="body" data-toggle="btnOferta"> ? </button></h1>
 
-<% if current_user.category == 2 or current_user.category == 3 %>
-	<%= link_to "Nueva oferta de servicio", new_offering_path, :class => 'btn btn-lg' %>
+<% if current_user.category != 4%>
+	<%if current_user.institution.present?%>
+		<%= link_to "Nueva oferta de servicio", new_offering_path, :class => 'btn btn-lg' %>
+	<%else%>
+		<% flash[:alert] = "No podrá crear solicitudes de servicio hasta que esté adherido a una institución" %>
+	<%end%>
 <%end%>
 
-<div class="ReaseDiv">
-	<ul class="nav nav-tabs tabRease nav-justified">
+<div class="div-rease">
+	<ul class="nav nav-tabs tab-rease nav-justified">
 		<li id="off1" onclick="off1()"><a>Disponibles</a></li>
 		<li id="off2" onclick="off2()"><a>Canceladas</a></li>
 		<li id="off3" onclick="off3()"><a>Caducadas</a></li>
 	</ul>
-	<div class="borderTab">
+	<div class="border-tab">
 
 		<div id="Disponible" class="padding15">
 			<%if @disponible.present?%>
@@ -34,17 +38,16 @@
 										<%=link_to truncate(offering.title, length: 40), offering%>
 									<%end%>
 									
-								</td>
-								
+								</td>			
 								<%if offering.user.category == 3%>
 									<td>Sin profesor responsable</td>
 									<td>Sin institución</td>
 								<%else%>
-									<td><%=link_to offering.user.name, offering.user%></td>
-									<td><%=link_to offering.user.institution.name, offering.user.institution%></td>
+									<td><%=link_to offering.user.nickname, offering.user%></td>
+									<td><%=link_to offering.institution.name, offering.institution%></td>
 								<%end%>
-								<td><%= offering.start_time%></td>
-								<td><%= offering.end_time%></td>
+								<td><%= offering.start_time.strftime("%d/%m/%Y")%></td>
+								<td><%= offering.end_time.strftime("%d/%m/%Y")%></td>
 							</tr>
 						<%end%>
 					</tbody>
@@ -59,7 +62,7 @@
 					</tfoot>
 				</table>
 			<%else%>
-				<div class="panel panel-default panelRease">
+				<div class="panel panel-default panel-rease">
 					<div class="panel-heading">
 						Ofertas de servicios disponibles
 					</div>
@@ -93,16 +96,15 @@
 									<%end%>
 									
 								</td>
-								
 								<%if offering.user.category == 3%>
 									<td>Sin profesor responsable</td>
 									<td>Sin institución</td>
 								<%else%>
-									<td><%=link_to offering.user.name, offering.user%></td>
-									<td><%=link_to offering.user.institution.name, offering.user.institution%></td>
+									<td><%=link_to offering.user.nickname, offering.user%></td>
+									<td><%=link_to offering.institution.name, offering.institution%></td>
 								<%end%>
-								<td><%= offering.start_time%></td>
-								<td><%= offering.end_time%></td>
+								<td><%= offering.start_time.strftime("%d/%m/%Y")%></td>
+								<td><%= offering.end_time.strftime("%d/%m/%Y")%></td>
 							</tr>
 						<%end%>
 					</tbody>
@@ -117,7 +119,7 @@
 					</tfoot>
 				</table>
 			<%else%>
-				<div class="panel panel-default panelRease">
+				<div class="panel panel-default panel-rease">
 					<div class="panel-heading">
 						Ofertas de servicios canceladas
 					</div>
@@ -150,13 +152,12 @@
 									<%end%>
 									
 								</td>
-								
 								<%if offering.user.category == 3%>
 									<td>Sin profesor responsable</td>
 									<td>Sin institución</td>
 								<%else%>
-									<td><%=link_to offering.user.name, offering.user%></td>
-									<td><%=link_to offering.user.institution.name, offering.user.institution%></td>
+									<td><%=link_to offering.user.nickname, offering.user%></td>
+									<td><%=link_to offering.institution.name, offering.institution%></td>
 								<%end%>
 								<td><%= offering.start_time%></td>
 								<td><%= offering.end_time%></td>
@@ -174,7 +175,7 @@
 					</tfoot>
 				</table>
 			<%else%>
-				<div class="panel panel-default panelRease">
+				<div class="panel panel-default panel-rease">
 					<div class="panel-heading">
 						Ofertas de servicios caducadas
 					</div>
@@ -217,7 +218,7 @@
 		document.getElementById("off2").className = "";
 		document.getElementById("off3").className = "active";
 	}
-	var content = '<p>Una <strong>oferta de servicio</strong> es el proceso previo para concretar un proyecto AS, esta es publicada por un profesor y pretenden encontrar un socio comunitario con quien realizar dicho proyecto. <p>A continuación se presenta el proceso completo de un proyecto AS</p></p><div id = \"image"> <%= image_tag("Services.png",:class=>"popoverImage") %></div> <p><i class="glyphicon glyphicon-tags"></i> : Oferta de servicio que usted publicó.</p>';
+	var content = '<p>Una <strong>oferta de servicio</strong> es el proceso previo para concretar un proyecto AS, esta es publicada por un profesor y pretenden encontrar un socio comunitario con quien realizar dicho proyecto. <p>A continuación se presenta el proceso completo de un proyecto AS</p></p><div id = \"image"> <%= image_tag("Services.png",:class=>"popover-image") %></div> <p><i class="glyphicon glyphicon-tags"></i> : Oferta de servicio que usted publicó.</p>';
 	
 	$(function () {
 		$('[data-toggle="btnOferta"]').popover(

@@ -1,18 +1,14 @@
-<h2>Resultados por Experiencias</h2>
-<ul class="nav nav-tabs tabRease nav-justified">
-	<li id="impact1" onclick="impact1()"><a>Resultados</a></li>
-	<li id="impact2" onclick="impact2()"><a>Experiencias</a></li>
-</ul>
-
-<div class="borderTab ">
-	<div id="Global" style="text-align: left;" class="padding15">
-		<div class="padding15">
-		<li><strong>Experiencias totales</strong>: <%=@institution.experiences.count%><br></li>
-		<li><strong>Estudiantes beneficiados </strong>: <%=@institution.experiences.sum("participants")%></li>
-		<li><strong>Miembros de comunidades beneficiados </strong>: <%=@institution.experiences.sum("benefited")%></li>
-		</div>
+<div class="panel panel-default panel-rease no-margin-side">
+	<div class="panel-heading">
+		Experiencias y sus resultados
 	</div>
-	<div id="Experiencias" class="padding15">
+	<div class="panel-body">
+		<div class="padding15 to-left">
+			<li><strong>Experiencias totales</strong>: <%=@institution.experiences.count%><br></li>
+			<li><strong>Estudiantes participantes totales </strong>: <%=@institution.experiences.sum("participants")%></li>
+			<li><strong>Miembros de comunidades beneficiados </strong>: <%=@institution.experiences.sum("benefited")%></li>
+		</div>
+		<hr>
 		<table class="table table-striped display">
 			<thead>
 				<tr>
@@ -28,29 +24,10 @@
 					<%@profesor = User.where(id: experience.professor_id).first%>
 					<td><%=link_to truncate(experience.title, length: 60), experience%></td>
 					<td><%=link_to @profesor.nickname, user_path(@profesor)%></td>
-					<td><%=experience.created_at.strftime("%d / %m / %Y")%> <%=link_to image_tag("Extensiones/pdf.gif"), experience_path(experience, format: "pdf"), :target=>'_blank'%></td>
+					<td><%=experience.created_at.strftime("%d/%m/%Y")%> <%=link_to image_tag("Extensiones/pdf.gif"), experience_path(experience, format: "pdf"), :target=>'_blank'%></td>
 				</tr>
 			<%end%>
 			</tbody>
 		</table>	
 	</div>
 </div>
-
-<script type="text/javascript">
-	document.getElementById("impact1").className = "active";	
-	document.getElementById('Global').style.display='block';
-	document.getElementById('Experiencias').style.display='none';
-
-	function impact1(){		
-	document.getElementById('Global').style.display='block';
-	document.getElementById('Experiencias').style.display='none';
-	document.getElementById("impact1").className = "active";
-	document.getElementById("impact2").className = "";
-	}
-	function impact2(){
-	document.getElementById('Global').style.display='none';
-	document.getElementById('Experiencias').style.display='block';
-	document.getElementById("impact1").className = "";
-	document.getElementById("impact2").className = "active";
-	}
-</script>

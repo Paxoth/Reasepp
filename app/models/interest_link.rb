@@ -1,6 +1,8 @@
 =begin rdoc
 _**Interest Link** es la entidad que representa los links de interés que se despliegan a lo largo de  la intranet, que contienen información relacionada al Aprendizaje Servicio._
 
+_Los enlaces de interés fueron eliminados de las vistas, pero no así su código fuente, pues se espera que vuelvan a ser utilizados en un futuro. _
+
 **ATRIBUTOS**
 
 *	__name__: Nombre del sitio al cual redirecciona.

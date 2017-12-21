@@ -2,17 +2,17 @@
 
 <%if user_signed_in?%>
     <%if (current_user.is_admin? and !@manager.present?) or current_user==@manager%>
-        <%= link_to 'Editar', edit_institution_path(@institution), :class =>"btn btn-lg btnCRUD" %>
-        <%=link_to "Información de gestión", managment_path(@institution), :class=>'btn btn-lg btnCRUD'%>
+        <%= link_to 'Editar', edit_institution_path(@institution), :class =>"btn btn-lg btn-crud" %>
+        <%=link_to "Información de gestión", managment_path(@institution), :class=>'btn btn-lg btn-crud'%>
     <%end%>
 <%end%>
-<%= link_to 'Volver', :back, :class =>"btn btn-lg btnCRUD" %>
+<%= link_to 'Volver', :back, :class =>"btn btn-lg btn-crud" %>
 
-<div class="ReaseDiv">
+<div class="div-rease">
     
     <%= render 'datas'%>
-    <%= render 'results'%>
     <%= render 'members'%>
+    <%= render 'results'%>
 </div>  
 
 <script type="text/javascript">

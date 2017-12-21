@@ -63,6 +63,9 @@ class RequestsController < ApplicationController
 	#Método que permite crear la solicitud de servicio.
 	#
 	#Creado desde un usuario, impidiendole crearlo si no es un socio comunitario o un vinculador social.
+	#
+	#La solicitud poseera inicialmente la insitución del usuario que la genere, pero es importante recordar que cuando pase a ser un servicio, quedará bajo el nombre de la institución del profesor responsable.
+	#
 	#Además se validan las fechas que estén dentro de valores válidos.
 	def create
 		@request = current_user.requests.new(defined_params)
@@ -70,6 +73,7 @@ class RequestsController < ApplicationController
 			@request.broker_id = current_user.id
 			flash[:alert] = "Para que esta solicitud de servicio se concrete, un socio comunitario debe aceptarla inicialmente."
 		end
+		@request.institution_id = current_user.institution_id
 		@request.status = 1
 		@request.start_time = Time.now
 		if @request.save

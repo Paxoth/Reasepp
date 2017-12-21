@@ -1,4 +1,4 @@
-<div class="panel panel-default panelRease">
+<div class="panel panel-default panel-rease">
 	<div class="panel-heading">
 		<%if @user==current_user%>
 			¡Hola <%= @user.nickname %>!
@@ -9,7 +9,7 @@
 	<div class="panel-body">
 		<%if !@user.photo.blank?%>
 			<div class="mainLayout"">
-				<%= image_tag @user.photo.url(:medium),:class=>'RoundPicture' %>
+				<%= image_tag @user.photo.url(:medium),:class=>'round-picture' %>
 				<div class="clearFlt"></div>
 			</div>
 		<%end%>
@@ -75,6 +75,4 @@
 		</div>
 	<%end%>
 </div>
-<div class="ReaseDiv">
-	<%= render 'partials/activities' %>
-</div>
+<%= render 'partials/activities' %>

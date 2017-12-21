@@ -90,6 +90,13 @@ Fue creada para la clasificación de los diferentes publicaciones que pueden
 realizar los administradores del sitio, las cuales se desplegarán de manera
 ordenada en el sitio web.</em></p>
 
+<p><em>La entidad Sections, perdió gran valor con la reformulación del siio,
+ahora solo se utiliza para crear noticias, ya que esta plataforma no se
+encargará más de hacer visible REASE para el mundo.</em></p>
+
+<p><em>No se eliminaron los demás módulos, pues se espera que algún día
+vuelvan a ser utilizados.</em></p>
+
 <p><strong>ATRIBUTOS</strong></p>
 <ul><li>
 <p><strong>title</strong>: Título de la publicación.</p>
@@ -163,7 +170,7 @@ palabras en sus atributos.</p>
 
           
           <div class="method-source-code" id="search-source">
-            <pre><span class="ruby-comment"># File app/models/section.rb, line 31</span>
+            <pre><span class="ruby-comment"># File app/models/section.rb, line 35</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">search</span>(<span class="ruby-identifier">search</span>)
         <span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;title LIKE ? or body LIKE ? or module LIKE ?&quot;</span>, <span class="ruby-node">&quot;%#{search}%&quot;</span>, <span class="ruby-node">&quot;%#{search}%&quot;</span>, <span class="ruby-node">&quot;%#{search}%&quot;</span>) 
 <span class="ruby-keyword">end</span></pre>

@@ -36,6 +36,15 @@
 			<%= f.label :department, "Departamento/Carrera: "%>
 				<%= f.text_field :department, :class => 'form-control', :placeholder => 'Departamento/Carrera', required: true%>
 			</p></div>
+			
+		<div class="field"><p>
+			<%= f.label :region, "Región: "%>
+			<%= f.text_field :región, :class => 'form-control', :placeholder => 'Región', required: true%>
+		</p></div>
+		<div class="field"><p>
+			<%= f.label :comuna, "Comuna: "%>
+			<%= f.text_field :Comuna, :class => 'form-control', :placeholder => 'Comuna', required: true%>
+		</p></div>
 
 			<div class="field"><p>
 				<%= f.label :course_name, "Nombre de la asignatura/curso"%>
@@ -83,8 +92,8 @@
 		</p></div>
 
 		<div class="field"><p>
-			<%= f.label :partner, "Socio comunitario: "%>
-			<%= f.text_field :partner, :class => 'form-control', :placeholder => 'Nombre socio comunitario colaborador', :required => true%>
+			<%= f.label :partner_name, "Socio comunitario: "%>
+			<%= f.text_field :partner_name, :class => 'form-control', :placeholder => 'Nombre socio comunitario colaborador', :required => true%>
 		</p></div>
 	</div>
 </div>
@@ -158,7 +167,7 @@
 </div>
 
 		<%= f.submit "Guardar Experiencia", :class => 'btn btn-lg btn-crud' %>
-		<%= link_to 'Volver', projects_path, :class => "btn btn-lg btn-crud"%>
+		<%= link_to 'Volver', experiences_path, :class => "btn btn-lg btn-crud"%>
 
 <% end %>
 
