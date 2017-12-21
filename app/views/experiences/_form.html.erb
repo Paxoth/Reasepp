@@ -29,7 +29,7 @@
 
 		<div class="field"><p>
 			<%= f.label :institution_id, "Institución: "%>
-			<%= f.select(:institution_id, Institution.order("name ASC").all.collect {|inst| [inst.name, inst.id]},{:include_blank => " -- Institución asociada -- ", :selected => @service.institution_id },{ :class => 'form-control',:required=>true}) -%>
+			<%=current_user.institution.name%>
 		</p></div>
 
 		<div class="field"><p>

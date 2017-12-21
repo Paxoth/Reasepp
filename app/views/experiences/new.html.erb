@@ -1,2 +1,6 @@
 <h1>Formato sitematización actividades aprendizaje servicio</h1>
-<%=render 'form', {accion: "nuevo"}%>
+<%if @service.present?%>
+	<%=render 'form', {accion: "nuevo"}%>
+<%else%>
+	<%=render 'report', {accion: "nuevo"}%>
+<%end%>

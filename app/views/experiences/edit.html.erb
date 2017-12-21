@@ -1,2 +1,6 @@
 <h1>EDITAR Formato sitematización actividades aprendizaje servicio</h1>
-<%=render 'form', {accion:"Actualizar"}%>
+<%if @service.present?%>
+	<%=render 'form', {accion: "Actualizar"}%>
+<%else%>
+	<%=render 'report', {accion: "Actualizar"}%>
+<%end%>

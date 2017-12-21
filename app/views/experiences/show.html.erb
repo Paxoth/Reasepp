@@ -12,9 +12,13 @@
 
 		<h3>I. Antecedentes generales</h3>
 		<div  class="experiencia">
-			<p><strong>Título del servicio relacionado: </strong><%= link_to @experience.service.title,@experience.service %> </p>
+			<%if @experience.service.present?%>
+				<p><strong>Título del servicio relacionado: </strong><%= link_to @experience.service.title,@experience.service %> </p>
+			<%end%>
 			<p><strong>Area: </strong><%=@experience.area.name%></p>
-			<p><strong>Institución: </strong><%=link_to @experience.institution.name, @experience.institution%></p>
+			<%if @experience.institution.present?%>
+				<p><strong>Institución: </strong><%=link_to @experience.institution.name, @experience.institution%></p>
+			<%end%>
 			<p><strong>Facultad: </strong><%=@experience.faculty%></p>
 			<p><strong>Departamento: </strong><%=@experience.department%></p>
 			<p><strong>Nombre de Asignatura/curso: </strong><%=@experience.course_name%></p>
@@ -50,7 +54,13 @@
 				<%if @experience.professor_degree == 2%> Magister <%end%>
 				<%if @experience.professor_degree == 3%> Doctorado <%end%>
 			</p>
-			<p><strong>Nombre del socio comunitario responsable: </strong> <%=link_to @experience.partner.name, @experience.partner%></p>
+			<p><strong>Nombre del socio comunitario responsable: </strong> 
+				<%if @experience.partner.present?%>
+					<%=link_to @experience.partner.name, @experience.partner%>
+				<%else%>
+					AGREGAR APRTNER NAME
+				<%end%>
+			</p>
 
 			<%if @broker.present?%>
 				<p><strong>Nombre del vinculador social: </strong> <%=link_to @broker.name, @broker%></p>
@@ -85,8 +95,13 @@
 				<p><%=@experience.reflection_moments%></p>
 		</div>
 <%= link_to 'Servicio relacionado', @experience.service, :class => "btn btn-lg btnCRUD" %>
+
 <%if @experience.professor == current_user%>
-	<%= link_to 'Editar', edit_service_experience_path(@experience.service,@experience), :class => "btn btn-lg btnCRUD" %>
+	<%if @experience.service.present?%>
+		<%= link_to 'Editar', edit_service_experience_path(@experience.service,@experience), :class => "btn btn-lg btnCRUD" %>
+	<%else%>
+		AGREGAR EDIT
+	<%end%>
 <%end%>
 <%= link_to "Descargar como PDF", experience_path(@experience, format: "pdf"), :class=> "btn btn-lg btnCRUD", :target=>'_blank'%>
 <%= link_to 'Volver', experiences_path, :class => "btn btn-lg btnCRUD" %>

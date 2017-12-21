@@ -27,7 +27,13 @@ class ExperiencesController < ApplicationController
 	#En caso de que no provenga de un servicio se pueden generar experiencias documentadas (Ver Project)
 	def new
 		@service = servicio
-		@experience = @service.experiences.new
+		if @service.present?
+			puts "GENERANDO EN BASE A SERVICIO"
+			@experience = @service.experiences.new
+		else
+			puts "REPORTANDO"
+			@experience = Experience.new
+		end
 	end
 
 	#Vista de editar experiencias
@@ -73,24 +79,30 @@ class ExperiencesController < ApplicationController
 	# El profesor siempre debe ser responsable de las experiencias.
 	def create
 		@service = servicio
-		@experience = @service.experiences.new(experience_params)
-		@experience.professor = current_user
-		if @service.publication_type == "Offering"
-			@experience.partner = @service.creator
+		if @service.present?
+			@service = servicio
+			@experience = @service.experiences.new(experience_params)
+			if @service.publication_type == "Offering"
+				@experience.partner = @service.creator
+			else
+				@experience.partner = @service.acceptor
+			end
+			if @broker.present?
+				@experience.broker_id = @broker.id
+			end
 		else
-			@experience.partner = @service.acceptor
+			@experience = Experience.new(experience_params)
 		end
-		if @broker.present?
-			@experience.broker_id = @broker.id
-		end
+		@experience.professor = current_user
+		@experience.institution = current_user.institution
 		respond_to do |format|
 			if @experience.save
-				@service.update(status: 5)
+				if @service.present?
+					@service.update(status: 5)
+				end
 				format.html { redirect_to experience_path(@experience), notice: 'La experiencia se ha creado exitosamente.' }
-				format.json { render :show, status: :created, location: @experience }
 			else
 				format.html { render :new }
-				format.json { render json: @experience.errors, status: :unprocessable_entity }
 			end
 		end
 	end
@@ -143,9 +155,10 @@ class ExperiencesController < ApplicationController
 	#Busca los servicios de acuerdo al ID obtenido del URL
     def servicio # :doc
         id = params[:service_id]
-        Service.find(params[:service_id])     
-    end 
-
+        if id.present?
+       		Service.find(params[:service_id])     
+    	end 
+    end
     #Valida que solo un profesor puede trabajar sobre la experiencia.
 	def validate_category # :doc
 		if current_user.category != 2
@@ -172,7 +185,7 @@ class ExperiencesController < ApplicationController
     # Busca si el servicio padre de la experiencia posee un vinculador social.
     # De ser así realiza la consulta para tenerlo en parametros.
 	def set_broker # :doc
-		if servicio.broker_id.present?
+		if servicio.present? and servicio.broker_id.present?
 			@broker = User.where(id:servicio.broker_id).first
 		end
 	end
