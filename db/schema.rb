@@ -73,7 +73,6 @@ ActiveRecord::Schema.define(version: 20171221165508) do
     t.text     "course_type_other",   limit: 65535
     t.integer  "period",              limit: 4
     t.text     "professor_phone",     limit: 65535
-    t.integer  "professor_degree",    limit: 4
     t.text     "learning_objectives", limit: 65535
     t.text     "service_objectives",  limit: 65535
     t.text     "frequency",           limit: 65535
@@ -85,6 +84,7 @@ ActiveRecord::Schema.define(version: 20171221165508) do
     t.text     "tools",               limit: 65535
     t.text     "reflection_moments",  limit: 65535
     t.integer  "area_id",             limit: 4
+    t.integer  "professor_degree",    limit: 4
     t.integer  "service_id",          limit: 4
     t.date     "start_time"
     t.date     "end_time"

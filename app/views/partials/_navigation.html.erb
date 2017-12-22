@@ -18,12 +18,6 @@
 					<li role="presentation" class="<%= 'active' if current_page?(root_path) %>">
 						<%= link_to 'Noticias', root_path %>
 					</li>
-					<li role="presentation" class="<%= 'active' if current_page?(new_user_session_path) %>">
-						<%= link_to 'Intranet', new_user_session_path %>
-					</li>
-					<li role="presentation" class="<%= 'active' if current_page?(new_registration_path(resource_name)) %>">
-						<%= link_to 'Regístrate', new_registration_path(resource_name) %>
-					</li>
 					<li role="presentation" class="<%= 'active' if current_page?(institutions_path) %>">
 						<%= link_to "Instituciones", presentation_somos_path %>
 					</li>
@@ -32,6 +26,12 @@
 					</li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
+					<li role="presentation" class="<%= 'active' if current_page?(new_user_session_path) %>">
+						<%= link_to 'Conéctate', new_user_session_path %>
+					</li>
+					<li role="presentation" class="<%= 'active' if current_page?(new_registration_path(resource_name)) %>">
+						<%= link_to 'Regístrate', new_registration_path(resource_name) %>
+					</li>
 					<li>
 					<%= link_to '<i class="glyphicon glyphicon-question-sign"></i>'.html_safe, presentation_about_path,:class=>"nav-text-right"%>
 					</li>				
