@@ -1,30 +1,52 @@
-<h1>Administrar preguntas frecuentes</h1>
-<div class="buscador">
-	<%= form_tag(questions_searchQuestion_path, :method => "post",:class=>"form-inline") do %>
-	<div class="input-group">
-		<%= text_field_tag :search, params[:search], placeholder: "Buscar pregunta",:class => 'form-control',:required=>true %>
-		<span class="input-group-btn">
-			<%= button_tag(type: "submit", class: "btn btn-default ") do %>
-				<i class="glyphicon glyphicon-search"></i>
-			<% end %>
-		</span>
-	</div>
-	<%end%>
-</div>
+<h1>Administrar preguntas frecuentes <button type="button" class="btn btn-lg btn-admin-question btn-secondary" id:"btn-fq"  data-trigger="focus" data-container="body" data-toggle="btn-fq"> ? </button></h1>
+
 <%= link_to "Agregar pregunta frecuente", new_question_path, :class=>"btn btn-lg btn-crud"%>
 <div class="panel panel-default panel-rease">
 	<div class="panel-heading">
 		Listado de preguntas frecuentes
 	</div>
 	<div class="panel-body">
-		<% @questions.each do |pregunta| %>
-				<p>
-				<%=	pregunta.title %>  - 
-				<%=	link_to "Ver", pregunta %>  -				
-				<%= link_to "Editar", edit_question_path(pregunta)%> - 
-				<%= link_to 'Eliminar', pregunta, method: :delete, data: { confirm: '¿Está seguro de eliminar esta pregunta?' } %>
-				</p>
-		<%end%>
+		<table class="table table-striped display" id="question_dt">
+			<thead>
+				<tr>
+					<th>Pregunta</th>
+					<th>Editar</th>
+					<th>Eliminar</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @questions.each do |pregunta| %>
+					<tr>
+						<td><%=	pregunta.title %></td>
+						<td><%= link_to "Editar", edit_question_path(pregunta)%></td>
+						<td><%= link_to 'Eliminar', pregunta, method: :delete, data: { confirm: '¿Está seguro de eliminar esta pregunta?' } %></td>
+					</td>
+				<%end%>
+			</tbody>
+		</table>
+
 	</div>
 </div>
 <%= link_to "Volver", sections_path, :class => "btn btn-lg btn-crud"%>
+
+<script type="text/javascript">
+
+	$(function () {
+		$('[data-toggle="btn-fq"]').popover(
+		{
+				title: 'Administración de áreas',
+				placement: 'bottom',
+				html: 'true', 
+				content: '<p>El administrador es el único capaz de agregar nuevas disciplinas de la OCDE en caso de que sean actualizadas</p>'
+			}
+		)
+	})
+
+	$(document).ready(function() {
+		$('#question_dt').DataTable({
+			"language": {
+				"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+			},
+		});
+	} );
+</script>

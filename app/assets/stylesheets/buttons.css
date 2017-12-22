@@ -1,6 +1,14 @@
+.be-white{
+	background: white;
+}
+
+.btn{
+	margin-left: 4%;
+	margin-right: 4%;
+}
+
 /*FONDO*/
-.btn, .btn a, .btn-somos, .btn-hacemos, .btn-admin, .btn-crud, .btn-nav
-{
+.btn, .btn a, .btn-somos, .btn-hacemos, .btn-admin, .btn-crud, .btn-nav{
 	background: #30aaaa;
 	background-image: -webkit-linear-gradient(top, #30aaaa, #30bbbb);
 	background-image: -moz-linear-gradient(top, #30aaaa, #30bbbb);
@@ -10,9 +18,9 @@
 	color: white;
 	font-size:  14px;
 }
+
 /*SOMBRA*/
-.btn, .btn a, .btn-hacemos, .btn-somos, .btn-crud, .btn-nav
-{
+.btn, .btn a, .btn-hacemos, .btn-somos, .btn-crud, .btn-nav{
 	-webkit-border-radius: 6;
 	-moz-border-radius: 6;
 	border-radius: 3px;
@@ -23,8 +31,7 @@
 }
 
 /*HOVER*/
-.btn:hover, .btn a:hover,.btn-admin:hover , .btn-somos:hover, .btn-crud:hover
-{
+.btn:hover, .btn a:hover,.btn-admin:hover , .btn-somos:hover, .btn-crud:hover{
 	background: #30bbbb;
 	background-image: -webkit-linear-gradient(top, #30bbbb, #30cccc);
 	background-image: -moz-linear-gradient(top, #30bbbb, #30cccc);
@@ -36,132 +43,110 @@
 	font-weight: bold;
 }
 
-.btn-crud
-{
-	min-width: 150px;
-}
-.btn:visited, .btn a:visited, .btn:focus, .btn a:focus
-{
- color: white;
-}
-/*COMPORTAMIENTO*/
-.btn
-{
-	margin-left: 4%;
-	margin-right: 4%;
-}
-.btn-secondary{
-	margin: 0;
-}
-.btn-crud, .buscador
-{
-	margin-left: 4%;
-	margin-right: 4%;
-	margin-top: 1%;
-	text-align: center;
+.btn:visited, .btn a:visited, .btn:focus, .btn a:focus{
+	color: white;
 }
 
-.btn-cerrar, 
-{
-	margin-top: 2%;
-	margin-right: 4%;
-}
-.btn-hacemos, .btn-somos 
-{
-	margin-left: 4%;
-	margin-right: 4%;
-	margin-top: 1%;
-	text-align: center;
-	min-width: 200px;
-}
-.btn-somos
-{
-	min-width: 250px;
-}
 .btn-admin{
+	display: inline;
 	min-width: 250px;
 	margin: 0;
 	margin-bottom: 2em;
 	text-align: center;
-	display: inline;
 }
+
 .btn-admin-question{
-	display: inline;
-	color: black;
 	background-image: none;
 	background: white;
-	margin-left: 0;
 	border-color: #30aaaa;	
+	color: black;
+	display: inline;
+	margin-left: 0;
 }
+
 .btn-admin-question:hover
 {
-	color: black;
 	background: #ddd;
+	color: black;
 }
 
-.btn-heading, .btn-heading:hover, .btn-heading:visited
-{
-	color: white;
-}
-.btn-search
-{
-	font-size: 12px;
-	padding: 7px;
-}
-.btn-social{
-	margin:0;
-	font-size: 18px;
-	font-weight: bold;
-	border-radius: 2em;
-	min-width: 2.5em;
-}
-.btn-white, .btn-white:visited
-{
-	color: black;
-	background-image: none;
-	background: white;
-	margin-left: 0;
-}
-
-.btn-white:hover
-{
-	color: black;
-	background: #ddd;
-}
-.btn-aside
-{
-	min-width: 95%;
-	text-align: left;
-	margin: 0;
+.btn-aside{
 	background: #30bbbb;
-	font-weight: bold;
 	border-radius: 3px;
+	font-weight: bold;
+	margin: 0;
+	margin-top: 7px;
+	min-width: 95%;
 	padding: 9px;
 	padding-left: 15px;
-	margin-top: 7px;
-}
-.form-control
-{
-	margin-bottom: 20px;
+	text-align: left;
 }
 
-.be-white
-{
-	background: white;
+.btn-cerrar{
+	margin-right: 4%;
+	margin-top: 2%;
 }
 
-.btn-nav
-{
+.btn-crud{
+	min-width: 150px;
+}
+
+.btn-crud, .buscador{
+	margin-left: 4%;
+	margin-right: 4%;
+	margin-top: 1%;
+	text-align: center;
+}
+
+.btn-heading, .btn-heading:hover, .btn-heading:visited{
+	color: white;
+}
+
+.btn-nav{
 	font-size: 16px;
 	padding-top: 5px;
 	padding-bottom: 5px;
 }
 
-#btn-perfil
-{
-	margin-top: 0px;
+.btn-search{
+	font-size: 12px;
+	padding: 7px;
 }
-.social-addon{
-	min-width: 5em;
+
+.btn-secondary{
+	margin: 0;
+}
+
+.btn-social{
+	border-radius: 2em;
 	font-size: 18px;
+	font-weight: bold;
+	margin:0;
+	min-width: 2.5em;
+}
+
+.btn-white, .btn-white:visited
+{
+	background-image: none;
+	background: white;
+	color: black;
+	margin-left: 0;
+}
+
+.btn-white:hover{
+	background: #ddd;
+	color: black;	
+}
+
+.form-control{
+	margin-bottom: 20px;
+}
+
+.social-addon{
+	font-size: 18px;
+	min-width: 5em;
+}
+
+#btn-perfil{
+	margin-top: 0px;
 }

@@ -24,6 +24,7 @@ El profesor siempre será el responsable de la actividad._
 *   __end_time__: Fecha de término del proyecto AS.
 *   __learning_objectives__: representa los objetivos de aprendizaje del proyecto AS.
 *   __service_objectives__: representa los objetivos de servicio del proyecto AS.
+*	__broker_id__: Hace referencia al usuario vinculador social que potencialmente podría haber creado la publicación inicial y otorgado la responsabilidad.
 
 **RELACIONES**
 

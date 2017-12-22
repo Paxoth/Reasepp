@@ -1,114 +1,150 @@
-<h1>Administrar recursos </h1>
-<%= link_to 'Agregar nuevo recurso', new_resource_path, :class=>"btn btn-lg btn-admin" %><br>
+<h1>Recursos</h1>
+<%if current_user.is_admin?%>
+	<%= link_to 'Agregar nuevo recurso', new_resource_path, :class=>"btn btn-lg " %>
+<%end%>
 
-<ul class="nav nav-tabs tab-rease nav-justified">
-	<li id="res1" onclick="res1()"><a>Actas reuniones</a></li>
-	<li id="res2" onclick="res2()"><a>Plantillas</a></li>
-	<li id="res3" onclick="res3()"><a>Formación AS</a></li>
-	<li id="res4" onclick="res4()"><a>Enlaces útiles</a></li>
-	<li id="res5" onclick="res5()"><a>Otros</a></li>
-</ul>
-<div id="Actas">
-	<div class="panel panel-default panel-rease">
-		<div class="panel-heading">
-			Actas disponibles
-		</div>
-		<div class="panel-body">
+<div class="div-rease">
+	<ul class="nav nav-tabs tab-rease nav-justified">
+		<li id="res1" onclick="res1()"><a>Actas reuniones</a></li>
+		<li id="res2" onclick="res2()"><a>Plantillas</a></li>
+		<li id="res3" onclick="res3()"><a>Formación AS</a></li>
+		<li id="res4" onclick="res4()"><a>Enlaces útiles</a></li>
+		<li id="res5" onclick="res5()"><a>Otros</a></li>
+	</ul>
+
+	<div class="border-tab">
+		<div id="Actas" class="padding15">
 			<%if @actas.present?%>
-				<% @actas.each do |resource| %>
-					<p>	<%=resource.name%>: <%=l resource.date%> - 
-					<%= link_to 'Ver recurso', resource.archive.url, :target => "_blank" %> -
-					<%= link_to 'Detalle', resource %> -
-					<%= link_to 'eliminar recurso', resource, method: :delete, data: { confirm: '¿Seguro que desea eliminar esta acta?' } %>
-					</p>
-				<%end%>
+				<table class="table table-striped display" id="actas_dt">
+					<thead>
+						<tr>
+							<th>Nombre</th>
+							<th>Publicador</th>
+							<th>Fecha</th>
+							<th>descargar</th>
+						</tr>
+					</thead>
+					<tbody>
+						<%@actas.each do |resource|%>
+							<tr>
+								<td><%=resource.name%></td>
+								<td><%=link_to resource.user.nickname, resource.user%></td>
+								<td><%=l resource.date%></td>
+								<td><%= render 'extensiones', :resource => resource %></td>
+							</tr>
+						<%end%>
+					</tbody>
+				</table>
 			<%else%>
 				<p>No hay actas de reuniones disponibles</p>
 			<%end%>
 		</div>
-	</div>
-</div>
-<div id="Plantillas">
-	<div class="panel panel-default panel-rease">
-		<div class="panel-heading">
-			Plantillas disponibles
-		</div>
-		<div class="panel-body">
+		<div id="Plantillas">
 			<%if @plantillas.present?%>
-				<% @plantillas.each do |resource| %>
-					<p>	<%=resource.name%>: <%=l resource.date%> - 
-					<%= link_to 'Ver recurso', resource.archive.url,:target => "_blank" %> -
-					<%= link_to 'Detalle', resource %> -
-					<%= link_to 'eliminar recurso', resource, method: :delete, data: { confirm: '¿Seguro que desea eliminar esta acta?' } %>
-					</p>
-				<%end%>
+				<table class="table table-striped display" id="plantillas_dt">
+					<thead>
+						<tr>
+							<th>Nombre</th>
+							<th>Publicador</th>
+							<th>Fecha</th>
+							<th>descargar</th>
+						</tr>
+					</thead>
+					<tbody>
+						<%@plantillas.each do |resource|%>
+							<tr>
+								<td><%=resource.name%></td>
+								<td><%=resource.id%></td>
+								<td><%=l resource.date%></td>
+								<td><%= render 'extensiones', :resource => resource %></td>
+							</tr>
+						<%end%>
+					</tbody>
+				</table>
 			<%else%>
-				No hay plantillas de recursos disponibles
-			<%end%>
+				<p>No hay plantillas disponibles</p>
+			<%end%>		
 		</div>
-	</div>
-</div>
-<div id="Formacion">
-	<div class="panel panel-default panel-rease">
-		<div class="panel-heading">
-			Formación AS disponibles
-		</div>
-		<div class="panel-body">
+		<div id="Formacion">
 			<%if @formacion.present?%>
-				<% @formacion.each do |resource| %>
-					<p>	<%=resource.name%>: <%=l resource.date%> - 
-					<%= link_to 'Ver recurso', resource.archive.url,:target => "_blank" %> -
-					<%= link_to 'Detalle', resource %> -
-					<%= link_to 'eliminar recurso', resource, method: :delete, data: { confirm: '¿Seguro que desea eliminar esta acta?' } %>
-					</p>
-				<%end%>
+				<table class="table table-striped display" id="formacion_dt">
+					<thead>
+						<tr>
+							<th>Nombre</th>
+							<th>Publicador</th>
+							<th>Fecha</th>
+							<th>descargar</th>
+						</tr>
+					</thead>
+					<tbody>
+						<%@formacion.each do |resource|%>
+							<tr>
+								<td><%=resource.name%></td>
+								<td><%=resource.id%></td>
+								<td><%=l resource.date%></td>
+								<td><%= render 'extensiones', :resource => resource %></td>
+							</tr>
+						<%end%>
+					</tbody>
+				</table>
 			<%else%>
-				No hay recursos formación AS disponibles
+				<p>No hay recursos de formación AS disponibles</p>
 			<%end%>
 		</div>
-	</div>
-</div>
-<div id="Enlaces">
-	<div class="panel panel-default panel-rease">
-		<div class="panel-heading">
-			Enlaces útiles disponibles
-		</div>
-		<div class="panel-body">
+		<div id="Enlaces">
 			<%if @enlaces.present?%>
-				<% @enlaces.each do |resource| %>
-					<p>	<%=resource.name%>: <%=l resource.date%> - 
-					<%= link_to 'Ver recurso', resource.archive.url,:target => "_blank" %> -
-					<%= link_to 'Detalle', resource %> -
-					<%= link_to 'eliminar recurso', resource, method: :delete, data: { confirm: '¿Seguro que desea eliminar esta acta?' } %>
-					</p>
-				<%end%>
+				<table class="table table-striped display" id="actas_dt">
+					<thead>
+						<tr>
+							<th>Nombre</th>
+							<th>Publicador</th>
+							<th>Fecha</th>
+							<th>descargar</th>
+						</tr>
+					</thead>
+					<tbody>
+						<%@enlaces.each do |resource|%>
+							<tr>
+								<td><%=resource.name%></td>
+								<td><%=resource.id%></td>
+								<td><%=l resource.date%></td>
+								<td><%= render 'extensiones', :resource => resource %></td>
+							</tr>
+						<%end%>
+					</tbody>
+				</table>
 			<%else%>
-				No hay enlaces útiles disponibles
+				<p>No hay enlaces disponibles</p>
 			<%end%>
 		</div>
-	</div>
-</div>
-<div id="Otros">
-	<div class="panel panel-default panel-rease">
-		<div class="panel-heading">
-			Otro recursos disponibles
-		</div>
-		<div class="panel-body">
+		<div id="Otros">
 			<%if @otros.present?%>
-				<% @otros.each do |resource| %>
-					<p>	<%=resource.name%>: <%=l resource.date%> - 
-					<%= link_to 'Ver recurso', resource.archive.url,:target => "_blank" %> -
-					<%= link_to 'Detalle', resource %> -
-					<%= link_to 'eliminar recurso', resource, method: :delete, data: { confirm: '¿Seguro que desea eliminar esta acta?' } %>
-					</p>
-				<%end%>
+				<table class="table table-striped display" id="actas_dt">
+					<thead>
+						<tr>
+							<th>Nombre</th>
+							<th>Publicador</th>
+							<th>Fecha</th>
+							<th>descargar</th>
+						</tr>
+					</thead>
+					<tbody>
+						<%@otros.each do |resource|%>
+							<tr>
+								<td><%=resource.name%></td>
+								<td><%=resource.id%></td>
+								<td><%=l resource.date%></td>
+								<td><%= render 'extensiones', :resource => resource %></td>
+							</tr>
+						<%end%>
+					</tbody>
+				</table>
 			<%else%>
-				No hay otros recursos disponibles
+				<p>No hay recursos extras disponibles</p>
 			<%end%>
 		</div>
 	</div>
 </div>
-
 <script type="text/javascript">
 	document.getElementById('Actas').style.display='block';	
 	document.getElementById("res1").className = "active";	
@@ -176,4 +212,12 @@
 		document.getElementById("res4").className = "";
 		document.getElementById("res5").className = "active";
 	}
+
+	$(document).ready(function() {
+		$('table.display').DataTable({
+			"language": {
+				"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+			},
+		});
+	} );
 </script>

@@ -7,6 +7,8 @@ _**Experience** es la entidad que representa a las experiencias de servicio, la 
     + description
     + faculty
     + department
+    + region
+    + comuna
     + course_name
     + course_type
     + course_type_other

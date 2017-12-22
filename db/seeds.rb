@@ -428,7 +428,7 @@ print("\tSeed:\tServicios de pruebas creadas basadas las ofertas y solicitudes d
 
 
 print("\n\tSeed:\tCreando Experiencias basados en los servicios: ")
-(1..200).step(1) do |n| #ESTA CONDICION SE PUEDE CAMBIAR
+(1..150).step(1) do |n| #ESTA CONDICION SE PUEDE CAMBIAR
 	service_aux_id = rand(1..300)
 	service_aux = Service.where(id:service_aux_id).first
 	while service_aux.status == 5
@@ -436,8 +436,9 @@ print("\n\tSeed:\tCreando Experiencias basados en los servicios: ")
 		service_aux = Service.where(id:service_aux_id).first
 	end
 	print service_aux_id.to_s+" "
-	if service_aux.publication_type = "Request"
-		professor_aux = User.where(id:service_aux.creator_id).first
+	
+	professor_aux = User.where(id:service_aux.creator_id).first
+	if professor_aux.category == 2
 		partner_aux = User.where(id: service_aux.acceptor_id).first
 	else
 		partner_aux = User.where(id:service_aux.creator_id).first
@@ -450,6 +451,8 @@ print("\n\tSeed:\tCreando Experiencias basados en los servicios: ")
 		institution_id: service_aux.institution_id,
 		faculty: "Facultad de prueba Experiencia basada en servicio #"+service_aux.id.to_s,
 		department: "Departamento de prueba para Experiencia basada en servicio #"+service_aux.id.to_s,
+		region: "Región de la experiencias #"+n,
+		comuna: "Comuna de la experiencias #"+n,
 		course_name: "Curso de prueba para Experiencia basada en servicio #"+service_aux.id.to_s,
 		course_type: ["Obligatorio", "Optativo", "Electivo"].sample,
 		course_type_other: nil,	

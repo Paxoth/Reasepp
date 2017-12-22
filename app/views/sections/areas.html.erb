@@ -1,0 +1,51 @@
+<h1>Administrar Áreas <button type="button" class="btn btn-lg btn-admin-question btn-secondary" id:"btn-area"  data-trigger="focus" data-container="body" data-toggle="btn-area"> ? </button> </h1>
+
+<%= link_to 'Agregar Área', new_area_path, :class=>"btn btn-lg btn-admin" %>
+<div class="panel panel-default panel-rease">
+	<div class="panel-heading">
+		Áreas de trabajo
+	</div>
+	<div class="panel-body">
+		<table class="table table-striped display" id="areas_dt">
+			<thead>
+				<tr>
+					<th>Disciplina</th>
+					<th>Área</th>
+					<th>Editar</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @areas.each do |area| %>
+
+					<tr>
+						<td><%=link_to area.discipline, area%></td>
+						<td><%= area.name%></td>
+						<td><%=link_to "Editar", edit_area_path(area)%></td>
+					</tr>
+				<%end%>
+			</tbody>
+		</table>
+	</div>
+</div>
+<%= link_to "Volver", sections_path, :class => "btn btn-lg btn-crud"%>
+<script type="text/javascript">
+
+	$(function () {
+		$('[data-toggle="btn-area"]').popover(
+		{
+				title: 'Administración de áreas',
+				placement: 'bottom',
+				html: 'true', 
+				content: '<p>El administrador es el único capaz de agregar nuevas disciplinas de la OCDE en caso de que sean actualizadas</p>'
+			}
+		)
+	})
+
+	$(document).ready(function() {
+		$('#areas_dt').DataTable({
+			"language": {
+				"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+			},
+		});
+	} );
+</script>

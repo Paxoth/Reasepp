@@ -1,11 +1,9 @@
-<%if current_user.is_admin?%>
-	<h1>Administrar Área de trabajo </h1>
-	<%= link_to 'Agregar área de trabajo', new_area_path, :class=>"btn btn-lg btn-admin" %><br>
-<%end%>
 
 <h1>Experiencias por áreas de trabajo <button type="button" class="btn btn-default btn-white" id:"btnAreas" data-trigger="focus" data-container="body" data-toggle="btnAreas"> ? </button> </h1>
-<%= link_to 'Volver a Experiencias', experiences_path, :class=>"btn btn-lg " %><br>
-
+<%= link_to 'Volver a Experiencias', experiences_path, :class=>"btn btn-lg " %>
+<%if current_user.is_admin?%>
+	<%= link_to 'Agregar área de trabajo', new_area_path, :class=>"btn btn-lg " %>
+<%end%><br>
 <div class="panel panel-default panel-rease">
 	<div class="panel-heading">
 		Listado de Áreas de Trabajo

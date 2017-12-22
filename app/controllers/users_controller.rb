@@ -38,7 +38,7 @@ class UsersController < ApplicationController
 	#Acá los adminstradores podrán cambiar la categoría de los usuarios y nombrarlos administradores.
 	def listarUsuarios
 		add_breadcrumb "Usuarios registrados"
-		@user = User.paginate(page: params[:page],per_page: 20).order("nickname ASC").all
+		@user = User.all
 	end
 	
 	#Perfil externo: vista específica

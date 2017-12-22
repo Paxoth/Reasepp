@@ -1,30 +1,25 @@
 <%accion ||= "Crear"%>
-<%= form_for([@service, @experience]) do |f| %>
-  <% if @experience.errors.any? %>
-      <% @experience.errors.full_messages.each do |message| %>
-        <%flash[:alert] = message %>
-      <% end %>
-  <% end %>
-
+<%= form_for(@experience) do |f| %>
+	<% if @experience.errors.any? %>
+			<% @experience.errors.full_messages.each do |message| %>
+				<%flash[:alert] = message %>
+			<% end %>
+	<% end %>
 
 <div class="panel panel-default panel-rease" >
-    <div class="panel-heading">I. Antecedentes generales</div>
-    <div class="panel-body">
+		<div class="panel-heading">I. Antecedentes generales</div>
+		<div class="panel-body">
 
-		<%if accion == "nuevo"%>
-			<%titulo="Experiencia de "+@service.title %>
-		<%else%>
-			<%titulo=@experience.title%>
-		<%end%>
+		<%titulo=@experience.title%>
 
 		<div class="field"><p>
 			<%= f.label :title, "Título de la experiencia: "%>
-			<%= f.text_field :title, :class => 'form-control', :placeholder => 'Título de la experiencia  ', :value=>titulo, required: true%>
+			<%= f.text_field :title, :class => 'form-control', :placeholder => 'Título de la experiencia	', :value=>titulo, required: true%>
 		</p></div>
 		
 		<div class="field"><p>
 			<%= f.label :area_id, "Area de trabajo: "%>
-			<%= f.select(:area_id, Area.order("discipline ASC").order("name ASC").all.collect {|area| [area.discipline+": "+area.name, area.id]},{:include_blank => " -- Área de trabajo -- ", :selected => @service.area_id},{ :class => 'form-control',:required=>true}) -%>
+			<%= f.select(:area_id, Area.order("discipline ASC").order("name ASC").all.collect {|area| [area.discipline+": "+area.name, area.id]},{:include_blank => " -- Área de trabajo -- "},{ :class => 'form-control',:required=>true}) -%>
 		</p></div>
 
 		<div class="field"><p>
@@ -39,9 +34,9 @@
 
 		<div class="field"><p>
 			<%= f.label :department, "Departamento/Carrera: "%>
-			<%= f.text_field :department, :class => 'form-control', :placeholder => 'Departamento/Carrera', required: true%>
-		</p></div>
-
+				<%= f.text_field :department, :class => 'form-control', :placeholder => 'Departamento/Carrera', required: true%>
+			</p></div>
+			
 		<div class="field"><p>
 			<%= f.label :region, "Región: "%>
 			<%= f.text_field :región, :class => 'form-control', :placeholder => 'Región', required: true%>
@@ -51,12 +46,12 @@
 			<%= f.text_field :Comuna, :class => 'form-control', :placeholder => 'Comuna', required: true%>
 		</p></div>
 
-    	<div class="field"><p>
-    		<%= f.label :course_name, "Nombre de la asignatura/curso"%>
-    		<%= f.text_field :course_name, :class => 'form-control', :placeholder => 'Nombre asignatura/curso', required: true%>
-    	</p></div>
+			<div class="field"><p>
+				<%= f.label :course_name, "Nombre de la asignatura/curso"%>
+				<%= f.text_field :course_name, :class => 'form-control', :placeholder => 'Nombre asignatura/curso', required: true%>
+			</p></div>
 
-    	<div class="field"><p>
+			<div class="field"><p>
 			<%= f.label :course_type, "Tipo de curso: "%>
 			<%= f.select(:course_type, [['Obligatorio', 'Obligatorio'],['Optativo', 'Optativo'],['Electivo','Electivo'], ['Otro','Otro']], {:include_blank => '-- Seleccione tipo de curso --' }, { :class => 'form-control', :required => true, :id => "tipoCurso" }) %>
 			<%= f.text_field :course_type_other ,:class => 'form-control', :placeholder => "OTRO: Especificación en caso de marcar otro" %></p>
@@ -66,9 +61,9 @@
 			<%= f.label :period, "Periodo del curso: "%>
 			<%= f.select(:period, [['I semestre', 1],['II semestre', 2],['Cada semestre', 3],['Anual', 4]], {:include_blank => '-- Periodo del curso --' }, { :class => 'form-control', :required => true }) %>
 		</p></div>
-	
 	</div>
 </div>
+
 
 <div class="panel panel-default panel-rease">
 	<div class="panel-heading">
@@ -83,7 +78,7 @@
 
 		<div class="field"><p>
 			<%= f.label :professor_email, "Correo electrónico profesor responsable: "%>
-			<%=current_user.email%>			
+			<%=current_user.email%>		 
 		</p></div>
 
 		<div class="field"><p>
@@ -95,51 +90,27 @@
 			<%= f.label :professor_degree, "Grado académico del profesor responsable: "%>
 			<%= f.select(:professor_degree, [['Licenciado', 1],['Magister', 2],['Doctorado',3]], {:include_blank => '-- Grado académico del profesor responsable --' }, { :class => 'form-control', :required => true }) %>
 		</p></div>
-		<div class="field"><p>
-			<%= f.label :partner_id, "Socio comunitario responsable: "%>
-			<%if @service.publication_type == "Offering"%>
-				<%= @service.creator.name %>
-			<%else%>
-				<%= @service.acceptor.name %>
-			<%end%>		
-		</p></div>
-		
-		<%if @broker.present?%>
-			<div class="field"><p>
-				<%= f.label :broker_id, "Vinculador social: "%>
-				<%= @broker.name%>
-			</p></div>
-		<%end%>
 
+		<div class="field"><p>
+			<%= f.label :partner_name, "Socio comunitario: "%>
+			<%= f.text_field :partner_name, :class => 'form-control', :placeholder => 'Nombre socio comunitario colaborador', :required => true%>
+		</p></div>
 	</div>
 </div>
 
 <div class="panel panel-default panel-rease" >
-	<div class="panel-heading">III. Antecedentes de la actividad de Aprendizaje Servicio </div>
+	<div class="panel-heading">II. Antecedentes de la actividad de Aprendizaje Servicio </div>
 	<div class="panel-body">
 
 
-		<%if accion == "nuevo"%>
-			<%obj1=@service.learning_objectives %>
-		<%else%>
-			<%obj1=@experience.learning_objectives%>
-		<%end%>
-
 		<div class="field"><p>
 			<%= f.label :learning_objectives, "Objetivos de aprendizaje y/o Competencias asociadas:" %>
-			<%= f.text_area :learning_objectives, :class => 'form-control', :placeholder => 'Objetivos de aprendizaje y/o Competencias asociadas', :value=> obj1, :required => true%>
+			<%= f.text_area :learning_objectives, :class => 'form-control', :placeholder => 'Objetivos de aprendizaje y/o Competencias asociadas', :required => true%>
 		</p></div>
 
-
-		<%if accion == "nuevo"%>
-			<%obj2=@service.service_objectives %>
-		<%else%>
-			<%obj2=@experience.service_objectives%>
-		<%end%>
-
 		<div class="field"><p>
-			<%= f.label :service_objectives,  "Objetivos de servicio: "%>
-			<%= f.text_area :service_objectives, :class => 'form-control', :placeholder => 'Objetivos de servicio', :value=> obj2, :required => true%>
+			<%= f.label :service_objectives,	"Objetivos de servicio: "%>
+			<%= f.text_area :service_objectives, :class => 'form-control', :placeholder => 'Objetivos de servicio', :required => true%>
 		</p></div>
 
 		<div class="field"><p>
@@ -169,7 +140,7 @@
 
 		<div class="field"><p>
 			<%= f.label :organization_type, "Tipo de organización comunitaria: "%>
-			<%= f.text_field :organization_type, :class => 'form-control', :placeholder => 'Tipo de organización comunitaria',:required => true%>		
+			<%= f.text_field :organization_type, :class => 'form-control', :placeholder => 'Tipo de organización comunitaria',:required => true%>	 
 		</p></div>	
 
 		<div class="field"><p>
@@ -195,8 +166,8 @@
 	</div>
 </div>
 
-    <%= f.submit "Guardar Experiencia", :class => 'btn btn-lg btn-crud' %>
-    <%= link_to 'Volver', experiences_path, :class => "btn btn-lg btn-crud"%>
+		<%= f.submit "Guardar Experiencia", :class => 'btn btn-lg btn-crud' %>
+		<%= link_to 'Volver', experiences_path, :class => "btn btn-lg btn-crud"%>
 
 <% end %>
 

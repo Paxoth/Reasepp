@@ -7,7 +7,7 @@
 =end
 class ResourcesController < ApplicationController
   before_action :authenticate_user!
-  before_action :validate_category, except: [:show,:muestra,:searchResource]
+  before_action :validate_category, except: [:show,:index,:searchResource]
   before_action :set_resource, only: [:show, :edit, :update, :destroy]
   before_action :set_categorizated, only: [:index, :muestra]
 
@@ -21,16 +21,8 @@ class ResourcesController < ApplicationController
     add_breadcrumb "Recursos", :resources_path 
   end
 
-  #Vista de muestra
-  #
-  #Vista para los usuarios no adminsitradores, en donde podrán descargar los recursos disponibles.
-  def muestra
-      add_breadcrumb "Recursos", :resources_muestra_path
-      @interest_links = InterestLink.order("created_at DESC").all
-  end
-
   def show # :nodoc:
-    add_breadcrumb "Recursos", :resources_muestra_path 
+    add_breadcrumb "Recursos", :resources_path 
     add_breadcrumb "Detalle"
   end
 
@@ -100,7 +92,7 @@ class ResourcesController < ApplicationController
     #Validar que solo un administrador peuda acceder a ciertas vistas de recursos descargables.
     def validate_category # :doc:
       if !current_user.is_admin?
-      redirect_to root_path, alert: "Sólo un administrador puede trabajar las actas."
+      redirect_to root_path, alert: "Sólo un administrador puede operar los recursos."
       end   
     end
 

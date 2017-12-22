@@ -40,7 +40,6 @@ _User posee muchos atributos generados por la gema Devise, que permite hacer la 
 *   has_many Offering
 *   has_many Request
 *   has_many Experience
-*   has_many Project
 *   has_many accepted_services ( Service )
 *   has_many created_services  ( Service ) 
 *   has_many taught_experiences ( Experience )
@@ -67,7 +66,6 @@ class User < ActiveRecord::Base
 	has_many :offerings
 	has_many :requests
 	has_many :experiences
-	has_many :projects
 	has_many :questions
 	has_many :interest_links
 	has_many :resources

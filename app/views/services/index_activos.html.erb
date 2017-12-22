@@ -21,7 +21,12 @@
 						<tr>
 							<%creator =  User.where(id: service.creator_id).first%>
 							<%acceptor =  User.where(id: service.acceptor_id).first%>
-							<td> <%=link_to truncate(service.title, length: 60), service%>
+							<td> 
+								<%if current_user.id==service.creator_id || current_user.id == service.acceptor_id%>
+									<%=link_to '<i class="glyphicon glyphicon-tags"></i> '.html_safe+truncate(service.title, length: 60), service%>
+								<%else%>
+									<%=link_to truncate(service.title, length: 60), service%>
+								<%end%>
 							</td>
 							<%if service.publication_type == "Request"%>
 								<td><%= link_to creator.nickname, creator%></td>

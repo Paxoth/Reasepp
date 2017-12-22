@@ -24,10 +24,16 @@ class ExperiencesController < ApplicationController
 	#Vista nueva experiencias
 	#
 	#Permite crear uan experiencia, basada un un servicio anteriormente generado. Las experiencias, siempre provienen de un servicio.
-	#En caso de que no provenga de un servicio se pueden generar experiencias documentadas (Ver Project)
+	#En caso de que no provenga de un servicio se pueden generar experiencias reportada, la cual no utilizará el proceso de licitación.
 	def new
 		@service = servicio
-		@experience = @service.experiences.new
+		if @service.present?
+			puts "GENERANDO EN BASE A SERVICIO"
+			@experience = @service.experiences.new
+		else
+			puts "REPORTANDO"
+			@experience = Experience.new
+		end
 	end
 
 	#Vista de editar experiencias
@@ -37,7 +43,11 @@ class ExperiencesController < ApplicationController
 	def edit
 		add_breadcrumb "Editar"
 	    @service = servicio
-	    @experience = servicio.experiences.find(params[:id])
+	    if @service.present?
+	   		@experience = servicio.experiences.find(params[:id])
+	   	else
+	   		@experience = Experience.find(params[:id])
+	   	end
 	    if current_user != @experience.professor
 	    	redirect_to root_path, alert: "Solo el profesor dueño de esta experiencia puede editarla."
 	    end
@@ -73,24 +83,32 @@ class ExperiencesController < ApplicationController
 	# El profesor siempre debe ser responsable de las experiencias.
 	def create
 		@service = servicio
-		@experience = @service.experiences.new(experience_params)
-		@experience.professor = current_user
-		if @service.publication_type == "Offering"
-			@experience.partner = @service.creator
+		if @service.present?
+			@service = servicio
+			@experience = @service.experiences.new(experience_params)
+			if @service.publication_type == "Offering"
+				@experience.partner = @service.creator
+			else
+				@experience.partner = @service.acceptor
+			end
+			if @broker.present?
+				@experience.broker_id = @broker.id
+			end
 		else
-			@experience.partner = @service.acceptor
+			@experience = Experience.new(experience_params)
 		end
-		if @broker.present?
-			@experience.broker_id = @broker.id
-		end
+		@experience.professor = current_user
+		@experience.institution = current_user.institution
 		respond_to do |format|
 			if @experience.save
-				@service.update(status: 5)
+				if @service.present?
+					@service.update(status: 5)
+					@experience.partner_name = @experience.partner.name;
+				end
+
 				format.html { redirect_to experience_path(@experience), notice: 'La experiencia se ha creado exitosamente.' }
-				format.json { render :show, status: :created, location: @experience }
 			else
 				format.html { render :new }
-				format.json { render json: @experience.errors, status: :unprocessable_entity }
 			end
 		end
 	end
@@ -122,19 +140,15 @@ class ExperiencesController < ApplicationController
 	end
 
 	#Vista que permite buscar experiencias a través de un match de palabras, utilizando la función search.
-	#La busqueda complementa tanto las experiencias como las experiencias documentadas ( Project )
 	#
 	#*NOTA IMPORTANTE:* a pesar de que esta vista funciona de manera correcta, fue quitada por Maximiiano Pérez porque la búsuqeda de DataTables es suficientemente eficiente.
 	def searchExperience
 		add_breadcrumb "Búsqueda"
 		@experiences = Experience.order("created_at DESC").all
-		@projects = Project.order("created_at DESC").all
 		if params[:search]
 			@experiences = Experience.search(params[:search]).order("created_at DESC")
-			@projects = Project.search(params[:search]).order("created_at DESC")
 		else
 			@experiences = Experience.order("created_at DESC").all
-			@projects = Project.order("created_at DESC").all
 		end
 	end
 	
@@ -143,9 +157,10 @@ class ExperiencesController < ApplicationController
 	#Busca los servicios de acuerdo al ID obtenido del URL
     def servicio # :doc
         id = params[:service_id]
-        Service.find(params[:service_id])     
-    end 
-
+        if id.present?
+       		Service.find(params[:service_id])     
+    	end 
+    end
     #Valida que solo un profesor puede trabajar sobre la experiencia.
 	def validate_category # :doc
 		if current_user.category != 2
@@ -172,7 +187,7 @@ class ExperiencesController < ApplicationController
     # Busca si el servicio padre de la experiencia posee un vinculador social.
     # De ser así realiza la consulta para tenerlo en parametros.
 	def set_broker # :doc
-		if servicio.broker_id.present?
+		if servicio.present? and servicio.broker_id.present?
 			@broker = User.where(id:servicio.broker_id).first
 		end
 	end
@@ -183,12 +198,15 @@ class ExperiencesController < ApplicationController
       		:service_id,
 			:description,
 			:partner_id,
+			:partner_name,
 			:professor_id,
 			:broker_id,
 			:folio,
 			:institution_id,
 			:faculty,
 			:department,
+			:region,
+			:comuna, 
 			:course_name,
 			:course_type,
 			:course_type_other,

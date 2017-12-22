@@ -1,0 +1,7 @@
+<!--Esta vista fue dejada por la posibildiad de que algun día fuera requerida nuevamente-->
+<h1>Administrar ¿Qué es AS? </h1>
+
+<%= link_to "Nueva seccion de Aprendizaje Servicio", sections_newAprendizaje_path, :class=>"btn btn-lg btn-crud"%>
+
+<h1>Sección AS Anteriores: </h1>
+<%= render "muestra", {orden: "Aprendizaje Servicio", eliminar: "Si"} %>

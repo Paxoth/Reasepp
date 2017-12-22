@@ -24,46 +24,6 @@ class SectionsController < ApplicationController
 		@sections = Section.order("priority ASC").where("module = ?","Novedad")
 	end
 
-	#Vista de administrar módulo de ¿Quiénes somos?
-	#
-	#Se genera la consulta de todas las secciones que pertenezcan al módulo "Somos".
-	#
-	#Sección eliminada, nuevo objetivo de la plataforma la hace innecesaria
-	def somos
-		add_breadcrumb "¿Quienes Somos?", :sections_somos_path
-		@sections = Section.order("priority ASC").where("module = ?","Somos")
-	end
-
-	#Vista de administrar módulo de ¿Qué hacemos?
-	#
-	#Se genera la consulta de todas las secciones que pertenezcan al módulo "Hacemos".
-	#
-	#Sección eliminada, nuevo objetivo de la plataforma la hace innecesaria
-	def hacemos
-		add_breadcrumb "¿Qué hacemos?", :sections_hacemos_path
-		@sections = Section.order("priority ASC").where("module = ?","Hacemos")
-	end
-
-	#Vista de administrar módulo de Estatuto
-	#
-	#Se genera la consulta de todas las secciones que pertenezcan al módulo "Estatuto".
-	#
-	#Sección eliminada, nuevo objetivo de la plataforma la hace innecesaria
-	def estatuto
-		add_breadcrumb "Estatuto", :sections_estatuto_path
-		@sections = Section.order("created_at ASC").where("module = ?","Estatuto")
-	end
-
-	#Vista de administrar módulo de Aprendizaje Servicio
-	#
-	#Se genera la consulta de todas las secciones que pertenezcan al módulo "Aprendizaje Servicio".
-	#
-	#Sección eliminada, nuevo objetivo de la plataforma la hace innecesaria
-	def aprendizaje
-		add_breadcrumb "Aprendizaje Servicio", :sections_aprendizaje_path
-		@sections = Section.order("priority ASC").where("module = ?","Aprendizaje Servicio")
-	end
-
 	#Vista de crear módulo de novedades.
 	#
 	#Se crea una vista específica con el objetivo de que la sección automáticamente perteneciera al respectivo módulo. Se cree que estas vistas son optimizables.
@@ -72,52 +32,25 @@ class SectionsController < ApplicationController
 		add_breadcrumb "Nuevo"
 	end
 
-	#Vista de crear módulo de ¿Quiénes somos?.
+	#Vista de administración de institutions
 	#
-	#Se crea una vista específica con el objetivo de que la sección automáticamente perteneciera al respectivo módulo. Se cree que estas vistas son optimizables.
-	#
-	#Sección eliminada, nuevo objetivo de la plataforma la hace innecesaria
-	def newSomos
-		add_breadcrumb "¿Quienes Somos?", :sections_somos_path
-		add_breadcrumb "Nuevo"
+	#Se crea una vista aparte con un datatable simple de insituticiones.
+	def institutions
+		@institutions = Institution.all
 	end
 
-	#Vista de crear módulo de ¿Qué hacemos?.
+	#Vista de administración de areas de trabajo
 	#
-	#Se crea una vista específica con el objetivo de que la sección automáticamente perteneciera al respectivo módulo. Se cree que estas vistas son optimizables.
-	#
-	#Sección eliminada, nuevo objetivo de la plataforma la hace innecesaria
-	def newHacemos
-		add_breadcrumb "¿Qué hacemos?", :sections_hacemos_path
-		add_breadcrumb "Nuevo"
+	#Se crea una vista aparte con un datatable simple de areas de trabajo.
+	def areas
+		@areas = Area.all
 	end
 
-	#Vista de crear módulo de Estatuto.
+	#Vista de administración de recursos
 	#
-	#Se crea una vista específica con el objetivo de que la sección automáticamente perteneciera al respectivo módulo. Se cree que estas vistas son optimizables.
-	#
-	#Sección eliminada, nuevo objetivo de la plataforma la hace innecesaria
-	def newEstatuto
-		add_breadcrumb "Estatuto", :sections_estatuto_path
-		add_breadcrumb "Nuevo"
-	end
-
-	#Vista de crear módulo de Aprendizaje Servicio.
-	#
-	#Se crea una vista específica con el objetivo de que la sección automáticamente perteneciera al respectivo módulo. Se cree que estas vistas son optimizables.
-	#
-	#Sección eliminada, nuevo objetivo de la plataforma la hace innecesaria
-	def newAprendizaje
-		add_breadcrumb "Aprendizaje Servicio", :sections_aprendizaje_path
-		add_breadcrumb "Nuevo"
-	end
-
-	#Vista de crear Section
-	#
-	#No utilizada comunmnete, se cree que se generó para poder generar secciones sin necesidad de tener claro a qué módulo pertenece. Se estima que debe mejorarse.
-	def new
-		add_breadcrumb "Nueva sección", :new_section_path
-		@section = Section.new
+	#Se crea una vista aparte con un datatable simple de recursos.
+	def resources
+		@resources = Resource.all
 	end
 
 	#Vista específica de una sección
@@ -140,7 +73,6 @@ class SectionsController < ApplicationController
 			render :new #en caso de que no guarde redirecciona a la misma pagina
 		end
 	end
-
 	#Eliminar sección
 	#
 	#Método que permite eliminar una seccion.
@@ -173,20 +105,114 @@ class SectionsController < ApplicationController
 		end
 	end
 
+
+
+	#============================= NO UTILIZADO ====================================#
+	#Vista de administrar módulo de ¿Quiénes somos?
+	#
+	#Se genera la consulta de todas las secciones que pertenezcan al módulo "Somos".
+	#
+	#Sección eliminada, nuevo objetivo de la plataforma la hace innecesaria
+	def somos # :nodoc:
+		add_breadcrumb "¿Quienes Somos?", :sections_somos_path
+		@sections = Section.order("priority ASC").where("module = ?","Somos")
+	end
+
+	#Vista de administrar módulo de ¿Qué hacemos?
+	#
+	#Se genera la consulta de todas las secciones que pertenezcan al módulo "Hacemos".
+	#
+	#Sección eliminada, nuevo objetivo de la plataforma la hace innecesaria
+	def hacemos # :nodoc:
+		add_breadcrumb "¿Qué hacemos?", :sections_hacemos_path
+		@sections = Section.order("priority ASC").where("module = ?","Hacemos")
+	end
+
+	#Vista de administrar módulo de Estatuto
+	#
+	#Se genera la consulta de todas las secciones que pertenezcan al módulo "Estatuto".
+	#
+	#Sección eliminada, nuevo objetivo de la plataforma la hace innecesaria
+	def estatuto # :nodoc:
+		add_breadcrumb "Estatuto", :sections_estatuto_path
+		@sections = Section.order("created_at ASC").where("module = ?","Estatuto")
+	end
+
+	#Vista de administrar módulo de Aprendizaje Servicio
+	#
+	#Se genera la consulta de todas las secciones que pertenezcan al módulo "Aprendizaje Servicio".
+	#
+	#Sección eliminada, nuevo objetivo de la plataforma la hace innecesaria
+	def aprendizaje # :nodoc:
+		add_breadcrumb "Aprendizaje Servicio", :sections_aprendizaje_path
+		@sections = Section.order("priority ASC").where("module = ?","Aprendizaje Servicio")
+	end
+	
+	#Vista de crear módulo de ¿Quiénes somos?.
+	#
+	#Se crea una vista específica con el objetivo de que la sección automáticamente perteneciera al respectivo módulo. Se cree que estas vistas son optimizables.
+	#
+	#Sección eliminada, nuevo objetivo de la plataforma la hace innecesaria
+	def newSomos # :nodoc:
+		add_breadcrumb "¿Quienes Somos?", :sections_somos_path
+		add_breadcrumb "Nuevo"
+	end
+
+	#Vista de crear módulo de ¿Qué hacemos?.
+	#
+	#Se crea una vista específica con el objetivo de que la sección automáticamente perteneciera al respectivo módulo. Se cree que estas vistas son optimizables.
+	#
+	#Sección eliminada, nuevo objetivo de la plataforma la hace innecesaria
+	def newHacemos # :nodoc:
+		add_breadcrumb "¿Qué hacemos?", :sections_hacemos_path
+		add_breadcrumb "Nuevo"
+	end
+
+	#Vista de crear módulo de Estatuto.
+	#
+	#Se crea una vista específica con el objetivo de que la sección automáticamente perteneciera al respectivo módulo. Se cree que estas vistas son optimizables.
+	#
+	#Sección eliminada, nuevo objetivo de la plataforma la hace innecesaria
+	def newEstatuto # :nodoc:
+		add_breadcrumb "Estatuto", :sections_estatuto_path
+		add_breadcrumb "Nuevo"
+	end
+
+	#Vista de crear módulo de Aprendizaje Servicio.
+	#
+	#Se crea una vista específica con el objetivo de que la sección automáticamente perteneciera al respectivo módulo. Se cree que estas vistas son optimizables.
+	#
+	#Sección eliminada, nuevo objetivo de la plataforma la hace innecesaria
+	def newAprendizaje # :nodoc:
+		add_breadcrumb "Aprendizaje Servicio", :sections_aprendizaje_path
+		add_breadcrumb "Nuevo"
+	end
+
+	#Vista de crear Section
+	#
+	#No utilizada comunmnete, se cree que se generó para poder generar secciones sin necesidad de tener claro a qué módulo pertenece. Se estima que debe mejorarse.
+	def new # :nodoc:
+		add_breadcrumb "Nueva sección", :new_section_path
+		@section = Section.new
+	end
+
+	#=========================== FIN NO UTILIZADO ==================================#
+
 	private #acciones privadas del controlador
 
 	#Valida que solo los administradores sean capaces de entrar en estas vistas administrativas.
-	def validate_category # :doc:
-		if !current_user.is_admin?
-			redirect_to root_path, alert: "Sólo un administrador puede trabajar la página de inicio."
-		end   
-	end
+	
+		def validate_category # :doc:
+			if !current_user.is_admin?
+				redirect_to root_path, alert: "Usted no tiene los privilegios para administrar la plataforma"
+			end   
+		end
 
-	def administration
-		@section = Section.new		
-	end
+		def administration
+			@section = Section.new		
+		end
 
-	def section_params
-		params.require(:section).permit(:title,:body,:module,:priority, :user_id)
-	end
+		def section_params
+			params.require(:section).permit(:title,:body,:module,:priority, :user_id)
+		end
 end
