@@ -1,32 +1,70 @@
 /*****BARRA NAVEGADORA ***/
-/*sombras y efectos de la barra navegadora*/
+
 .banner-rease{
-	padding: 1em;
 	max-height: 120px;
+	padding: 1em;
 }
+
+.border-tab{	
+	background: white;
+	border: solid 1px;
+	border-color: #30aaaa;
+	margin: 0;
+}
+
+.div-rease{
+	margin: 2%;
+}
+
+.dropdown-menu > li > a{
+	color: grey;
+	font-weight: bold;
+    min-width: 250px;
+	padding: 1em;
+}
+
+.dropdown-menu > li > a:hover{  
+	background: #30aaaa; 
+	background-image: -webkit-linear-gradient(top, #30aaaa, #30bbbb);
+	background-image: -moz-linear-gradient(top, #30aaaa, #30bbbb);
+	background-image: -ms-linear-gradient(top, #30aaaa, #30bbbb);
+	background-image: -o-linear-gradient(top, #30aaaa, #30bbbb);
+	background-image: linear-gradient(to bottom, #30aaaa, #30bbbb);
+	color: white; 
+}
+
+.dropdown-menu > li.active > a {
+	background: #30cccc;
+	color: white;
+}
+
+.dropdown-menu > li.active > a:hover {
+	background: #30aaaa;
+}
+
 .movdb-header {
 	width: 100%;
 }
 
+/*ESTILOS DE NAVBAR*/
 .navbar{
 	position: relative;
 }
-.navbar-default .navbar-nav>li>a
-{
-	text-align: center;
-	color: white;
-	padding-left: 10px;
-	padding-right: 5px;
-	min-width: 115px;
 
+.navbar-default .navbar-nav>li>a{
+		color: white;
+		min-width: 115px;
+		padding-left: 10px;
+		padding-right: 5px;
+		text-align: center;
 }
-.navbar-default .navbar-nav>li>.nav-text-right
-{
-	min-width: 30px;
+
+.navbar-default .navbar-nav>li>.nav-text-right{
 	font-size: 15px;
+	min-width: 30px;
 }
-.navbar-default .navbar-nav>li>a:hover
-{
+
+.navbar-default .navbar-nav>li>a:hover{
 	background: #ffffff;
 	background-image: -webkit-linear-gradient(top, #ffffff, #30bbbb);
 	background-image: -moz-linear-gradient(top, #ffffff, #30bbbb);
@@ -36,41 +74,53 @@
 	color: #999;
 
 }
-.navbar-default .navbar-nav>.active>a
-{
+
+.navbar-default .navbar-nav>.active>a{
 	background: white;
 	color: #999;
-}
-p.navbar-text.navbar-right
-{
-	color:white;
-	padding: 0;
-	margin: 0;
-	line-height: 50px;
 }
 
 
 /*colores para barras y paneles*/
-
-.navbar-rease, .panel-click .panel-heading, .btn-aside
-{
-	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+.navbar-rease, .panel-click .panel-heading, .btn-aside{
 	background: #30bbbb;
 	background-image: -webkit-linear-gradient(top, #30bbbb, #30cccc);
 	background-image: -moz-linear-gradient(top, #30bbbb, #30cccc);
 	background-image: -ms-linear-gradient(top, #30bbbb, #30cccc);
 	background-image: -o-linear-gradient(top, #30bbbb, #30cccc);
 	background-image: linear-gradient(to bottom, #30bbbb, #30cccc);
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
 }
-.navbar-rease 
-{
+
+.navbar-rease {
 	-webkit-box-shadow: 3px 2px 5px #666666;
 	-moz-box-shadow: 3px 2px 5px #666666;
-	font-weight: bold;
 	border-color: #30cccc;
+	font-weight: bold;
+	
 }
-.panel-click .panel-heading:hover, .btn-nav:hover, .btn-aside:hover
-{
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus{
+	color: white;
+	background: #30bbbb;
+	font-weight: bold;
+	margin: 0;
+}
+
+.nav-tabs.nav-justified > .active > a,
+.nav-tabs.nav-justified > .active > a:hover,
+.nav-tabs.nav-justified > .active > a:focus {
+	border-bottom-color: #30aaaa;
+}
+
+.nav-text-right{
+	max-width: 100px;
+	text-align: left;
+
+}
+
+/*colores para barras y paneles*/
+.panel-click .panel-heading:hover, .btn-nav:hover, .btn-aside:hover{
 	background: #30cccc;
 	background-image: -webkit-linear-gradient(top, #30cccc, #30dddd);
 	background-image: -moz-linear-gradient(top, #30cccc, #30dddd);
@@ -78,113 +128,54 @@ p.navbar-text.navbar-right
 	background-image: -o-linear-gradient(top, #30cccc, #30dddd);
 	background-image: linear-gradient(to bottom, #30cccc, #30dddd);
 	font-weight: bold;
-	
 }
-/*colores para barras y paneles*/
-.panel-rease .panel-heading, #pies, .panel-half .panel-heading
-{
-	font-size:  12px;
+
+.panel-half{	
+	display: inline-block;
+	margin-right: 2%;
+	margin-left: 2%;
+	width: 45%;
+}
+
+.panel-rease .panel-heading, #pies, .panel-half .panel-heading{
 	background: #30aaaa;
 	background-image: -webkit-linear-gradient(top, #30aaaa, #30bbbb);
 	background-image: -moz-linear-gradient(top, #30aaaa, #30bbbb);
 	background-image: -ms-linear-gradient(top, #30aaaa, #30bbbb);
 	background-image: -o-linear-gradient(top, #30aaaa, #30bbbb);
 	background-image: linear-gradient(to bottom, #30aaaa, #30bbbb);
+	font-size:  12px;
 }
 
-.panel-half
-{	
-	margin-right: 2%;
-	margin-left: 2%;
-	width: 45%;
-	display: inline-block;
-
-}
-
-/*Todos los estilos de los paneles que se muestran en toda la página*/
-.panel-rease, .panel-click
-{
+.panel-rease, .panel-click{
 	margin: 2%;
 	text-align: center;
 }
 
-.panel-rease .panel-heading, .panel-click .panel-heading, .panel-half .panel-heading /*Cabecera del panel*/
-{
+.panel-rease .panel-heading, .panel-click .panel-heading, .panel-half .panel-heading{
 	color: white;
 	font-weight: bold;
 	font-size: 14px;
 	text-align: left;
 }
-.panel-rease .panel-footer, .panel-click .panel-footer /*Cabecera del footer*/
-{
+
+.panel-rease .panel-footer, .panel-click .panel-footer{
 	background: white;
 }
-.nav-text-right
-{
-	max-width: 100px;
-	text-align: left;
 
-}
-.tab-rease
-{
+.tab-rease{
 	margin: 0;
 	width: 100%;
 }
 
-.tab-rease>li>a
-{
+.tab-rease>li>a{
 	color: #30aaaa;
 	margin: 0;
 }
-.tab-rease>li>a:hover
-{
-	font-weight: bold;
+
+.tab-rease>li>a:hover{
 	background: #30cccc;
 	color: white;
-	margin: 0;
-}
-.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus
-{
-	color: white;
-	background: #30bbbb;
 	font-weight: bold;
 	margin: 0;
-}
-.nav-tabs.nav-justified > .active > a,
-.nav-tabs.nav-justified > .active > a:hover,
-.nav-tabs.nav-justified > .active > a:focus {
-	border-bottom-color: #30aaaa;
-}
-.border-tab
-{	
-	margin: 0;
-	border: solid 1px;
-	border-color: #30aaaa;
-	background: white;
-}
-.div-rease
-{
-	margin: 2%;
-}
-.dropdown-menu > li > a{
-	padding: 1em;
-	font-weight: bold;
-	color: grey;
-    min-width: 250px;
-}
-.dropdown-menu > li > a:hover{
-	color: white;   
-	background: #30aaaa; 
-	background-image: -webkit-linear-gradient(top, #30aaaa, #30bbbb);
-	background-image: -moz-linear-gradient(top, #30aaaa, #30bbbb);
-	background-image: -ms-linear-gradient(top, #30aaaa, #30bbbb);
-	background-image: -o-linear-gradient(top, #30aaaa, #30bbbb);
-	background-image: linear-gradient(to bottom, #30aaaa, #30bbbb);
-}
-.dropdown-menu > li.active > a {
-	color: white;
-	background: #30cccc;
-}
-.dropdown-menu > li.active > a:hover {
-	background: #30aaaa;
 }

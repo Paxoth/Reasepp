@@ -1,0 +1,70 @@
+<h1>Administrar Áreas <button type="button" class="btn btn-lg btn-admin-question btn-secondary" id:"btn-resource"  data-trigger="focus" data-container="body" data-toggle="btn-resource"> ? </button> </h1>
+
+<%= link_to 'Agregar recurso', new_resource_path, :class=>"btn btn-lg btn-admin" %>
+<div class="panel panel-default panel-rease">
+	<div class="panel-heading">
+		Áreas de trabajo
+	</div>
+	<div class="panel-body">
+		<table class="table table-striped display" id="resources_dt">
+			<thead>
+				<tr>
+					<th>Nombre</th>
+					<th>Publicador</th>
+					<th>Tipo</th>
+					<th>Editar</th>
+					<th>Eliminar</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @resources.each do |resource| %>
+
+					<tr>
+						<td><%=link_to resource.name, resource%></td>
+						<td><%=link_to resource.user.nickname, resource.user%></td>
+						<td>
+							<%if resource.category == 1%>
+								Acta de reunión
+							<%elsif resource.category == 2%>
+								Plantilla
+							<%elsif resource.category == 3%>
+								Formación AS
+							<%elsif resource.category == 4%>
+								Enlace útil
+							<%else%>
+								Otros
+							<%end%>
+						</td>
+						<td><%=link_to "Editar", edit_resource_path(resource)%></td>
+						<td>
+							<%= link_to "Eliminar", resource, method: :delete, data: { confirm: "¿Está seguro que desea eliminar este recurso?" } %>
+						</td>
+					</tr>
+				<%end%>
+			</tbody>
+		</table>
+	</div>
+</div>
+<%= link_to "Volver", sections_path, :class => "btn btn-lg btn-crud"%>
+
+<script type="text/javascript">
+
+	$(function () {
+		$('[data-toggle="btn-resource"]').popover(
+		{
+				title: 'Administración de áreas',
+				placement: 'bottom',
+				html: 'true', 
+				content: '<p>El administrador es el único capaz de agregar nuevas disciplinas de la OCDE en caso de que sean actualizadas</p>'
+			}
+		)
+	})
+
+	$(document).ready(function() {
+		$('#resources_dt').DataTable({
+			"language": {
+				"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+			},
+		});
+	} );
+</script>

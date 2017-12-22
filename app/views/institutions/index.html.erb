@@ -1,8 +1,7 @@
-<%if current_user.is_admin?%>
-	<h1>Administrar Institución </h1>
-	<%= link_to 'Agregar institución', new_institution_path, :class=>"btn btn-lg btn-admin" %><br>
-<%end%>
 <h1>Organizaciones adheridas</h1>
+<%if current_user.is_admin?%>
+	<%= link_to 'Agregar institución', new_institution_path, :class=>"btn btn-lg " %><br>
+<%end%>
 <p> Las organizaciones que actualmente están activas dentro de REASE o alguno de los miembros activos pertenecen a ellas, son: </p>
 
 <%if @institutions.present?%>

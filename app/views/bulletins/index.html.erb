@@ -1,4 +1,4 @@
-<h1>Boletines de Rease</h1>
+<h1>Boletines de Rease <button type="button" class="btn btn-lg btn-admin-question btn-secondary" id:"btn-bull"  data-trigger="focus" data-container="body" data-toggle="btn-bull"> ? </button></h1>
 
 <%= link_to 'Escribir boletín', new_bulletin_path,:class=>'btn btn-lg btn-crud' %>
 
@@ -7,9 +7,43 @@
 		Correos enviados anteriormente
 	</div>
 	<div class="panel-body">
-		<%@bulletins.each do |bulletin|%>
-			<p><strong><%=bulletin.title%></strong> - <%=l bulletin.start_date%> - <%= link_to "Ver", bulletin %> </p>
-		<%end%>
+		<table class="table table-striped display" id="bulletins_dt">
+			<thead>
+				<tr>
+					<th>Título</th>
+					<th>Fecha</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @bulletins.each do |bulletin| %>
+					<tr>
+						<td>><%= link_to bulletin.title, bulletin%></td>
+						<td><%=l bulletin.start_date%></td>
+					</tr>
+				<%end%>
+			</tbody>
+		</table>
 	</div>
 </div>
+<%= link_to "Volver", sections_path, :class => "btn btn-lg btn-crud"%>
+<script type="text/javascript">
 
+	$(function () {
+		$('[data-toggle="btn-bull"]').popover(
+		{
+				title: 'Generación de boletines informativos',
+				placement: 'bottom',
+				html: 'true', 
+				content: '<p>El administrador es capaz de generar boletines con las últimas noticias de la red, añadiendo el listado de actividades AS que se han generado</p>'
+			}
+		)
+	})
+
+	$(document).ready(function() {
+		$('#bulletins_dt').DataTable({
+			"language": {
+				"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+			},
+		});
+	} );
+</script>

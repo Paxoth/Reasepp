@@ -57,10 +57,31 @@
 					<span class="input-group-addon social-addon"><i class="fa fa-youtube"></i></span>
 					<%= f.text_field :youtube, :class => 'form-control', :placeholder=>"https://www.youtube.com/user/ejemplo" %>
 				</div>
-			</div>		
+			</div>	
+
+			<h2>Encargado AS <button type="button" class="btn btn-default btn-white" id:"btn-encargado-AS" data-trigger="focus" data-container="body" data-toggle="btn-encargado-AS"> ? </button></h2>
+			<div class="padding15">
+				<%@professors = @institution.users.where(category: 2)%>
+				<%if @institution.manager_id == current_user.id%>
+					<%= f.select :manager_id, @professors.collect {|prof| [prof.name, prof.id]},{:include_blank => "Seleccione un usuario como encargado AS"},{ :class => 'form-control'}%>
+				<%end%>
+			</div>	
 			<%end%>
 		</div>	
 	</div>
 	<%= f.submit orden, :class=>"btn btn-lg btn-crud" %>
 	<%= link_to 'Volver', institutions_path, :class =>"btn btn-lg btn-crud" %>
 <% end %>
+
+<script type="text/javascript">
+		$(function () {
+		$('[data-toggle="btn-encargado-AS"]').popover(
+			{
+				title: 'Encargado AS',
+				html: 'true', 
+				content: '<p>El <strong>Encargado AS</strong> es un usuario único por insitución. Este usuario es el único capaz de velar por mantener la información y datos de la institution actualizados.</p><p>Además, el encargado AS es el único usuario por institution con permisos para acceder a la información de gestión.</p><p>Si nombras a otro usuario como encargado AS otorgarás tus derechos a otro usuario.</p>',
+				template: '<div class="popover popover-rease"><div class="arrow"></div><div class="popover-inner"><h3 class="popover-title"></h3><div class="popover-content"><p></p></div></div></div>'
+			}
+		)
+	})
+</script>

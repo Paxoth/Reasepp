@@ -2,19 +2,19 @@
 <h1>Administración del sitio <button type="button" class="btn btn-default btn-white" id:"btn-admin"  data-trigger="focus" data-container="body" data-toggle="btn-admin"> ? </button></h1>
 
 <div class="btn-group" role="group" aria-label="Basic example">
-	<%= link_to "Administrar instituciones", institutions_path, class:"btn btn-lg btn-admin btn-secondary"%>
+	<%= link_to "Administrar instituciones", sections_institutions_path, class:"btn btn-lg btn-admin btn-secondary"%>
 	<button type="button" class="btn btn-lg btn-admin-question btn-secondary" id:"btn-inst"  data-trigger="focus" data-container="body" data-toggle="btn-inst"> ? </button>
 </div>
 <br>
 
 <div class="btn-group" role="group" aria-label="Basic example">
-	<%= link_to "Administrar áreas de trabajo", areas_path, class:"btn btn-lg btn-admin btn-secondary"%>
+	<%= link_to "Administrar áreas de trabajo", sections_areas_path, class:"btn btn-lg btn-admin btn-secondary"%>
 	<button type="button" class="btn btn-lg btn-admin-question btn-secondary" id:"btn-area"  data-trigger="focus" data-container="body" data-toggle="btn-area"> ? </button>
 </div>
 <br>
 
 <div class="btn-group" role="group" aria-label="Basic example">
-	<%= link_to "Administrar recursos", resources_path, class:"btn btn-lg btn-admin btn-secondary"%>
+	<%= link_to "Administrar recursos", sections_resources_path, class:"btn btn-lg btn-admin btn-secondary"%>
 	<button type="button" class="btn btn-lg btn-admin-question btn-secondary" id:"btn-res"  data-trigger="focus" data-container="body" data-toggle="btn-res"> ? </button>
 </div>
 <br>
@@ -90,7 +90,7 @@
 	$(function () {
 		$('[data-toggle="btn-fq"]').popover(
 		{
-				title: 'Administración',
+				title: 'Administración de pregunta frecuentes',
 				placement: 'bottom',
 				html: 'true', 
 				content: '<p>El administrador debe crear preguntas frecuentes, junto con sus respuestas para que los usuarios puedan resolver la mayor cantidad de dudas sin problemas</p>'

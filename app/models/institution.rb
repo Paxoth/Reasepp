@@ -33,7 +33,7 @@ class Institution < ActiveRecord::Base
 	#VALIDACIONES
 	has_attached_file :logo, styles: {mini:"160x80"}
 	validates_attachment_content_type :logo, content_type: /\Aimage\/.*\Z/ 
-	validates :name, presence: true, uniqueness: true
+	validates :name, presence: true, uniqueness: true, length: {minimum: 10, maximum: 100}
 
 	
 	

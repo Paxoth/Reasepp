@@ -3,7 +3,7 @@
   Utiliza comunmente información de Section, pero este controlador es solo pensado para vistas específicas de usuarios visitantes, es decir, offline._
 =end
 class PresentationController < ApplicationController
-	before_action :set_presentation, except: [:estatuto]
+
 	add_breadcrumb "Inicio", :root_path
 	
 	#Vista principal del portal web
@@ -30,7 +30,7 @@ class PresentationController < ApplicationController
 	#
 	#Ademas de las secciones de la categoría "somos" ( Section )
 	def somos
-		add_breadcrumb "¿Quiénes Somos?", :presentation_somos_path 
+		add_breadcrumb "¿Quiénes Somos?"
 		@instituciones = Institution.order("name ASC").all
 		@sections = Section.order("priority ASC").where("module = ?","Somos")
 
@@ -42,7 +42,7 @@ class PresentationController < ApplicationController
 	#
 	#Ademas de las secciones de la categoría "somos" ( Section )
 	def hacemos
-		add_breadcrumb "¿Qué hacemos?", :presentation_hacemos_path
+		add_breadcrumb "¿Qué hacemos?"
 		@resources = Resource.paginate(page: params[:page],per_page: 10).where(category: 1).order("date DESC")
 		@sections = Section.order("priority ASC").where("module = ?","Hacemos")
 
@@ -52,7 +52,7 @@ class PresentationController < ApplicationController
 	#
 	#Muestra las secciones de la categoría "Aprendizaje Servicio" ( Section )
 	def aprendizaje
-		add_breadcrumb "¿Qué es AS?", :presentation_aprendizaje_path
+		add_breadcrumb "¿Qué es AS?", 
 		@sections = Section.order("priority ASC").where("module = ?","Aprendizaje Servicio")
 	end
 
@@ -60,7 +60,7 @@ class PresentationController < ApplicationController
 	#
 	#Muestra las secciones de la categoría "Estatuto" ( Section )
 	def estatuto
-		add_breadcrumb "Estatuto", :presentation_estatuto_path
+		add_breadcrumb "Estatuto"
 		@events = Event.all
     	@interest_links = InterestLink.order("name ASC").all
 		@sections = Section.where("module = ?","Estatuto")
@@ -70,9 +70,8 @@ class PresentationController < ApplicationController
 	#
 	#Genera las consultas de las preguntas frecuentes ( Question )	
 	def about
-		add_breadcrumb "Acerca de", :presentation_estatuto_path
+		add_breadcrumb "Acerca de"
 		@events = Event.all
-    	@interest_links = InterestLink.order("name ASC").all
 		@questions = Question.all
 	end
 

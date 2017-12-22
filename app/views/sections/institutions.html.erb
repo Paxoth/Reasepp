@@ -1,0 +1,64 @@
+<h1>Administrar instituciones <button type="button" class="btn btn-lg btn-admin-question btn-secondary" id:"btn-inst"  data-trigger="focus" data-container="body" data-toggle="btn-inst"> ? </button> </h1>
+
+<%= link_to 'Agregar institución', new_institution_path, :class=>"btn btn-lg btn-admin" %>
+<div class="panel panel-default panel-rease">
+	<div class="panel-heading">
+		Instituciones adheridas a REASE
+	</div>
+	<div class="panel-body">
+		<table class="table table-striped display" id="institution_dt">
+			<thead>
+				<tr>
+					<th>Nombre</th>
+					<th>Encargado AS</th>
+					<th>Editar</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @institutions.each do |institution| %>
+
+					<tr>
+						<td><%=link_to institution.name, institution%></td>
+						<td>
+							<%if institution.manager_id.present?%>
+								<%@manager = User.where(id: institution.manager_id).first%>
+								<%=link_to @manager.nickname, @manager%>
+							<%else%>
+								Sin encargado AS
+							<%end%>
+						</td>
+						<td>
+							<% if institution.manager_id.present?%>
+								No puede
+							<%else%>
+								<%=link_to "Editar", edit_institution_path(institution)%>
+							<%end%>
+						</td>
+					</tr>
+				<%end%>
+			</tbody>
+		</table>
+	</div>
+</div>
+<%= link_to "Volver", sections_path, :class => "btn btn-lg btn-crud"%>
+<script type="text/javascript">
+
+	$(function () {
+		$('[data-toggle="btn-inst"]').popover(
+		{
+				title: 'Administración de instituciones',
+				placement: 'bottom',
+				html: 'true', 
+				content: '<p>El administrador es el único capaz de adherir nuevas instituciones a la red y nombrar a un encargado AS como responsable de esta</p>'
+			}
+		)
+	})
+
+	$(document).ready(function() {
+		$('#institution_dt').DataTable({
+			"language": {
+				"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+			},
+		});
+	} );
+</script>
