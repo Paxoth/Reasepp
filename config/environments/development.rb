@@ -23,8 +23,8 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :mailgun
   config.action_mailer.mailgun_settings = {
           :port => 587,
-          api_key: 'key-5b41486f6b02208d233a05748bb8b3ae',
-          domain: 'sandbox1d5c2d3084c744bb8fd30f594262fd0d.mailgun.org'
+          api_key: 'key-fbfb4c77690fe98f2d9c24d20a4ab522',
+          domain: 'sandbox78591e5ecb4649b89ca74a477e5d9549.mailgun.org'
   }
 
   # Print deprecation notices to the Rails logger.

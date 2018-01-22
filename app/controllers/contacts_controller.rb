@@ -36,8 +36,8 @@ class ContactsController < ApplicationController
     respond_to do |format|
       if @contact.save
         ContactMailer.contact_receiver(@contact).deliver
-        ContactMailer.contact_sender(@contact).deliver
-        format.html { redirect_to @contact, notice: 'Su mensaje ha sido enviado' }
+        #ContactMailer.contact_sender(@contact).deliver
+        format.html { redirect_to contacts_path, notice: 'Su mensaje ha sido enviado. REASE se comunicará con usted a través de su correo electrónico.' }
         format.json { render :show, status: :created, location: @contact }
       else
         format.html { render :new }

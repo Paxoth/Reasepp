@@ -1,3 +1,12 @@
+Area.destroy_all
+Institution.destroy_all
+InterestLink.destroy_all
+Resource.destroy_all
+Offering.destroy_all
+Request.destroy_all
+Service.destroy_all
+Experience.destroy_all
+
 User.create([{
 	email: 'coordinacion.rease@gmail.com',
 	password: 'rease2017',
@@ -97,6 +106,23 @@ institution_list.each do |id, logo,name, web|
 end
 print("\tSeed:\tInstuciones creadas\n")
 
+interestLinks_list = [
+	["RIDAS","http://revistes.ub.edu/index.php/RIDAS","Revista Iberoamericana de Aprendizaje Servicio"],
+	["National Service-Learning Clearinghouse","https://gsn.nylc.org/","Centro Aprendizaje Servicio en USA"],
+	["Zerbikas","http://www.zerbikas.es/","Centro Promotor del Aprendizaje y Servicio Solidario en Euskadi ZERBIKAS"],
+	["REASE en youtube (Tutoriales aplicación)","https://www.youtube.com/channel/UCO3xgzmdu9EWKVGJO1Yj4rA","Tutoriales para poder usar la aplicación sin documentación o capacitación previa"],
+	["El aprendizaje-servicio por Andrew Furco","http://educacionglobalresearch.net/wp-content/uploads/03-Furco-1-Castellano.pdf","El aprendizaje-servicio por Andrew Furco"],
+	["CLAYSS en youtube","https://www.youtube.com/channel/UCfjT6MIfaghMrdw7NCDICcQ","Videos de CLAYSS en youtube"],
+	["CLAYSS","http://www.clayss.org.ar","Centro Latinoamericano de Aprendizaje y Servicio"],
+	["Facebook REASE Chile","https://es-es.facebook.com/reasechile","Página de facebook de la red nacional de aprendizaje servicio"]
+]
+
+interestLinks_list.each do |name,url, description|
+  	InterestLink.create(name: name, url: url, description: description)
+end
+print("\tSeed:\tEnlances de Interes creados\n")
+
+
 actas_list = [
  [1,"#{Rails.root}/public/resources/actas/2014_04_10_ampliada.pdf", "Acta reunión ampliada 1", "2014-04-10", "Acta de reunión ampliada 2014-04-10"],
  [2,"#{Rails.root}/public/resources/actas/2014_07_11_ampliada.pdf", "Acta reunión ampliada 2", "2014-07-11", "Acta de reunión ampliada 2014-07-11"],
@@ -122,8 +148,8 @@ print("\nGENERACIÓN DE DATOS DUMMIES PARA LAS PRUEBAS DE INFORMACIÓN DE GESTIO
 
 print("\nINSERTANDO TEXTOS BASES PARA POBLAR SISTEMA\n")
 
-(1..5).step(1) do |n|
-	modulos = ["Novedad"]
+(1..30).step(1) do |n|
+	modulos = ["Novedad","Aprendizaje Servicio","Somos","Hacemos","Estatuto"]
 	Section.create(
 		id: n,
 		title: "Seccion de prueba "+n.to_s,
@@ -133,15 +159,6 @@ print("\nINSERTANDO TEXTOS BASES PARA POBLAR SISTEMA\n")
 	)
 end
 
-User.create([{
-	email: 'edmundo.leiva@usach.cl',
-	password: 'rease2017',
-	name: 'Edmundo Leiva Lobos',
-	nickname: 'Profe Edmundo', 
-	category: 2, 
-	autorization_level: 1, 
-	confirmed_at: Time.now,
-}])
 
 print("\n\tSeed:\tAsignado usuarios básicos cargos dentro de la usach")
 	profesor = User.where(id:2).first
@@ -151,34 +168,16 @@ print("\n\tSeed:\tAsignado usuarios básicos cargos dentro de la usach")
 	socio.institution_id = 14
 	vinculador.institution_id=14
 	usach = Institution.where(id:14).first
-	utem = Institution.where(id:15).first
-	edmundo = User.last
-	edmundo.institution = usach
-	profesor.institution = utem
-	usach.manager_id = edmundo.id
-	utem.manager_id = profesor.id
-	utem.facebook = "https://www.facebook.com/utem.cl"
-	utem.instagram = "https://www.instagram.com/utem.cl/"
-	utem.linkedin = "https://www.linkedin.com/school/15092438/"
-	utem.twitter = "https://twitter.com/utem"
-	utem.youtube = "https://www.youtube.com/channel/UCOD3DHD_bafDGzGPYxTtRRw"
-	usach.facebook = "https://www.facebook.com/universidaddesantiago/"
-	usach.instagram = "https://www.instagram.com/udesantiagocl/"
-	usach.linkedin = "https://www.linkedin.com/school/universidad-de-santiago-de-chile/"
-	usach.twitter = "https://twitter.com/usach"
-	usach.youtube = "https://www.youtube.com/user/digecapusach"
-	usach.save
-	utem.save
+	usach.manager_id=2
 	profesor.save
-	edmundo.save
 	socio.save
 	vinculador.save
+	usach.save
 print("\n\tSeed:\tUsarios básicos asignados a usach:")
 
 
-
 print("\n\tSeed:\tCreando profesores: ")
-(1..10).step(1) do |n| #6..15
+(1..100).step(1) do |n|
 	inst_id = rand(1..15)
 	inst_aux = Institution.where(id:inst_id).first
 	inst_days = (inst_aux.created_at.to_date..Time.now.to_date).count
@@ -196,10 +195,10 @@ print("\n\tSeed:\tCreando profesores: ")
 	)
 	print(User.last.id.to_s+" ")
 end
-print("\n\tSeed:\tprofesores de pruebas creados [10=>6-15]\n")
+print("\n\tSeed:\tprofesores de pruebas creados [100=>5-104]\n")
 
 print("\n\tSeed:\tCreando socios: ")
-(1..10).step(1) do |n| #16..25
+(1..100).step(1) do |n|
 	inst_id = rand(1..15)
 	inst_aux = Institution.where(id:inst_id).first
 	inst_days = (inst_aux.created_at.to_date..Time.now.to_date).count
@@ -218,10 +217,10 @@ print("\n\tSeed:\tCreando socios: ")
 	print(User.last.id.to_s+" ")
 end
 
-print("\n\tSeed:\tSocios de pruebas creados [10=>16-25] \n")
+print("\n\tSeed:\tSocios de pruebas creados [100=>105-204] \n")
 
 print("\n\tSeed:\tCreando Vinculadores: ")
-(1..10).step(1) do |n| #26..35
+(1..100).step(1) do |n|
 	inst_id = rand(1..15)
 	inst_aux = Institution.where(id:inst_id).first
 	inst_days = (inst_aux.created_at.to_date..Time.now.to_date).count
@@ -240,12 +239,12 @@ print("\n\tSeed:\tCreando Vinculadores: ")
 	print(User.last.id.to_s+" ")
 end
 
-print("\n\tSeed:\tVinculadores de pruebas creados [10=>26-35] \n")
+print("\n\tSeed:\tVinculadores de pruebas creados [100=>205-304] \n")
 
 
 print("\n\tSeed:\tCreando ofertas con profesores: ")
-(1..25).step(1) do |n|
-	professor_aux_id = rand(6..15)
+(1..250).step(1) do |n|
+	professor_aux_id = rand(5..104)
 	professor_aux = User.where(id:professor_aux_id).first #UN professor al azar
 	Offering.create(
 		id: n, 
@@ -263,17 +262,17 @@ print("\n\tSeed:\tCreando ofertas con profesores: ")
 	)
 	print(professor_aux_id.to_s+" ")
 end
-print("\n\tSeed:\tOfertas de pruebas por profesores creadas [25]\n")
+print("\n\tSeed:\tOfertas de pruebas por profesores creadas [250]\n")
 
 print("\n\tSeed:\tCreando ofertas con vinculadores: ")
 offering_count = Offering.count
-(1..10).step(1) do |n|
-	vinculador_aux_id = rand(26..35)
+(1..100).step(1) do |n|
+	vinculador_aux_id = rand(205..304)
 	has_professor = rand(0..2)
 	if has_professor == 0
 		user_id = vinculador_aux_id
 	else
-		user_id = rand(6..15)
+		user_id = rand(5..104)
 	end
 	print(vinculador_aux_id.to_s+" ")
 	vinculador_aux = User.where(id:vinculador_aux_id).first 	
@@ -294,11 +293,11 @@ offering_count = Offering.count
 		broker_id: vinculador_aux.id
 	)
 end
-print("\n\tSeed:\tOfertas de servicio por vinculadores creadas [10] \n")
+print("\n\tSeed:\tOfertas de servicio por vinculadores creadas [100] \n")
 
 print("\n\tSeed:\tCreando solicitudes con socios: ")
-(1..25).step(1) do |n|
-	partner_aux_id = rand(16..25)
+(1..250).step(1) do |n|
+	partner_aux_id = rand(105..204)
 	print(partner_aux_id.to_s+" ")
 	partner_aux = User.where(id:partner_aux_id).first 	#Un socio al aazar
 	Request.create(
@@ -316,18 +315,18 @@ print("\n\tSeed:\tCreando solicitudes con socios: ")
 		institution_id: partner_aux.institution_id
 	)
 end
-print("\n\tSeed:\tSolicitud de pruebas por socios creadas [25] \n")
+print("\n\tSeed:\tSolicitud de pruebas por socios creadas [250] \n")
 
 
 print("\n\tSeed:\tCreando solicitudes con vinculadores: ")
 request_count = Request.count
-(1..10).step(1) do |n|
-	vinculador_aux_id = rand(26..35)
+(1..100).step(1) do |n|
+	vinculador_aux_id = rand(205..304)
 	has_partner = rand(0..2)
 	if has_partner == 0
 		user_id = vinculador_aux_id
 	else
-		user_id = rand(16..25)
+		user_id = rand(105..204)
 	end
 	print(vinculador_aux_id.to_s+" ")
 	vinculador_aux = User.where(id:vinculador_aux_id).first 	#Un socio al aazar
@@ -348,20 +347,20 @@ request_count = Request.count
 		broker_id: vinculador_aux.id
 	)
 end
-print("\n\tSeed:\tSolicitud de servicio por vinculadores creadas [10] \n")
+print("\n\tSeed:\tSolicitud de servicio por vinculadores creadas [100] \n")
 
 print("\n\tSeed:\tCreando servicios con profesores responsables: ")
-(1..30).step(1) do |n|
+(1..300).step(1) do |n|
 
 	publication_type = rand(0..1) #0:request   #1:offering
-	publication_id = rand(1..35)  #Cualquier publicacion
+	publication_id = rand(1..300)  #Cualquier publicacion
 
 	if publication_type == 0 #BASADOS EN REQUEST
-		professor_aux_id = rand(6..15)
+		professor_aux_id = rand(5..104)
 		professor_aux = User.where(id: professor_aux_id).first 	#Un professor al azar
 		publication_aux = Request.where(id: publication_id).first
 		while (publication_aux.status != 1 or publication_aux.user.category==3)
-			publication_id = rand(1..35)
+			publication_id = rand(1..300)
 			publication_aux = Request.where(id: publication_id).first
 		end
 		days = (professor_aux.confirmed_at.to_date..Time.now.to_date).count
@@ -388,11 +387,11 @@ print("\n\tSeed:\tCreando servicios con profesores responsables: ")
 		)
 		print("R"+publication_id.to_s+" ")
 	else #BASADOS EN OFFERING
-		partner_aux_id = rand(16..25)
+		partner_aux_id = rand(105..204)
 		partner_aux = User.where(id: partner_aux_id).first		#Un socio al azar
 		publication_aux = Offering.where(id: publication_id).first
 		while publication_aux.user.category == 3 or publication_aux.status != 1
-			publication_id = rand(1..35)
+			publication_id = rand(1..300)
 			publication_aux = Offering.where(id: publication_id).first
 		end
 		days = (publication_aux.user.confirmed_at.to_date..Time.now.to_date).count
@@ -429,11 +428,11 @@ print("\tSeed:\tServicios de pruebas creadas basadas las ofertas y solicitudes d
 
 
 print("\n\tSeed:\tCreando Experiencias basados en los servicios: ")
-(1..15).step(1) do |n| #ESTA CONDICION SE PUEDE CAMBIAR
-	service_aux_id = rand(1..30)
+(1..150).step(1) do |n| #ESTA CONDICION SE PUEDE CAMBIAR
+	service_aux_id = rand(1..300)
 	service_aux = Service.where(id:service_aux_id).first
 	while service_aux.status == 5
-		service_aux_id = rand(1..30)
+		service_aux_id = rand(1..300)
 		service_aux = Service.where(id:service_aux_id).first
 	end
 	print service_aux_id.to_s+" "
@@ -492,4 +491,34 @@ print("\n\tSeed:\tCreando Experiencias basados en los servicios: ")
 end
 print("\n\tSeed:\tExperiencias de pruebas creadas [200]\n")
 
-
+User.create([{
+	email: 'edmundo.leiva@usach.cl',
+	password: 'rease2017',
+	name: 'Edmundo Leiva Lobos',
+	nickname: 'Profe Edmundo', 
+	category: 2, 
+	autorization_level: 1, 
+	confirmed_at: Time.now,
+}])
+usach = Institution.where(id:14).first
+utem = Institution.where(id:15).first
+edmundo = User.last
+edmundo.institution = usach
+profesor = User.where(id:2).first
+profesor.institution = utem
+usach.manager_id = edmundo.id
+utem.manager_id = profesor.id
+utem.facebook = "https://www.facebook.com/utem.cl"
+utem.instagram = "https://www.instagram.com/utem.cl/"
+utem.linkedin = "https://www.linkedin.com/school/15092438/"
+utem.twitter = "https://twitter.com/utem"
+utem.youtube = "https://www.youtube.com/channel/UCOD3DHD_bafDGzGPYxTtRRw"
+usach.facebook = "https://www.facebook.com/universidaddesantiago/"
+usach.instagram = "https://www.instagram.com/udesantiagocl/"
+usach.linkedin = "https://www.linkedin.com/school/universidad-de-santiago-de-chile/"
+usach.twitter = "https://twitter.com/usach"
+usach.youtube = "https://www.youtube.com/user/digecapusach"
+usach.save
+utem.save
+profesor.save
+edmundo.save
