@@ -5,6 +5,34 @@
 <p> Las organizaciones que actualmente están activas dentro de REASE o alguno de los miembros activos pertenecen a ellas, son: </p>
 
 <%if @institutions.present?%>
+<div class="panel-body">
+	<table class="table table-striped display" id="institution_dt">
+		<thead>
+			<tr>
+				<th>Nombre</th>
+				<th>Encargado AS</th>
+				<th>Fecha Ingreso</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @institutions.each do |institution| %>
+
+				<tr>
+					<td><%=link_to institution.name, institution%></td>
+					<td>
+						<%if institution.manager_id.present?%>
+							<%@manager = User.where(id: institution.manager_id).first%>
+							<%=link_to @manager.name, @manager%>
+						<%else%>
+							Sin encargado AS
+						<%end%>
+					</td>
+					<td><%= institution.created_at%></td>
+				</tr>
+			<%end%>
+		</tbody>
+	</table>
+</div>
 	<% @institutions.each do |institution| %>
 		<%= link_to(image_tag(institution.logo.url(:mini)), institution, :id=>"logo-institution") %>
 	<%end%>
@@ -12,3 +40,13 @@
 	Aún no se han agregado insituciones.
 <%end%>
 
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#institution_dt').DataTable({
+			"language": {
+				"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+			},
+		});
+	} );
+</script>

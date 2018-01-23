@@ -13,7 +13,7 @@
 			
 			<%if @manager.present?%>
 				<%if !@manager.photo.blank?%>
-					<%= image_tag @user.photo.url(:medium),:class=>'round-picture' %>
+					<%= image_tag @manager.photo.url(:medium),:class=>'round-picture' %>
 				<%end%>
 				<p><strong>Nombre completo: </strong> <%= link_to @manager.name, @manager %> </p>
 				<p><strong>Categoría:</strong> 

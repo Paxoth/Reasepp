@@ -6,7 +6,7 @@
 		<div class="padding15 to-left">
 			<li><strong>Experiencias totales</strong>: <%=@institution.experiences.count%><br></li>
 			<li><strong>Estudiantes participantes totales </strong>: <%=@institution.experiences.sum("participants")%></li>
-			<li><strong>Miembros de comunidades beneficiados </strong>: <%=@institution.experiences.sum("benefited")%></li>
+			<li><strong>Miembros de comunidades participantes </strong>: <%=@institution.experiences.sum("benefited")%></li>
 		</div>
 		<hr>
 		<table class="table table-striped display">

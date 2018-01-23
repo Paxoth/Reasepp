@@ -88,7 +88,7 @@ class ExperiencePdf < Prawn::Document
 		text "\n<b>Horas cronológicas semanales:</b> #{@experience.weekly_hours}", size: 11, indent_paragraphs: 30, align: :justify, :inline_format => true
 		text "\n<b>Número de estudiantes participantes:</b> #{@experience.participants}", size: 11, indent_paragraphs: 30, align: :justify, :inline_format => true
 		text "\n<b>Nivel de la carrera de los estudiantes:</b> #{@experience.students_level}", size: 11, indent_paragraphs: 30, align: :justify, :inline_format => true
-		text "\n<b>Números de beneficiados directos con toda la actividad o proyecto:</b>", size: 11, indent_paragraphs: 30, align: :justify, :inline_format => true
+		text "\n<b>Números de miembros de la comunidad participantes directos con toda la actividad o proyecto:</b>", size: 11, indent_paragraphs: 30, align: :justify, :inline_format => true
 		text "\n#{@experience.benefited}", size: 11, indent_paragraphs: 60, align: :justify
 		text "\n<b>Resultados de aprendizaje:</b>", size: 11, indent_paragraphs: 30, align: :justify, :inline_format => true
 		text "\n#{@experience.results}", size: 11, indent_paragraphs: 60, align: :justify

@@ -1,3 +1,7 @@
+print("============================")
+print("\n SEED PARA PRESENTACIÓN \n")
+print("============================\n\n")
+
 User.create([{
 	email: 'coordinacion.rease@gmail.com',
 	password: 'rease2017',
@@ -11,13 +15,13 @@ User.create([{
 print("\tSeed:\tUsuario Administrador creado\n")
 
 usuarios_prueba_list =[
-	["profesor@rease.cl",'rease2017', 'profesor Prueba', 'profesor', 2, 1],
-	["vinculador@rease.cl",'rease2017', 'Vinculador Prueba', 'Vinculador', 3, 1],
-	["socio@rease.cl",'rease2017', 'Socio Prueba', 'Socio',4,1]
+	["profesor@rease.cl",'rease2017', 'profesor Prueba', 'profesor', 2, 1, "#{Rails.root}/public/fotos/Profesor.png"],
+	["vinculador@rease.cl",'rease2017', 'Vinculador Prueba', 'Vinculador', 3, 1, "#{Rails.root}/public/fotos/Vinculador.png"],
+	["socio@rease.cl",'rease2017', 'Socio Prueba', 'Socio',4,1, "#{Rails.root}/public/fotos/Socio.png"]
 ]
 
-usuarios_prueba_list.each do |email, password, name, nickname, category, autorization_level|
-  User.create( email: email, password: password, name: name, nickname: nickname, category: category, autorization_level:autorization_level, confirmed_at: Time.now)
+usuarios_prueba_list.each do |email, password, name, nickname, category, autorization_level, archive|
+  User.create( email: email, password: password, name: name, nickname: nickname, category: category, autorization_level:autorization_level, confirmed_at: Time.now, photo: File.new(archive))
 end
 print("\tSeed:\tUsuarios profesor, Vinculador y Socio Comunitario creados\n")
 
@@ -89,7 +93,9 @@ institution_list = [
 	[12,"#{Rails.root}/public/institution/uconce.gif", "Universidad de Concepción", "http://www.udec.cl/pexterno/"],
 	[13,"#{Rails.root}/public/institution/ufro.png", "Universidad de la Frontera", "http://www.ufro.cl/"],
 	[14,"#{Rails.root}/public/institution/usach.png", "Universidad de Santiago de Chile", "http://rsu.usach.cl/"],
-	[15,"#{Rails.root}/public/institution/utem.png", "Universidad Técnica Metropolitana", "http://www.utem.cl/"]
+	[15,"#{Rails.root}/public/institution/umayor.png", "Universidad Mayor", "http://www.umayor.cl/"],
+	[16,"#{Rails.root}/public/institution/utem.png", "Universidad Técnica Metropolitana", "http://www.utem.cl/"],
+	
 ]
 
 institution_list.each do |id, logo,name, web|
@@ -122,15 +128,14 @@ print("\nGENERACIÓN DE DATOS DUMMIES PARA LAS PRUEBAS DE INFORMACIÓN DE GESTIO
 
 print("\nINSERTANDO TEXTOS BASES PARA POBLAR SISTEMA\n")
 
-(1..5).step(1) do |n|
-	modulos = ["Novedad"]
-	Section.create(
-		id: n,
-		title: "Seccion de prueba "+n.to_s,
-		module: modulos.sample,
-		body: "Texto de prueba numero"+n.to_s+", esto será escrito como una prueba.",
-		priority: rand(1..3)
-	)
+texto_list=[
+	[1, "Damos inicio a la nueva intranet de REASE", "Se ha creado una nueva intranet en rease en donde la prioridad está enfocada en ser un repositorios de experiencias realizadas por toda la organización. Se espera que con estos cambios, los usuarios puedan utilizar de mejor manera la plataforma."],
+	[2, "¡Nuevas vistas!", "Ahora todas las actividades AS (Ofertas, Solicitudes, Servicios Activos y Experiencias) se despliegan a través de Datatables, tablas las cuales puedes ordenar su componente y hacen sus vistas mucho más amigables!"],
+	[3, "Instituciones mejoradas", "Con la última actualización de la intranet de REASE, ahora existe una página de institución, en donde los usuarios podrán ver las actividades AS que esta ha realizado a través de su instancia en la RED."]
+]
+
+texto_list.each do |id, title, body|
+  	Section.create(id: id, title: title, body: body, module: "Novedad", priority: rand(1..3))
 end
 
 User.create([{
@@ -141,9 +146,79 @@ User.create([{
 	category: 2, 
 	autorization_level: 1, 
 	confirmed_at: Time.now,
+	is_admin: true,
+	institution_id: 14,
+	institution_custom: true,
+	photo: File.new("#{Rails.root}/public/fotos/Edmundo.png")
 }])
 
-print("\n\tSeed:\tAsignado usuarios básicos cargos dentro de la usach")
+User.create([{
+	email: 'maximiliano.perez@usach.cl',
+	password: 'rease2017',
+	name: 'Maximiliano Pérez Rodríguez',
+	nickname: 'Paxoth', 
+	category: 4, 
+	autorization_level: 1, 
+	confirmed_at: Time.now,
+	is_admin: true,
+	institution_id: 14,
+	institution_custom: true
+}])
+
+User.create([{
+	email: 'catalina.mujica@umayor.cl',
+	password: 'rease2017',
+	name: 'Catalina Mujica',
+	nickname: 'Catalina', 
+	category: 4, 
+	autorization_level: 1, 
+	confirmed_at: Time.now,
+	is_admin: true,
+	institution_id: 15,
+	institution_custom: false
+}])
+
+User.create([{
+	email: 'jtmontalva@gmail.com',
+	password: 'rease2017',
+	name: 'José Tomás Montalva',
+	nickname: 'José', 
+	category: 4, 
+	autorization_level: 1, 
+	confirmed_at: Time.now,
+	is_admin: true,
+	institution_custom: false
+}])
+
+User.create([{
+	email: 'aprendizajeservicio@uc.cl',
+	password: 'rease2017',
+	name: 'Manuel Caire Espinoza',
+	nickname: 'Manuel', 
+	category: 2, 
+	autorization_level: 1, 
+	confirmed_at: Time.now,
+	is_admin: false,
+	institution_id: 3,
+	institution_custom: false,
+	photo: File.new("#{Rails.root}/public/fotos/Manuel.jpg")
+}])
+
+User.create([{
+	email: 'ralmendras@utem.cl',
+	password: 'rease2017',
+	name: 'Rocío Almendras',
+	nickname: 'Rocío', 
+	category: 2, 
+	autorization_level: 1, 
+	confirmed_at: Time.now,
+	is_admin: false,
+	institution_id: 16,
+	institution_custom: true,
+	photo: File.new("#{Rails.root}/public/fotos/Rocio.jpg")
+}])
+
+print("\n\tSeed:\tAsignado usuarios básicos cargos dentro de las instituciones")
 	profesor = User.where(id:2).first
 	socio = User.where(id:3).first
 	vinculador = User.where(id:4).first
@@ -151,12 +226,17 @@ print("\n\tSeed:\tAsignado usuarios básicos cargos dentro de la usach")
 	socio.institution_id = 14
 	vinculador.institution_id=14
 	usach = Institution.where(id:14).first
-	utem = Institution.where(id:15).first
-	edmundo = User.last
-	edmundo.institution = usach
-	profesor.institution = utem
+	utem = Institution.where(id:16).first
+	umayor = Institution.where(id:15).first
+	puc = Institution.where(id:3).first
+	edmundo = User.where(email: "edmundo.leiva@usach.cl").first
+	rocio = User.where(email: "ralmendras@utem.cl").first
+	manuel = User.where(email: "aprendizajeservicio@uc.cl").first
+	catalina = User.where(email: "catalina.mujica@umayor.cl").first
 	usach.manager_id = edmundo.id
-	utem.manager_id = profesor.id
+	utem.manager_id = rocio.id
+	umayor.manager_id = catalina.id
+	puc.manager_id = manuel.id
 	utem.facebook = "https://www.facebook.com/utem.cl"
 	utem.instagram = "https://www.instagram.com/utem.cl/"
 	utem.linkedin = "https://www.linkedin.com/school/15092438/"
@@ -169,17 +249,15 @@ print("\n\tSeed:\tAsignado usuarios básicos cargos dentro de la usach")
 	usach.youtube = "https://www.youtube.com/user/digecapusach"
 	usach.save
 	utem.save
-	profesor.save
-	edmundo.save
-	socio.save
-	vinculador.save
-print("\n\tSeed:\tUsarios básicos asignados a usach:")
+	umayor.save
+	puc.save
+print("\n\tSeed:\tUsarios básicos asignados a sus instituticiones:")
 
 
 
 print("\n\tSeed:\tCreando profesores: ")
-(1..10).step(1) do |n| #6..15
-	inst_id = rand(1..15)
+(1..10).step(1) do |n| #11..20
+	inst_id = rand(1..16)
 	inst_aux = Institution.where(id:inst_id).first
 	inst_days = (inst_aux.created_at.to_date..Time.now.to_date).count
 	user_created = inst_aux.created_at+rand(inst_days-10).days+rand(200).minutes
@@ -196,11 +274,11 @@ print("\n\tSeed:\tCreando profesores: ")
 	)
 	print(User.last.id.to_s+" ")
 end
-print("\n\tSeed:\tprofesores de pruebas creados [10=>6-15]\n")
+print("\n\tSeed:\tprofesores de pruebas creados [10=>11-20]\n")
 
 print("\n\tSeed:\tCreando socios: ")
-(1..10).step(1) do |n| #16..25
-	inst_id = rand(1..15)
+(1..10).step(1) do |n| #21..30
+	inst_id = rand(1..16)
 	inst_aux = Institution.where(id:inst_id).first
 	inst_days = (inst_aux.created_at.to_date..Time.now.to_date).count
 	user_created = inst_aux.created_at+rand(inst_days-10).days+rand(200).minutes
@@ -218,11 +296,11 @@ print("\n\tSeed:\tCreando socios: ")
 	print(User.last.id.to_s+" ")
 end
 
-print("\n\tSeed:\tSocios de pruebas creados [10=>16-25] \n")
+print("\n\tSeed:\tSocios de pruebas creados [10=>21-30] \n")
 
 print("\n\tSeed:\tCreando Vinculadores: ")
-(1..10).step(1) do |n| #26..35
-	inst_id = rand(1..15)
+(1..10).step(1) do |n| #31..40
+	inst_id = rand(1..16)
 	inst_aux = Institution.where(id:inst_id).first
 	inst_days = (inst_aux.created_at.to_date..Time.now.to_date).count
 	user_created = inst_aux.created_at+rand(inst_days-10).days+rand(200).minutes
@@ -240,17 +318,17 @@ print("\n\tSeed:\tCreando Vinculadores: ")
 	print(User.last.id.to_s+" ")
 end
 
-print("\n\tSeed:\tVinculadores de pruebas creados [10=>26-35] \n")
+print("\n\tSeed:\tVinculadores de pruebas creados [10=>31-40] \n")
 
 
 print("\n\tSeed:\tCreando ofertas con profesores: ")
-(1..25).step(1) do |n|
-	professor_aux_id = rand(6..15)
+(1..20).step(1) do |n|
+	professor_aux_id = rand(11..20)
 	professor_aux = User.where(id:professor_aux_id).first #UN professor al azar
 	Offering.create(
 		id: n, 
 		user_id: professor_aux.id, 
-		title: "Oferta de prueba generada por seed #"+n.to_s, 
+		title: "Oferta de prueba #"+n.to_s, 
 		description: "Descripción de Oferta de Servicio de prueba generada por seed #"+n.to_s, 
 		created_at: Time.now-rand*(20-40).days,
 		start_time: Time.now-rand*(20).days, 
@@ -263,25 +341,27 @@ print("\n\tSeed:\tCreando ofertas con profesores: ")
 	)
 	print(professor_aux_id.to_s+" ")
 end
-print("\n\tSeed:\tOfertas de pruebas por profesores creadas [25]\n")
+print("\n\tSeed:\tOfertas de pruebas por profesores creadas [20]\n")
 
 print("\n\tSeed:\tCreando ofertas con vinculadores: ")
 offering_count = Offering.count
 (1..10).step(1) do |n|
-	vinculador_aux_id = rand(26..35)
+	vinculador_aux_id = rand(31..40)
 	has_professor = rand(0..2)
 	if has_professor == 0
 		user_id = vinculador_aux_id
 	else
-		user_id = rand(6..15)
+		user_id = rand(11..20)
 	end
+	dueno = User.where(id:user_id).first
+	institution_id = dueno.institution_id
 	print(vinculador_aux_id.to_s+" ")
 	vinculador_aux = User.where(id:vinculador_aux_id).first 	
 	actual_id = offering_count+n
 	Offering.create(
 		id: actual_id,
 		user_id: user_id,
-		title: "Oferta de prueba por VINCULADOR generada por seed #"+actual_id.to_s, 
+		title: "Oferta de prueba por Vinculador #"+actual_id.to_s, 
 		description: "Descripción de Oferta de Servicio por VINCULADOR de prueba generada por seed #"+actual_id.to_s, 
 		created_at: Time.now-rand*(20-40).days,
 		start_time: Time.now-rand*(20).days,  
@@ -290,21 +370,21 @@ offering_count = Offering.count
 		status: 1, 
 		area_id: rand(1..42), 
 		location: "Ubicación de Oferta prueba por VINCULADOR generada por seed #"+actual_id.to_s, 
-		institution_id: vinculador_aux.institution_id,
+		institution_id: institution_id,
 		broker_id: vinculador_aux.id
 	)
 end
 print("\n\tSeed:\tOfertas de servicio por vinculadores creadas [10] \n")
 
 print("\n\tSeed:\tCreando solicitudes con socios: ")
-(1..25).step(1) do |n|
-	partner_aux_id = rand(16..25)
+(1..20).step(1) do |n|
+	partner_aux_id = rand(21..30)
 	print(partner_aux_id.to_s+" ")
 	partner_aux = User.where(id:partner_aux_id).first 	#Un socio al aazar
 	Request.create(
 		id: n, 
 		user_id: partner_aux.id, 
-		title: "Solicitud de prueba generada por seed #"+n.to_s, 
+		title: "Solicitud de prueba #"+n.to_s, 
 		description: "Descripción de Solicitud de Servicio de prueba generada por seed #"+n.to_s, 
 		created_at: Time.now-rand*(20-40).days,
 		start_time: Time.now-rand*(20).days,  
@@ -316,19 +396,21 @@ print("\n\tSeed:\tCreando solicitudes con socios: ")
 		institution_id: partner_aux.institution_id
 	)
 end
-print("\n\tSeed:\tSolicitud de pruebas por socios creadas [25] \n")
+print("\n\tSeed:\tSolicitud de pruebas por socios creadas [20] \n")
 
 
 print("\n\tSeed:\tCreando solicitudes con vinculadores: ")
 request_count = Request.count
 (1..10).step(1) do |n|
-	vinculador_aux_id = rand(26..35)
+	vinculador_aux_id = rand(31..40)
 	has_partner = rand(0..2)
 	if has_partner == 0
 		user_id = vinculador_aux_id
 	else
 		user_id = rand(16..25)
 	end
+	dueno = User.where(id:user_id).first
+	institution_id = dueno.institution_id
 	print(vinculador_aux_id.to_s+" ")
 	vinculador_aux = User.where(id:vinculador_aux_id).first 	#Un socio al aazar
 	actual_id = request_count+n
@@ -344,24 +426,24 @@ request_count = Request.count
 		status: 1, 
 		area_id: rand(1..42), 
 		location: "Ubicación de Solicitud prueba por VINCULADOR generada por seed #"+actual_id.to_s, 
-		institution_id: vinculador_aux.institution_id,
+		institution_id: institution_id,
 		broker_id: vinculador_aux.id
 	)
 end
 print("\n\tSeed:\tSolicitud de servicio por vinculadores creadas [10] \n")
 
 print("\n\tSeed:\tCreando servicios con profesores responsables: ")
-(1..30).step(1) do |n|
+(1..25).step(1) do |n|
 
 	publication_type = rand(0..1) #0:request   #1:offering
-	publication_id = rand(1..35)  #Cualquier publicacion
+	publication_id = rand(1..30)  #Cualquier publicacion
 
 	if publication_type == 0 #BASADOS EN REQUEST
-		professor_aux_id = rand(6..15)
+		professor_aux_id = rand(11..20)
 		professor_aux = User.where(id: professor_aux_id).first 	#Un professor al azar
 		publication_aux = Request.where(id: publication_id).first
 		while (publication_aux.status != 1 or publication_aux.user.category==3)
-			publication_id = rand(1..35)
+			publication_id = rand(1..30)
 			publication_aux = Request.where(id: publication_id).first
 		end
 		days = (professor_aux.confirmed_at.to_date..Time.now.to_date).count
@@ -374,7 +456,7 @@ print("\n\tSeed:\tCreando servicios con profesores responsables: ")
 			acceptor_id: publication_aux.user_id, #Creador de la solicitud
 			area_id: publication_aux.area.id, 
 			institution_id: professor_aux.institution_id, #institucioon del profesor
-			title: "Servicio basado en solicitud de prueba generada por seed #"+publication_aux.id.to_s, 
+			title: "Servicio basado en solicitud #"+publication_aux.id.to_s, 
 			status: 4,
 			message: "Mensaje de prueba de servicio #"+n.to_s, 
 			description: "Descripción de del Servicio basado en Solicitud de prueba por seed #"+publication_aux.id.to_s,
@@ -388,11 +470,11 @@ print("\n\tSeed:\tCreando servicios con profesores responsables: ")
 		)
 		print("R"+publication_id.to_s+" ")
 	else #BASADOS EN OFFERING
-		partner_aux_id = rand(16..25)
+		partner_aux_id = rand(21..30)
 		partner_aux = User.where(id: partner_aux_id).first		#Un socio al azar
 		publication_aux = Offering.where(id: publication_id).first
 		while publication_aux.user.category == 3 or publication_aux.status != 1
-			publication_id = rand(1..35)
+			publication_id = rand(1..30)
 			publication_aux = Offering.where(id: publication_id).first
 		end
 		days = (publication_aux.user.confirmed_at.to_date..Time.now.to_date).count
@@ -405,7 +487,7 @@ print("\n\tSeed:\tCreando servicios con profesores responsables: ")
 			acceptor_id: publication_aux.user_id, #Creador de la oferta
 			area_id: publication_aux.area.id, 
 			institution_id: publication_aux.institution_id, #intitucion del profesor
-			title: "Servicio basado en la Oferta de prueba generada por seed #"+publication_aux.id.to_s, 
+			title: "Servicio basado en la Oferta #"+publication_aux.id.to_s, 
 			status: 4,
 			message: "Mensaje de prueba de servicio #"+n.to_s, 
 			description: "Descripción de del Servicio basado en Oferta de prueba por seed #"+publication_aux.id.to_s,
@@ -425,15 +507,15 @@ print("\n\tSeed:\tCreando servicios con profesores responsables: ")
 	publication_aux.end_time = creation_date+(rand*(20+n)).days
 	publication_aux.save
 end
-print("\tSeed:\tServicios de pruebas creadas basadas las ofertas y solicitudes de prueba [300] \n")
+print("\tSeed:\tServicios de pruebas creadas basadas las ofertas y solicitudes de prueba [25] \n")
 
 
 print("\n\tSeed:\tCreando Experiencias basados en los servicios: ")
 (1..15).step(1) do |n| #ESTA CONDICION SE PUEDE CAMBIAR
-	service_aux_id = rand(1..30)
+	service_aux_id = rand(1..25)
 	service_aux = Service.where(id:service_aux_id).first
 	while service_aux.status == 5
-		service_aux_id = rand(1..30)
+		service_aux_id = rand(1..25)
 		service_aux = Service.where(id:service_aux_id).first
 	end
 	print service_aux_id.to_s+" "
@@ -490,6 +572,6 @@ print("\n\tSeed:\tCreando Experiencias basados en los servicios: ")
 	service_aux.status = 5 #Con esto el servicio pasa a estado de experiencia
 	service_aux.save
 end
-print("\n\tSeed:\tExperiencias de pruebas creadas [200]\n")
+print("\n\tSeed:\tExperiencias de pruebas creadas [15]\n")
 
 

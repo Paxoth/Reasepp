@@ -18,15 +18,3 @@
 		<%= f.submit "Enviar comentario", :class => 'btn btn-default btn-crud' %>
 	</div>
 <% end %>
-
-<script>
-	$(function() {
-		$('textarea#eg-custom-toolbar').edifroalaEditortable({
-			theme: 'rease',
-			inlineMode: false,
-			language: 'es',
-			// Set custom buttons with separator between them.
-			buttons: ['undo', 'redo' , 'sep', 'bold', 'italic', 'underline','color', 'blockStyle', 'align', 'insertOrderedList', 'insertUnorderedList', 'outdent', 'indent','createLink' ] 
-		})
-	});
-</script>
