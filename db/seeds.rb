@@ -256,7 +256,7 @@ print("\n\tSeed:\tUsarios básicos asignados a sus instituticiones:")
 
 
 print("\n\tSeed:\tCreando profesores: ")
-(1..10).step(1) do |n| #11..20
+(1..100).step(1) do |n| #11..20
 	inst_id = rand(1..16)
 	inst_aux = Institution.where(id:inst_id).first
 	inst_days = (inst_aux.created_at.to_date..Time.now.to_date).count
@@ -277,7 +277,7 @@ end
 print("\n\tSeed:\tprofesores de pruebas creados [10=>11-20]\n")
 
 print("\n\tSeed:\tCreando socios: ")
-(1..10).step(1) do |n| #21..30
+(1..100).step(1) do |n| #21..30
 	inst_id = rand(1..16)
 	inst_aux = Institution.where(id:inst_id).first
 	inst_days = (inst_aux.created_at.to_date..Time.now.to_date).count
@@ -299,7 +299,7 @@ end
 print("\n\tSeed:\tSocios de pruebas creados [10=>21-30] \n")
 
 print("\n\tSeed:\tCreando Vinculadores: ")
-(1..10).step(1) do |n| #31..40
+(1..100).step(1) do |n| #31..40
 	inst_id = rand(1..16)
 	inst_aux = Institution.where(id:inst_id).first
 	inst_days = (inst_aux.created_at.to_date..Time.now.to_date).count
@@ -322,7 +322,7 @@ print("\n\tSeed:\tVinculadores de pruebas creados [10=>31-40] \n")
 
 
 print("\n\tSeed:\tCreando ofertas con profesores: ")
-(1..20).step(1) do |n|
+(1..250).step(1) do |n|
 	professor_aux_id = rand(11..20)
 	professor_aux = User.where(id:professor_aux_id).first #UN professor al azar
 	Offering.create(
@@ -345,7 +345,7 @@ print("\n\tSeed:\tOfertas de pruebas por profesores creadas [20]\n")
 
 print("\n\tSeed:\tCreando ofertas con vinculadores: ")
 offering_count = Offering.count
-(1..10).step(1) do |n|
+(1..100).step(1) do |n|
 	vinculador_aux_id = rand(31..40)
 	has_professor = rand(0..2)
 	if has_professor == 0
@@ -377,7 +377,7 @@ end
 print("\n\tSeed:\tOfertas de servicio por vinculadores creadas [10] \n")
 
 print("\n\tSeed:\tCreando solicitudes con socios: ")
-(1..20).step(1) do |n|
+(1..250).step(1) do |n|
 	partner_aux_id = rand(21..30)
 	print(partner_aux_id.to_s+" ")
 	partner_aux = User.where(id:partner_aux_id).first 	#Un socio al aazar
@@ -401,7 +401,7 @@ print("\n\tSeed:\tSolicitud de pruebas por socios creadas [20] \n")
 
 print("\n\tSeed:\tCreando solicitudes con vinculadores: ")
 request_count = Request.count
-(1..10).step(1) do |n|
+(1..100).step(1) do |n|
 	vinculador_aux_id = rand(31..40)
 	has_partner = rand(0..2)
 	if has_partner == 0
@@ -433,7 +433,7 @@ end
 print("\n\tSeed:\tSolicitud de servicio por vinculadores creadas [10] \n")
 
 print("\n\tSeed:\tCreando servicios con profesores responsables: ")
-(1..25).step(1) do |n|
+(1..300).step(1) do |n|
 
 	publication_type = rand(0..1) #0:request   #1:offering
 	publication_id = rand(1..30)  #Cualquier publicacion
@@ -511,7 +511,7 @@ print("\tSeed:\tServicios de pruebas creadas basadas las ofertas y solicitudes d
 
 
 print("\n\tSeed:\tCreando Experiencias basados en los servicios: ")
-(1..15).step(1) do |n| #ESTA CONDICION SE PUEDE CAMBIAR
+(1..150).step(1) do |n| #ESTA CONDICION SE PUEDE CAMBIAR
 	service_aux_id = rand(1..25)
 	service_aux = Service.where(id:service_aux_id).first
 	while service_aux.status == 5
